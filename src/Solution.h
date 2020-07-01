@@ -141,7 +141,7 @@ ListNode* addTwoNumbers_2(ListNode* l1, ListNode* l2) {
     return ans;
 }
 
-//三解 runtime beats:84.20%% memory beats:55.78%
+//三解 runtime beats:84.20% memory beats:55.78%
 ListNode* addTwoNumbers_3(ListNode* l1, ListNode* l2) {
     ListNode* ans = new ListNode;
     ListNode* cur = ans;
@@ -210,7 +210,8 @@ ListNode* addTwoNumbers_network(ListNode* l1, ListNode* l2) {
     return root;
 }
 
-//3. Longest Substring Without Repeating Characters runtime beats:98.72% memory beats:83.53%
+//3. Longest Substring Without Repeating Characters 
+//初解 runtime beats:98.72% memory beats:83.53%
 int lengthOfLongestSubstring(std::string s) {
     int max_len = 0;
     int len = 0;
