@@ -3,6 +3,8 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <algorithm>
+#include <math.h>
 
 //1. Two Sum
 //初解 runtime beats:12.97% memory beats:89.01%
@@ -232,4 +234,202 @@ int lengthOfLongestSubstring(std::string s) {
     max_len = max_len > len ? max_len : len;
 
     return max_len;
+}
+
+//4. Median of Two Sorted Arrays
+//初解 runtime beats:89.56% memory beats:17.58%
+double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) {
+    auto tar_posi = (nums1.size() + nums2.size()) / 2 + 1;    //多塞一個
+    auto tar_posi_tmp = tar_posi;
+    std::vector<int*> tmp;
+    int nums1_posi = 0, nums2_posi = 0;
+    while (tar_posi_tmp--) {
+        if (nums1_posi >= nums1.size())
+        {
+            tmp.push_back(&nums2[nums2_posi]);
+                nums2_posi++;
+        }
+        else if (nums2_posi >= nums2.size()) {
+            tmp.push_back(&nums1[nums1_posi]);
+                nums1_posi++;
+        }
+        else {
+            if (nums1[nums1_posi] < nums2[nums2_posi]) {
+                tmp.push_back(&nums1[nums1_posi]);
+                    nums1_posi++;
+            }
+            else {
+                tmp.push_back(&nums2[nums2_posi]);
+                    nums2_posi++;
+            }
+        }
+    }
+
+    if ((nums1.size() + nums2.size()) % 2)
+        return (double)(*tmp[tar_posi - 1]);
+    else
+        return ((double)(*tmp[tar_posi - 2]) + (double)(*tmp[tar_posi - 1])) / 2;
+}
+
+//二解 runtime beats:09.40% memory beats:31.19%
+double findMedianSortedArrays_2(std::vector<int>& nums1, std::vector<int>& nums2) {
+    auto tar_posi = ((float)nums1.size() + nums2.size()) / 2;
+    short tmp_size = tar_posi + 1;                       //多塞一個
+    std::vector<int> tmp;
+    while (tmp_size--) {
+        if (nums1.size() == 0)
+        {
+            tmp.push_back(nums2.front());
+            nums2.erase(nums2.begin());
+        }
+        else if (nums2.size() == 0) {
+            tmp.push_back(nums1.front());
+            nums1.erase(nums1.begin());
+        }
+        else {
+            if (nums1.front() < nums2.front()) {
+                tmp.push_back(nums1.front());
+                nums1.erase(nums1.begin());
+            }
+            else {
+                tmp.push_back((nums2.front()));
+                nums2.erase(nums2.begin());
+            }
+        }
+    }
+
+    if (tar_posi - (short)tar_posi)
+        return (double)(tmp[tar_posi]);
+    else
+        return ((double)(tmp[tar_posi - 1]) + (double)(tmp[tar_posi])) / 2;
+}
+
+//網解 runtime beats:95.44% memory beats:89.75%
+double findMedianSortedArrays_network(std::vector<int>& nums1, std::vector<int>& nums2) {
+    int n1 = nums1.size(), n2 = nums2.size(), total = n1 + n2;
+    if (n1 > n2) return findMedianSortedArrays(nums2, nums1);
+
+    int i = 0, j = n1;
+    while (i <= j)
+    {
+        int left1 = i + (j - i) / 2;
+        int left2 = total / 2 + (total % 2 == 1 ? 1 : 0) - left1;
+
+        int max1 = left1 - 1 >= 0 ? nums1[left1 - 1] : INT_MIN, max2 = left2 - 1 >= 0 ? nums2[left2 - 1] : INT_MIN;
+        int min1 = left1 < n1 ? nums1[left1] : INT_MAX, min2 = left2 < n2 ? nums2[left2] : INT_MAX;
+
+        if (max1 <= min2 && max2 <= min1)
+            return total % 2 == 0 ? ((std::max(max1, max2)) + std::min(min1, min2)) / 2.0 : std::max(max1, max2);
+        else if (max1 > min2)
+            j = left1 - 1;
+        else i = left1 + 1;
+    }
+    return -1;
+
+}
+
+//5. Longest Palindromic Substring
+//參考網址：https://www.cnblogs.com/grandyang/p/4464476.html
+//網解 runtime beats:90.65% memory beats:61.59%
+//Manacher's Algorithm
+std::string longestPalindrome_network(std::string s) {
+    std::string t = "&#";
+    for (int i = 0; i < s.size(); ++i) {
+        t += s[i];
+        t += '#';
+    }
+    std::vector<int> p = std::vector<int>(t.size(), 0);
+
+    int id = 0, mx = 0, resId = 0, resMx = 0;
+    for (int i = 1; i < t.size(); ++i) {
+        p[i] = mx > i ? std::min(p[2 * id - i], mx - i) : 1;
+        while (t[i + p[i]] == t[i - p[i]]) ++p[i];
+        if (mx < i + p[i]) {
+            mx = i + p[i];
+            id = i;
+        }
+        if (resMx < p[i]) {
+            resMx = p[i];
+            resId = i;
+        }
+    }
+    return s.substr((resId - resMx) / 2, resMx - 1);
+}
+
+//9. Palindrome Number
+//初解 runtime beats:92.39% memory beats:63.63%
+bool isPalindrome(int x) {
+    std::string x_s = std::to_string(x);
+
+    for (int i = 0; i < (x_s.size() / 2); i++) {
+        if (x_s[i] != x_s[x_s.size() - 1 - i])
+            return false;
+    }
+    return true;
+}
+
+//二解 runtime beats:92.39% memory beats:63.63%
+bool isPalindrome_2(int x) {
+    if (x < 0) return false;
+    std::string x_s = std::to_string(x);
+
+    for (int i = 0; i < (x_s.size() / 2); i++) {
+        if (x_s[i] != x_s[x_s.size() - 1 - i])
+            return false;
+    }
+    return true;
+}
+
+//10. Regular Expression Matching
+//https://knightzone.studio/2018/09/30/3644/leetcode%EF%BC%9A10-regular-expression-matching/
+//網解 runtime beats:58.66% memory beats:42.67%
+bool isMatch(std::string s, std::string p) {
+    std::vector<std::vector<bool>> dp(s.length() + 1, std::vector<bool>(p.length() + 1, false));
+
+    /* Empty String */
+    dp[0][0] = true;
+
+    /* "" v.s. X*X*X*..... */
+    for (int i = 2; i <= p.length() && p[i - 1] == '*'; i += 2) {
+        dp[0][i] = true;
+    }
+
+    /* s[0...i-1] v.s. p[0...j-1] */
+    for (int i = 1; i <= s.length(); ++i) {
+        for (int j = 1; j <= p.length(); ++j) {
+            int sIndex = i - 1;
+            int pIndex = j - 1;
+
+            if (p[pIndex] == '.' || s[sIndex] == p[pIndex]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            }
+            else if (p[pIndex] == '*') {
+                dp[i][j] = dp[i][j - 2] || ((s[sIndex] == p[pIndex - 1] || p[pIndex - 1] == '.') && dp[i - 1][j]);
+            }
+        }
+    }
+
+    return dp[s.length()][p.length()];
+}
+
+//11. Container With Most Water
+//初解 runtime beats:90.66% memory beats:41.36%
+int maxArea(std::vector<int>& height) {
+    if (height.size() == 2) {
+        return height[0] < height[1] ? height[0] : height[1];
+    }
+
+    int l = 0, r = height.size() - 1;
+    int max_area = 0;
+    while (l < r) {
+        int tmp = (height[l] < height[r] ? height[l] : height[r]) * (r - l);
+        if (tmp > max_area)
+            max_area = tmp;
+
+        if (height[l] < height[r])
+            l++;
+        else
+            r--;
+    }
+    return max_area;
 }
