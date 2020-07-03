@@ -27,3 +27,25 @@ Record the Problem-solving process
 	- 網解 runtime beats:58.66% memory beats:42.67% [參考網址](https://knightzone.studio/2018/09/30/3644/leetcode%EF%BC%9A10-regular-expression-matching/)
 - 11. Container With Most Water
 	- 初解 runtime beats:90.66% memory beats:41.36%
+	- 二解 runtime beats:16.97% memory beats:87.56%
+- 15. 3Sum
+	- 網解 runtime beats:35.80% memory beats:99.73%
+	- 網解 runtime beats:90.94% memory beats:75.02%
+- 17. Letter Combinations of a Phone Number
+	- 初解 runtime beats:100.00% memory beats:81.11%
+- 19. Remove Nth Node From End of List
+	- 初解 runtime beats:80.29% memory beats:05.19%
+	- 二解 runtime beats:21.49% memory beats:90.55%
+- 20. Valid Parentheses
+	- 初解 runtime beats:30.31% memory beats:51.04%
+	- 網解 runtime beats:30.31% memory beats:95.93%
+- 21. Merge Two Sorted Lists
+	- 初解 runtime beats:29.53% memory beats:76.65%
+	- 二解 runtime beats:29.53% memory beats:94.64%
+- 22. Generate Parentheses
+	- 初解 runtime beats:07.94% memory beats:88.57%
+	- 網解 runtime beats:49.63% memory beats:26.09%
+	- 網解 runtime beats:87.16% memory beats:98.54%
+- 23. Merge k Sorted Lists
+	- 初解 runtime beats:23.65% memory beats:74.41%
+	- 網解 runtime beats:75.68% memory beats:44.58%

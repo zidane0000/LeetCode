@@ -67,8 +67,55 @@ int main()
     //std::vector<int> height{ 1,8,6,2,5,4,8,3,7 };
     //std::vector<int> height{ 1,2,1 };
     //std::vector<int> height{ 2, 3, 4, 5, 18, 17, 6 };
-    std::vector<int> height{ 1, 2, 3, 4, 5, 25, 24, 3, 4 };
-    int a = maxArea(height);
+    //std::vector<int> height{ 1, 2, 3, 4, 5, 25, 24, 3, 4 };
+    //int a = maxArea(height);
+
+    //15. 3Sum
+    //std::vector<int> nums{ -1, 0, 1, 2, -1, -4 };
+    //std::vector<int> nums{ -2, 0, 1, 1, 2 };
+    //std::vector<int> nums{ -4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6 };
+    //std::vector<int> nums{ 7, 5, -8, -6, -13, 7, 10, 1, 1, -4, -14, 0, -1, -10, 1, -13, -4, 6, -11, 8, -6, 0, 0, -5, 0, 11, -9, 8, 2, -6, 4, -14, 6, 4, -5, 0, -12, 12, -13, 5, -6, 10, -10, 0, 7, -2, -5, -12, 12, -9, 12, -9, 6, -11, 1, 14, 8, -1, 7, -13, 8, -11, -11, 0, 0, -1, -15, 3, -11, 9, -7, -10, 4, -2, 5, -4, 12, 7, -8, 9, 14, -11, 7, 5, -15, -15, -4, 0, 0, -11, 3, -15, -15, 7, 0, 0, 13, -7, -12, 9, 9, -3, 14, -1, 2, 5, 2, -9, -3, 1, 7, -12, -3, -1, 1, -2, 0, 12, 5, 7, 8, -7, 7, 8, 7, -15 };
+    //std::vector<std::vector<int>> r = threeSum_network(nums);
+
+    //17. Letter Combinations of a Phone Number
+    //std::vector<std::string> r = letterCombinations("23");
+
+    //19. Remove Nth Node From End of List
+    //ListNode* r = removeNthFromEnd(toList({1}), 1);
+    //ListNode* r = removeNthFromEnd_2(toList({ 1 }), 1);
+
+    //20. Valid Parentheses
+    //bool r = isValid("()[]{}");
+    //r = isValid("(]");
+    //r = isValid("([)]");
+    //r = isValid("{[]}");
+    //r = isValid_network("]}");
+    //r = isValid_network("{]}");
+    //r = isValid_network("{}");
+    //r = isValid_network("{}()[]");
+    //r = isValid_network("{}()()[]");
+    //r = isValid_network("{}()[][");
+    //r = isValid_network("[()]");
+    //r = isValid_network("{()}");
+
+    //21. Merge Two Sorted Lists
+    //ListNode* r = mergeTwoLists(toList({ 1,2,4 }), toList({ 1,3,4 }));
+    //ListNode* r = mergeTwoLists(toList({ 5 }), toList({ 1,3,4 }));
+    //ListNode* r = mergeTwoLists_2(toList({ 1,2,4 }), toList({ 1,3,4 }));
+    //ListNode* r = mergeTwoLists_2(toList({ 5 }), toList({ 1,3,4 }));
+    //ListNode* r = mergeTwoLists_2(toList({ 1 }), toList({ 2 }));
+    
+    //22. Generate Parentheses
+    //std::vector<std::string> r = generateParenthesis(6);
+    //std::vector<std::string> r = generateParenthesis_network(6);
+    //std::vector<std::string> r = generateParenthesis_network2(3);
+
+    //23. Merge k Sorted Lists
+    std::vector<ListNode*> lists;
+    lists.push_back(toList({ 1,4,5 }));
+    lists.push_back(toList({ 1,3,4 }));
+    lists.push_back(toList({ 2,6 }));
+    ListNode* r = mergeKLists(lists);
 
     return 0;
 }
