@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <math.h>
+#include <stack>
 
 //1. Two Sum
 //初解 runtime beats:12.97% memory beats:89.01%
@@ -900,20 +901,6 @@ ListNode* mergeKLists(std::vector<ListNode*>& lists) {
 }
 
 //網解 runtime beats:75.68% memory beats:44.58%
-ListNode* mergeKLists_network(std::vector<ListNode*>& lists) {
-    if (lists.empty()) return nullptr;
-    int n = lists.size();
-
-    while (n != 1) {
-        for (int i = 0; i < n / 2; i++) {
-            int k = (n + 1) / 2;
-            lists[i] = merge(lists[i], lists[i + k]);
-        }
-        n = (n + 1) / 2;
-    }
-    return lists[0];
-}
-
 ListNode* merge(ListNode* l, ListNode* r) {
     ListNode* dummy = new ListNode(0);
     ListNode* head = dummy;
@@ -936,4 +923,243 @@ ListNode* merge(ListNode* l, ListNode* r) {
         dummy->next = r;
     }
     return head->next;
+}
+
+ListNode* mergeKLists_network(std::vector<ListNode*>& lists) {
+    if (lists.empty()) return nullptr;
+    int n = lists.size();
+
+    while (n != 1) {
+        for (int i = 0; i < n / 2; i++) {
+            int k = (n + 1) / 2;
+            lists[i] = merge(lists[i], lists[i + k]);
+        }
+        n = (n + 1) / 2;
+    }
+    return lists[0];
+}
+
+//24. Swap Nodes in Pairs
+//初解 runtime beats:100.00% memory beats:73.69%
+ListNode* swapPairs(ListNode* head) {
+    if (head == NULL)
+        return NULL;
+
+    ListNode* f = new ListNode;
+    f->next = head;
+    ListNode* s = head;
+    ListNode* t = s->next;
+    if (t == NULL)
+        return s;
+
+    ListNode* new_head = t;
+    while ((f != NULL) && (s != NULL) && (t != NULL)) {
+        s->next = t->next;
+        t->next = s;
+        f->next = t;
+        
+        f = s;
+        s = f->next;
+        if (s == NULL)
+            t = NULL;
+        else
+            t = s->next;
+    }
+
+    return new_head;
+}
+
+//二解 runtime beats:54.37% memory beats:61.37%
+ListNode* swapPairs_2(ListNode* head) {
+    if (head == NULL)
+        return NULL;
+
+    ListNode* f = NULL;
+    ListNode* s = head;
+    ListNode* t = s->next;
+    if (t == NULL)
+        return s;
+
+    ListNode* new_head = t;
+    while ((s != NULL) && (t != NULL)) {
+        s->next = t->next;
+        t->next = s;
+        if(f)
+            f->next = t;
+
+        f = s;
+        s = f->next;
+        if (s == NULL)
+            t = NULL;
+        else
+            t = s->next;
+    }
+
+    return new_head;
+}
+
+//25. Reverse Nodes in k-Group
+//初解 runtime beats:16.58% memory beats:12.35%
+ListNode* reverseKGroup(ListNode* head, int k) {
+    if (head == NULL)
+        return NULL;
+
+    ListNode* cur = head;
+    ListNode* new_head;
+    int i = 1;
+    while (i < k) {
+        if (cur != NULL) {
+            cur = cur->next;
+            i++;
+        }
+        else
+            return head;
+    }
+
+    if (cur == NULL)
+        return head;
+
+    new_head = cur;
+    cur = head;
+    ListNode* old_end = NULL;
+    std::vector<ListNode*> list;
+    while (cur) {
+
+        i = 0;
+        list.clear();
+        while (i < k) {
+            if (cur != NULL) {
+                list.push_back(cur);
+                cur = cur->next;
+                i++;
+            }
+            else
+                i = k;
+        }
+
+        if (list.size() == k) {
+            list[0]->next = list[k - 1]->next;
+            for (i = 0; i < k - 1; i++) {
+                list[k - i - 1]->next = list[k - i - 2];
+            }
+
+            if (old_end)
+                old_end->next = list[k - 1];
+
+            old_end = list[0];
+        }
+    }
+
+    return new_head;
+}
+
+//網解 runtime beats:76.96% memory beats:97.95%
+ListNode* reverseList(ListNode* head, int k)
+{
+    ListNode* pre = NULL;
+    ListNode* cur = head;
+    while (k > 0)
+    {
+        ListNode* next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = next;
+        --k;
+    }
+
+    return pre;
+}
+
+ListNode* reverseKGroup_network(ListNode* head, int k) {
+    int count = 0;
+    ListNode* runner = head;
+    while (count < k && runner)
+    {
+        runner = runner->next;
+        count++;
+    }
+
+    if (count == k)
+    {
+        ListNode* head1 = reverseList(head, k);
+        head->next = reverseKGroup_network(runner, k);
+        return head1;
+    }
+    return head;
+}
+
+//31. Next Permutation
+//題目意思：給一個數字，請給下一個比該數字大但最接近的數字，且兩數字使用之數字一樣，例如給'123'，最接近'123'且用'1','2','3'組成的數字為'132'
+//初解 runtime beats:58.26% memory beats:82.06%
+void nextPermutation(std::vector<int>& nums) {
+    
+    int nums_size = nums.size();
+    int p1 = nums_size - 2;
+    bool keepGo = true;
+    while (p1 > -1 && keepGo) {
+        if (nums[p1 + 1] > nums[p1]) {  //升冪
+            int p2_record = p1 + 1;
+            int p2_minus = INT_MAX;
+            for (int p2 = p1 + 1; p2 < nums_size; p2++) {
+                if (p2_minus >= (nums[p2] - nums[p1]) && ((nums[p2] - nums[p1]) > 0)) {
+                    p2_minus = nums[p2] - nums[p1];
+                    p2_record = p2;
+                }
+            }
+
+            int tmp = nums[p2_record];
+            nums[p2_record] = nums[p1];
+            nums[p1] = tmp;
+
+            keepGo = false;
+        }
+        else
+            p1--;
+    }
+
+    for (int i = 1; i <= (nums_size - p1 - 1) / 2; i++) {
+        int tmp = nums[nums_size - i];
+        nums[nums_size - i] = nums[p1 + i];
+        nums[p1 + i] = tmp;
+    }
+}
+
+//網解 runtime beats:92.81% memory beats:50.25%
+void nextPermutation_network(std::vector<int>& nums) {
+    std::next_permutation(nums.begin(), nums.end());
+}
+
+//32. Longest Valid Parentheses
+//網解 runtime beats:87.24% memory beats:79.15%
+int longestValidParentheses_network(std::string s) {
+    int res = 0, start = 0, n = s.size();
+    std::stack<int> st;
+    for (int i = 0; i < n; ++i) {
+        if (s[i] == '(') st.push(i);
+        else if (s[i] == ')') {
+            if (st.empty()) start = i + 1;
+            else {
+                st.pop();
+                res = st.empty() ? std::max(res, i - start + 1) : std::max(res, i - st.top());
+            }
+        }
+    }
+    return res;
+}
+
+//初解 runtime beats:08.75% memory beats:53.26%
+int longestValidParentheses(std::string s) {
+    int res = 0, start = 0, n = s.size();
+    std::vector<int> st;
+    for (int i = 0; i < n; ++i) {
+        if (s[i] == '(') st.push_back(i);
+        else if (s[i] == ')') {
+            if (st.empty()) start = i + 1;
+            else {
+                st.pop_back();
+                res = st.empty() ? std::max(res, i - start + 1) : std::max(res, i - st.back());
+            }
+        }
+    }
+    return res;
 }

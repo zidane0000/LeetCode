@@ -48,4 +48,16 @@ Record the Problem-solving process
 	- 網解 runtime beats:87.16% memory beats:98.54%
 - 23. Merge k Sorted Lists
 	- 初解 runtime beats:23.65% memory beats:74.41%
-	- 網解 runtime beats:75.68% memory beats:44.58%
+	- 網解 runtime beats:75.68% memory beats:44.58%.
+- 24. Swap Nodes in Pairs
+	- 初解 runtime beats:100.00% memory beats:73.69%
+	- 二解 runtime beats:54.37% memory beats:61.37%
+- 25. Reverse Nodes in k-Group
+	- 初解 runtime beats:16.58% memory beats:12.35%
+	- 網解 runtime beats:76.96% memory beats:97.95%
+- 31. Next Permutation
+	- 初解 runtime beats:58.26% memory beats:82.06%
+	- 網解 runtime beats:92.81% memory beats:50.25%
+- 32. Longest Valid Parentheses
+	- 網解 runtime beats:87.24% memory beats:79.15%
+	- 初解 runtime beats:08.75% memory beats:53.26%

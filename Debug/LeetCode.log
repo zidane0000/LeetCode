@@ -1,23 +1,23 @@
 ﻿  Source.cpp
-E:\Dave\VS2019\LeetCode\src\Solution.h(14,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(16,31): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(32,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(47,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(221,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(247,24): warning C4018: '>=': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(252,29): warning C4018: '>=': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(277,20): warning C4244: 'initializing': conversion from 'float' to 'short', possible loss of data
-E:\Dave\VS2019\LeetCode\src\Solution.h(302,29): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
-E:\Dave\VS2019\LeetCode\src\Solution.h(304,39): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
-E:\Dave\VS2019\LeetCode\src\Solution.h(304,60): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
-E:\Dave\VS2019\LeetCode\src\Solution.h(337,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(344,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(364,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(376,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(393,23): warning C4018: '<=': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(398,23): warning C4018: '<=': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(399,27): warning C4018: '<=': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(690,35): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(794,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(895,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(15,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(17,31): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(33,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(48,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(222,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(248,24): warning C4018: '>=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(253,29): warning C4018: '>=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(278,20): warning C4244: 'initializing': conversion from 'float' to 'short', possible loss of data
+E:\Dave\VS2019\LeetCode\src\Solution.h(303,29): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+E:\Dave\VS2019\LeetCode\src\Solution.h(305,39): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+E:\Dave\VS2019\LeetCode\src\Solution.h(305,60): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+E:\Dave\VS2019\LeetCode\src\Solution.h(338,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(345,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(365,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(377,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(394,23): warning C4018: '<=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(399,23): warning C4018: '<=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(400,27): warning C4018: '<=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(691,35): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(795,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(896,23): warning C4018: '<': signed/unsigned mismatch
   LeetCode.vcxproj -> E:\Dave\VS2019\LeetCode\Debug\LeetCode.exe

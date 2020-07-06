@@ -111,11 +111,37 @@ int main()
     //std::vector<std::string> r = generateParenthesis_network2(3);
 
     //23. Merge k Sorted Lists
-    std::vector<ListNode*> lists;
-    lists.push_back(toList({ 1,4,5 }));
-    lists.push_back(toList({ 1,3,4 }));
-    lists.push_back(toList({ 2,6 }));
-    ListNode* r = mergeKLists(lists);
+    //std::vector<ListNode*> lists;
+    //lists.push_back(toList({ 1,4,5 }));
+    //lists.push_back(toList({ 1,3,4 }));
+    //lists.push_back(toList({ 2,6 }));
+    //ListNode* r = mergeKLists(lists);
+
+    //24. Swap Nodes in Pairs
+    //ListNode* r = swapPairs(toList({ 1 }));
+    //ListNode* r = swapPairs_2(toList({ 1 }));
+
+    //25. Reverse Nodes in k-Group
+    //ListNode* r = reverseKGroup(toList({ 1,2,3,4,5 }), 3);
+    //ListNode* r = reverseKGroup_network(toList({ 1,2,3,4,5,6,7,8,9 }), 3);
+
+    //31. Next Permutation
+    //std::vector<int> nums{1,2,7,4,3,1};
+    //std::vector<int> nums{ 3,2,1 };
+    //std::vector<int> nums{ 1 };
+    //std::vector<int> nums{ 1,2,4,3 };
+    //std::vector<int> nums{ 2,3,1,3,3 };
+    //std::vector<int> nums{ 11,12,0,27,3,11,21,9,0,15,26,27,17,24,0,16,4,17,14,8,15,8,2,16,10,6,6,24,16,2,18,19,6,10,17,10,21,0,11,13,7,7,2,16,24,25,2,20,12,9,20,19 };
+    //nextPermutation(nums);
+
+    //32. Longest Valid Parentheses
+    int r = longestValidParentheses("(()");
+    //r = longestValidParentheses(")()())");
+    //r = longestValidParentheses("(()())");
+    //r = longestValidParentheses("(())())"); 
+    //r = longestValidParentheses("()()()()()()(()()");
+    r = longestValidParentheses(")))()())(()((()()((()(()()(()()))()(((()())))()(((()(((())()))(()))(())((())())())))(()))((()(()())((((((()()(((())()()(((((())(((()())())(()(())))");
+    
 
     return 0;
 }
