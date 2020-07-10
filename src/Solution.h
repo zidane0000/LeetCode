@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <math.h>
 #include <stack>
+#include <set>
 
 //1. Two Sum
 //初解 runtime beats:12.97% memory beats:89.01%
@@ -1162,4 +1163,599 @@ int longestValidParentheses(std::string s) {
         }
     }
     return res;
+}
+
+//33. Search in Rotated Sorted Array
+//初解 runtime beats:65.96% memory beats:75.43%
+int search(std::vector<int>& nums, int target) {
+    int nums_size = nums.size();
+    for (int i = 0; i < nums_size; i++) {
+        if (nums[i] == target)
+            return i;
+    }
+    return -1;
+}
+
+//二解 runtime beats:65.96% memory beats:66.92%
+int search_2(std::vector<int>& nums, int target) {
+    int i = 0;
+    std::vector<int>::iterator nums_itr = nums.begin();
+    while (nums_itr != nums.end()) {
+        if (*nums_itr == target)
+            return i;
+        nums_itr++;
+        i++;
+    }
+
+    return -1;
+}
+
+//三解 runtime beats:65.96% memory beats:51.38%
+int search_3(std::vector<int>& nums, int target) {
+    int nums_size = nums.size();
+    int i = 0;
+    for (i = 0; i < nums_size; i++) {
+        if (nums[i] > target)
+            i = nums_size;
+        else if(nums[i] == target)
+            return i;
+    }
+
+    for (i = nums_size-1; i >= 0; i--) {
+        if (nums[i] < target)
+            i = 0;
+        else if (nums[i] == target)
+            return i;
+    }
+
+    return -1;
+}
+
+//網解 runtime beats:96.62% memory beats:97.67%
+int search_network(std::vector<int>& nums, int target) {
+    int pivotindex;
+    int low, high, mid;
+    int n = nums.size();
+    if (n == 0) return -1;
+    if (nums[0] < nums[n - 1])
+        pivotindex = 0;
+    else
+    {
+        low = 0; high = n - 1;
+        while (low < high) {
+            mid = low + (high - low) / 2;
+            if (nums[mid] < nums[0])high = mid;
+            else
+                low = mid + 1;
+        }
+        pivotindex = low;
+    }
+
+    if (target == nums[pivotindex])
+        return pivotindex;
+
+    if (pivotindex == 0) {
+        low = 0;
+        high = n - 1;
+    }
+    else if (target < nums[0]) {
+        low = pivotindex;
+        high = n - 1;
+    }
+    else if (target > nums[0]) {
+        low = 0;
+        high = pivotindex - 1;
+    }
+    else if (target == nums[0])
+        return 0;
+
+    while (low < high) {
+        mid = low + (high - low + 1) / 2;
+        if (nums[mid] > target)
+            high = mid - 1;
+        else
+            low = mid;
+    }
+    if (nums[low] == target)
+        return low;
+    else
+        return -1;
+}
+
+//34. Find First and Last Position of Element in Sorted Array
+//初解 runtime beats:58.74% memory beats:55.39%
+std::vector<int> searchRange(std::vector<int>& nums, int target) {
+    int nums_size = nums.size();
+    if(nums_size == 0)
+        return { -1,-1 };
+        
+    int left = 0, right = nums_size - 1;
+
+    while (left < right) {
+        int mid = left + (right - left + 1) / 2;
+        if (nums[mid] > target)
+            right = mid - 1;
+        else
+            left = mid;
+    }
+    
+    if (nums[left] != target)
+        return { -1,-1 };
+
+    while ((left - 1 >= 0) && nums[left - 1] == target) {
+        left--;
+    }
+
+    while ((right + 1) < nums_size && nums[right + 1] == target) {
+        right++;
+    }
+
+    return { left,right };
+}
+
+//二解 runtime beats:15.07% memory beats:56.99%
+std::vector<int> searchRange_2(std::vector<int>& nums, int target) {
+    std::vector<int>::iterator itr = nums.begin();
+    int i = 0;
+    while (itr != nums.end()) {
+        if (*itr > target) {
+            return { -1, -1 };
+        }
+        else if (*itr == target) {
+            int j = i;
+            while (itr != nums.end() && *itr == target) {
+                itr++;
+                j++;
+            }
+            return { i,j-1 };
+        }
+        itr++;
+        i++;
+    }
+    return { -1,-1 };
+}
+
+//網解 runtime beats:58.74% memory beats:83.68%
+std::vector<int> searchRange_network(std::vector<int>& nums, int target) {
+    std::vector<int> res(2, -1);
+    int start_ = 0, end_ = nums.size() - 1;
+    while (start_ <= end_) {
+        int mid_ = (start_ + end_) / 2;
+        if (nums[mid_] > target) end_ = mid_ - 1;
+        else if (nums[mid_] < target) start_ = mid_ + 1;
+        else {
+            start_ = mid_;
+            end_ = mid_;
+            for (; start_ > -1;) {
+                if (nums[start_] == target) { res[0] = start_; --start_; }
+                else break;
+            }
+            for (; end_ < nums.size();) {
+                if (nums[end_] == target) { res[1] = end_; ++end_; }
+                else break;
+            }
+            break;
+        }
+    }
+    return res;
+}
+
+//35. Search Insert Position
+//初解 runtime beats:58.18% memory beats:31.13%
+int searchInsert(std::vector<int>& nums, int target) {
+    int s = nums.size();
+    for (int i = 0; i < s; i++) {
+        if (nums[i] > target)
+            return i;
+        else if (nums[i] == target)
+            return i;
+    }
+    return s;
+}
+
+//36. Valid Sudoku
+//初解 runtime beats:05.22% memory beats:05.02%
+bool isValidSudoku(std::vector<std::vector<char>>& board) {
+    //9x9
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            //sub-boxes
+            if (i % 3 == 0 && j % 3 == 0) {
+                std::map<char, int> subboxes;
+                for (int i_off = 0; i_off < 3; i_off++) {
+                    for (int j_off = 0; j_off < 3; j_off++) {
+                        if (((i != i + i_off) || (j != j + j_off)) 
+                            && (board[i + i_off][j + j_off] != '.') 
+                            && (subboxes.find(board[i + i_off][j + j_off]) != subboxes.end())) {
+                            return false;
+                        }
+                        else {
+                            subboxes[board[i + i_off][j + j_off]] = 1;
+                        }
+                    }
+                }
+            }
+
+            if (board[i][j] != '.') {
+                
+                int i1 = i + 1, j1 = j + 1;
+                //行
+                for (i1; i1 < 9; i1++) {
+                    if (board[i][j] == board[i1][j]) {
+                        return false;
+                    }
+                }
+
+                //列
+                for (j1; j1 < 9; j1++) {
+                    if (board[i][j] == board[i][j1]) {
+                        return false;
+                    }
+                }
+            }       
+        }
+    }
+
+    return true;
+}
+
+//二解 runtime beats:26.30% memory beats:19.15%
+bool isValidSudoku_2(std::vector<std::vector<char>>& board) {
+    //9x9
+    int i, j;
+    std::map<char, int> subboxes;
+    //sub-boxes
+    for (i = 0; i < 7; i += 3)
+        for (j = 0; j < 7; j += 3) {
+            subboxes.clear();
+            for (int i_off = 0; i_off < 3; i_off++) {
+                for (int j_off = 0; j_off < 3; j_off++) {
+                    if (((i != i + i_off) || (j != j + j_off))
+                        && (board[i + i_off][j + j_off] != '.')
+                        && (subboxes.find(board[i + i_off][j + j_off]) != subboxes.end())) {
+                        return false;
+                    }
+                    else
+                        subboxes[board[i + i_off][j + j_off]] = 1;
+                }
+            }
+        }
+
+    //逐行檢查
+    for (i = 0; i < 9; i++) {
+        subboxes.clear();
+        for (j = 0; j < 9; j++) {
+            if ((board[i][j] != '.') && (subboxes.find(board[i][j]) != subboxes.end())) {
+                return false;
+            }
+            else
+                subboxes[board[i][j]] = 1;
+        }
+    }
+
+    //逐列檢查
+    for (i = 0; i < 9; i++) {
+        subboxes.clear();
+        for (j = 0; j < 9; j++) {
+            if ((board[j][i] != '.') && (subboxes.find(board[j][i]) != subboxes.end())) {
+                return false;
+            }
+            else
+                subboxes[board[j][i]] = 1;
+        }
+    }
+
+    return true;
+}
+
+//網解 runtime beats:46.20% memory beats:91.75%
+bool isValidSudoku_network(std::vector<std::vector<char>>& a) {
+    bool row[10][10];
+    bool col[10][10];
+    memset(row, false, sizeof(row));
+    memset(col, false, sizeof(col));
+    int i, j, k, l;
+    for (k = 0; k < 9; k++) {
+        for (l = 0; l < 9; l++) {
+            char c = a[k][l];
+            if (c == '.') {
+                continue;
+            }
+            if (row[c - '0'][k] == true) {
+                return false;
+            }
+            else if (col[c - '0'][l] == true) {
+                return false;
+            }
+            else {
+                int boxi = k / 3, boxj = l / 3;
+                for (i = boxi * 3; i < boxi * 3 + 3; i++) {
+                    for (j = boxj * 3; j < boxj * 3 + 3; j++) {
+                        if (a[i][j] == a[k][l] && (i != k || j != l)) {
+                            return false;
+                        }
+                    }
+                }
+                row[c - '0'][k] = true; col[c - '0'][l] = true;
+            }
+        }
+    }
+    return true;
+}
+
+//39. Combination Sum
+//Fail
+
+//41. First Missing Positive
+//初解 runtime beats:07.31% memory beats:87.72%
+int firstMissingPositive(std::vector<int>& nums) {
+    int s = nums.size();
+    if (s == 0)
+        return 1;
+
+    sort(nums.begin(), nums.end());
+
+    int smallest = 1;
+    for (int i = 0; i < s; i++) {
+        if (nums[i] > smallest)
+            return smallest;
+        else if (nums[i] == smallest)
+            smallest++;
+    }
+
+    return smallest;
+}
+
+//二解 runtime beats:84.53% memory beats:86.24%
+int firstMissingPositive_2(std::vector<int>& nums) {
+    int s = nums.size();
+    if (s == 0)
+        return 1;
+
+    int smallest = 1;
+    for (int i = 0; i < s; i++) {
+        for (int j = i + 1; j < s; j++) {
+            if (nums[i] > nums[j]) {
+                int tmp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = tmp;
+            }
+        }
+
+        if (nums[i] > smallest)
+            return smallest;
+        else if (nums[i] == smallest)
+            smallest++;
+    }
+
+    return smallest;
+}
+
+//42. Trapping Rain Water
+//初解 runtime beats:62.06% memory beats:64.38%
+int trap(std::vector<int>& height) {
+    if (height.size() < 3) {
+        return 0;
+    }
+    
+    int s = height.size();
+    int posi = 0;
+    int mid_count = 0, total_area = 0;
+    //從左到右
+    for (int i = 1; i < s; i++) {
+        if (height[posi] <= height[i]) {
+            total_area += ((i - posi - 1) * (height[posi] < height[i] ? height[posi] : height[i])) - mid_count;
+            mid_count = 0;
+            posi = i;
+        }
+        else {
+            mid_count = mid_count + height[i];
+        }
+    }
+
+    if(mid_count == 0)
+        return total_area;
+
+    //從右到左
+    int p_plus = posi;
+    posi = s - 1;
+    mid_count = 0;
+    for (int i = s - 2; i > p_plus - 1; i--) {
+        if (height[posi] <= height[i]) {
+            total_area += ((posi - i - 1) * (height[posi] < height[i] ? height[posi] : height[i])) - mid_count;
+            mid_count = 0;
+            posi = i;
+        }
+        else {
+            mid_count = mid_count + height[i];
+        }
+    }
+
+    return total_area;
+}
+
+//int trap_2(std::vector<int>& height) {
+//    if (height.size() < 3) {
+//        return 0;
+//    }
+//    height.push_back(0);
+//    int s = height.size();
+//    int compare_peak = -1, old_peak = 0, peak = -1;
+//    int mid_count = 0, total_area = 0;
+//    for (int i = 0; i < s - 1; i++) {
+//        if (height[i] > height[i + 1]) {    //  下坡
+//            if (peak != -1) {   //過峰點
+//                total_area += ((peak - old_peak - 1) * (height[peak] < height[old_peak] ? height[peak] : height[old_peak])) - (mid_count - height[peak]);
+//                mid_count = height[i + 1];
+//
+//                if (compare_peak != -1 && old_peak < peak)
+//                    total_area += ((peak - compare_peak - 1) * ((height[peak] < height[compare_peak] ? height[peak] : height[compare_peak]) - height[old_peak]));
+//
+//                compare_peak = height[peak] < height[old_peak] ? old_peak : -1; //當舊的peak大於新的peak，觸發補償機制
+//                old_peak = peak;
+//                peak = -1;
+//            }
+//            else {
+//                mid_count += height[i + 1];
+//            }
+//        }
+//        else {  //  上坡
+//            peak = i + 1;
+//            mid_count += height[i + 1];
+//        }
+//    }
+//
+//    return total_area;
+//}
+
+//網解 runtime beats:62.06% memory beats:92.89%
+int trap_network(std::vector<int>& arr) {
+    int n = arr.size();
+    if (n <= 2)
+        return 0;
+    // initialize output 
+    int result = 0;
+
+    // maximum element on left and right 
+    int left_max = 0, right_max = 0;
+
+    // indices to traverse the array 
+    int lo = 0, hi = n - 1;
+
+    while (lo <= hi) {
+        if (arr[lo] < arr[hi]) {    //right max than left
+            if (arr[lo] > left_max)
+                // update max in left 
+                left_max = arr[lo];
+            else
+                // water on curr element = max - curr 
+                result += left_max - arr[lo];
+            lo++;
+        }
+        else {
+            if (arr[hi] > right_max)
+                // update right maximum 
+                right_max = arr[hi];
+            else
+                result += right_max - arr[hi];
+            hi--;
+        }
+    }
+
+    return result;
+}
+
+//45. Jump Game II
+//網解 runtime beats:52.28% memory beats:70.17%
+int jump_network(std::vector<int>& nums) {
+    int count = 0;//計步器
+    int cur = 0;//當前走到底幾位
+    int maxNext = 0;//最大的下一個
+    for (int i = 0; i < nums.size() - 1; i++) {
+        maxNext = std::max(maxNext, nums[i] + i);
+        //nums[i]+i可以知道跳到第幾步 i=要跳的步數 nums[i]指的是這次能跳的步數
+        if (i == cur) {//因為是用nums.length-1 所以這邊要先++ 
+            count++;
+            cur = maxNext;
+            i = cur - 1;
+        }
+    }
+    return count;
+}
+
+//46. Permutations
+//初解 runtime beats:37.58% memory beats:46.35%
+void DFS(std::vector<std::vector<int>>& ans, std::vector<int>& part, std::vector<int>& rest)
+{
+    int rest_size = rest.size();
+    if (rest_size == 0) {
+        ans.push_back(part);
+        return;
+    }
+
+    for (int i = 0; i < rest_size; i++) {
+        part.push_back(rest[i]);
+
+        std::vector<int> new_rest;
+        for (auto r : rest) {
+            if (r != rest[i])
+                new_rest.push_back(r);
+        }
+
+        DFS(ans, part, new_rest);
+        part.pop_back();
+    }    
+}
+
+std::vector<std::vector<int>> permute(std::vector<int>& nums) {
+    std::vector<std::vector<int>> ans;
+    std::vector<int> sub_ans;
+    DFS(ans, sub_ans, nums);
+
+    return ans;
+}
+
+//48. Rotate Image
+//初解 runtime beats:64.33% memory beats:49.52%
+void rotate(std::vector<std::vector<int>>& matrix) {
+    int  s = matrix.size();
+    if (s < 1)
+        return;
+
+    int x1 = 0, y1 = 0,
+        x2 = s - 1, y2 = 0,
+        x3 = s - 1, y3 = s - 1,
+        x4 = 0, y4 = s - 1;
+
+    int shrink = 0;
+    while (shrink < (s - 2) / 2 + 1) {
+        int tmp = matrix[x1][y1];
+        matrix[x1][y1] = matrix[x2][y2];
+        matrix[x2][y2] = matrix[x3][y3];
+        matrix[x3][y3] = matrix[x4][y4];
+        matrix[x4][y4] = tmp;
+
+        x1++; y2++; x3--; y4--;
+        if (x1 == s - 1 - shrink && y2 == s - 1 - shrink && x3 == shrink && y4 == shrink) { //  內縮一圈
+            shrink++;
+            x1 = shrink, y1 = shrink, x2 = s - 1 - shrink, y2 = shrink, x3 = s - 1 - shrink, y3 = s - 1 - shrink, x4 = shrink, y4 = s - 1 - shrink;
+        }
+    }
+}
+
+//網解 runtime beats:100.00% memory beats:92.23%
+void rotate_network(std::vector<std::vector<int>>& matrix) {
+    int n = matrix.size();
+    reverse(matrix.begin(), matrix.end());
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++)
+            std::swap(matrix[i][j], matrix[j][i]);
+}
+
+//49. Group Anagrams
+//初解 runtime beats:41.91% memory beats:82.06%
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
+    int s = strs.size();
+    if (s < 1)
+        return { {} };
+
+    std::map<std::string , int> sort_map;
+    std::vector<std::vector<std::string>> ans;
+
+    for (int i = 0; i < s; i++) {
+        std::string sort_str = strs[i];
+        std::sort(sort_str.begin(), sort_str.end());
+
+        if (sort_map.find(sort_str) != sort_map.end()) {
+            ans[sort_map[sort_str]].push_back(strs[i]);
+        }
+        else {
+            std::vector<std::string> sub_ans;
+            sub_ans.push_back(strs[i]);
+            ans.push_back(sub_ans);
+            sort_map[sort_str] = ans.size() - 1;
+        }
+    }
+
+    return ans;
 }

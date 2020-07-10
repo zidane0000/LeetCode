@@ -1,7 +1,7 @@
 # LeetCode 專案介紹
 Record the Problem-solving process
 
-[Code Link](https://github.com/zidane0000/LeetCode/blob/master/src/Solution.h)
+[Code Link](https:- github.com/zidane0000/LeetCode/blob/master/src/Solution.h)
 
 - 1. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
@@ -19,12 +19,12 @@ Record the Problem-solving process
 	- 二解 runtime beats:09.40% memory beats:31.19%
 	- 網解 runtime beats:95.44% memory beats:89.75%
 - 5. Longest Palindromic Substring
-	- 網解 runtime beats:90.65% memory beats:61.59% [參考網址](https://www.cnblogs.com/grandyang/p/4464476.html)
+	- 網解 runtime beats:90.65% memory beats:61.59% [參考網址](https:- www.cnblogs.com/grandyang/p/4464476.html)
 - 9. Palindrome Number
 	- 初解 runtime beats:92.39% memory beats:63.63%
 	- 二解 runtime beats:92.39% memory beats:63.63%
 - 10. Regular Expression Matching
-	- 網解 runtime beats:58.66% memory beats:42.67% [參考網址](https://knightzone.studio/2018/09/30/3644/leetcode%EF%BC%9A10-regular-expression-matching/)
+	- 網解 runtime beats:58.66% memory beats:42.67% [參考網址](https:- knightzone.studio/2018/09/30/3644/leetcode%EF%BC%9A10-regular-expression-matching/)
 - 11. Container With Most Water
 	- 初解 runtime beats:90.66% memory beats:41.36%
 	- 二解 runtime beats:16.97% memory beats:87.56%
@@ -61,3 +61,35 @@ Record the Problem-solving process
 - 32. Longest Valid Parentheses
 	- 網解 runtime beats:87.24% memory beats:79.15%
 	- 初解 runtime beats:08.75% memory beats:53.26%
+- 33. Search in Rotated Sorted Array
+	- 初解 runtime beats:65.96% memory beats:75.43%
+	- 二解 runtime beats:65.96% memory beats:66.92%
+	- 三解 runtime beats:65.96% memory beats:51.38%
+	- 網解 runtime beats:96.62% memory beats:97.67%
+- 34. Find First and Last Position of Element in Sorted Array
+	- 初解 runtime beats:58.74% memory beats:55.39%
+	- 二解 runtime beats:15.07% memory beats:56.99%
+	- 網解 runtime beats:58.74% memory beats:83.68%
+- 35. Search Insert Position
+	- 初解 runtime beats:58.18% memory beats:31.13%
+- 36. Valid Sudoku
+	- 初解 runtime beats:05.22% memory beats:05.02%
+	- 二解 runtime beats:26.30% memory beats:19.15%
+	- 網解 runtime beats:46.20% memory beats:91.75%
+- 39. Combination Sum
+	- Fail
+- 41. First Missing Positive
+	- 初解 runtime beats:07.31% memory beats:87.72%
+	- 二解 runtime beats:84.53% memory beats:86.24%
+- 42. Trapping Rain Water
+	- 初解 runtime beats:62.06% memory beats:64.38%
+	- 網解 runtime beats:62.06% memory beats:92.89%
+- 45. Jump Game II
+	- 網解 runtime beats:52.28% memory beats:70.17%
+- 46. Permutations
+	- 初解 runtime beats:37.58% memory beats:46.35%
+- 48. Rotate Image
+	- 初解 runtime beats:64.33% memory beats:49.52%
+	- 網解 runtime beats:100.00% memory beats:92.23%
+- 49. Group Anagrams
+	- 初解 runtime beats:41.91% memory beats:82.06%
