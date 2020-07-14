@@ -226,7 +226,7 @@ int main()
     //int r = trap_2(height);
 
     //45. Jump Game II
-    //std::vector<int> nums{ 2,1 };
+    //std::vector<int> nums{ 2,3,1,1,4 };
     //std::vector<int> nums{ 5, 6, 4, 4, 6, 9, 4, 4, 7, 4, 4, 8, 2, 6, 8, 1, 5, 9, 6, 5, 2, 7, 9, 7, 9, 6, 9, 4, 1, 6, 8, 8, 4, 4, 2, 0, 3, 8, 5 };
     //int r = jump_network(nums);
 
@@ -246,11 +246,62 @@ int main()
 
 
     //49. Group Anagrams
-    std::vector<std::string> strs{ "eata", "tea", "tan", "ate", "nat", "bat" };
-    std::vector<std::vector<std::string>> r = groupAnagrams(strs);
+    //std::vector<std::string> strs{ "eata", "tea", "tan", "ate", "nat", "bat" };
+    //std::vector<std::vector<std::string>> r = groupAnagrams(strs);
+
+    //53. Maximum Subarray
+    //std::vector<int> nums{ -1 };
+    //int r = maxSubArray(nums);
+
+    //55. Jump Game
+    //ªì¸Ñ runtime beats:46.64% memory beats:70.04%
+    //std::vector<int> nums{2,0,0,1};
+    //bool r = canJump(nums);
 
 
+    //56. Merge Intervals
+    //std::vector<std::vector<int>> intervals{ {1,3},{2,6},{8,10},{15,18} };
+    //std::vector<std::vector<int>> intervals{ {1,2},{2,3},{3,4},{4,5},{5,6},{7,8},{9,10} };
+    //std::vector<std::vector<int>> intervals{ {1,3},{2,6},{8,10},{15,18} };
+    //std::vector<std::vector<int>> r =  merge(intervals);
 
+    //60. Permutation Sequence
+    //std::string r = getPermutation(9, 219601);
+    //std::string r = getPermutation_2(4, 2);
+
+    //62. Unique Paths
+    //int m = 4;
+    //int r = uniquePaths(1, m);
+    //r = uniquePaths(2, m);
+    //r = uniquePaths(3, m);
+    //r = uniquePaths(4, m);
+    //r = uniquePaths(5, m);
+    //r = uniquePaths(6, m);
+    //r = uniquePaths(7, m);
+    //r = uniquePaths(8, m);
+    //r = uniquePaths(9, m);
+
+    //64. Minimum Path Sum
+    //std::vector<std::vector<int>> grid{
+    //    {1,3,1},
+    //    {1,5,1},
+    //    {4,2,1}
+    //};
+    //int r = minPathSum(grid);
+
+    //67. Add Binary
+    //std::string r = addBinary("110010", "10111");
+
+    //70. Climbing Stairs
+    //int r = climbStairs(12);
+
+    //73. Set Matrix Zeroes
+    std::vector<std::vector<int>> matrix{
+        {1,2,1},
+        {1,0,1},
+        {1,2,1}
+    };
+    setZeroes(matrix);
 
 
 

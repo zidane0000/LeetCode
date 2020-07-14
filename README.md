@@ -93,3 +93,30 @@ Record the Problem-solving process
 	- 網解 runtime beats:100.00% memory beats:92.23%
 - 49. Group Anagrams
 	- 初解 runtime beats:41.91% memory beats:82.06%
+- 53. Maximum Subarray
+	- 初解 runtime beats:46.64% memory beats:70.04%
+- 54. Spiral Matrix
+	- fail
+- 55. Jump Game
+	- 初解 runtime beats:81.88% memory beats:37.69%
+- 56. Merge Intervals
+	- 初解 runtime beats:65.74% memory beats:61.10%
+	- 網解 runtime beats:74.07% memory beats:76.75%
+- 57. Insert Interval
+	- 初解 runtime beats:05.29% memory beats:52.84%
+- 60. Permutation Sequence
+	- 初解 runtime beats:05.04% memory beats:32.76%
+	- 二解 runtime beats:30.03% memory beats:05.04%
+	- 網解 runtime beats:100.00% memory beats:12.73%
+- 62. Unique Paths
+	- 初解 runtime beats:18.41% memory beats:97.66%
+- 64. Minimum Path Sum
+	- 初解 runtime beats:08.58% memory beats:94.01%
+- 67. Add Binary
+	- 初解 runtime beats:92.85% memory beats:05.03%
+	- 二解 runtime beats:92.85% memory beats:45.78%
+- 70. Climbing Stairs
+	- 初解 runtime beats:13.94% memory beats:70.44%
+	- 二解 runtime beats:100.00% memory beats:80.69%
+- 73. Set Matrix Zeroes
+	- 初解 runtime beats:30.94% memory beats:56.66%

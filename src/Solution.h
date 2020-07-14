@@ -1657,7 +1657,6 @@ int jump_network(std::vector<int>& nums) {
         if (i == cur) {//因為是用nums.length-1 所以這邊要先++ 
             count++;
             cur = maxNext;
-            i = cur - 1;
         }
     }
     return count;
@@ -1684,7 +1683,7 @@ void DFS(std::vector<std::vector<int>>& ans, std::vector<int>& part, std::vector
 
         DFS(ans, part, new_rest);
         part.pop_back();
-    }    
+    }
 }
 
 std::vector<std::vector<int>> permute(std::vector<int>& nums) {
@@ -1758,4 +1757,496 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& st
     }
 
     return ans;
+}
+
+//53. Maximum Subarray
+//初解 runtime beats:46.64% memory beats:70.04%
+int maxSubArray(std::vector<int>& nums) {
+    if (nums.size() == 0)
+        return INT_MIN;
+
+    int max_Sub = INT_MIN;
+    int Sub = 0;
+    for (auto num : nums) {
+        Sub += num;
+        max_Sub = max_Sub > Sub ? max_Sub : Sub;
+        if (Sub < 0)
+            Sub = 0;
+    }
+
+    return max_Sub;
+}
+
+//54. Spiral Matrix
+//fail
+
+//55. Jump Game
+//初解 runtime beats:81.88% memory beats:37.69%
+bool canJump(std::vector<int>& nums) {
+    int cur = 0;        //當前走到底幾位
+    int maxNext = 0;    //最大的下一個
+    int s = nums.size();
+    for (int i = 0; i < s - 1; i++) {
+        maxNext = std::max(maxNext, nums[i] + i);
+        //nums[i]+i可以知道跳到第幾步 i=要跳的步數 nums[i]指的是這次能跳的步數
+        if (i == cur) {//因為是用nums.length-1 所以這邊要先++ 
+            cur = maxNext;
+            if (cur >= s - 1)
+                return true;
+        }
+    }
+
+    if (cur < s - 1)
+        return false;
+    else
+        return true;
+}
+
+//56. Merge Intervals
+//初解 runtime beats:65.74% memory beats:61.10%
+std::vector<std::vector<int>> merge(std::vector<std::vector<int>>& intervals) {
+    int s = intervals.size();
+    if (s < 2)
+        return intervals;
+    sort(intervals.begin(), intervals.end());
+    std::vector<std::vector<int>> ans;
+    int x = intervals[0][0], y = intervals[0][1];
+    for (int i = 1; i < s; i++) {
+        if (y >= intervals[i][0]) {
+            if (y < intervals[i][1])
+                y = intervals[i][1];
+        }
+        else {
+            ans.push_back({ x, y });
+            x = intervals[i][0], y = intervals[i][1];
+        }
+    }
+    ans.push_back({ x, y });
+    return ans;
+}
+
+//網解 runtime beats:74.07% memory beats:76.75%
+std::vector<std::vector<int>> merge_network(std::vector<std::vector<int>>& in) {
+    std::vector<std::vector<int>>a;
+    for (int i = 0; i < in.size(); i++)
+    {
+        if (in[i][0] == -1 && in[i][1] == -1)continue;
+        int s = in[i][0];
+        int f = in[i][1];
+        in[i][0] = -1;
+        in[i][1] = -1;
+        for (int j = 0; j < in.size(); j++)
+        {
+            if (in[j][0] == -1)continue;
+            if (in[j][0] >= s && in[j][0] <= f && in[j][1] >= s && in[j][1] <= f)
+            {
+                in[j][0] = -1;
+                in[j][1] = -1;
+                continue;
+            }
+            if ((in[j][0] > s && in[j][0] > f) && (in[j][1] > s && in[j][1] > f))continue;
+            if (in[j][0] < s && in[j][0] < f && in[j][1] < s && in[j][1] < f)continue;
+            if (in[j][0] <= s && in[j][1] >= s && in[j][1] <= f && in[j][0] < f)
+            {
+                s = in[j][0];
+                in[j][0] = -1;
+                in[j][1] = -1;
+                j = -1; continue;
+            }
+            if (in[j][0] > s && in[j][0] <= f && in[j][1] > s && in[j][1] > f)
+            {
+                f = in[j][1];
+                in[j][0] = -1;
+                in[j][1] = -1;
+                j = -1; continue;
+            }
+            if (in[j][0] <= s && in[j][1] >= s && in[j][0] <= f && in[j][1] >= f)
+            {
+                s = in[j][0];
+                f = in[j][1];
+                in[j][0] = -1;
+                in[j][1] = -1;
+                j = -1; continue;
+
+            }
+        }
+        std::vector<int>x;
+        x.push_back(s);
+        x.push_back(f);
+        a.push_back(x);
+    }
+
+    return a;
+}
+
+//57. Insert Interval
+//初解 runtime beats:05.29% memory beats:52.84%
+std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& newInterval) {
+    intervals.push_back(newInterval);
+    int s = intervals.size();
+    if (s < 2)
+        return intervals;
+    sort(intervals.begin(), intervals.end());
+    std::vector<std::vector<int>> ans;
+    int x = intervals[0][0], y = intervals[0][1];
+    for (int i = 1; i < s; i++) {
+        if (y >= intervals[i][0]) {
+            if (y < intervals[i][1])
+                y = intervals[i][1];
+        }
+        else {
+            ans.push_back({ x, y });
+            x = intervals[i][0], y = intervals[i][1];
+        }
+    }
+    ans.push_back({ x, y });
+    return ans;
+}
+
+//60. Permutation Sequence
+//初解 runtime beats:05.04% memory beats:32.76%
+std::string DFS(std::vector<int>& parts, std::vector<int>& rest, int& k)
+{
+    int rest_size = rest.size();
+    if (rest_size == 0) {
+        k--;
+        if (k == 0) {
+            std::string s_part;
+            for (auto part : parts)
+                s_part += std::to_string(part);
+            return s_part;
+        }
+        else
+            return "";
+    }
+
+    for (int i = 0; i < rest_size; i++) {
+        parts.push_back(rest[i]);
+
+        int rest_i = rest[i];
+        rest.erase(rest.begin() + i);
+        std::string fromDFS = DFS(parts, rest, k);
+        rest.insert(rest.begin() + i, rest_i);
+
+        if (fromDFS != "")
+            return fromDFS;
+        parts.pop_back();
+    }
+    return "";
+}
+
+int n_factorial(int k) {
+    if (k < 2)
+        return 1;
+    else
+        return k * n_factorial(k - 1);
+}
+
+std::string getPermutation(int n, int k) {
+    std::vector<int> parts;
+    std::vector<int> rest;
+    int count = 0;
+    for (int i = 1; i <= n; i++) {
+        rest.push_back(i);
+    }
+    
+    int if_1 = n_factorial(n - 1);
+    if (k % if_1 != 0) {
+        int part = (k / if_1) + 1;
+        count = if_1 * (part - 1);
+        parts.push_back(part);
+        rest.erase(rest.begin() + part - 1);
+    }
+    else {
+        int part = (k / if_1);
+        count = if_1 * (part - 1);
+        parts.push_back(part);
+        rest.erase(rest.begin() + part - 1);
+    }
+    k = k - count;
+    return DFS(parts, rest, k);
+}
+
+//二解 runtime beats:30.03% memory beats:05.04%
+std::string getPermutation_2(int n, int k) {
+    std::vector<int> parts;
+    std::vector<int> rests;
+    int count = 0;
+    for (int i = 1; i <= n; i++) {
+        rests.push_back(i);
+    }
+
+    while (n > 0) {
+        int if_1 = n_factorial(n - 1);
+        if (k % if_1 != 0) {
+            int posi = (k / if_1);
+            if (posi == 0) {
+                int k_plus = k % if_1;
+                if (k_plus == 1) {
+                    for (auto rest : rests)
+                        parts.push_back(rest);
+                    n = 0;
+                }
+                else {
+                    return DFS(parts, rests, k_plus);
+                }
+            }
+            else {
+                int part = rests[posi];
+                count = if_1 * (posi);
+                parts.push_back(part);
+                rests.erase(rests.begin() + posi);
+            }            
+        }
+        else {
+            int posi = (k / if_1) - 1;
+            int part = rests[posi];
+            count = if_1 * (posi);
+            parts.push_back(part);
+            rests.erase(rests.begin() + posi);
+        }
+        n--;
+        k = k - count;
+    }    
+
+    std::string str;
+    for (auto part : parts)
+        str += std::to_string(part);
+    return str;
+}
+
+//網解 runtime beats:100.00% memory beats:12.73%
+void helper(std::string& ans, std::vector<int>& nums, std::vector<int> fact, int n, int k)
+{
+    if (n == 1) {
+        ans += std::to_string(nums.back());
+        return;
+    }
+
+    int ind = (k / fact[n - 1]);
+    if (k % fact[n - 1] == 0)
+        ind--;
+
+    ans += std::to_string(nums[ind]);
+    nums.erase(nums.begin() + ind);
+    k -= fact[n - 1] * ind;
+    helper(ans, nums, fact, n - 1, k);
+}
+
+std::string getPermutation_network(int n, int k)
+{
+    std::string ans = "";
+    if (n == 1)
+        return "1";
+
+    std::vector <int> nums;
+    for (int i = 1; i <= n; i++)
+        nums.push_back(i);
+
+    std::vector <int> fact = { 1,1,2,6,24,120,720,5040,40320,362880 };
+
+    helper(ans, nums, fact, n, k);
+
+    return ans;
+}
+
+//62. Unique Paths
+//初解 runtime beats:18.41% memory beats:97.66%
+int uniquePaths(int m, int n) {
+    if (m == 1)
+        return 1;
+    else if (n == 1)
+        return 1;
+    else if (n == 2)    //從n == 2之後皆是為了加速計算速度而找出的規律
+        return m;
+    else if (n == 3)
+        return (1 + m) * m / 2;
+    else if (n == 4) {
+        int tmp = 0;
+        for (int i = 1; i <= m; i++)
+            tmp += ((1 + i) * i / 2);
+        return tmp;
+    }
+    return uniquePaths(m, n - 1) + uniquePaths(m - 1, n);
+}
+
+//64. Minimum Path Sum
+//初解 runtime beats:08.58% memory beats:94.01%
+int minPathSum(std::vector<std::vector<int>>& grid) {
+    int layer1_size = grid.size();
+    if (layer1_size == 0)
+        return 0;
+
+    int layer2_size = grid[0].size();
+    int i = 0, j = 0;
+    for (i = 1; i < layer1_size; i++) {
+        grid[i][0] += grid[i - 1][0];
+    }
+
+    for (j = 1; j < layer2_size; j++) {
+        grid[0][j] += grid[0][j - 1];
+    }
+  
+    for (i = 1; i < layer1_size; i++) {
+        for (j = 1; j < layer2_size; j++) {
+            grid[i][j] += std::min(grid[i - 1][j], grid[i][j - 1]);
+        }
+    }
+
+    return grid[layer1_size - 1][layer2_size - 1];
+}
+
+//67. Add Binary
+//初解 runtime beats:92.85% memory beats:05.03%
+std::string addBinary(std::string a, std::string b) {
+    int a_size = a.size();
+    int b_size = b.size();
+    if (a_size > b_size)
+        return addBinary(b, a);
+
+    //a比b短
+    std::string ans = "";
+    bool iscarry = false;
+    int i = b_size - a_size;
+
+    while (i--) {   //前面補0
+        a = "0" + a;
+    }
+
+    for (i = b_size - 1; i >= 0; i--) {
+        if (iscarry) {
+            if (a[i] == '1' && b[i] == '1')
+                ans = "1" + ans;
+            else if (a[i] == '1') 
+                ans = "0" + ans;
+            else if (b[i] == '1') 
+                ans = "0" + ans;
+            else {
+                ans = "1" + ans;
+                iscarry = false;
+            }
+        }
+        else {
+            if (a[i] == '1' && b[i] == '1') {
+                ans = "0" + ans;
+                iscarry = true;
+            }
+            else if (a[i] == '1')
+                ans = "1" + ans;
+            else if (b[i] == '1')
+                ans = "1" + ans;
+            else
+                ans = "0" + ans;
+        }
+    }
+
+    if(iscarry)
+        ans = "1" + ans;
+    
+    return ans;
+}
+
+//二解 runtime beats:92.85% memory beats:45.78%
+std::string addBinary_2(std::string a, std::string b) {
+    int a_size = a.size();
+    int b_size = b.size();
+    if (a_size > b_size)
+        return addBinary_2(b, a);
+
+    //a比b短
+    bool iscarry = false;
+    int i = b_size - a_size;
+    while (i--) {   //前面補0
+        a = "0" + a;
+    }
+
+    for (i = b_size - 1; i >= 0; i--) {
+        if (iscarry) {
+            if (a[i] == '1' && b[i] == '1')
+                a[i] = '1';
+            else if (a[i] == '1')
+                a[i] = '0';
+            else if (b[i] == '1')
+                a[i] = '0';
+            else {
+                a[i] = '1';
+                iscarry = false;
+            }
+        }
+        else {
+            if (a[i] == '1' && b[i] == '1') {
+                a[i] = '0';
+                iscarry = true;
+            }
+            else if (a[i] == '1')
+                a[i] = '1';
+            else if (b[i] == '1')
+                a[i] = '1';
+            else
+                a[i] = '0';
+        }
+    }
+
+    if (iscarry)
+        a = "1" + a;
+
+    return a;
+}
+
+//70. Climbing Stairs
+//初解 runtime beats:13.94% memory beats:70.44%
+int climbStairs(int n) {
+    std::vector<int> stairs{ 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
+    for (int i = 11; i < n; i++) {
+        stairs.push_back(stairs[i] + stairs[i - 1]);
+    }
+    return stairs[n];
+}
+
+//二解 runtime beats:100.00% memory beats:80.69%
+int climbStairs_2(int n) {
+    if (n < 4)
+        return n;
+
+    int a = 2, b = 3;
+    n += -3;
+
+    while (n--) {
+        int tmp = a;
+        a = b;
+        b = b + tmp;
+    }
+        
+    return b;
+}
+
+//73. Set Matrix Zeroes
+//初解 runtime beats:30.94% memory beats:56.66%
+void setZeroes(std::vector<std::vector<int>>& matrix) {
+    int cols_size = matrix.size();
+    if (cols_size < 1)
+        return;
+
+    int rows_size = matrix[0].size();
+    int i, j;
+    std::set<int> cols;
+    bool needclear = false;
+
+    for (i = 0; i < cols_size; i++) {
+        for (j = 0; j < rows_size; j++) {
+            if (matrix[i][j] == 0) {
+                cols.insert(j);
+                needclear = true;
+            }
+        }
+
+        if (needclear) {
+            matrix[i].assign(rows_size, 0);
+            needclear = false;
+        }
+    }
+
+    for (std::set<int>::iterator it = cols.begin(); it != cols.end(); ++it)
+        for (i = 0; i < cols_size; i++)
+            matrix[i][*it] = 0;    
 }

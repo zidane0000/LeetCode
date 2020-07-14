@@ -22,4 +22,6 @@ E:\Dave\VS2019\LeetCode\src\Solution.h(796,23): warning C4018: '<': signed/unsig
 E:\Dave\VS2019\LeetCode\src\Solution.h(897,23): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(1333,25): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(1654,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(1831,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(1838,27): warning C4018: '<': signed/unsigned mismatch
   LeetCode.vcxproj -> E:\Dave\VS2019\LeetCode\Debug\LeetCode.exe
