@@ -296,12 +296,29 @@ int main()
     //int r = climbStairs(12);
 
     //73. Set Matrix Zeroes
-    std::vector<std::vector<int>> matrix{
-        {1,2,1},
-        {1,0,1},
-        {1,2,1}
-    };
-    setZeroes(matrix);
+    //std::vector<std::vector<int>> matrix{
+    //    {1,2,1},
+    //    {1,0,1},
+    //    {1,2,1}
+    //};
+    //setZeroes(matrix);
+
+
+    //74. Search a 2D Matrix
+    //std::vector<std::vector<int>> matrix{
+    //    {1},
+    //    {3}
+    //};
+    //bool r = searchMatrix(matrix, 3);
+
+
+    //76. Minimum Window Substring
+    //std::string r = minWindow("ADOBECODEBANC", "ABC");
+
+    //77. Combinations
+    std::vector<std::vector<int>> r = combine(5, 2);
+    std::vector<std::vector<int>> r1 = combine_2(5, 2);
+
 
 
 

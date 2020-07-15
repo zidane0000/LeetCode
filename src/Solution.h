@@ -2250,3 +2250,131 @@ void setZeroes(std::vector<std::vector<int>>& matrix) {
         for (i = 0; i < cols_size; i++)
             matrix[i][*it] = 0;    
 }
+
+//74. Search a 2D Matrix
+//初解 runtime beats:80.89% memory beats:49.57%
+bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
+    int rows = matrix.size();
+    if (rows == 0)
+        return false;
+
+    int cols = matrix[0].size();
+    if (cols == 0)
+        return false;
+    int i;
+    for (i = 0; i < rows - 1; i++) {
+        if ((matrix[i][0] <= target) && (matrix[i + 1][0] > target)) {
+            for (auto col : matrix[i]) {
+                if (col == target)
+                    return true;
+                else if (col > target)
+                    return false;
+            }
+            return false;
+        }
+    }
+
+    //last rows
+    if ((matrix[rows - 1][0] <= target) && (matrix[rows - 1][cols - 1] >= target)) {
+        for (auto col : matrix[rows - 1]) {
+            if (col == target)
+                return true;
+            else if (col > target)
+                return false;
+        }
+    }
+
+    return false;
+}
+
+//75. Sort Colors
+//初解 runtime beats:100.00% memory beats:17.43%
+void sortColors(std::vector<int>& nums) {
+    for (int i = 0; i < nums.size(); i++) {
+        for (int j = i + 1; j < nums.size(); j++) {
+            if (nums[i] > nums[j]) {
+                std::swap(nums[i], nums[j]);
+            }
+        }
+    }
+}
+
+//76. Minimum Window Substring
+//網解 runtime beats:91.42% memory beats:61.38%
+std::string minWindow_network(std::string s, std::string t) {
+    std::vector<int> letterCnt(128, 0);
+    int left = 0, cnt = 0, minLeft = -1, minLen = INT_MAX;
+
+    for (auto c : t) ++letterCnt[c];
+
+    for (int i = 0; i < s.size(); ++i) {
+        if (--letterCnt[s[i]] >= 0) ++cnt;
+        while (cnt == t.size()) {
+            if (minLen > i - left + 1) {
+                minLen = i - left + 1;
+                minLeft = left;
+            }
+            if (++letterCnt[s[left]] > 0) --cnt;
+            ++left;
+        }
+    }
+    return minLeft == -1 ? "" : s.substr(minLeft, minLen);
+}
+
+//77. Combinations
+//初解 runtime beats:20.54% memory beats:26.08%
+void DFS(std::vector<std::vector<int>>& ans, std::vector<int>& a, std::vector<int> b, int depth, int depth_max) {
+    while(b.size() > 0){
+        a.push_back(b[0]);
+        b.erase(b.begin());
+
+        if (depth == depth_max - 1) {
+            ans.push_back(a);
+        }
+        else {
+            DFS(ans, a, b, depth + 1, depth_max);
+        }
+        a.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> combine(int n, int k) {
+    if (n == 0)
+        return {};
+    if (k == 0)
+        return { {} };
+
+    std::vector<int> n_combi;
+    while (n > 0) {
+        n_combi.push_back(n);
+        n--;
+    }
+
+    reverse(n_combi.begin(), n_combi.end());
+    
+    std::vector<std::vector<int>> ans;
+    std::vector<int> a;
+    DFS(ans, a, n_combi, 0, k);
+    return ans;
+}
+
+//網解 runtime beats:92.87% memory beats:88.06%
+void combine(int begin, int n, int k, std::vector<std::vector<int>>& ans, std::vector<int>& temp) {
+    if (k == 0) {
+        ans.push_back(temp);
+        return;
+    }
+    //condition : n-i+1 is the range, range must greater than k
+    for (int i = begin; n - i + 1 >= k; i++) { // for the ith iteration, get the combination of i and k-1 numbers differ from i.
+        temp.push_back(i);
+        combine(i + 1, n, k - 1, ans, temp);// get the combination of k-1 numbers which range is(i+1,n) 
+        temp.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> combine(int n, int k) {
+    std::vector<std::vector<int>> ans;
+    std::vector<int> temp;
+    combine(1, n, k, ans, temp); //call fuction to get combination of k numbers which range is 1-n
+    return ans;
+}

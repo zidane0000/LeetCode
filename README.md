@@ -120,3 +120,12 @@ Record the Problem-solving process
 	- 二解 runtime beats:100.00% memory beats:80.69%
 - 73. Set Matrix Zeroes
 	- 初解 runtime beats:30.94% memory beats:56.66%
+- 74. Search a 2D Matrix
+	- 初解 runtime beats:80.89% memory beats:49.57%
+- 75. Sort Colors
+	- 初解 runtime beats:100.00% memory beats:17.43%
+- 76. Minimum Window Substring
+	- 網解 runtime beats:91.42% memory beats:61.38%
+- 77. Combinations
+	- 初解 runtime beats:20.54% memory beats:26.08%
+	- 網解 runtime beats:92.87% memory beats:88.06%
