@@ -19,6 +19,33 @@ ListNode* toList(std::vector<int> vec) {
     return a;
 }
 
+//https://leetcode.com/problems/invert-binary-tree/discuss/62896/Just-wonder-how-to-write-custom-testcase.-Any-examples/499471
+TreeNode* toTree(std::vector<int> arr) {
+    TreeNode* root = NULL;
+    std::queue<TreeNode*> q;
+    int i = 0;
+    TreeNode* t = arr[i] == NULL ? NULL : new TreeNode(arr[i]);
+    root = t;
+    q.push(root);
+    i++;
+    while (!q.empty() && i < arr.size()) {
+        TreeNode* t1 = q.front();
+        q.pop();
+        if (t1 != NULL) {
+            t1->left = arr[i] == NULL ? NULL : new TreeNode(arr[i]);
+            q.push(t1->left);
+            i++;
+            if (i >= arr.size()) {
+                break;
+            }
+            t1->right = arr[i] == NULL ? NULL : new TreeNode(arr[i]);
+            q.push(t1->right);
+            i++;
+        }
+    }
+    return root;
+}
+
 int main()
 {
     //LeetCode 1. Two Sum
@@ -313,11 +340,77 @@ int main()
 
 
     //76. Minimum Window Substring
-    //std::string r = minWindow("ADOBECODEBANC", "ABC");
+    //std::string r = minWindow_network("ADOBECODEBANC", "ABC");
 
     //77. Combinations
-    std::vector<std::vector<int>> r = combine(5, 2);
-    std::vector<std::vector<int>> r1 = combine_2(5, 2);
+    //std::vector<std::vector<int>> r = combine(5, 2);
+
+    //78. Subsets
+    //std::vector<int> nums{1,2,3};
+    //std::vector<std::vector<int>> r = subsets(nums);
+
+    //79. Word Search
+    //std::vector<std::vector<char>> board{
+        //{'A','B','C','E'},
+        //{'S','F','C','S'},
+        //{'A','D','E','E'},
+        //{'A','A'},
+        //{'A','A'}
+    //    {'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}
+    //};
+    //bool r = exist(board, "ABCESEEEFS");
+
+    //80. Remove Duplicates from Sorted Array II
+    //std::vector<int> nums{1,1,1};
+    //int r = removeDuplicates(nums);
+
+    //82. Remove Duplicates from Sorted List II
+    //ListNode* r = deleteDuplicates_network(toList({ 1,2,2,3,3,4,4,4,5,6 }));
+
+    //86. Partition List
+    //ListNode* r = partition(toList({3,1,2}), 3);
+
+    //90. Subsets II
+    //std::vector<int> nums{ 1,2,2 };
+    //std::vector< std::vector<int>> r = subsetsWithDup_network(nums);
+
+    //92. Reverse Linked List II
+    //ListNode* r = reverseBetween(toList({ 1,2,3,4,5 }), 1, 4);
+
+    //95. Unique Binary Search Trees II
+    //std::vector<TreeNode*> r = generateTrees(8);
+
+    ////96. Unique Binary Search Trees
+    //int r = numTrees_network(3);
+    //r = numTrees_network_2(3);
+
+    //97. Interleaving String
+    //bool  r = isInterleave_network("aabcc", "dbbca", "aadbbbaccc");
+
+    //102. Binary Tree Level Order Traversal
+    //std::vector<std::vector<int>> r = levelOrder(toTree({ 1,2,3,NULL,NULL,4,5,NULL,NULL,7 }));
+    //std::vector<std::vector<int>> r = levelOrder_2(toTree({ 1,2,3,NULL,NULL,4,5,NULL,NULL,7 }));
+
+    //103. Binary Tree Zigzag Level Order Traversal
+    //std::vector<std::vector<int>> r = zigzagLevelOrder(toTree({ 3,9,20,NULL,NULL,15,7 }));
+
+    //105. Construct Binary Tree from Preorder and Inorder Traversal
+    //std::vector<int>preorder{ 3,9,20,15,7 };
+    //std::vector<int>inorder{ 9,3,15,20,7 };
+    //TreeNode* r = buildTree_network_2(preorder, inorder);
+
+    //107. Binary Tree Level Order Traversal II
+    //std::vector<std::vector<int>> r = levelOrderBottom(toTree({ 3,9,20,NULL,NULL,15,7 }));
+
+    //108. Convert Sorted Array to Binary Search Tree
+    std::vector<int> nums{-15,-10,-3,0,3,5,9};
+    TreeNode* r = sortedArrayToBST(nums);
+
+
+
+
+
+
 
 
 

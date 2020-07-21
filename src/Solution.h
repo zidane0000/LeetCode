@@ -7,6 +7,8 @@
 #include <math.h>
 #include <stack>
 #include <set>
+#include <unordered_set>
+#include <queue>
 
 //1. Two Sum
 //初解 runtime beats:12.97% memory beats:89.01%
@@ -2308,13 +2310,15 @@ std::string minWindow_network(std::string s, std::string t) {
     for (auto c : t) ++letterCnt[c];
 
     for (int i = 0; i < s.size(); ++i) {
-        if (--letterCnt[s[i]] >= 0) ++cnt;
+        if (--letterCnt[s[i]] >= 0)
+            ++cnt;
         while (cnt == t.size()) {
             if (minLen > i - left + 1) {
                 minLen = i - left + 1;
                 minLeft = left;
             }
-            if (++letterCnt[s[left]] > 0) --cnt;
+            if (++letterCnt[s[left]] > 0)
+                --cnt;
             ++left;
         }
     }
@@ -2372,9 +2376,903 @@ void combine(int begin, int n, int k, std::vector<std::vector<int>>& ans, std::v
     }
 }
 
-std::vector<std::vector<int>> combine(int n, int k) {
+std::vector<std::vector<int>> combine_network(int n, int k) {
     std::vector<std::vector<int>> ans;
     std::vector<int> temp;
     combine(1, n, k, ans, temp); //call fuction to get combination of k numbers which range is 1-n
     return ans;
+}
+
+//78. Subsets
+//初解 runtime beats:66.40% memory beats:44.33%
+void Subsets(int begin, int k, std::vector<std::vector<int>>& ans, std::vector<int> sets, std::vector<int>& temp) {
+    ans.push_back(temp);
+    for (int i = begin; i < k; i++) {
+        temp.push_back(sets[i]);
+        Subsets(i + 1, k, ans, sets, temp);
+        temp.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> subsets(std::vector<int>& nums) {
+    std::vector<std::vector<int>> ans;
+    std::vector<int> temp;
+
+    Subsets(0, nums.size(), ans, nums, temp);
+
+    return ans;
+}
+
+//網解 runtime beats:100.00% memory beats:68.55%
+std::vector<std::vector<int>> subsets_network(std::vector<int>& nums) {
+    const int n = nums.size();
+    std::vector<std::vector<int>> results;
+    for (int i = 0; i < pow(2, n); i++) {
+        std::vector<int> v;
+        for (int j = 0; j < n; j++) {
+            if (i & (1 << j)) {
+                v.push_back(nums[j]);
+            }
+        }
+        results.push_back(move(v));
+    }
+    return results;
+}
+
+//79. Word Search
+//初解 runtime beats:05.02% memory beats:05.43%
+bool exist(std::vector<std::vector<char>>& board, int rows, int cols, std::vector<std::vector<bool>> bool_board, int i, int j, int word_posi, std::string word) {
+    if (word_posi == word.size())
+        return true;
+    
+    if (i != 0)
+        if (bool_board[i -1][j])
+            if (board[i - 1][j] == word[word_posi]) {
+                bool_board[i - 1][j] = false;
+                if (exist(board, rows, cols, bool_board, i - 1, j, word_posi + 1, word))
+                    return true;
+                bool_board[i - 1][j] = true;
+            }                
+
+    if (i != rows)
+        if (bool_board[i + 1][j])
+            if (board[i + 1][j] == word[word_posi]) {
+                bool_board[i + 1][j] = false;
+                if (exist(board, rows, cols, bool_board, i + 1, j, word_posi + 1, word))
+                    return true;
+                bool_board[i + 1][j] = true;
+            }
+                
+
+    if (j != 0)
+        if (bool_board[i][j - 1])
+            if (board[i][j - 1] == word[word_posi]) {
+                bool_board[i][j - 1] = false;
+                if (exist(board, rows, cols, bool_board, i, j - 1, word_posi + 1, word))
+                    return true;
+                bool_board[i][j - 1] = true;
+            }
+
+    if (j != cols)
+        if (bool_board[i][j + 1])
+            if (board[i][j + 1] == word[word_posi]) {
+                bool_board[i][j + 1] = false;
+                if (exist(board, rows, cols, bool_board, i, j + 1, word_posi + 1, word))
+                    return true;
+                bool_board[i][j + 1] = true;
+            }                
+
+    return false;
+}
+
+bool exist(std::vector<std::vector<char>>& board, std::string word) {
+    int rows = board.size();
+    if (rows == 0)
+        return false;
+    
+    int cols = board[0].size();
+    if (cols == 0)
+        return false;
+
+    int i, j;
+
+    std::vector<std::vector<bool>> bool_board(rows, std::vector<bool>(cols, true));
+    for(i=0;i<rows;i++)
+        for (j = 0; j < cols; j++) {
+            if (board[i][j] == word[0]) {
+                bool_board[i][j] = false;
+                if (exist(board, rows - 1, cols - 1, bool_board, i, j, 1, word))
+                    return true;
+                bool_board[i][j] = true;
+            }
+        }
+
+    return false;
+}
+
+//網解 runtime beats:97.90% memory beats:78.72%
+bool exist(std::vector<std::vector<char>>& board, int i, int j, std::string& word, int mindex) {
+    if (mindex == word.size()) 
+        return true;
+    if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size())
+        return false;
+    if (word[mindex] != board[i][j])
+        return false;
+
+    char c = board[i][j];
+    board[i][j] = '*';   //to prevent selecting this cell twice
+    bool ret = exist(board, i + 1, j, word, mindex + 1) || exist(board, i - 1, j, word, mindex + 1) || exist(board, i, j + 1, word, mindex + 1) || exist(board, i, j - 1, word, mindex + 1);
+    board[i][j] = c;
+    return ret;
+}
+
+bool exist_network(std::vector<std::vector<char>>& board, std::string word) {
+    for (int i = 0; i < board.size(); i++) {
+        for (int j = 0; j < board[0].size(); j++) {
+            if (exist(board, i, j, word, 0))
+                return true;
+        }
+    }
+    return false;
+}
+
+//80. Remove Duplicates from Sorted Array II
+//初解 runtime beats:99.21% memory beats:78.99%
+int removeDuplicates(std::vector<int>& nums) {
+    for (int i = 1; i < nums.size(); i++) {
+        if (nums[i - 1] == nums[i]) {
+            i++;
+            while ((i < nums.size()) && (nums[i - 1] == nums[i])) {
+                nums.erase(nums.begin() + i);
+            }
+        }
+    }
+
+    return nums.size();
+}
+
+//81. Search in Rotated Sorted Array II
+//初解 runtime beats:96.60% memory beats:72.85%
+bool searchII(std::vector<int>& nums, int target) {
+    int nums_size = nums.size();
+    for (int i = 0; i < nums_size; i++) {
+        if (nums[i] == target)
+            return true;
+    }
+    return false;
+}
+
+//82. Remove Duplicates from Sorted List II
+//網解 runtime beats:99.35% memory beats:78.46%
+ListNode* deleteDuplicates_network(ListNode* head) {
+    if (head == nullptr)
+        return head;
+    ListNode* p1 = head->next;
+    if (p1 && p1->val == head->val) {
+        while (p1 && p1->val == head->val) {
+            ListNode* p2 = p1;
+            p1 = p1->next;
+            p2->next = nullptr;
+        }
+        return deleteDuplicates_network(p1);
+    }
+    else
+        head->next = deleteDuplicates_network(head->next);
+    return head;
+}
+
+//84. Largest Rectangle in Histogram
+//https://www.cnblogs.com/boring09/p/4231906.html
+//網解 runtime beats:64.06% memory beats:72.64%
+int largestRectangleArea_network(std::vector<int>& height) {
+    height.push_back(0);
+    std::stack<int> st;
+    int n = height.size();
+    int maxArea = 0;
+    int h, w;
+
+    for (int i = 0; i < n; i++) {
+        if (st.empty() || height[st.top()] < height[i])
+            st.push(i);
+        else {
+            while (!st.empty() && height[i] <= height[st.top()]) {
+                h = height[st.top()];
+                st.pop();
+                w = st.empty() ? i : i - (st.top() + 1);
+                maxArea = std::max(maxArea, h * w);
+            }
+            st.push(i);
+        }
+    }
+
+    return maxArea;
+}
+
+//https://www.cnblogs.com/grandyang/p/4322653.html
+//網解 runtime beats:87.52% memory beats:94.84%
+int largestRectangleArea_network_2(std::vector<int>& heights) {
+    int res = 0;
+    std::stack<int> st;
+    heights.push_back(0);
+    for (int i = 0; i < heights.size(); ++i) {
+        while (!st.empty() && heights[st.top()] >= heights[i]) {
+            int cur = st.top(); 
+            st.pop();
+            res = std::max(res, heights[cur] * (st.empty() ? i : (i - st.top() - 1)));
+        }
+        st.push(i);
+    }
+    return res;
+}
+
+//86. Partition List
+//初解 runtime beats:100.00% memory beats:61.95%
+ListNode* partition(ListNode* head, int x) {
+    if ((head == nullptr) || (head->next == nullptr))
+        return head;
+
+    ListNode* push = new ListNode;
+    push->next = head;
+    ListNode* cur_push = push;
+    ListNode* start = head;
+    while ((start != nullptr) && (start->val < x)) {
+        cur_push = start;
+        start = start->next;
+    }
+
+    while (start != nullptr) {
+        if ((start->next != nullptr) && (start->next->val < x)) {
+            ListNode* tmp = start->next;
+            start->next = start->next->next;
+            tmp->next = cur_push->next;
+            cur_push->next = tmp;
+            cur_push = cur_push->next;
+        }
+        else
+            start = start->next;
+    }
+
+    return push->next;
+}
+
+//90. Subsets II
+//初解 runtime beats:06.48% memory beats:05.08%
+void subsetsWithDup(int begin, int k, std::vector<std::vector<int>>& ans, std::vector<int> sets, std::vector<int>& temp) {
+    for (auto an : ans)
+        if (std::equal(an.begin(), an.end(), temp.begin(), temp.end()))
+            return;
+    ans.push_back(temp);
+    for (int i = begin; i < k; i++) {
+        temp.push_back(sets[i]);
+        subsetsWithDup(i + 1, k, ans, sets, temp);
+        temp.pop_back();
+    }
+}
+
+std::vector< std::vector<int>> subsetsWithDup(std::vector<int>& nums) {
+    std::vector<std::vector<int>> ans;
+    std::vector<int> temp;
+    std::sort(nums.begin(), nums.end());
+    subsetsWithDup(0, nums.size(), ans, nums, temp);
+    return ans;
+}
+
+//網解 runtime beats:100.00% memory beats:100.00%
+void backtrack(std::vector<std::vector<int>>& res, std::vector<int>& nums, int i, int n, std::vector<int>& tmp) {
+    if (i == nums.size()) return;
+
+    int m = res.size();
+    if (nums[i] != nums[i - 1])
+        n = m;
+    for (int j = m - n; j < m; ++j) {
+        tmp = res[j];
+        tmp.emplace_back(nums[i]);
+        res.emplace_back(tmp);
+    }
+
+    backtrack(res, nums, ++i, n, tmp);
+}
+
+std::vector<std::vector<int>> subsetsWithDup_network(std::vector<int>& nums) {
+    if (nums.empty()) return { {} };
+    sort(nums.begin(), nums.end());
+    std::vector<std::vector<int>> res{ {} };
+    std::vector<int> tmp;
+    res.emplace_back(std::vector<int>{nums[0]});
+    backtrack(res, nums, 1, 1, tmp);
+    return res;
+}
+
+//92. Reverse Linked List II
+//初解 runtime beats:57.90% memory beats:29.00%
+ListNode* reverseBetween(ListNode* head, int m, int n) {
+    if (m == n)
+        return head;
+    m--;
+    n--;
+    std::vector<ListNode*> list;
+    while (head != NULL) {
+        list.emplace_back(head);
+        head = head->next;
+    }
+    
+    for (int i = n; i > m; i--) {
+        list[i]->next = list[i - 1];
+    }
+
+    if (list.size() < n + 2)
+        list[m]->next = NULL;
+    else
+        list[m]->next = list[n + 1];
+
+    if (m - 1 >= 0)
+        list[m - 1]->next = list[n];
+    else
+        return list[n];
+
+    return list[0];
+}
+
+//網解 runtime beats:100.00% memory beats:34.02%
+ListNode* reverseBetween_network(ListNode* head, int m, int n) {
+    if (head == nullptr or (n - m) == 0)
+        return head;
+    ListNode* prevList = nullptr, * curr = head;
+    int cnt = 1;
+    while (cnt < m) {
+        prevList = curr;
+        curr = curr->next;
+        cnt++;
+    }
+    ListNode* prevCurr = curr, * prev = nullptr;
+    cnt = 0;
+    while (cnt <= n - m) {
+        ListNode* save = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = save;
+        cnt++;
+    }
+    prevCurr->next = curr;
+    if (prevList) {
+        prevList->next = prev;
+    }
+    else
+        head = prev;
+    return head;
+}
+
+//94. Binary Tree Inorder Traversal
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}   
+};
+
+void traversalTree(std::vector<int>& ans, TreeNode* root, int& posi) {
+    if (root->left != nullptr) {        
+        ans.insert(ans.begin() + posi, root->left->val);
+        traversalTree(ans, root->left, posi);
+    }
+   
+    if (root->right != nullptr) {
+        if (posi + 1 >= ans.size())
+            ans.push_back(root->right->val);
+        else
+            ans.insert(ans.begin() + posi + 1, root->right->val);
+        posi++;
+        traversalTree(ans, root->right, posi);
+        posi--;
+    }
+}
+
+//初解 runtime beats:100.00% memory beats:10.03%
+std::vector<int> inorderTraversal(TreeNode* root) {
+    std::vector<int> ans;
+    int posi = 0;
+    if (root != nullptr) {
+        ans.push_back(root->val);
+        traversalTree(ans, root, posi);
+    }
+    
+    return ans;
+}
+
+//95. Unique Binary Search Trees II
+//網解 runtime beats:92.68% memory beats:87.69%
+std::vector<TreeNode*> helper(int start, int end, std::vector<std::vector<std::vector<TreeNode*>>>& memo) {
+    if (start > end) return { nullptr };
+    if (!memo[start - 1][end - 1].empty()) return memo[start - 1][end - 1];
+    std::vector<TreeNode*> res;
+    for (int i = start; i <= end; ++i) {
+        auto left = helper(start, i - 1, memo), right = helper(i + 1, end, memo);
+        for (auto a : left) {
+            for (auto b : right) {
+                TreeNode* node = new TreeNode(i);
+                node->left = a;
+                node->right = b;
+                res.push_back(node);
+            }
+        }
+    }
+    return memo[start - 1][end - 1] = res;
+}
+
+std::vector<TreeNode*> generateTrees_network(int n) {
+    if (n == 0) return {};
+    std::vector<std::vector<std::vector<TreeNode*>>> memo(n, std::vector<std::vector<TreeNode*>>(n));
+    return helper(1, n, memo);
+}
+
+//96. Unique Binary Search Trees
+//https://medium.com/@bill800227/leetcode-96-unique-binary-search-trees-abce6e62a7a0
+//網解 runtime beats:100.00% memory beats:45.28%
+int numTrees_network(int n) {
+    //Time complexity: O(n^2) space complexity: O(n)
+    if (n == 0) return 1;
+    std::vector<int> dp(n + 1, 0);
+    dp[0] = 1;
+    dp[1] = 1;
+
+    for (int i = 2; i <= n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            dp[i] += dp[j] * dp[i - j - 1];
+        }
+    }
+    return dp.back();
+}
+
+//https://www.cnblogs.com/grandyang/p/4299608.html
+//網解 runtime beats:100.00% memory beats:60.29%
+int numTrees_network_2(int n) {
+    //Catalan Number
+    //https://en.wikipedia.org/wiki/Catalan_number
+    //                     (2n)!        (n+1)(n+2)(n+3) ... (2n)
+    //Catalan Number = ------------- = --------------------------
+    //                  (n+1)!(n)!              (n+1)!
+    
+    long res = 1;
+    for (int i = n + 1; i <= 2 * n; ++i) {
+        res = res * i / (i - n);
+    }
+    return res / (n + 1);
+}
+
+//97. Interleaving String
+//網解 runtime beats:84.84% memory beats:15.95%
+//https://medium.com/@bill800227/leetcode-97-interleaving-string-18b1202fb0ea
+bool isInterleave_DFS(std::string s1, int p1, std::string s2, int p2, std::string s3, int p3, std::unordered_set<int>& memo) {
+    int key = p1 * s3.size() + p2;
+    if (memo.find(key) != memo.end())   //memo儲存的是錯誤，若在memo中找到key代表該key的答案是false
+        return false;
+    
+    if (p1 == s1.size()) //代表s1已經全比對完成
+        return s2.substr(p2) == s3.substr(p3);
+
+    if (p2 == s2.size()) //代表s2已經全比對完成
+        return s1.substr(p1) == s3.substr(p3);
+
+    if (s1[p1] == s3[p3] && isInterleave_DFS(s1, p1 + 1, s2, p2, s3, p3 + 1, memo))
+        return true;
+
+    if (s2[p2] == s3[p3] && isInterleave_DFS(s1, p1, s2, p2 + 1, s3, p3 + 1, memo))
+        return true;
+
+    memo.insert(key);
+    return false;
+}
+
+bool isInterleave_network(std::string s1, std::string s2, std::string s3) {
+    if (s1.size() + s2.size() < s3.size())
+        return false;
+
+    std::unordered_set<int> memo;
+    return isInterleave_DFS(s1, 0, s2, 0, s3, 0, memo);
+}
+
+//網解 runtime beats:100.00% memory beats:93.75%
+bool isInterleave_network_2(std::string s1, std::string s2, std::string s3) {
+    int m = s1.length(), n = s2.length(), l = s3.length();
+    if (m > n) return isInterleave_network_2(s2, s1, s3);
+    if (l != m + n) return false;
+    bool* dp = new bool[m + 1];
+    dp[0] = true;
+    for (int i = 1; i <= m; i++)
+        dp[i] = dp[i - 1] && s3[i - 1] == s1[i - 1];
+    for (int j = 1; j <= n; j++) {
+        dp[0] = dp[0] && s3[j - 1] == s2[j - 1];
+        for (int i = 1; i <= m; i++)
+            dp[i] = (dp[i - 1] && s3[i + j - 1] == s1[i - 1]) || (dp[i] && s3[i + j - 1] == s2[j - 1]);
+    }
+    return dp[m];
+}
+
+//98. Validate Binary Search Tree
+//https://www.cnblogs.com/grandyang/p/4298435.html
+//網解 runtime beats:66.61% memory beats:51.39%
+void inorder(TreeNode* root, std::vector<int>& vals) {
+    if (!root) return;
+    //中序遍歷
+    inorder(root->left, vals);
+    vals.push_back(root->val);
+    inorder(root->right, vals);
+}
+
+bool isValidBST(TreeNode* root) {
+    if (!root) return true;
+    std::vector<int> vals;
+    inorder(root, vals);
+    for (int i = 0; i < vals.size() - 1; ++i) {
+        if (vals[i] >= vals[i + 1]) return false;
+    }
+    return true;
+}
+
+//100. Same Tree
+//初解 runtime beats:100.00% memory beats:63.73%
+bool isSameTree_DFS(TreeNode* p, TreeNode* q) {
+    if (!p && !q)
+        return true;
+    else if (!p)
+        return false;
+    else if (!q)
+        return false;
+
+    if (p->val == q->val) {
+        return isSameTree_DFS(p->left, q->left) && isSameTree_DFS(p->right, q->right);
+    }
+    else
+        return false;
+}
+
+bool isSameTree(TreeNode* p, TreeNode* q) {   
+
+    return isSameTree_DFS(p, q);
+}
+
+//101. Symmetric Tree
+//初解 runtime beats:67.13% memory beats:66.67%
+bool isSymmetric_DFS(TreeNode* L, TreeNode* R) {
+    if (!L && !R)
+        return true;
+    else if (!L)
+        return false;
+    else if (!R)
+        return false;
+
+    if (L->val == R->val) {
+        return isSymmetric_DFS(L->left, R->right) && isSymmetric_DFS(L->right, R->left);
+    }
+    else
+        return false;
+}
+
+bool isSymmetric(TreeNode* root) {
+    if (!root)
+        return true;
+
+    return isSymmetric_DFS(root->left, root->right);
+}
+
+//102. Binary Tree Level Order Traversal
+//初解 runtime beats:54.91% memory beats:15.87%
+void Traverse_Tree_DFS(std::vector<std::vector<int>>& ans, TreeNode* node, int level) {
+    if (!node)
+        return;
+
+    if (ans.size() == level)
+        ans.push_back(std::vector<int>());
+
+    ans[level].push_back(node->val);
+    Traverse_Tree_DFS(ans, node->left, level + 1);
+    Traverse_Tree_DFS(ans, node->right, level + 1);
+}
+
+std::vector<std::vector<int>> levelOrder(TreeNode* root) {
+    std::vector<std::vector<int>> ans;
+    Traverse_Tree_DFS(ans, root, 0);
+    return ans;
+}
+
+//二解 runtime beats:91.33% memory beats:94.76%
+std::vector<std::vector<int>> levelOrder_2(TreeNode* root) {
+    if (!root)
+        return {};
+    std::vector<std::vector<int>> ans;
+    //BFS
+    std::queue<TreeNode*> wait_queue;
+    wait_queue.push(root);
+    int old_count = 1;
+    int new_count = 0;
+    while (!wait_queue.empty()) {
+        ans.push_back({});
+        while (old_count--) {
+            TreeNode* node = wait_queue.front();
+            wait_queue.pop();
+            ans[ans.size() - 1].push_back(node->val);
+            if (node->left) {
+                wait_queue.push(node->left);
+                new_count++;
+            }
+
+            if (node->right) {
+                wait_queue.push(node->right);
+                new_count++;
+            }
+        }
+        old_count = new_count;
+        new_count = 0;
+    }
+
+    return ans;
+}
+
+//103. Binary Tree Zigzag Level Order Traversal
+//初解 runtime beats:100.00% memory beats:98.34%
+std::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {
+    if (!root)
+        return {};
+    std::vector<std::vector<int>> ans;
+    //BFS
+    std::queue<TreeNode*> wait_queue;
+    wait_queue.push(root);
+    int old_count = 1;
+    int new_count = 0;
+    bool iszigzag = true;
+    while (!wait_queue.empty()) {
+        ans.push_back({});
+        while (old_count--) {
+            TreeNode* node = wait_queue.front();
+            wait_queue.pop();
+
+            if (iszigzag)
+                ans[ans.size() - 1].push_back(node->val);
+            else
+                ans[ans.size() - 1].insert(ans[ans.size() - 1].begin(), node->val);
+
+            if (node->left) {
+                wait_queue.push(node->left);
+                new_count++;
+            }
+
+            if (node->right) {
+                wait_queue.push(node->right);
+                new_count++;
+            }
+        }
+        old_count = new_count;
+        new_count = 0;
+        iszigzag = !iszigzag;
+    }
+
+    return ans;
+}
+
+//104. Maximum Depth of Binary Tree
+//初解 runtime beats:77.93% memory beats:08.59%
+int Traverse_Tree_DFS(TreeNode* node, int level) {
+    if (!node)
+        return level;
+
+    return std::max(Traverse_Tree_DFS(node->left, level + 1), Traverse_Tree_DFS(node->right, level + 1));
+}
+
+int maxDepth(TreeNode* root) {
+    if (!root)
+        return 0;
+
+    return Traverse_Tree_DFS(root, 0);
+}
+
+//二解 runtime beats:48.35% memory beats:49.87%
+int maxDepth_2(TreeNode* root) {
+    if (!root)
+        return 0;
+    int level = 0;
+    //BFS
+    std::queue<TreeNode*> wait_queue;
+    wait_queue.push(root);
+    int old_count = 1;
+    int new_count = 0;
+    while (!wait_queue.empty()) {
+        level++;
+        while (old_count--) {
+            TreeNode* node = wait_queue.front();
+            wait_queue.pop();
+
+            if (node->left) {
+                wait_queue.push(node->left);
+                new_count++;
+            }
+
+            if (node->right) {
+                wait_queue.push(node->right);
+                new_count++;
+            }
+        }
+        old_count = new_count;
+        new_count = 0;
+    }
+
+    return level;
+}
+
+//105. Construct Binary Tree from Preorder and Inorder Traversal
+//https://medium.com/@ChYuan/leetcode-no-105-construct-binary-tree-from-preorder-and-inorder-traversal-%E5%BF%83%E5%BE%97-medium-12dd4fcfa654
+//網解 runtime beats:84.37% memory beats:91.49%
+TreeNode* build(std::vector<int>& preorder, std::vector<int>& inorder, int& in, int& pre, int stop) {
+    if (pre >= preorder.size()) return NULL;
+    if (inorder[in] == stop) {
+        in++;
+        return NULL;
+    }
+    TreeNode* node = new TreeNode(preorder[pre++]);
+    node->left = build(preorder, inorder, in, pre, node->val);
+    node->right = build(preorder, inorder, in, pre, stop);
+    return node;
+}
+
+TreeNode* buildTree_network(std::vector<int> preorder, std::vector<int> inorder) {
+    int in = 0;
+    int pre = 0;
+    return build(preorder, inorder, in, pre, INT_MIN);
+}
+
+//網解 runtime beats:74.95% memory beats:99.55%
+TreeNode* buildTree_network_2(std::vector<int>& preorder, std::vector<int>& inorder) {
+    if (!preorder.size()) return NULL;
+    int i(0), p(0);
+    TreeNode* root = new TreeNode(preorder[p++]), * q(NULL);
+    std::stack<TreeNode*> stk({ root });
+    while (!stk.empty()) {
+        while (stk.top()->val != inorder[i]) {
+            stk.push(stk.top()->left = new TreeNode(preorder[p++]));
+        }
+        while (!stk.empty() && stk.top()->val == inorder[i]) {
+            q = stk.top(); stk.pop();
+            ++i;
+        }
+        if (p < preorder.size())
+            if (q)
+                stk.push(q->right = new TreeNode(preorder[p++]));
+    }
+    return root;
+}
+
+//107. Binary Tree Level Order Traversal II
+//初解 runtime beats:33.88% memory beats:99.38%
+std::vector<std::vector<int>> levelOrderBottom(TreeNode* root) {
+    if (!root)
+        return {};
+    std::vector<std::vector<int>> ans;
+    //BFS
+    std::queue<TreeNode*> wait_queue;
+    wait_queue.push(root);
+    int old_count = 1;
+    int new_count = 0;
+    while (!wait_queue.empty()) {
+        ans.push_back({});
+        while (old_count--) {
+            TreeNode* node = wait_queue.front();
+            wait_queue.pop();
+            ans[ans.size() - 1].push_back(node->val);
+            if (node->left) {
+                wait_queue.push(node->left);
+                new_count++;
+            }
+
+            if (node->right) {
+                wait_queue.push(node->right);
+                new_count++;
+            }
+        }
+        old_count = new_count;
+        new_count = 0;
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
+//網解 runtime beats:100.00% memory beats:96.51%
+std::vector<std::vector<int>> levelOrderBottom_network(TreeNode* root)
+{
+    std::vector<std::vector<int>>ans;
+    if (!root)
+        return ans;
+    std::vector<int>res;
+    TreeNode* temp;
+    int level = 0;
+    std::queue<TreeNode*>q;
+    res.push_back(root->val);
+    q.push(root);
+    while (!q.empty())
+    {
+        if (level == 0)
+        {
+            level = q.size();
+            ans.push_back(res);
+            res.clear();
+        }
+        temp = q.front();
+        q.pop();
+        if (temp->left)
+        {
+            res.push_back(temp->left->val);
+            q.push(temp->left);
+        }
+        if (temp->right)
+        {
+            res.push_back(temp->right->val);
+            q.push(temp->right);
+        }
+        level--;
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
+//108. Convert Sorted Array to Binary Search Tree
+//初解 runtime beats:62.98% memory beats:88.00%
+TreeNode* ArrayToBST_DFS(std::vector<int>& nums, int start, int end) {
+    if ((start == end))
+        return NULL;
+
+    TreeNode* node = new TreeNode(nums[(start + end) / 2]);
+    node->left = ArrayToBST_DFS(nums, start, (start + end) / 2);
+    node->right = ArrayToBST_DFS(nums, (start + end) / 2 + 1, end);
+    return node;
+}
+
+TreeNode* sortedArrayToBST(std::vector<int>& nums) {
+    int size = nums.size();
+    if (size == 0)
+        return NULL;
+
+    return  ArrayToBST_DFS(nums, 0, size);
+}
+
+//網解 runtime beats:84.55% memory beats:99.52%
+void build(TreeNode* root, int start, int end, std::vector<int>& nums, bool l) {
+    if (start > end) return;
+    TreeNode* a = new TreeNode(nums[(start + end) / 2]);
+    if (l) root->left = a;
+    else root->right = a;
+    build(a, start, (start + end) / 2 - 1, nums, true);
+    build(a, (start + end) / 2 + 1, end, nums, false);
+}
+
+TreeNode* sortedArrayToBST(std::vector<int>& nums) {
+    int n = nums.size();
+    if (n == 0) return NULL;
+    TreeNode* root = new TreeNode(nums[n / 2]);
+    build(root, 0, n / 2 - 1, nums, true);
+    build(root, n / 2 + 1, n - 1, nums, false);
+    return root;
+}
+
+//109. Convert Sorted List to Binary Search Tree
+//初解 runtime beats:18.07% memory beats:24.86%
+TreeNode* ArrayToBST_DFS(std::vector<int>& nums, int start, int end) {
+    if ((start >= end))
+        return NULL;
+
+    TreeNode* node = new TreeNode(nums[(start + end) / 2]);
+    node->left = ArrayToBST_DFS(nums, start, (start + end) / 2);
+    node->right = ArrayToBST_DFS(nums, (start + end) / 2 + 1, end);
+    return node;
+}
+
+TreeNode* sortedListToBST(ListNode* head) {
+    if (!head)
+        return NULL;
+    std::vector<int> nums;
+    while (head != NULL) {
+        nums.push_back(head->val);
+        head = head->next;
+    }
+
+    return  ArrayToBST_DFS(nums, 0, nums.size());
 }

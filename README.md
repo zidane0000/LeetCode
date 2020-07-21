@@ -129,3 +129,62 @@ Record the Problem-solving process
 - 77. Combinations
 	- 初解 runtime beats:20.54% memory beats:26.08%
 	- 網解 runtime beats:92.87% memory beats:88.06%
+- 78. Subsets
+	- 初解 runtime beats:66.40% memory beats:44.33%
+	- 網解 runtime beats:100.00% memory beats:68.55%
+- 79. Word Search
+	- 初解 runtime beats:05.02% memory beats:05.43%
+	- 網解 runtime beats:97.90% memory beats:78.72%
+- 80. Remove Duplicates from Sorted Array II
+	- 初解 runtime beats:99.21% memory beats:78.99%
+- 81. Search in Rotated Sorted Array II
+	- 初解 runtime beats:96.60% memory beats:72.85%
+- 82. Remove Duplicates from Sorted List II
+	- 網解 runtime beats:99.35% memory beats:78.46%
+- 84. Largest Rectangle in Histogram
+	- 網解 runtime beats:64.06% memory beats:72.64% [參考網址](https:- www.cnblogs.com/boring09/p/4231906.html)
+- https:- www.cnblogs.com/grandyang/p/4322653.html
+	- 網解 runtime beats:87.52% memory beats:94.84%
+- 86. Partition List
+	- 初解 runtime beats:100.00% memory beats:61.95%
+- 90. Subsets II
+	- 初解 runtime beats:06.48% memory beats:05.08%
+	- 網解 runtime beats:100.00% memory beats:100.00%
+- 92. Reverse Linked List II
+	- 初解 runtime beats:57.90% memory beats:29.00%
+	- 網解 runtime beats:100.00% memory beats:34.02%
+- 94. Binary Tree Inorder Traversal
+	- 初解 runtime beats:100.00% memory beats:10.03%
+- 95. Unique Binary Search Trees II
+	- 網解 runtime beats:92.68% memory beats:87.69%
+- 96. Unique Binary Search Trees
+	- 網解 runtime beats:100.00% memory beats:45.28% [參考網址](https:- medium.com/@bill800227/leetcode-96-unique-binary-search-trees-abce6e62a7a0)
+	- 網解 runtime beats:100.00% memory beats:60.29% [參考網址](https:- www.cnblogs.com/grandyang/p/4299608.html)
+- 97. Interleaving String
+	- 網解 runtime beats:84.84% memory beats:15.95%
+	- 網解 runtime beats:100.00% memory beats:93.75% [參考網址](https:- medium.com/@bill800227/leetcode-97-interleaving-string-18b1202fb0ea)
+- 98. Validate Binary Search Tree
+	- 網解 runtime beats:66.61% memory beats:51.39% [參考網址](https:- www.cnblogs.com/grandyang/p/4298435.html)
+- 100. Same Tree
+	- 初解 runtime beats:100.00% memory beats:63.73%
+- 101. Symmetric Tree
+	- 初解 runtime beats:67.13% memory beats:66.67%
+- 102. Binary Tree Level Order Traversal
+	- 初解 runtime beats:54.91% memory beats:15.87%
+	- 二解 runtime beats:91.33% memory beats:94.76%
+- 103. Binary Tree Zigzag Level Order Traversal
+	- 初解 runtime beats:100.00% memory beats:98.34%
+- 104. Maximum Depth of Binary Tree
+	- 初解 runtime beats:77.93% memory beats:08.59%
+	- 二解 runtime beats:48.35% memory beats:49.87%
+- 105. Construct Binary Tree from Preorder and Inorder Traversal
+	- 網解 runtime beats:84.37% memory beats:91.49% [參考網址](https:- medium.com/@ChYuan/leetcode-no-105-construct-binary-tree-from-preorder-and-inorder-traversal-%E5%BF%83%E5%BE%97-medium-12dd4fcfa654)
+	- 網解 runtime beats:74.95% memory beats:99.55%
+- 107. Binary Tree Level Order Traversal II
+	- 初解 runtime beats:33.88% memory beats:99.38%
+	- 網解 runtime beats:100.00% memory beats:96.51%
+- 108. Convert Sorted Array to Binary Search Tree
+	- 初解 runtime beats:62.98% memory beats:88.00%
+	- 網解 runtime beats:84.55% memory beats:99.52%
+- 109. Convert Sorted List to Binary Search Tree
+	- 初解 runtime beats:18.07% memory beats:24.86%
