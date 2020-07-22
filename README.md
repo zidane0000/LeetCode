@@ -188,3 +188,33 @@ Record the Problem-solving process
 	- 網解 runtime beats:84.55% memory beats:99.52%
 - 109. Convert Sorted List to Binary Search Tree
 	- 初解 runtime beats:18.07% memory beats:24.86%
+- 110. Balanced Binary Tree
+	- 初解 runtime beats:88.34% memory beats:25.29%
+	- 網解 runtime beats:88.34% memory beats:99.20%
+- 111. Minimum Depth of Binary Tree
+	- 初解 runtime beats:73.34% memory beats:05.33%
+	- 網解 runtime beats:23.11% memory beats:98.73%
+- 112. Path Sum
+	- 初解 runtime beats:15.45% memory beats:82.93%
+- 113. Path Sum II
+	- 初解 runtime beats:53.67% memory beats:28.84%
+	- 網解 runtime beats:96.78% memory beats:89.30%
+- 114. Flatten Binary Tree to Linked List
+	- 初解 runtime beats:96.98% memory beats:43.80%
+	- 網解 runtime beats:24.31% memory beats:99.79%
+- 115. Distinct Subsequences
+	- 初解 runtime beats:11.13% memory beats:05.26%
+	- 網解 runtime beats:77.45% memory beats:98.54%
+- 116. Populating Next Right Pointers in Each Node
+	- 初解 runtime beats:52.14% memory beats:16.94%
+	- 網解 runtime beats:94.58% memory beats:99.90%
+- 118. Pascal's Triangle
+	- 初解 runtime beats:100.00% memory beats:45.15%
+- 119. Pascal's Triangle II
+	- 初解 runtime beats:100.00% memory beats:79.38%
+	- 網解 runtime beats:100.00% memory beats:96.35%
+- 120. Triangle
+	- 初解 runtime beats:63.02% memory beats:74.89%
+	- 網解 runtime beats:97.45% memory beats:85.05%
+- 121. Best Time to Buy and Sell Stock
+	- 初解 runtime beats:78.41% memory beats:60.88%

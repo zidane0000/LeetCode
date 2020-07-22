@@ -46,6 +46,32 @@ TreeNode* toTree(std::vector<int> arr) {
     return root;
 }
 
+Node* toNode(std::vector<int> arr) {
+    Node* root = NULL;
+    std::queue<Node*> q;
+    int i = 0;
+    Node* t = arr[i] == NULL ? NULL : new Node(arr[i]);
+    root = t;
+    q.push(root);
+    i++;
+    while (!q.empty() && i < arr.size()) {
+        Node* t1 = q.front();
+        q.pop();
+        if (t1 != NULL) {
+            t1->left = arr[i] == NULL ? NULL : new Node(arr[i]);
+            q.push(t1->left);
+            i++;
+            if (i >= arr.size()) {
+                break;
+            }
+            t1->right = arr[i] == NULL ? NULL : new Node(arr[i]);
+            q.push(t1->right);
+            i++;
+        }
+    }
+    return root;
+}
+
 int main()
 {
     //LeetCode 1. Two Sum
@@ -403,14 +429,41 @@ int main()
     //std::vector<std::vector<int>> r = levelOrderBottom(toTree({ 3,9,20,NULL,NULL,15,7 }));
 
     //108. Convert Sorted Array to Binary Search Tree
-    std::vector<int> nums{-15,-10,-3,0,3,5,9};
-    TreeNode* r = sortedArrayToBST(nums);
+    //std::vector<int> nums{-15,-10,-3,0,3,5,9};
+    //TreeNode* r = sortedArrayToBST(nums);
 
+    //111. Minimum Depth of Binary Tree
+    //int r = minDepth(toTree({ 1,2,NULL,3,NULL,4,NULL,5 }));
 
+    //114. Flatten Binary Tree to Linked List
+    //TreeNode* root = toTree({ 1,2,5,3,4,NULL,6,NULL,NULL,7,8 });
+    //flatten(root);
 
+    //115. Distinct Subsequences
+    //int r = numDistinct_network("adbdadeecadeadeccaeaabdabdbcdabddddabcaaadbabaaedeeddeaeebcdeabcaaaeeaeeabcddcebddebeebedaecccbdcbcedbdaeaedcdebeecdaaedaacadbdccabddaddacdddc", "bcddceeeebecbc");
 
+    //116. Populating Next Right Pointers in Each Node
+    //Node* r = connect_network(toNode({1,2,3,4,5,6,7}));
 
+    //118. Pascal's Triangle
+    //std::vector<std::vector<int>> r = generate(5);
 
+    //119. Pascal's Triangle II
+    //std::vector<int> r = getRow_network(5);
+
+    //120. Triangle
+    //std::vector<std::vector<int>> triangle{
+    //    {2},
+    //    {3,4},
+    //    {6,5,7},
+    //    {1,2,8,7},
+    //    {9,5,4,7,3}
+    //};
+    //int r = minimumTotal(triangle);
+
+    //121. Best Time to Buy and Sell Stock
+    std::vector<int> prices{ 7,1,5,3,6,4 };
+    int r = maxProfit(prices);
 
 
 

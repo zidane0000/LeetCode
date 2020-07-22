@@ -3244,7 +3244,7 @@ void build(TreeNode* root, int start, int end, std::vector<int>& nums, bool l) {
     build(a, (start + end) / 2 + 1, end, nums, false);
 }
 
-TreeNode* sortedArrayToBST(std::vector<int>& nums) {
+TreeNode* sortedArrayToBST_network(std::vector<int>& nums) {
     int n = nums.size();
     if (n == 0) return NULL;
     TreeNode* root = new TreeNode(nums[n / 2]);
@@ -3255,16 +3255,6 @@ TreeNode* sortedArrayToBST(std::vector<int>& nums) {
 
 //109. Convert Sorted List to Binary Search Tree
 //初解 runtime beats:18.07% memory beats:24.86%
-TreeNode* ArrayToBST_DFS(std::vector<int>& nums, int start, int end) {
-    if ((start >= end))
-        return NULL;
-
-    TreeNode* node = new TreeNode(nums[(start + end) / 2]);
-    node->left = ArrayToBST_DFS(nums, start, (start + end) / 2);
-    node->right = ArrayToBST_DFS(nums, (start + end) / 2 + 1, end);
-    return node;
-}
-
 TreeNode* sortedListToBST(ListNode* head) {
     if (!head)
         return NULL;
@@ -3276,3 +3266,453 @@ TreeNode* sortedListToBST(ListNode* head) {
 
     return  ArrayToBST_DFS(nums, 0, nums.size());
 }
+
+//110. Balanced Binary Tree
+//初解 runtime beats:88.34% memory beats:25.29%
+bool isBalanced(TreeNode* root) {
+    if (!root)
+        return true;
+
+    if (abs(Traverse_Tree_DFS(root->left, 0) - Traverse_Tree_DFS(root->right, 0)) > 1)
+        return false;
+    else
+        return isBalanced(root->left) && isBalanced(root->right);
+}
+
+//網解 runtime beats:88.34% memory beats:99.20%
+int height(TreeNode* root) {
+    if (root == NULL)
+        return 0;
+    else {
+        int ldepth = height(root->left);
+        int rdepth = height(root->right);
+        if (ldepth > rdepth)
+            return ldepth + 1;
+        else
+            return rdepth + 1;
+    }
+}
+
+bool isBalanced_network(TreeNode* root) {
+    if (root == NULL)
+        return true;
+    if (abs(height(root->left) - height(root->right)) > 1)
+        return false;
+    return isBalanced(root->left) && isBalanced(root->right);
+}
+
+//111. Minimum Depth of Binary Tree
+//初解 runtime beats:73.34% memory beats:05.33%
+int minDepth(TreeNode* root) {
+    if (root == NULL)
+        return 0;
+    
+    if (root->left != NULL && root->right != NULL) {
+        return std::min(minDepth(root->left), minDepth(root->right)) + 1;
+    }
+    else if (root->left != NULL)
+        return minDepth(root->left) + 1;
+    else if (root->right != NULL)
+        return minDepth(root->right) + 1;
+    else
+        return 1;
+}
+
+//網解 runtime beats:23.11% memory beats:98.73%
+int solve(TreeNode* root)
+{
+    if (root == NULL)
+        return INT_MAX;
+
+    if (root->left == NULL && root->right == NULL)
+        return 1;
+
+    int lc = solve(root->left);
+    int rc = solve(root->right);
+    return lc > rc ? rc + 1 : lc + 1;
+}
+
+int minDepth_network(TreeNode* root) {
+    if (root == NULL)
+        return 0;
+    else {
+        int ans = solve(root);
+        return ans;
+    }
+}
+
+//112. Path Sum
+//初解 runtime beats:15.45% memory beats:82.93%
+bool hasPathSum(TreeNode* root, int sum) {
+    if (!root)
+        return false;
+
+    if (root->left || root->right)
+        return (root->left && hasPathSum(root->left, sum - root->val)) || (root->right && hasPathSum(root->right, sum - root->val));
+    else
+        return root->val == sum;
+}
+
+//113. Path Sum II
+//初解 runtime beats:53.67% memory beats:28.84%
+void ToPathSum(std::vector<std::vector<int>>& ans,std::vector<int> sub_ans, TreeNode* root, int sum) {
+    if (!root)
+        return;
+    sub_ans.push_back(root->val);
+    if (root->left || root->right) {
+        ToPathSum(ans, sub_ans, root->left, sum - root->val);
+        ToPathSum(ans, sub_ans, root->right, sum - root->val);
+    }
+    else
+        if (root->val == sum)
+            ans.push_back(sub_ans);
+    return;            
+}
+
+std::vector<std::vector<int>> pathSum(TreeNode* root, int sum) {
+    std::vector<std::vector<int>> ans;
+    ToPathSum(ans, {}, root, sum);
+    return ans;
+}
+
+//網解 runtime beats:96.78% memory beats:89.30%
+void dfs(TreeNode* node, int sum, std::vector<std::vector<int>>& res, std::vector<int>& tmp) {
+    if (!node) return;
+    tmp.push_back(node->val);
+    if (!node->left && !node->right) {
+        if (sum == node->val)
+            res.push_back(tmp);
+        tmp.pop_back();
+        return;
+    }
+    sum -= node->val;
+    dfs(node->left, sum, res, tmp);
+    dfs(node->right, sum, res, tmp);
+    tmp.pop_back();
+}
+
+std::vector<std::vector<int>> pathSum_network(TreeNode* root, int sum) {
+    std::vector<std::vector<int>> ans;
+    std::vector<int> tmp;
+    dfs(root, sum, ans, tmp);
+    return ans;
+}
+
+//114. Flatten Binary Tree to Linked List
+//初解 runtime beats:96.98% memory beats:43.80%
+void flatten(TreeNode* root) {
+    if (!root)
+        return;
+
+    if (root->left)
+        flatten(root->left);
+
+    if(root->right)
+        flatten(root->right);
+
+    TreeNode* left_bottom = root->left;
+    while (left_bottom && left_bottom->right != NULL) {
+        left_bottom = left_bottom->right;
+    }
+
+    if (left_bottom) {
+        if (!root->right) {
+            root->right = root->left;
+            root->left = NULL;
+        }
+        else {
+            left_bottom->right = root->right;
+            root->right = root->left;
+            root->left = NULL;
+        }
+    }
+}
+
+//網解 runtime beats:24.31% memory beats:99.79%
+TreeNode* flattenInternal(TreeNode* node)
+{
+    if (node == nullptr)
+        return node;
+    else if (node->left == nullptr && node->right == nullptr)
+        return node;    // No children
+
+    auto leftTail = flattenInternal(node->left);
+    auto rightTail = flattenInternal(node->right);
+
+    if (leftTail != nullptr) {
+        leftTail->right = node->right;
+        node->right = node->left;
+        node->left = nullptr;
+    }
+
+    // Return the "right-most" node
+    return (rightTail != nullptr) ? rightTail : leftTail;
+}
+
+void flatten_network(TreeNode* root) {
+    flattenInternal(root);
+}
+
+//115. Distinct Subsequences
+//初解 runtime beats:11.13% memory beats:05.26%
+int numDistinct_DP(std::map<int, int>& DP, std::string s, std::string t, int offset) {
+    int t_size = t.size();
+    int s_size = s.size();
+    if (t_size > s_size || t_size == 0)
+        return 0;
+    int key = s_size * offset + t_size;
+
+    if (DP.find(key) != DP.end()) {
+        return DP[key];
+    }
+
+    int count = 0;
+    int posi;
+    std::string str = s;
+    while ((posi = str.find(t[0])) != s.npos) {
+        str = str.substr(posi + 1, s_size - posi);
+        if (t_size != 1)
+            count += numDistinct_DP(DP, str, t.substr(1, t_size - 1), offset);
+        else
+            count++;
+    }
+
+    DP[key] = count;
+    return count;
+}
+
+int numDistinct(std::string s, std::string t) {
+    std::map<int, int> DP;
+
+    int offset = 10;
+    int tsize = t.size();
+    while (t.size() / offset) {
+        offset = offset * 10;
+    }
+
+    return numDistinct_DP(DP, s, t, offset);
+}
+
+//網解 runtime beats:77.45% memory beats:98.54%
+int numDistinct_network(std::string s, std::string t) {
+    int m = t.length(), n = s.length();
+    std::vector<long long> cur(m + 1, 0L);
+    cur[0] = 1;
+    for (int j = 1; j <= n; j++) {
+        int prev = 1;
+        for (int i = 1; i <= m; i++) {
+            int temp = cur[i];
+            cur[i] = cur[i] + (s[j - 1] == t[i - 1] ? prev : 0);
+            prev = temp;
+        }
+    }
+    return cur[m];
+}
+
+//116. Populating Next Right Pointers in Each Node
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+    Node* next;
+
+    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val, Node* _left, Node* _right, Node* _next)
+        : val(_val), left(_left), right(_right), next(_next) {}
+};
+
+//初解 runtime beats:52.14% memory beats:16.94%
+Node* connect(Node* root) {
+    if (!root)
+        return root;
+    
+    //BFS
+    std::queue<Node*> wait_queue;
+    std::queue<Node*> next_queue;
+    wait_queue.push(root);
+
+    while (!wait_queue.empty()) {
+        Node* tmp = wait_queue.front();
+        wait_queue.pop();
+        if (tmp->left)
+            next_queue.push(tmp->left);
+
+        if (tmp->right)
+            next_queue.push(tmp->right);
+
+        while (!wait_queue.empty()) {
+            Node* tmp_2 = wait_queue.front();
+            wait_queue.pop();
+            if (tmp_2->left)
+                next_queue.push(tmp_2->left);
+
+            if (tmp_2->right)
+                next_queue.push(tmp_2->right);
+
+            tmp->next = tmp_2;
+            tmp = tmp->next;
+        }
+
+        while (!next_queue.empty()) {
+            tmp = next_queue.front();
+            next_queue.pop();
+            wait_queue.push(tmp);
+        }
+    }
+
+    return root;
+}
+
+//網解 runtime beats:94.58% memory beats:99.90%
+Node* connect_network(Node* root) {
+    if (!root)
+        return nullptr;
+    Node* l = root->left;
+    Node* last;
+    std::queue<Node*> q;
+    if (root->right)
+        q.push(root->right);
+
+    while (l && !q.empty())
+    {
+        last = l;
+        int initial_size = q.size();
+        if (l->right)
+            q.push(l->right);
+        for (int i = 1; i <= initial_size; i++)
+        {
+            Node* curr = q.front();
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
+            curr->left = curr->right = nullptr;
+            last->next = curr;
+            last = last->next;
+            q.pop();
+        }
+        l = l->left;
+    }
+    return root;
+}
+
+//118. Pascal's Triangle
+//初解 runtime beats:100.00% memory beats:45.15%
+std::vector<std::vector<int>> generate(int numRows) {
+    std::vector<std::vector<int>> ans;
+
+    for (int i = 1; i <= numRows; i++)
+        ans.push_back(std::vector<int>(i, 1));
+
+    for (int i = 2; i < numRows; i++) {
+        for (int j = 1; j < ans[i].size() - 1; j++) {
+            ans[i][j] = ans[i - 1][j - 1] + ans[i - 1][j];
+        }
+    }
+
+    return ans;
+}
+
+//119. Pascal's Triangle II
+//初解 runtime beats:100.00% memory beats:79.38%
+std::vector<int> getRow(int numRows) {
+    std::vector<std::vector<int>> ans;
+
+    for (int i = 1; i <= numRows + 1; i++)
+        ans.push_back(std::vector<int>(i, 1));
+
+    for (int i = 2; i < numRows + 1; i++) {
+        for (int j = 1; j < ans[i].size() - 1; j++) {
+            ans[i][j] = ans[i - 1][j - 1] + ans[i - 1][j];
+        }
+    }
+
+    return ans[numRows];
+}
+
+//網解 runtime beats:100.00% memory beats:96.35%
+std::vector<int> getRow_network(int rowIndex) {
+    std::vector<int> v;
+    v.push_back(1);
+    for (int i = 1; i <= rowIndex; i++)
+    {
+        int temp = 0;
+        for (int j = 1; j <= i; j++)
+        {
+            int temp1 = v[j - 1];       //將原始數字紀錄，用於在下一位時當作左上方之數字
+            v[j - 1] = v[j - 1] + temp; //右上方之數字在該欄中，將上次紀錄的左上方之數字加上該欄等於新的欄位
+            temp = temp1;
+        }
+        v.push_back(1);
+    }
+    return v;
+}
+
+//120. Triangle
+//初解 runtime beats:63.02% memory beats:74.89%
+int minimumTotal(std::vector<std::vector<int>>& triangle) {
+    int t_size = triangle.size();
+    int i;
+    for (i = 1; i < t_size; i++) {
+        int i_size = triangle[i].size();
+        for (int j = 0; j < i_size; j++) {
+            if (j == 0)
+                triangle[i][j] += triangle[i - 1][j];
+            else if (j == i_size - 1)
+                triangle[i][j] += triangle[i - 1][j - 1];
+            else
+                triangle[i][j] = std::min(triangle[i][j] + triangle[i - 1][j - 1], triangle[i][j] + triangle[i - 1][j]);
+        }
+    }
+
+    int ans = INT_MAX;
+    for (i = 0; i < triangle[t_size - 1].size(); i++) {
+        ans = std::min(ans, triangle[t_size - 1][i]);
+    }
+
+    return ans;
+}
+
+//網解 runtime beats:97.45% memory beats:85.05%
+int minimumTotal_network(std::vector<std::vector<int>>& triangle) {
+    int n = triangle.size();
+    std::vector<int> dp(n), tmp;
+    for (int i = 0; i < n; i++) {
+        tmp = dp;
+        dp[0] = tmp[0] + triangle[i][0];
+        for (int j = 1; j < i; j++) {
+            dp[j] = triangle[i][j] + std::min(tmp[j], tmp[j - 1]);
+        }
+        if (i) dp[i] = triangle[i][i] + tmp[i - 1];
+    }
+    int res = INT_MAX;
+    for (int i : dp) res = std::min(res, i);
+    return res;
+}
+
+//121. Best Time to Buy and Sell Stock
+//初解 runtime beats:78.41% memory beats:60.88%
+int maxProfit(std::vector<int>& prices) {
+    int p_size = prices.size();
+    if (p_size == 0)
+        return 0;
+
+    int min_price = INT_MAX;
+    int max_profile = 0;
+
+    for (int i = 0; i < prices.size(); i++) {
+        if (min_price > prices[i]) {
+            min_price = prices[i];
+        }
+        else {
+            max_profile = std::max(max_profile, prices[i] - min_price);
+        }
+    }
+    return max_profile;
+}
+
+//124. Binary Tree Maximum Path Sum

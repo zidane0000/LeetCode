@@ -39,6 +39,21 @@ E:\Dave\VS2019\LeetCode\src\Solution.h(2762,22): warning C4018: '>=': signed/uns
 E:\Dave\VS2019\LeetCode\src\Solution.h(2908,23): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(3107,13): warning C4018: '>=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(3138,15): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(3504,22): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+E:\Dave\VS2019\LeetCode\src\Solution.h(3509,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+E:\Dave\VS2019\LeetCode\src\Solution.h(3612,27): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(3629,27): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(3673,19): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(31,28): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(38,19): warning C4018: '>=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Source.cpp(57,28): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Source.cpp(64,19): warning C4018: '>=': signed/unsigned mismatch
   LeetCode.vcxproj -> E:\Dave\VS2019\LeetCode\Debug\LeetCode.exe
