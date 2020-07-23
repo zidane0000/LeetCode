@@ -3716,3 +3716,47 @@ int maxProfit(std::vector<int>& prices) {
 }
 
 //124. Binary Tree Maximum Path Sum
+//網解 runtime beats:28.29% memory beats:98.99%
+int solve(TreeNode* root, int& ans)
+{
+    if (root == NULL) {
+        return 0;
+    }
+
+    int lv = solve(root->left, ans);
+    int rv = solve(root->right, ans);
+    int cv = lv + rv + root->val > root->val ? lv + rv + root->val : root->val;
+    cv = cv > lv + root->val ? cv : lv + root->val;
+    cv = cv > rv + root->val ? cv : rv + root->val;
+    ans = ans > cv ? ans : cv;
+    int retv = lv > rv ? lv + root->val : rv + root->val;
+    retv = retv > root->val ? retv : root->val;
+    return retv;
+}
+int maxPathSum(TreeNode* root) {
+    int ans = INT_MIN;
+    solve(root, ans);
+    return ans;
+}
+
+//網解 runtime beats:88.78% memory beats:77.04%
+int calcPathSum(TreeNode* root, int& maxSum) {
+    if (root == NULL) return 0;
+
+    int ls = calcPathSum(root->left, maxSum);
+    int rs = calcPathSum(root->right, maxSum);
+
+    // Path sum to return to the parent. The path can contain
+    // atmost one child.
+    int returnSum = std::max(std::max(ls + root->val, rs + root->val),
+        root->val);
+
+    maxSum = std::max(maxSum, std::max(returnSum, ls + rs + root->val));
+    return returnSum;
+}
+
+int maxPathSum(TreeNode* root) {
+    int maxSum = INT_MIN;
+    calcPathSum(root, maxSum);
+    return maxSum;
+}

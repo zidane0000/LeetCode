@@ -462,11 +462,12 @@ int main()
     //int r = minimumTotal(triangle);
 
     //121. Best Time to Buy and Sell Stock
-    std::vector<int> prices{ 7,1,5,3,6,4 };
-    int r = maxProfit(prices);
+    //std::vector<int> prices{ 7,1,5,3,6,4 };
+    //int r = maxProfit(prices);
 
 
-
+    //124. Binary Tree Maximum Path Sum
+    int r = maxPathSum(toTree({ 1,-2,-3,1,3,-2,NULL,-1 }));
 
 
     return 0;
