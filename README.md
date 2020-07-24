@@ -1,7 +1,7 @@
 # LeetCode 專案介紹
 Record the Problem-solving process
 
-[Code Link](https:- github.com/zidane0000/LeetCode/blob/master/src/Solution.h)
+[Code Link](https:-github.com/zidane0000/LeetCode/blob/master/src/Solution.h)
 
 - 1. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
