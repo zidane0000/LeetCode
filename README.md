@@ -29,11 +29,11 @@ Record the Problem-solving process
 	- 初解 runtime beats:90.66% memory beats:41.36%
 	- 二解 runtime beats:16.97% memory beats:87.56%
 - 14. Longest Common Prefix
-	-初解 runtime beats:74.28% memory beats:62.31%
+	- 初解 runtime beats:74.28% memory beats:62.31%
 - 15. 3Sum
 	- 網解 runtime beats:35.80% memory beats:99.73%
 	- 網解 runtime beats:90.94% memory beats:75.02%
-	- 網解 runtime beats:93.07% memory beats:78.92% [參考網址](https:- www.cnblogs.com/grandyang/p/4481576.html)
+	- 網解 runtime beats:93.07% memory beats:78.92% [參考網址](https:-www.cnblogs.com/grandyang/p/4481576.html)
 - 16. 3Sum Closest
 	- 初解 runtime beats:8.01% memory beats:89.32%
 	- 網解 runtime beats:93.31% memory beats:19.81%
