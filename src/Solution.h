@@ -323,7 +323,7 @@ double findMedianSortedArrays_network(std::vector<int>& nums1, std::vector<int>&
         int min1 = left1 < n1 ? nums1[left1] : INT_MAX, min2 = left2 < n2 ? nums2[left2] : INT_MAX;
 
         if (max1 <= min2 && max2 <= min1)
-            return total % 2 == 0 ? ((std::max(max1, max2)) + std::min(min1, min2)) / 2.0 : std::max(max1, max2);
+            return total % 2 == 0 ? (std::max(max1, max2) + std::min(min1, min2)) / 2 : std::max(max1, max2);
         else if (max1 > min2)
             j = left1 - 1;
         else i = left1 + 1;
@@ -459,15 +459,30 @@ int maxArea_2(std::vector<int> & height) {
     return max_area;
 }
 
+//14. Longest Common Prefix
+//初解 runtime beats:74.28% memory beats:62.31%
+std::string longestCommonPrefix(std::vector<std::string>& strs) {
+    int strs_size = strs.size();
+    if (strs_size == 0)
+        return "";
+    
+    int posi = 0;
+    for (posi = 0; posi < strs[0].size(); posi++) {
+        for (int j = 0; j < strs_size - 1; j++) {
+            if (strs[j][posi] != strs[j + 1][posi])
+                return strs[j].substr(0, posi);
+        }
+    }
+    
+    return strs[0].substr(0, posi);
+}
+
 //15. 3Sum
 //網解 runtime beats:35.80% memory beats:99.73%
 std::vector<std::vector<int>> threeSum_network(std::vector<int>& nums) {
     sort(nums.begin(), nums.end());
-
     int n = nums.size();
-
     std::vector<std::vector<int> > ans;
-
     for (int i = 0; i < n; i++) {
         if (i > 0) {
             while (i < n && nums[i] == nums[i - 1])
@@ -497,7 +512,6 @@ std::vector<std::vector<int>> threeSum_network(std::vector<int>& nums) {
             if (r < n - 1)
                 while (r > 0 && nums[r] == nums[r + 1])
                     r--;
-
         }
     }
 
@@ -532,6 +546,75 @@ std::vector<std::vector<int>> threeSum_network_2(std::vector<int>& nums) {
             i++;
     }
     return res;
+}
+
+//https://www.cnblogs.com/grandyang/p/4481576.html
+//網解 runtime beats:93.07% memory beats:78.92%
+std::vector<std::vector<int>> threeSum_network_3(std::vector<int>& nums) {
+    std::vector<std::vector<int>> res;
+    sort(nums.begin(), nums.end());
+    if (nums.empty() || nums.back() < 0 || nums.front() > 0) return {};
+    for (int k = 0; k < (int)nums.size() - 2; ++k) {
+        if (nums[k] > 0) break;
+        if (k > 0 && nums[k] == nums[k - 1]) continue;
+        int target = 0 - nums[k], i = k + 1, j = (int)nums.size() - 1;
+        while (i < j) {
+            if (nums[i] + nums[j] == target) {
+                res.push_back({ nums[k], nums[i], nums[j] });
+                while (i < j && nums[i] == nums[i + 1]) ++i;
+                while (i < j && nums[j] == nums[j - 1]) --j;
+                ++i; --j;
+            }
+            else if (nums[i] + nums[j] < target) ++i;
+            else --j;
+        }
+    }
+    return res;
+}
+
+//16. 3Sum Closest
+//初解 runtime beats:8.01% memory beats:89.32%
+int threeSumClosest(std::vector<int>& nums, int target) {
+    sort(nums.begin(), nums.end());
+    int size = nums.size();
+    int ans = INT_MAX;
+    for (int k = 0; k < size - 2; k++) {
+        if (k > 0 && nums[k] == nums[k - 1]) continue;
+        int dif = target - nums[k], i = k + 1, j = size - 1;        
+        for (int i = k + 1; i < size - 1; i++)
+            for (int j = size - 1; j > i; j--) {
+                int tmp = dif - nums[i] - nums[j];
+                if (abs(tmp) < abs(ans))
+                    if (tmp == 0)
+                        return target;
+                    else
+                        ans = tmp;
+            }
+    }
+    return target - ans;
+}
+
+//網解 runtime beats:93.31% memory beats:19.81%
+int threeSumClosest_network(std::vector<int>& nums, int target) {
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    int diff = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        int low = i + 1;
+        int high = n - 1;
+        while (low < high) {
+            int sum = nums[i] + nums[low] + nums[high];
+            if (sum == target)
+                return target;
+            else if (sum < target)
+                low++;
+            else
+                high--;
+            if (abs(diff) > abs(target - sum))
+                diff = target - sum;
+        }
+    }
+    return target - diff;
 }
 
 //17. Letter Combinations of a Phone Number
@@ -615,13 +698,14 @@ ListNode* removeNthFromEnd_2(ListNode* head, int n) {
     }
 
     if (before == target) {
-        if (before->next)
+        if (before->next != NULL)
             return before->next;
         else
             return NULL;
     }
     else {
-        before->next = before->next->next;
+        if (before->next != NULL)
+            before->next = before->next->next;
     }
 
     return head;
@@ -3733,7 +3817,7 @@ int solve(TreeNode* root, int& ans)
     retv = retv > root->val ? retv : root->val;
     return retv;
 }
-int maxPathSum(TreeNode* root) {
+int maxPathSum_network(TreeNode* root) {
     int ans = INT_MIN;
     solve(root, ans);
     return ans;
@@ -3755,8 +3839,45 @@ int calcPathSum(TreeNode* root, int& maxSum) {
     return returnSum;
 }
 
-int maxPathSum(TreeNode* root) {
+int maxPathSum_network_2(TreeNode* root) {
     int maxSum = INT_MIN;
     calcPathSum(root, maxSum);
     return maxSum;
+}
+
+//128. Longest Consecutive Sequence
+//網解 runtime beats:93.09% memory beats:73.79%
+//https://www.cnblogs.com/grandyang/p/4276225.html
+int longestConsecutive(std::vector<int>& nums) {
+    int res = 0;
+    std::unordered_set<int> s(nums.begin(), nums.end());
+    for (int val : nums) {
+        if (!s.count(val)) continue;
+        s.erase(val);
+        int pre = val - 1, next = val + 1;
+        while (s.count(pre)) s.erase(pre--);
+        while (s.count(next)) s.erase(next++);
+        res = std::max(res, next - pre - 1);
+    }
+    return res;
+}
+
+//129. Sum Root to Leaf Numbers
+//初解 runtime beats:100.00% memory beats:74.77%
+void sumNumbers_DFS(TreeNode* root, int past, int& ans) {
+    if (!root)
+        return;
+
+    if (!root->left && !root->right)
+        ans += (past * 10) + root->val;
+    else {
+        sumNumbers_DFS(root->left, (past * 10) + root->val, ans);
+        sumNumbers_DFS(root->right, (past * 10) + root->val, ans);
+    }
+}
+
+int sumNumbers(TreeNode* root) {
+    int ans = 0;
+    sumNumbers_DFS(root, 0, ans);
+    return ans;
 }

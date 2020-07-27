@@ -123,12 +123,21 @@ int main()
     //std::vector<int> height{ 1, 2, 3, 4, 5, 25, 24, 3, 4 };
     //int a = maxArea(height);
 
+    //14. Longest Common Prefix
+    //std::vector<std::string> strs = { "aa","aa","aa" };
+    //std::string r = longestCommonPrefix(strs);
+
     //15. 3Sum
     //std::vector<int> nums{ -1, 0, 1, 2, -1, -4 };
     //std::vector<int> nums{ -2, 0, 1, 1, 2 };
     //std::vector<int> nums{ -4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6 };
     //std::vector<int> nums{ 7, 5, -8, -6, -13, 7, 10, 1, 1, -4, -14, 0, -1, -10, 1, -13, -4, 6, -11, 8, -6, 0, 0, -5, 0, 11, -9, 8, 2, -6, 4, -14, 6, 4, -5, 0, -12, 12, -13, 5, -6, 10, -10, 0, 7, -2, -5, -12, 12, -9, 12, -9, 6, -11, 1, 14, 8, -1, 7, -13, 8, -11, -11, 0, 0, -1, -15, 3, -11, 9, -7, -10, 4, -2, 5, -4, 12, 7, -8, 9, 14, -11, 7, 5, -15, -15, -4, 0, 0, -11, 3, -15, -15, 7, 0, 0, 13, -7, -12, 9, 9, -3, 14, -1, 2, 5, 2, -9, -3, 1, 7, -12, -3, -1, 1, -2, 0, 12, 5, 7, 8, -7, 7, 8, 7, -15 };
     //std::vector<std::vector<int>> r = threeSum_network(nums);
+
+    //16. 3Sum Closest
+    std::vector<int> nums{ -1,0,1,1,55 };
+    int r = threeSumClosest(nums, 3);
+    std::cout << r;
 
     //17. Letter Combinations of a Phone Number
     //std::vector<std::string> r = letterCombinations("23");
@@ -465,9 +474,8 @@ int main()
     //std::vector<int> prices{ 7,1,5,3,6,4 };
     //int r = maxProfit(prices);
 
-
     //124. Binary Tree Maximum Path Sum
-    int r = maxPathSum(toTree({ 1,-2,-3,1,3,-2,NULL,-1 }));
+    //int r = maxPathSum_network(toTree({ 1,-2,-3,1,3,-2,NULL,-1 }));
 
 
     return 0;
