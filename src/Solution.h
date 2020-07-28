@@ -698,7 +698,7 @@ ListNode* removeNthFromEnd_2(ListNode* head, int n) {
     }
 
     if (before == target) {
-        if (before->next != NULL)
+        if ((before != NULL) && (before->next != NULL))
             return before->next;
         else
             return NULL;
@@ -1570,7 +1570,82 @@ bool isValidSudoku_network(std::vector<std::vector<char>>& a) {
 }
 
 //39. Combination Sum
-//Fail
+//初解 runtime beats:98.93% memory beats:79.43%
+void combinationSum_helper(std::vector<std::vector<int>>& ans, std::vector<int>& sub_ans, std::vector<int>& candidates, int start, int end, int target) {
+    if (target < 0)
+        return;
+
+    for (int i = start; i < end; i++) {
+        sub_ans.push_back(candidates[i]);
+        if (candidates[i] == target)
+            ans.push_back(sub_ans);
+        else
+            combinationSum_helper(ans, sub_ans, candidates, i, end, target - candidates[i]);
+        sub_ans.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> combinationSum(std::vector<int>& candidates, int target) {
+    std::vector<std::vector<int>> ans;
+    std::vector<int> sub_ans;
+    combinationSum_helper(ans, sub_ans, candidates, 0, candidates.size(), target);
+    return ans;
+}
+
+//40. Combination Sum II
+//初解 runtime beats:27.36% memory beats:70.38%
+void combinationSum2_helper(std::set<std::vector<int>>& ans, std::vector<int>& sub_ans, std::vector<int>& candidates, int start, int end, int target) {
+    if (target < 0)
+        return;
+
+    for (int i = start; i < end; i++) {
+        if (sub_ans.empty() && (i > 0) && (candidates[i] == candidates[i - 1]))
+            continue;
+        sub_ans.push_back(candidates[i]);
+        if (candidates[i] == target)
+            ans.insert(sub_ans);
+        else
+            combinationSum2_helper(ans, sub_ans, candidates, i + 1, end, target - candidates[i]);
+        sub_ans.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> combinationSum2(std::vector<int>& candidates, int target) {
+    std::set<std::vector<int>> ans;
+    std::vector<int> sub_ans;
+    sort(candidates.begin(), candidates.end());
+    combinationSum2_helper(ans, sub_ans, candidates, 0, candidates.size(), target);
+    return { ans.begin(), ans.end() };
+}
+
+//網解 runtime beats:100.00% memory beats:70.73%
+void findcomb(std::vector<int>& candidates, std::vector<std::vector<int>>& result, std::vector<int>& com, int start, int target)
+{
+    if (target == 0) {
+        result.push_back(com);
+        return;
+    }
+
+    for (int i = start; i < candidates.size(); i++) {
+        if (i != start && candidates[i] == candidates[i - 1])
+            continue;
+        if (candidates[i] > target)
+            break;
+        com.push_back(candidates[i]);
+        findcomb(candidates, result, com, i + 1, target - candidates[i]);
+        com.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> combinationSum2_network(std::vector<int>& candidates, int target) {
+    std::vector<std::vector<int>> result;
+    if (candidates.size() == 0)
+        return result;
+    sort(candidates.begin(), candidates.end());
+    std::vector<int> com;
+    findcomb(candidates, result, com, 0, target);
+    return result;
+}
 
 //41. First Missing Positive
 //初解 runtime beats:07.31% memory beats:87.72%
@@ -3880,4 +3955,102 @@ int sumNumbers(TreeNode* root) {
     int ans = 0;
     sumNumbers_DFS(root, 0, ans);
     return ans;
+}
+
+//130. Surrounded Regions
+//初解 runtime beats:07.73% memory beats:07.44%
+bool helper_solve(int i, int j, int x_size, int y_size,
+    std::vector<std::vector<bool>>& dp_board,
+    std::vector<std::vector<char>>& board,
+    std::vector<char*>& candidate) {
+
+    if (!dp_board[i][j])
+        return true;
+
+    //board
+    if ((i == 0) || (i == (x_size - 1)) || (j == 0) || (j == (y_size - 1))) {
+        if (board[i][j] == 'O')
+            return false;
+        else
+            return true;
+    }
+
+    if ((board[i][j] == 'O')) {
+        candidate.push_back(&board[i][j]);
+        dp_board[i][j] = false;
+
+        bool ans = helper_solve(i - 1, j, x_size, y_size, dp_board, board, candidate);
+        ans = helper_solve(i + 1, j, x_size, y_size, dp_board, board, candidate) && ans;
+        ans = helper_solve(i, j - 1, x_size, y_size, dp_board, board, candidate) && ans;
+        ans = helper_solve(i, j + 1, x_size, y_size, dp_board, board, candidate) && ans;
+        return ans;
+    }
+    return true;
+}
+
+void solve(std::vector<std::vector<char>>& board) {
+    int x_size = board.size();
+    if (x_size < 3)
+        return;
+    int y_size = board[0].size();
+    if (y_size < 3)
+        return;
+
+    std::vector<std::vector<bool>> dp_board(x_size, std::vector<bool>(y_size, true));
+    std::vector<std::vector<char*>> candidates;
+    std::vector<char*> candidate;
+    for(int i=1; i< x_size - 1;i++)
+        for (int j = 1; j < y_size - 1; j++) {
+            if (dp_board[i][j] && board[i][j] == 'O') {
+                if (helper_solve(i, j, x_size, y_size, dp_board, board, candidate))
+                    candidates.push_back(candidate);
+                candidate.clear();
+            }
+        }
+
+    for (auto c1 : candidates)
+        for (auto c2 : c1)
+            *c2 = 'X';
+}
+
+//網解 runtime beats:77.90% memory beats:56.75%
+void escape(std::vector<std::vector<char>>& board, int i, int j, int& rows, int& cols) {
+    if (i < 0 || i > rows - 1 || j < 0 || j > cols - 1) return;
+    if (board[i][j] == 'X' || board[i][j] == 'E') return;
+    board[i][j] = 'E';
+    escape(board, i + 1, j, rows, cols);
+    escape(board, i - 1, j, rows, cols);
+    escape(board, i, j - 1, rows, cols);
+    escape(board, i, j + 1, rows, cols);
+}
+
+void mark(std::vector<std::vector<char>>& board, int& rows, int& cols) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (board[i][j] == 'E') {
+                board[i][j] = 'O';
+            }
+            else if (board[i][j] == 'O') {
+                board[i][j] = 'X';
+            }
+        }
+    }
+}
+
+void solve_network(std::vector<std::vector<char>>& board) {
+    int rows = board.size();
+    if (rows == 0) return;
+    int cols = board[0].size();
+    if (cols == 0) return;
+    for (int i = 0; i < cols; ++i) {
+        escape(board, 0, i, rows, cols);
+        escape(board, rows - 1, i, rows, cols);
+    }
+
+    for (int i = 1; i < rows - 1; ++i) {
+        escape(board, i, 0, rows, cols);
+        escape(board, i, cols - 1, rows, cols);
+    }
+
+    mark(board, rows, cols);
 }

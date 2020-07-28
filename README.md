@@ -83,7 +83,10 @@ Record the Problem-solving process
 	- 二解 runtime beats:26.30% memory beats:19.15%
 	- 網解 runtime beats:46.20% memory beats:91.75%
 - 39. Combination Sum
-	- Fail
+	- 初解 runtime beats:98.93% memory beats:79.43%
+- 40. Combination Sum II
+	- 初解 runtime beats:27.36% memory beats:70.38%
+	- 網解 runtime beats:100.00% memory beats:70.73%
 - 41. First Missing Positive
 	- 初解 runtime beats:07.31% memory beats:87.72%
 	- 二解 runtime beats:84.53% memory beats:86.24%
@@ -223,3 +226,6 @@ Record the Problem-solving process
 	- 網解 runtime beats:97.45% memory beats:85.05%
 - 121. Best Time to Buy and Sell Stock
 	- 初解 runtime beats:78.41% memory beats:60.88%
+- 130. Surrounded Regions
+	- 初解 runtime beats:07.73% memory beats:07.44%
+	- 網解 runtime beats:77.90% memory beats:56.75%

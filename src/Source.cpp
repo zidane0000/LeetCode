@@ -135,9 +135,8 @@ int main()
     //std::vector<std::vector<int>> r = threeSum_network(nums);
 
     //16. 3Sum Closest
-    std::vector<int> nums{ -1,0,1,1,55 };
-    int r = threeSumClosest(nums, 3);
-    std::cout << r;
+    //std::vector<int> nums{ -1,0,1,1,55 };
+    //int r = threeSumClosest(nums, 3);
 
     //17. Letter Combinations of a Phone Number
     //std::vector<std::string> r = letterCombinations("23");
@@ -276,6 +275,14 @@ int main()
     //};
     //bool r = isValidSudoku_2(board);
 
+    //39. Combination Sum
+    //std::vector<int> candidates{ 2,3,5,7 };
+    //std::vector<std::vector<int>> r = combinationSum(candidates, 7);
+
+    //40. Combination Sum
+    std::vector<int> candidates{ 1,2,2,2,5 };
+    std::vector<std::vector<int>> r = combinationSum2(candidates, 5);
+
     //41. First Missing Positive
     //std::vector<int> nums{ -1,0,1 };
     //int r = firstMissingPositive(nums);
@@ -319,7 +326,6 @@ int main()
     //ªì¸Ñ runtime beats:46.64% memory beats:70.04%
     //std::vector<int> nums{2,0,0,1};
     //bool r = canJump(nums);
-
 
     //56. Merge Intervals
     //std::vector<std::vector<int>> intervals{ {1,3},{2,6},{8,10},{15,18} };
@@ -365,14 +371,12 @@ int main()
     //};
     //setZeroes(matrix);
 
-
     //74. Search a 2D Matrix
     //std::vector<std::vector<int>> matrix{
     //    {1},
     //    {3}
     //};
     //bool r = searchMatrix(matrix, 3);
-
 
     //76. Minimum Window Substring
     //std::string r = minWindow_network("ADOBECODEBANC", "ABC");
@@ -477,6 +481,14 @@ int main()
     //124. Binary Tree Maximum Path Sum
     //int r = maxPathSum_network(toTree({ 1,-2,-3,1,3,-2,NULL,-1 }));
 
+    //130. Surrounded Regions
+    std::vector<std::vector<char>> board {
+        {'X','X','X','X'},
+        {'X','O','O','X'},
+        {'X','O','O','X'},
+        {'X','O','X','X'}
+    };
+    solve(board);
 
     return 0;
 }
