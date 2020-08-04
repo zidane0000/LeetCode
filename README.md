@@ -19,12 +19,12 @@ Record the Problem-solving process
 	- 二解 runtime beats:09.40% memory beats:31.19%
 	- 網解 runtime beats:95.44% memory beats:89.75%
 - 5. Longest Palindromic Substring
-	- 網解 runtime beats:90.65% memory beats:61.59% [參考網址](https:-www.cnblogs.com/grandyang/p/4464476.html)
+	- 網解 runtime beats:90.65% memory beats:61.59% [參考網址](https://www.cnblogs.com/grandyang/p/4464476.html)
 - 9. Palindrome Number
 	- 初解 runtime beats:92.39% memory beats:63.63%
 	- 二解 runtime beats:92.39% memory beats:63.63%
 - 10. Regular Expression Matching
-	- 網解 runtime beats:58.66% memory beats:42.67% [參考網址](https:-knightzone.studio/2018/09/30/3644/leetcode%EF%BC%9A10-regular-expression-matching/)
+	- 網解 runtime beats:58.66% memory beats:42.67% [參考網址](https://knightzone.studio/2018/09/30/3644/leetcode%EF%BC%9A10-regular-expression-matching/)
 - 11. Container With Most Water
 	- 初解 runtime beats:90.66% memory beats:41.36%
 	- 二解 runtime beats:16.97% memory beats:87.56%
@@ -33,7 +33,7 @@ Record the Problem-solving process
 - 15. 3Sum
 	- 網解 runtime beats:35.80% memory beats:99.73%
 	- 網解 runtime beats:90.94% memory beats:75.02%
-	- 網解 runtime beats:93.07% memory beats:78.92% [參考網址](https:-www.cnblogs.com/grandyang/p/4481576.html)
+	- 網解 runtime beats:93.07% memory beats:78.92% [參考網址](https://www.cnblogs.com/grandyang/p/4481576.html)
 - 16. 3Sum Closest
 	- 初解 runtime beats:8.01% memory beats:89.32%
 	- 網解 runtime beats:93.31% memory beats:19.81%
@@ -151,8 +151,8 @@ Record the Problem-solving process
 - 82. Remove Duplicates from Sorted List II
 	- 網解 runtime beats:99.35% memory beats:78.46%
 - 84. Largest Rectangle in Histogram
-	- 網解 runtime beats:64.06% memory beats:72.64% [參考網址](https:-www.cnblogs.com/boring09/p/4231906.html)
-	- 網解 runtime beats:87.52% memory beats:94.84% [參考網址](https:-www.cnblogs.com/grandyang/p/4322653.html)
+	- 網解 runtime beats:64.06% memory beats:72.64% [參考網址](https://www.cnblogs.com/boring09/p/4231906.html)
+	- 網解 runtime beats:87.52% memory beats:94.84% [參考網址](https://www.cnblogs.com/grandyang/p/4322653.html)
 - 86. Partition List
 	- 初解 runtime beats:100.00% memory beats:61.95%
 - 90. Subsets II
@@ -166,13 +166,13 @@ Record the Problem-solving process
 - 95. Unique Binary Search Trees II
 	- 網解 runtime beats:92.68% memory beats:87.69%
 - 96. Unique Binary Search Trees
-	- 網解 runtime beats:100.00% memory beats:45.28% [參考網址](https:-medium.com/@bill800227/leetcode-96-unique-binary-search-trees-abce6e62a7a0)
-	- 網解 runtime beats:100.00% memory beats:60.29% [參考網址](https:-www.cnblogs.com/grandyang/p/4299608.html)
+	- 網解 runtime beats:100.00% memory beats:45.28% [參考網址](https://medium.com/@bill800227/leetcode-96-unique-binary-search-trees-abce6e62a7a0)
+	- 網解 runtime beats:100.00% memory beats:60.29% [參考網址](https://www.cnblogs.com/grandyang/p/4299608.html)
 - 97. Interleaving String
 	- 網解 runtime beats:84.84% memory beats:15.95%
-	- 網解 runtime beats:100.00% memory beats:93.75% [參考網址](https:-medium.com/@bill800227/leetcode-97-interleaving-string-18b1202fb0ea)
+	- 網解 runtime beats:100.00% memory beats:93.75% [參考網址](https://medium.com/@bill800227/leetcode-97-interleaving-string-18b1202fb0ea)
 - 98. Validate Binary Search Tree
-	- 網解 runtime beats:66.61% memory beats:51.39% [參考網址](https:-www.cnblogs.com/grandyang/p/4298435.html)
+	- 網解 runtime beats:66.61% memory beats:51.39% [參考網址](https://www.cnblogs.com/grandyang/p/4298435.html)
 - 100. Same Tree
 	- 初解 runtime beats:100.00% memory beats:63.73%
 - 101. Symmetric Tree
@@ -186,7 +186,7 @@ Record the Problem-solving process
 	- 初解 runtime beats:77.93% memory beats:08.59%
 	- 二解 runtime beats:48.35% memory beats:49.87%
 - 105. Construct Binary Tree from Preorder and Inorder Traversal
-	- 網解 runtime beats:84.37% memory beats:91.49% [參考網址](https:-medium.com/@ChYuan/leetcode-no-105-construct-binary-tree-from-preorder-and-inorder-traversal-%E5%BF%83%E5%BE%97-medium-12dd4fcfa654)
+	- 網解 runtime beats:84.37% memory beats:91.49% [參考網址](https://medium.com/@ChYuan/leetcode-no-105-construct-binary-tree-from-preorder-and-inorder-traversal-%E5%BF%83%E5%BE%97-medium-12dd4fcfa654)
 	- 網解 runtime beats:74.95% memory beats:99.55%
 - 107. Binary Tree Level Order Traversal II
 	- 初解 runtime beats:33.88% memory beats:99.38%
@@ -229,3 +229,40 @@ Record the Problem-solving process
 - 130. Surrounded Regions
 	- 初解 runtime beats:07.73% memory beats:07.44%
 	- 網解 runtime beats:77.90% memory beats:56.75%
+- 131. Palindrome Partitioning
+	- 網解 runtime beats:93.40% memory beats:98.36%
+	- 初解 runtime beats:99.41% memory beats:95.49%
+- 132. Palindrome Partitioning II
+	- 網解 runtime beats:99.94% memory beats:94.32% [參考網址](https://www.cnblogs.com/grandyang/p/4271456.html)
+	- 網解 runtime beats:55.57% memory beats:59.09% [參考網址](https://medium.com/@bill800227/leetcode-132-palindrome-partitioning-ii-d8aac7794ebc)
+- 134. Gas Station
+	- 初解 runtime beats:18.60% memory beats:77.33%
+	- 網解 runtime beats:96.74% memory beats:42.44%
+- 136. Single Number
+	- 初解 runtime beats:05.20% memory beats:77.40%
+	- 二解 runtime beats:07.30% memory beats:83.29%
+	- 三解 runtime beats:18.55% memory beats:07.67%
+	- 網解 runtime beats:93.21% memory beats:83.29%
+- 138. Copy List with Random Pointer
+	- 初解 runtime beats:37.50% memory beats:82.21%
+	- 網解 runtime beats:93.25% memory beats:92.49% [參考網址](https://www.cnblogs.com/grandyang/p/4261431.html)
+- 139. Word Break
+	- 初解 runtime beats:48.19% memory beats:37.24%
+	- 網解 runtime beats:78.37% memory beats:89.44%
+- 141. Linked List Cycle
+	- 初解 runtime beats:21.57% memory beats:07.88%
+	- 網解 runtime beats:96.32% memory beats:69.53%
+- 142. Linked List Cycle II
+	- 初解 runtime beats:39.50% memory beats:18.49%
+- 143. Reorder List
+	- 初解 runtime beats:92.37% memory beats:21.52%
+- 144. Binary Tree Preorder Traversal
+	- 初解 runtime beats:100.00% memory beats:71.55%
+- 145. Binary Tree Postorder Traversal
+	- 初解 runtime beats:100.00% memory beats:31.67%
+- 146. LRU Cache
+	- 初解 runtime beats:08.53% memory beats:45.17%
+	- 網解 runtime beats:99.48% memory beats:80.69%
+- 148. Sort List
+	- 網解 runtime beats:89.72% memory beats:88.98% [參考網址](https://www.cnblogs.com/grandyang/p/4249905.html)
+	- 網解 runtime beats:97.49% memory beats:47.35%

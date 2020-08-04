@@ -9,6 +9,8 @@
 #include <set>
 #include <unordered_set>
 #include <queue>
+#include <functional>
+#include <unordered_map>
 
 //1. Two Sum
 //初解 runtime beats:12.97% memory beats:89.01%
@@ -4053,4 +4055,717 @@ void solve_network(std::vector<std::vector<char>>& board) {
     }
 
     mark(board, rows, cols);
+}
+
+//131. Palindrome Partitioning
+//網解 runtime beats:93.40% memory beats:98.36%
+std::vector<std::vector<std::string>> partition_network(std::string s) {
+    std::vector<std::vector<std::string>> ans;
+    auto isPalindrome = [&](int i, int j) {
+        while (i < j) {
+            if (s[i] == s[j]) {
+                i++;
+                j--;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    };
+    std::function<void(int, std::vector<std::string>&)> dfs = [&](int i, std::vector<std::string>& curr) {
+        if (i >= s.length()) {
+            ans.push_back(std::vector<std::string>(curr.begin(), curr.end()));
+        }
+        for (int k = i; k < s.length(); k++) {
+            if (isPalindrome(i, k)) {
+                curr.push_back(s.substr(i, k - i + 1));
+                dfs(k + 1, curr);
+                curr.pop_back();
+            }
+        }
+    };
+    std::vector<std::string> curr;
+    dfs(0, curr);
+    return ans;
+}
+
+//初解 runtime beats:99.41% memory beats:95.49%
+bool isPalindrome(std::string& s, int i, int j) {
+    while (i < j) {
+        if (s[i] == s[j]) {
+            i++;
+            j--;
+        }
+        else
+            return false;
+    }
+    return true;
+}
+
+void dfs(std::string& s, int i, std::vector<std::string>& curr, std::vector<std::vector<std::string>>& ans) {
+    if (i >= s.length())
+        ans.push_back(curr);
+
+    for (int k = i; k < s.length(); k++) {
+        if (isPalindrome(s, i, k)) {
+            curr.push_back(s.substr(i, k - i + 1));
+            dfs(s, k + 1, curr, ans);
+            curr.pop_back();
+        }
+    }
+}
+
+std::vector<std::vector<std::string>> partition(std::string s) {
+    std::vector<std::vector<std::string>> ans;
+    std::vector<std::string> curr;
+    dfs(s, 0, curr, ans);
+    return ans;
+}
+
+//132. Palindrome Partitioning II
+//https://www.cnblogs.com/grandyang/p/4271456.html
+//網解 runtime beats:99.94% memory beats:94.32%
+int minCut_network(std::string s) {
+    if (s.empty()) return 0;
+    int n = s.size();
+    std::vector<int> dp(n + 1, INT_MAX);
+    dp[0] = -1;
+    for (int i = 0; i < n; ++i) {
+        for (int len = 0; i - len >= 0 && i + len < n && s[i - len] == s[i + len]; ++len)
+            dp[i + len + 1] = std::min(dp[i + len + 1], 1 + dp[i - len]);
+
+        for (int len = 0; i - len >= 0 && i + len + 1 < n && s[i - len] == s[i + len + 1]; ++len)
+            dp[i + len + 2] = std::min(dp[i + len + 2], 1 + dp[i - len]);
+    }
+
+    return dp[n];
+}
+
+//https://medium.com/@bill800227/leetcode-132-palindrome-partitioning-ii-d8aac7794ebc
+//網解 runtime beats:55.57% memory beats:59.09%
+int minCut_network_2(std::string s) {
+    int n = s.size();
+    std::vector<std::vector<bool>> isPalin(n, std::vector<bool>(n, false));
+    //isPalin[j][i] represents if s[j:i] is palindrome
+    std::vector<int> dp(n, 0);
+    //dp[i] represents the minCut of s[0:i]
+
+    for (int i = 0; i < n; ++i) {
+        dp[i] = i;  //max num of cut of s[0:i]
+        for (int j = 0; j <= i; ++j) {
+            if (s[i] == s[j] && (i - j <= 2 || isPalin[j + 1][i - 1])) {
+                isPalin[j][i] = true;
+                dp[i] = j == 0 ? 0 : std::min(dp[i], dp[j - 1] + 1);
+            }
+        }
+    }
+
+    return dp.back();
+}
+
+//134. Gas Station
+//初解 runtime beats:18.60% memory beats:77.33%
+int canCompleteCircuit(std::vector<int>& gas, std::vector<int>& cost) {
+    int size = gas.size();
+    if (size == 0)
+        return -1;
+
+    for (int i = 0; i < size; i++) {
+        int g = gas[i] - cost[i];
+        if (g < 0)
+            continue;
+
+        for (int j = 1; j < size; j++) {
+            if ((i + j) < size) {
+                g = g + gas[i + j] - cost[i + j];
+                if (g < 0) {
+                    j = size;
+                    continue;
+                } 
+            }
+            else {
+                g = g + gas[i + j - size] - cost[i + j - size];
+                if (g < 0) {
+                    j = size;
+                    continue;
+                }
+            }
+        }
+
+        if (g >= 0)
+            return i;
+    }
+
+    return -1;
+}
+
+//網解 runtime beats:96.74% memory beats:42.44%
+int canCompleteCircuit_network(std::vector<int>& gas, std::vector<int>& cost) {
+    int start = 0;
+    int tank = 0;
+    int sum_gas = 0;
+    int sum_cost = 0;
+    for (int i = 0; i < gas.size(); i++) {
+        sum_gas += gas[i];
+        sum_cost += cost[i];
+        tank += gas[i] - cost[i];
+        if (tank < 0) {
+            tank = 0;
+            start = i + 1;
+        }
+    }
+    if (sum_gas < sum_cost)
+        return -1;
+    return start;
+}
+
+//136. Single Number
+//初解 runtime beats:05.20% memory beats:77.40%
+int singleNumber(std::vector<int>& nums) {
+    int i = 1;
+    while ((nums.size() > 1) && (i < nums.size())) {
+        if (nums[0] == nums[i]) {
+            nums.erase(nums.begin() + i);
+            nums.erase(nums.begin());
+            i = 1;
+        }
+        else
+            i++;
+    }
+
+    if (nums.empty())
+        return 0;
+    else
+        return nums.front();
+}
+
+//二解 runtime beats:07.30% memory beats:83.29%
+int singleNumber_2(std::vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    int size = nums.size();
+    if (size == 1)
+        return nums[0];
+
+    for (int i = 0; i < size - 1; i++) {
+        if (nums[i] != nums[i + 1]) {
+            return nums[i];
+        }
+        else {
+            while ((i < (size - 1)) && (nums[i] == nums[i + 1]))
+                i++;
+        }
+    }
+
+    if (nums[size - 1] != nums[size - 2])
+        return nums[size - 1];
+    else
+        return 0;
+}
+
+//三解 runtime beats:18.55% memory beats:07.67%
+int singleNumber_3(std::vector<int>& nums) {
+    int size = nums.size();
+    if (size == 1)
+        return nums[0];
+
+    std::map<int, int> map_num;
+    for (int i = 0; i < size; i++)
+        map_num[nums[i]]++;
+
+    for (auto it = map_num.begin(); it != map_num.end(); ++it)
+        if (it->second == 1)
+            return it->first;
+
+    return 0;
+}
+
+//網解 runtime beats:93.21% memory beats:83.29%
+int singleNumber_network(std::vector<int>& nums) {
+    // use property of xor, any number xor with 0 is still itself
+    // every number xor with itself will be 0
+    // eg: 0 ^ 3 ^ 4 ^ 3 = 4
+    int sum = 0;
+    for (int i = 0; i < nums.size(); i++)
+        sum ^= nums[i];
+    return sum;
+}
+
+//138. Copy List with Random Pointer
+class rand_Node {
+public:
+    int val;
+    rand_Node* next;
+    rand_Node* random;
+
+    rand_Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+
+//初解 runtime beats:37.50% memory beats:82.21%
+rand_Node* copyRandomList(rand_Node* head) {
+    std::vector<rand_Node*> vec;
+    while (head != NULL) {
+        vec.push_back(head);
+        head = head->next;
+    }
+
+    int size = vec.size();
+    if (size == 0)
+        return NULL;
+    int i = 0;
+    std::vector<rand_Node*> new_vec;
+    for (i = 0; i < size; i++)
+        new_vec.push_back(new rand_Node(vec[i]->val));
+
+    new_vec.push_back(NULL);
+    for (i = 0; i < size; i++) {
+        new_vec[i]->next = new_vec[i + 1];
+
+        int posi = 0;
+        while ((posi < size) && (vec[i]->random != vec[posi])) {
+            posi++;
+            if (vec[i]->random == NULL)
+                posi = size;
+        }
+
+        if (posi >= size)
+            new_vec[i]->random = NULL;
+        else
+            new_vec[i]->random = new_vec[posi];
+    }
+    return new_vec.front();
+}
+
+//https://www.cnblogs.com/grandyang/p/4261431.html
+//網解 runtime beats:93.25% memory beats:92.49% 
+rand_Node* copyRandomList_network(rand_Node* head) {
+    if (!head) return nullptr;
+    rand_Node* cur = head;
+    while (cur) {
+        rand_Node* t = new rand_Node(cur->val);
+        t->next = cur->next;
+        cur->next = t;
+        cur = t->next;
+    }
+    cur = head;
+    while (cur) {
+        if (cur->random) cur->next->random = cur->random->next;
+        cur = cur->next->next;
+    }
+    cur = head;
+    rand_Node* res = head->next;
+    while (cur) {
+        rand_Node* t = cur->next;
+        cur->next = t->next;
+        if (t->next) t->next = t->next->next;
+        cur = cur->next;
+    }
+    return res;
+}
+
+//139. Word Break
+//初解 runtime beats:48.19% memory beats:37.24%
+bool helper_wordBreak(std::string s, std::unordered_set<std::string>& un_set, std::vector<bool>& memo) {
+    if (s == "")
+        return true;
+
+    for (int i = 1; i <= s.size(); i++)
+        if (un_set.find(s.substr(0, i)) != un_set.end())
+            if (memo[i] != false)
+                if (helper_wordBreak(s.substr(i, s.size() - i), un_set, memo))
+                    return true;
+                else
+                    memo[i] = false;
+
+    return false;
+}
+
+bool wordBreak(std::string s, std::vector<std::string>& wordDict) {
+    std::unordered_set<std::string> un_set(wordDict.begin(), wordDict.end());
+    std::vector<bool> memo (s.size(), true);    //紀錄第i個到最後，是否有在wordDict找到過
+    return helper_wordBreak(s, un_set, memo);
+}
+
+//網解 runtime beats:78.37% memory beats:89.44%
+bool wordBreak_network(std::string s, std::vector<std::string>& wordDict) {
+    if (wordDict.empty()) return false;
+    std::vector<bool> dp(s.size() + 1, false);
+    dp[0] = true;
+    for (int i = 1; i <= s.size(); ++i) {
+        for (const auto& word : wordDict) {
+            if (word == s.substr(i - 1, word.size()) && dp[i - 1]) {
+                dp[i + word.size() - 1] = true;
+            }
+        }
+    }
+    return dp[s.size()];
+}
+
+//141. Linked List Cycle
+//初解 runtime beats:21.57% memory beats:07.88%
+bool hasCycle(ListNode* head) {
+    std::unordered_set<ListNode*> list;
+    while (head != NULL && (list.find(head) == list.end())) {
+        list.insert(head);
+        head = head->next;
+    }
+
+    if (head == NULL)
+        return false;
+    else
+        return true;
+}
+
+//網解 runtime beats:96.32% memory beats:69.53%
+bool hasCycle_network(ListNode* head) {
+    //邏輯為temp一次走兩步，head一次走一步
+    //若有cycle，當進入cycle之後，temp會以每個cycle與head距離減少1的速度接近head
+    //最終temp == head
+    ListNode* temp = NULL;
+    while (head) {
+        if (temp == head)
+            return true;
+        if (head->next == NULL)
+            break;
+        if (!temp)
+            temp = head->next->next;
+        else {
+            if (temp->next == NULL)
+                break;
+            temp = temp->next->next;
+        }
+        head = head->next;
+    }
+    return false;
+}
+
+//142. Linked List Cycle II
+//初解 runtime beats:39.50% memory beats:18.49%
+ListNode* detectCycle(ListNode* head) {
+    std::unordered_set<ListNode*> list;
+    while (head != NULL && (list.find(head) == list.end())) {
+        list.insert(head);
+        head = head->next;
+    }
+
+    return head;
+}
+
+//143. Reorder List
+//初解 runtime beats:92.37% memory beats:21.52%
+void reorderList(ListNode* head) {
+    if (head == NULL || head->next == NULL || head->next->next == NULL)
+        return;
+
+    std::vector<ListNode*> list;
+    while (head != NULL) {
+        list.push_back(head);
+        head = head->next;
+    }
+
+    int size = list.size();
+    for (int i = 1; i < ((size / 2) + (size % 2)); i++) {
+        list[size - i]->next = list[i];
+        list[i - 1]->next = list[size - i];
+    }
+
+    list[size / 2]->next = NULL;
+    return;
+}
+
+//144. Binary Tree Preorder Traversal
+//初解 runtime beats:100.00% memory beats:71.55%
+void preorderTraversal(TreeNode* node, std::vector<int>& ans) {
+    if (!node)
+        return;
+    ans.push_back(node->val);
+    preorderTraversal(node->left, ans);
+    preorderTraversal(node->right, ans);
+}
+
+std::vector<int> preorderTraversal(TreeNode* root) {    //>mid->left->right
+    std::vector<int> ans;
+    preorderTraversal(root, ans);
+    return ans;
+}
+
+//145. Binary Tree Postorder Traversal
+//初解 runtime beats:100.00% memory beats:31.67%
+void postorderTraversal(TreeNode* node, std::vector<int>& ans) {
+    if (!node)
+        return;
+    if(node->left)
+        postorderTraversal(node->left, ans);
+    if(node->right)
+        postorderTraversal(node->right, ans);
+    ans.push_back(node->val);
+}
+
+std::vector<int> postorderTraversal(TreeNode* root) {   //left->right->mid
+    std::vector<int> ans;
+    postorderTraversal(root, ans);
+    return ans;
+}
+
+//146. LRU Cache
+//初解 runtime beats:08.53% memory beats:45.17%
+class LRUCache {    //最近最少使用
+public:
+    LRUCache(int capacity) {
+        private_capacity = capacity;
+        key_value.clear();
+        FIFO.clear();
+    }
+
+    int get(int key) {
+        if (key_value.find(key) == key_value.end())
+            return -1;
+        else {
+            FIFO.erase(find(FIFO.begin(), FIFO.end(), key));
+            FIFO.push_back(key);
+            return key_value[key];
+        }
+    }
+
+    void put(int key, int value) {
+        if (key_value.find(key) != key_value.end()) {
+            key_value[key] = value;
+            FIFO.erase(find(FIFO.begin(), FIFO.end(), key));
+            FIFO.push_back(key);
+            return;
+        }
+
+        if (key_value.size() >= private_capacity) {
+            key_value.erase(key_value.find(*FIFO.begin()));
+            FIFO.erase(FIFO.begin());
+        }
+        key_value[key] = value;
+        FIFO.push_back(key);
+    }
+private:
+    int private_capacity;
+    std::unordered_map<int, int> key_value;
+    std::list<int> FIFO;              //FIFO
+};
+
+//網解 runtime beats:99.48% memory beats:80.69%
+class LRUCache_network {
+public:
+    struct ListNode {
+        int key;
+        int val;
+        ListNode* prev;
+        ListNode* next;
+
+        ListNode(int value) {
+            key = 0;
+            val = value;
+            prev = nullptr;
+            next = nullptr;
+        }
+    };
+
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+    std::unordered_map<int, ListNode*> m;
+    int sz;
+
+    LRUCache_network(int capacity) {
+        sz = capacity;
+        std::ios_base::sync_with_stdio(false);
+        std::cin.tie(NULL);
+    }
+
+    int get(int key) {
+        auto it = m.find(key);
+        if (it == m.end())
+            return -1;
+        else {
+            ListNode* t = it->second;
+            if (t == this->head)
+                return t->val;
+            t->prev->next = t->next;
+            if (t != tail)
+                t->next->prev = t->prev;
+            else
+                this->tail = t->prev;
+            t->next = this->head;
+            t->prev = nullptr;
+            this->head->prev = t;
+            this->head = t;
+            return t->val;
+        }
+    }
+
+    void put(int key, int value) {
+        if (m.size() == 0) {
+            ListNode* temp = new ListNode(value);
+            temp->key = key;
+            this->head = temp;
+            this->tail = temp;
+            m[key] = temp;
+            return;
+        }
+
+        auto it = m.find(key);
+        if (it != m.end()) {
+            ListNode* t = it->second;
+            if (t->val != value) {
+                if (t == this->head) {
+                    t->val = value;
+                    return;
+                }
+                t->prev->next = t->next;
+                if (t != tail)
+                    t->next->prev = t->prev;
+                else
+                    this->tail = t->prev;
+                t->val = value;
+                t->next = this->head;
+                t->prev = nullptr;
+                this->head->prev = t;
+                this->head = t;
+            }
+            return;
+        }
+
+        if (m.size() < sz) {
+            struct ListNode* temp = new ListNode(value);
+            temp->key = key;
+            temp->next = this->head;
+            temp->prev = nullptr;
+            this->head->prev = temp;
+            this->head = temp;
+            m[key] = temp;
+        }
+        else if (m.size() == sz) {
+            struct ListNode* n = this->tail;
+            this->tail = this->tail->prev;
+            m.erase(n->key);
+            delete(n);
+            if (m.size() == 0) {
+                ListNode* temp = new ListNode(value);
+                temp->key = key;
+                this->head = temp;
+                this->tail = temp;
+                m[key] = temp;
+            }
+            else {
+                struct ListNode* temp = new ListNode(value);
+                temp->key = key;
+                this->head->prev = temp;
+                temp->next = this->head;
+                this->head = temp;
+                m[key] = temp;
+            }
+        }
+    }
+};
+
+//148. Sort List
+//https://www.cnblogs.com/grandyang/p/4249905.html
+//網解 runtime beats:89.72% memory beats:88.98%
+void sortListTree(ListNode* start, ListNode* end) {
+    if (start->next == end)
+        return;
+    ListNode* fast = start;
+    ListNode* slow = start;
+    while (fast != end && fast->next != end) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    ListNode* mid = slow;
+
+    ListNode* cur = start->next;
+    ListNode* back = start;
+
+    while (cur != mid) {
+        if (cur->val > mid->val) {
+            back->next = cur->next;
+            ListNode* tmp = mid->next;
+            mid->next = cur;
+            cur->next = tmp;
+            cur = back->next;
+        }
+        else {
+            back = back->next;
+            cur = cur->next;
+        }
+    }
+
+    cur = mid->next;
+    back = mid;
+    while (cur != end) {
+        if (cur->val < mid->val) {
+            back->next = cur->next;
+            ListNode* tmp = start->next;
+            start->next = cur;
+            cur->next = tmp;
+            cur = back->next;
+        }
+        else {
+            back = back->next;
+            cur = cur->next;
+        }
+    }
+    sortListTree(start, mid);
+    sortListTree(mid, end);
+
+}
+
+ListNode* sortList_network(ListNode* head) {
+    ListNode* dummy = new ListNode(INT_MIN);
+    dummy->next = head;
+    ListNode* cur = dummy;
+    while (cur && cur->next) {
+        cur = cur->next;
+    }
+    ListNode* end = new ListNode(INT_MAX);
+    cur->next = end;
+    sortListTree(dummy, end);
+    ListNode* front = dummy;
+    ListNode* back = dummy;
+    bool flag = false;
+    while (front && front->next) {
+        if (flag == true)
+            back = back->next;
+        flag = true;
+        front = front->next;
+    }
+    back->next = NULL;
+    return dummy->next;
+}
+
+//網解 runtime beats:97.49% memory beats:47.35%
+ListNode* merge(ListNode* l1, ListNode* l2) {
+    if (!l1) return l2;
+    if (!l2) return l1;
+
+    if (l1->val < l2->val) {
+        l1->next = merge(l1->next, l2);
+        return l1;
+    }
+    else {
+        l2->next = merge(l1, l2->next);
+        return l2;
+    }
+}
+
+ListNode* sortList_network2(ListNode* head) {
+    if (!head || !head->next) return head;
+    ListNode* slow = head, * fast = head, * pre = head;
+    while (fast && fast->next) {
+        //將鏈表從中間斷開的方法，采用的就是快慢指針，大家可能對快慢指針找鏈表中的環比較熟悉
+        //其實找鏈表中的中點同樣好使
+        //因為"快指針每次走兩步，慢指針每次走一步，當快指針到達鏈表末尾時，慢指針正好走到中間位置"
+        pre = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    pre->next = NULL;
+    return merge(sortList_network2(head), sortList_network2(slow));
 }

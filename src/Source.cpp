@@ -19,6 +19,31 @@ ListNode* toList(std::vector<int> vec) {
     return a;
 }
 
+ListNode* toList(std::vector<int> vec, int posi) {
+    ListNode* a = nullptr;
+    ListNode* cur = nullptr;
+    for (auto i : vec) {
+        if (a) {
+            ListNode* b = new ListNode;
+            b->val = i;
+            cur->next = b;
+            cur = b;
+        }
+        else {
+            a = new ListNode;
+            a->val = i;
+            cur = a;
+        }
+    }
+
+    ListNode* tmp  = a;
+    while ((posi--) && (tmp != NULL))
+        tmp = tmp->next;
+    cur->next = tmp;
+
+    return a;
+}
+
 //https://leetcode.com/problems/invert-binary-tree/discuss/62896/Just-wonder-how-to-write-custom-testcase.-Any-examples/499471
 TreeNode* toTree(std::vector<int> arr) {
     TreeNode* root = NULL;
@@ -280,8 +305,8 @@ int main()
     //std::vector<std::vector<int>> r = combinationSum(candidates, 7);
 
     //40. Combination Sum
-    std::vector<int> candidates{ 1,2,2,2,5 };
-    std::vector<std::vector<int>> r = combinationSum2(candidates, 5);
+    //std::vector<int> candidates{ 1,2,2,2,5 };
+    //std::vector<std::vector<int>> r = combinationSum2(candidates, 5);
 
     //41. First Missing Positive
     //std::vector<int> nums{ -1,0,1 };
@@ -482,13 +507,54 @@ int main()
     //int r = maxPathSum_network(toTree({ 1,-2,-3,1,3,-2,NULL,-1 }));
 
     //130. Surrounded Regions
-    std::vector<std::vector<char>> board {
-        {'X','X','X','X'},
-        {'X','O','O','X'},
-        {'X','O','O','X'},
-        {'X','O','X','X'}
-    };
-    solve(board);
+    //std::vector<std::vector<char>> board {
+    //    {'X','X','X','X'},
+    //    {'X','O','O','X'},
+    //    {'X','O','O','X'},
+    //    {'X','O','X','X'}
+    //};
+    //solve(board);
+
+    //131. Palindrome Partitioning
+    //std::vector<std::vector<std::string>> r = partition("aabbaa");
+
+    //132. Palindrome Partitioning II
+    //int r = minCut_network_2("abbab");
+
+    //134. Gas Station
+    //std::vector<int> gas{ 5,1,2,3,4 };
+    //std::vector<int> cost{ 4,4,1,5,1 };
+    //int r = canCompleteCircuit(gas, cost);
+
+    //136. Single Number
+    //std::vector<int> nums{ 3,1,1,2,2 };
+    //int r = singleNumber_network(nums);
+
+    //139. Word Break
+    //std::vector<std::string> wordDict{ "a","abc","b","cd" };
+    //bool r = wordBreak_network("abcd", wordDict);
+
+    //141. Linked List Cycle
+    //bool r = hasCycle_network(toList({ 1,2,4 }, 1));
+
+    //143. Reorder List
+    //ListNode* head = toList({ 1,2,3,4,5,6 });
+    //reorderList(head);
+
+    //144. Binary Tree Preorder Traversal
+    //std::vector<int> r = preorderTraversal(toTree({ 1,2,3,4,5 }));
+
+    //146. LRU Cache
+    //LRUCache cache = LRUCache(2 /* capacity */);
+    //cache.put(1, 1);
+    //cache.put(2, 2);
+    //std::cout << cache.get(1) << std::endl;       // returns 1
+    //cache.put(3, 3);    // evicts key 2
+    //std::cout << cache.get(2) << std::endl;       // returns -1 (not found)
+    //cache.put(4, 4);    // evicts key 1
+    //std::cout << cache.get(1) << std::endl;       // returns -1 (not found)
+    //std::cout << cache.get(3) << std::endl;       // returns 3
+    //std::cout << cache.get(4) << std::endl;       // returns 4
 
     return 0;
 }
