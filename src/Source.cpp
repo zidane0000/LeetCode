@@ -556,5 +556,19 @@ int main()
     //std::cout << cache.get(3) << std::endl;       // returns 3
     //std::cout << cache.get(4) << std::endl;       // returns 4
 
+    //155. Min Stack
+    //MinStack minStack = MinStack();
+    //minStack.push(-2);
+    //minStack.push(0);
+    //minStack.push(-3);
+    //minStack.getMin(); // return -3
+    //minStack.pop();
+    //minStack.top();    // return 0
+    //minStack.getMin(); // return -2
+
+    //168. Excel Sheet Column Title
+    std::string r = convertToTitle(26);
+
+
     return 0;
 }

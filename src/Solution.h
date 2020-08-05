@@ -4741,16 +4741,16 @@ ListNode* sortList_network(ListNode* head) {
 }
 
 //網解 runtime beats:97.49% memory beats:47.35%
-ListNode* merge(ListNode* l1, ListNode* l2) {
+ListNode* sortList_merge(ListNode* l1, ListNode* l2) {
     if (!l1) return l2;
     if (!l2) return l1;
 
     if (l1->val < l2->val) {
-        l1->next = merge(l1->next, l2);
+        l1->next = sortList_merge(l1->next, l2);
         return l1;
     }
     else {
-        l2->next = merge(l1, l2->next);
+        l2->next = sortList_merge(l1, l2->next);
         return l2;
     }
 }
@@ -4768,4 +4768,211 @@ ListNode* sortList_network2(ListNode* head) {
     }
     pre->next = NULL;
     return merge(sortList_network2(head), sortList_network2(slow));
+}
+
+//150. Evaluate Reverse Polish Notation
+//初解 runtime beats:27.18% memory beats:42.28%
+int evalRPN(std::vector<std::string>& tokens) {
+    std::stack<int> LIFO;
+
+    for (auto token : tokens) {
+        if (token == "+") {
+            int b = LIFO.top();
+            LIFO.pop();
+            int a = LIFO.top();
+            LIFO.pop();
+            LIFO.push(a + b);
+        }
+        else if (token == "-") {
+            int b = LIFO.top();
+            LIFO.pop();
+            int a = LIFO.top();
+            LIFO.pop();
+            LIFO.push(a - b);
+        }
+        else if (token == "*") {
+            int b = LIFO.top();
+            LIFO.pop();
+            int a = LIFO.top();
+            LIFO.pop();
+            LIFO.push(a * b);
+        }
+        else if (token == "/") {
+            int b = LIFO.top();
+            LIFO.pop();
+            int a = LIFO.top();
+            LIFO.pop();
+            LIFO.push(a / b);
+        }
+        else
+            LIFO.push(std::stoi(token));
+    }
+
+    return LIFO.top();
+}
+
+//網解 runtime beats:55.30% memory beats:32.52%
+int evalRPN_network(const std::vector<std::string>& tokens) {
+    std::vector<int> s;
+    for (auto token : tokens) {
+        if (token != "+" && token != "-" && token != "*" && token != "/") {
+            s.push_back(stoi(token));
+        }
+        else {
+            int num2 = s.back(); s.pop_back();
+            int num1 = s.back(); s.pop_back();
+            int res;
+            switch (token[0]) {
+            case '+': res = num1 + num2; break;
+            case '-': res = num1 - num2; break;
+            case '*': res = num1 * num2; break;
+            case '/': res = num1 / num2; break;
+            }
+            s.push_back(res);
+        }
+    }
+    return s.back();
+}
+
+//152. Maximum Product Subarray
+//http://bangbingsyb.blogspot.com/2014/11/leetcode-maximum-product-subarray.html
+//網解 runtime beats:80.49% memory beats:46.85%
+int maxProduct_network(std::vector<int>& nums) {
+    int size = nums.size();
+    if (size == 1)
+        return nums[0];
+
+    int ans, curMax, curMin;
+    ans = curMax = curMin = nums[0];
+    for (int i = 1; i < size; i++) {
+        int temp = curMax;
+        curMax = std::max(std::max(curMax * nums[i], curMin * nums[i]), nums[i]);
+        curMin = std::min(std::min(temp * nums[i], curMin * nums[i]), nums[i]);
+        ans = std::max(ans, curMax);
+    }
+    return ans;
+}
+
+//網解 runtime beats:98.29% memory beats:46.85%
+int maxProduct_network2(std::vector<int>& nums) {
+    int r = nums[0];
+    int maxi = r;
+    int mini = r;
+    for (int i = 1; i < nums.size(); i++) {
+        if (nums[i] < 0) {      //當nums[i] < 0時，乘上最小值變成其最大值，但不一定是答案，假設mini原本是正數，若nums[i]<0，其maxi會變負數
+            int temp = maxi;
+            maxi = mini;
+            mini = temp;
+        }
+        maxi = std::max(nums[i], nums[i] * maxi);
+        mini = std::min(nums[i], nums[i] * mini);   //紀錄最小值
+        r = std::max(r, maxi);
+    }
+    return r;
+}
+
+//153. Find Minimum in Rotated Sorted Array
+//初解 runtime beats:98.29% memory beats:88.67%
+int findMin(std::vector<int>& nums) {
+    int ans = INT_MAX;
+    for (auto num : nums)
+        ans = std::min(num, ans);
+    return ans;
+}
+
+//155. Min Stack
+//初解 runtime beats:05.01% memory beats:81.19%
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+        
+    }
+
+    void push(int x) {
+        s.push_back(x);
+    }
+
+    void pop() {
+        s.erase(s.begin() + s.size() - 1);
+    }
+
+    int top() {
+        return s[s.size() - 1];
+    }
+
+    int getMin() {
+        int min = INT_MAX;
+        for (auto num : s)
+            min = std::min(min, num);
+        return min;
+    }
+private:
+    std::vector<int> s;
+};
+
+//160. Intersection of Two Linked Lists
+//初解 runtime beats:07.98% memory beats:05.34%
+ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+    std::set<ListNode*> unique;
+    while (headB != NULL) {
+        unique.insert(headB);
+        headB = headB->next;
+    }
+
+    while (headA != NULL) {
+        if (unique.count(headA))
+            return headA;
+        unique.insert(headA);
+        headA = headA->next;
+    }
+
+    return NULL;
+}
+
+//167. Two Sum II - Input array is sorted
+//初解 runtime beats:69.97% memory beats:06.00%
+std::vector<int> twoSum2(std::vector<int>& numbers, int target) {
+    std::unordered_map<int, int> map;
+    int size = numbers.size();
+
+    for (int i = 0; i < numbers.size(); i++) {
+        if (map.find(target - numbers[i]) != map.end())
+            return { map[target - numbers[i]], i + 1 };
+        else
+            map[numbers[i]] = i + 1;
+    }
+    return { -1,-1 };
+}
+
+//網解 runtime beats:96.92% memory beats:68.33%
+std::vector<int> twoSum2_network(std::vector<int>& nums, int target) {
+    int l = 0;
+    int r = nums.size() - 1;
+
+    while (l < r) {
+        int sum = nums[l] + nums[r];
+
+        if (sum == target)
+            return { l + 1, r + 1 };
+        else if (sum < target)
+            l++;
+        else
+            r--;
+    }
+    return { -1, -1 };
+}
+
+//168. Excel Sheet Column Title
+//二解 runtime beats:69.97% memory beats:05.00%
+std::string convertToTitle(int n) {
+    std::string ans = "";
+    int base = 26;
+
+    while (n > 0) {
+        ans += (char)(65 + n / base);
+        n /= base;
+    }
+
+    return ans;
 }

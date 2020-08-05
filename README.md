@@ -266,3 +266,18 @@ Record the Problem-solving process
 - 148. Sort List
 	- 網解 runtime beats:89.72% memory beats:88.98% [參考網址](https://www.cnblogs.com/grandyang/p/4249905.html)
 	- 網解 runtime beats:97.49% memory beats:47.35%
+- 150. Evaluate Reverse Polish Notation
+	- 初解 runtime beats:27.18% memory beats:42.28%
+	- 網解 runtime beats:55.30% memory beats:32.52%
+- 152. Maximum Product Subarray
+	- 網解 runtime beats:80.49% memory beats:46.85% [參考網址](http://bangbingsyb.blogspot.com/2014/11/leetcode-maximum-product-subarray.html)
+	- 網解 runtime beats:98.29% memory beats:46.85%
+- 153. Find Minimum in Rotated Sorted Array
+	- 初解 runtime beats:98.29% memory beats:88.67%
+- 155. Min Stack
+	- 初解 runtime beats:05.01% memory beats:81.19%
+- 160. Intersection of Two Linked Lists
+	- 初解 runtime beats:07.98% memory beats:05.34%
+- 167. Two Sum II - Input array is sorted
+	- 初解 runtime beats:69.97% memory beats:06.00%
+	- 網解 runtime beats:96.92% memory beats:68.33%

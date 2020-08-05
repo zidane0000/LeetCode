@@ -66,6 +66,8 @@ E:\Dave\VS2019\LeetCode\src\Solution.h(4376,23): warning C4018: '<=': signed/uns
 E:\Dave\VS2019\LeetCode\src\Solution.h(4398,23): warning C4018: '<=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(4542,30): warning C4018: '>=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(4636,22): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(4861,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(4939,23): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(56,28): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(63,19): warning C4018: '>=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(82,28): warning C4018: '<': signed/unsigned mismatch
