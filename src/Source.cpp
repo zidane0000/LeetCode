@@ -19,30 +19,30 @@ ListNode* toList(std::vector<int> vec) {
     return a;
 }
 
-ListNode* toList(std::vector<int> vec, int posi) {
-    ListNode* a = nullptr;
-    ListNode* cur = nullptr;
-    for (auto i : vec) {
-        if (a) {
-            ListNode* b = new ListNode;
-            b->val = i;
-            cur->next = b;
-            cur = b;
-        }
-        else {
-            a = new ListNode;
-            a->val = i;
-            cur = a;
-        }
-    }
-
-    ListNode* tmp  = a;
-    while ((posi--) && (tmp != NULL))
-        tmp = tmp->next;
-    cur->next = tmp;
-
-    return a;
-}
+//ListNode* toList(std::vector<int> vec, int posi) {
+//    ListNode* a = nullptr;
+//    ListNode* cur = nullptr;
+//    for (auto i : vec) {
+//        if (a) {
+//            ListNode* b = new ListNode;
+//            b->val = i;
+//            cur->next = b;
+//            cur = b;
+//        }
+//        else {
+//            a = new ListNode;
+//            a->val = i;
+//            cur = a;
+//        }
+//    }
+//
+//    ListNode* tmp  = a;
+//    while ((posi--) && (tmp != NULL))
+//        tmp = tmp->next;
+//    cur->next = tmp;
+//
+//    return a;
+//}
 
 //https://leetcode.com/problems/invert-binary-tree/discuss/62896/Just-wonder-how-to-write-custom-testcase.-Any-examples/499471
 TreeNode* toTree(std::vector<int> arr) {
@@ -567,8 +567,29 @@ int main()
     //minStack.getMin(); // return -2
 
     //168. Excel Sheet Column Title
-    std::string r = convertToTitle(26);
+    //std::string r = convertToTitle(701);
 
+    //169. Majority Element
+    //std::vector<int> nums{ 1,2,3,4,4,4,4,4,4 };
+    //int r = majorityElement(nums);
+
+    //171. Excel Sheet Column Number
+    //int r = titleToNumber("A");
+    //r = titleToNumber("AA");
+    //r = titleToNumber("FXSHRXW");
+    //r = titleToNumber("FXSHRXA");
+    
+    //173. Binary Search Tree Iterator
+    //BSTIterator iterator = BSTIterator(toTree({ 3, 7, 15, NULL, NULL, 9, 20 }));
+    //iterator.next();    // return 3
+    //iterator.next();    // return 7
+    //iterator.hasNext(); // return true
+    //iterator.next();    // return 9
+    //iterator.hasNext(); // return true
+    //iterator.next();    // return 15
+    //iterator.hasNext(); // return true
+    //iterator.next();    // return 20
+    //iterator.hasNext(); // return false
 
     return 0;
 }

@@ -4964,15 +4964,213 @@ std::vector<int> twoSum2_network(std::vector<int>& nums, int target) {
 }
 
 //168. Excel Sheet Column Title
-//二解 runtime beats:69.97% memory beats:05.00%
+//初解 runtime beats:100.00% memory beats:60.85%
 std::string convertToTitle(int n) {
     std::string ans = "";
     int base = 26;
-
-    while (n > 0) {
-        ans += (char)(65 + n / base);
-        n /= base;
+    n--;
+    while (n >= 0) {
+        ans = (char)(65 + n % base) + ans;
+        n = n / base - 1;
     }
 
     return ans;
+}
+
+//網解 runtime beats:100.00% memory beats:92.12%
+std::string convertToTitle_network(int n) {
+    std::string str;
+    char tmp;
+    while (n) {
+        n = n - 1;
+        tmp = 'A' + n % 26;
+        str = tmp + str;
+        n = n / 26;
+    }
+    return str;
+}
+
+//169. Majority Element
+//初解 runtime beats:73.77% memory beats:27.05%
+int majorityElement(std::vector<int>& nums) {
+    std::unordered_map<int, int> majority;
+
+    for (auto num : nums)
+        majority[num]++;
+
+    std::pair<int, int>ans(-1,-1);
+    for (auto maj : majority) {
+        if (ans.second < maj.second)
+            ans = maj;
+    }
+    
+    return ans.first;
+}
+
+//網解 runtime beats:97.66% memory beats:41.27%
+int majorityElement_network(std::vector<int>& nums) {
+    int maj_elem = nums[0];
+    int count = 0;
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums[i] == maj_elem)
+            count++;
+        else {
+            count--;
+            if (count == 0) {
+                maj_elem = nums[i];
+                count = 1;
+            }
+        }
+
+    }
+    return maj_elem;
+}
+
+//171. Excel Sheet Column Number
+//初解 runtime beats:100.00% memory beats:10.75%
+int titleToNumber(std::string s) {
+    long ans = 0;
+    for (int i = 0; i < s.size(); i++)
+        ans = ans + (((int)s[i]) - 64) * pow(26, s.size() - 1 - i);        
+    return ans;
+}
+
+//網解 runtime beats:100.00% memory beats:67.40%
+int titleToNumber_network(std::string s) {
+    long ans = 0;
+    for (char c : s) ans = ans * 26 + c - 'A' + 1;
+    return ans;
+}
+
+//173. Binary Search Tree Iterator
+//初解 runtime beats:43.72% memory beats:05.02%
+class BSTIterator {
+public:
+    BSTIterator(TreeNode* root) {
+        Root = root;
+        BST_DFS(Root);
+    }
+
+    /** @return the next smallest number */
+    int next() {
+        int b = *i_set.begin();
+        i_set.erase(i_set.begin());
+        return b;
+    }
+
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        if (i_set.empty())
+            return false;
+        else
+            return true;
+    }
+
+    void BST_DFS(TreeNode* node) {
+        if (!node)
+            return;
+
+        i_set.insert(node->val);
+        BST_DFS(node->left);
+        BST_DFS(node->right);
+    }
+private:
+    TreeNode* Root;
+    std::set<int> i_set;
+};
+
+//二解 runtime beats:96.80% memory beats:05.02%
+class BSTIterator_2 {
+public:
+    BSTIterator_2(TreeNode* root) {
+        Root = root;
+        BST_BFS(Root);
+    }
+
+    /** @return the next smallest number */
+    int next() {
+        int b = *i_set.begin();
+        i_set.erase(i_set.begin());
+        return b;
+    }
+
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        if (i_set.empty())
+            return false;
+        else
+            return true;
+    }
+
+    void BST_BFS(TreeNode* node) {
+        if (!node)
+            return;
+
+        std::queue<TreeNode*> wait;
+        wait.push(node);
+        while (!wait.empty()) {
+            i_set.insert(wait.front()->val);
+
+            if (wait.front()->left)
+                wait.push(wait.front()->left);
+
+            if (wait.front()->right)
+                wait.push(wait.front()->right);
+            wait.pop();
+        }
+    }
+
+private:
+    TreeNode* Root;
+    std::set<int> i_set;
+};
+
+//網解 runtime beats:91.31% memory beats:99.00%
+class BSTIterator_network {
+public:
+    //vector<TreeNode *> st;
+    TreeNode* head;
+    BSTIterator_network(TreeNode* root) {
+        head = root;
+    }
+
+    /** @return the next smallest number */
+    int next() {
+        int ans = 0;
+        while (head) {
+            if (!head->left) {
+                ans = head->val;
+                head = head->right;
+                break;
+            }
+            else {
+                TreeNode* prev = head->left;
+                while (prev->right && prev->right != head) {
+                    prev = prev->right;
+                }
+                if (!prev->right) {
+                    prev->right = head;
+                    head = head->left;
+                }
+                else {
+                    ans = head->val;
+                    prev->right = NULL;
+                    head = head->right;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        return head != NULL;
+    }
+};
+
+//179. Largest Number
+//初解 runtime beats:43.72% memory beats:05.02%
+std::string largestNumber(std::vector<int>& nums) {
+
 }
