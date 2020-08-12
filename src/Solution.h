@@ -940,7 +940,7 @@ std::vector<std::string> generateParenthesis_network(int n) {
 }
 
 //網解 runtime beats:87.16% memory beats:98.54%
-std::vector<std::string> generateParenthesis_network2(int n) {
+std::vector<std::string> generateParenthesis_network_2(int n) {
     std::string p = "";
     for (int i = 0; i < n; i++) p += '(';
     for (int i = 0; i < n; i++) p += ')';
@@ -4755,7 +4755,7 @@ ListNode* sortList_merge(ListNode* l1, ListNode* l2) {
     }
 }
 
-ListNode* sortList_network2(ListNode* head) {
+ListNode* sortList_network_2(ListNode* head) {
     if (!head || !head->next) return head;
     ListNode* slow = head, * fast = head, * pre = head;
     while (fast && fast->next) {
@@ -4767,7 +4767,7 @@ ListNode* sortList_network2(ListNode* head) {
         fast = fast->next->next;
     }
     pre->next = NULL;
-    return merge(sortList_network2(head), sortList_network2(slow));
+    return merge(sortList_network_2(head), sortList_network_2(slow));
 }
 
 //150. Evaluate Reverse Polish Notation
@@ -4854,7 +4854,7 @@ int maxProduct_network(std::vector<int>& nums) {
 }
 
 //網解 runtime beats:98.29% memory beats:46.85%
-int maxProduct_network2(std::vector<int>& nums) {
+int maxProduct_network_2(std::vector<int>& nums) {
     int r = nums[0];
     int maxi = r;
     int mini = r;
@@ -5031,7 +5031,7 @@ int majorityElement_network(std::vector<int>& nums) {
 int titleToNumber(std::string s) {
     long ans = 0;
     for (int i = 0; i < s.size(); i++)
-        ans = ans + (((int)s[i]) - 64) * pow(26, s.size() - 1 - i);        
+        ans = ans + pow(26, s.size() - 1 - i) * (s[i] - 64);
     return ans;
 }
 
@@ -5170,7 +5170,164 @@ public:
 };
 
 //179. Largest Number
-//初解 runtime beats:43.72% memory beats:05.02%
+//初解 runtime beats:05.28% memory beats:77.40%
 std::string largestNumber(std::vector<int>& nums) {
+    std::string ans;
 
+    int size = nums.size();
+    for (int i = 0; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if ((std::to_string(nums[j]) + std::to_string(nums[i])) > (std::to_string(nums[i]) + std::to_string(nums[j]))) {
+                int tmp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = tmp;
+            }
+        }
+    }
+
+    for (auto num : nums)
+        ans += std::to_string(num);
+
+    return ans[0] == '0' ? "0" : ans;
+}
+
+//網解 runtime beats:43.80% memory beats:80.71%
+std::string largestNumber_network(std::vector<int>& nums) {
+    std::string res;
+    sort(nums.begin(), nums.end(), [](int a, int b) {
+        return std::to_string(a) + std::to_string(b) > std::to_string(b) + std::to_string(a);
+        });
+    for (int i = 0; i < nums.size(); ++i) {
+        res += std::to_string(nums[i]);
+    }
+    return res[0] == '0' ? "0" : res;
+}
+
+//網解 runtime beats:99.05% memory beats:23.09%
+struct Comp {
+    bool operator () (const std::string& a, const std::string& b) {
+        int len = std::min(a.size(), b.size());
+        for (int i = 0; i < len; i++) {
+            if (a[i] != b[i]) {
+                return a[i] < b[i];
+            }
+        }
+        return a + b < b + a;
+    }
+};
+
+std::string largestNumber_network_2(std::vector<int>& nums) {
+    std::vector<std::string> strs;
+    for (int num : nums) {
+        strs.push_back(std::to_string(num));
+    }
+    sort(strs.begin(), strs.end(), Comp());
+    std::string res;
+    for (int i = strs.size() - 1; i >= 0; i--) {
+        res += strs[i];
+        if (res == "0") {
+            break;
+        }
+    }
+    return res;
+}
+
+//187. Repeated DNA Sequences
+//網解 runtime beats:81.32% memory beats:66.99%
+std::vector<std::string> findRepeatedDnaSequences_network(std::string s) {
+    std::unordered_set<std::string> res, st;
+    for (int i = 0; i + 9 < s.size(); ++i) {
+        std::string t = s.substr(i, 10);
+        if (st.count(t))
+            res.insert(t);
+        else
+            st.insert(t);
+    }
+    return std::vector<std::string>{res.begin(), res.end()};
+}
+
+//網解 runtime beats:81.32% memory beats:66.99%
+std::vector<std::string> findRepeatedDnaSequences_network_2(std::string s) {
+    //A:0100 0001 -> 001
+    //C:0100 0011 -> 011
+    //G:0100 0111 -> 111
+    //T:0101 0100 -> 100
+    //
+    std::unordered_set<std::string> res;
+    std::unordered_set<int> st;
+    int cur = 0;
+    for (int i = 0; i < 9; ++i)         //原本的cur先左移3bit在接上s[i]的後3bit
+        cur = cur << 3 | (s[i] & 7);    //先做前27bit
+
+    for (int i = 9; i < s.size(); ++i) {
+        cur = ((cur & 0x7ffffff) << 3) | (s[i] & 7);        //接上28-30bit，在st中尋找，若存在則存入res
+        if (st.count(cur)) res.insert(s.substr(i - 9, 10));
+        else st.insert(cur);
+    }
+    return std::vector<std::string>(res.begin(), res.end());
+}
+
+//189. Rotate Array
+//初解 runtime beats:08.09% memory beats:80.70%
+void rotate(std::vector<int>& nums, int k) {
+    k = k % nums.size();
+    if (k == 0)
+        return;
+
+    while (k--) {
+        nums.insert(nums.begin(), *(nums.end() - 1));
+        nums.pop_back();
+    }
+}
+
+//二解 runtime beats:88.58% memory beats:33.31%
+void rotate_2(std::vector<int>& nums, int k) {
+    k = k % nums.size();
+    if (k == 0)
+        return;
+
+    std::vector<int> tmp(nums.end() - k, nums.end());
+    nums.erase(nums.end() - k, nums.end());
+    nums.insert(nums.begin(), tmp.begin(), tmp.end());
+}
+
+//190. Reverse Bits
+//初解 runtime beats:69.68% memory beats:82.94%
+uint32_t reverseBits(uint32_t n) {
+    int count = 32;
+    uint32_t ans = 0;
+    while (count--) {
+        ans <<= 1;
+        ans += n & 1;
+        n >>= 1;
+    }
+    return ans;
+}
+
+//191. Number of 1 Bits
+//初解 runtime beats:100.00% memory beats:97.21%
+int hammingWeight(uint32_t n) {
+    unsigned char ans = 0;
+    while (n) {
+        ans += n & 1;
+        n >>= 1;
+    }
+    return ans;
+}
+
+//198. House Robber
+//初解 runtime beats:100.00% memory beats:95.05%
+int rob(std::vector<int>& nums) {
+    int size = nums.size();
+    if (size == 0)
+        return 0;
+    else if (size == 1)
+        return nums[0];
+    else if (size > 3)
+        nums[2] += nums[0];
+
+    for (int i = 3; i < size; i++)
+        nums[i] += std::max(nums[i - 2], nums[i - 3]);
+
+    return std::max(nums[size - 1], nums[size - 2]);
 }

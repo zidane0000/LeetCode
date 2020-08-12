@@ -194,7 +194,7 @@ int main()
     //22. Generate Parentheses
     //std::vector<std::string> r = generateParenthesis(6);
     //std::vector<std::string> r = generateParenthesis_network(6);
-    //std::vector<std::string> r = generateParenthesis_network2(3);
+    //std::vector<std::string> r = generateParenthesis_network_2(3);
 
     //23. Merge k Sorted Lists
     //std::vector<ListNode*> lists;
@@ -590,6 +590,21 @@ int main()
     //iterator.hasNext(); // return true
     //iterator.next();    // return 20
     //iterator.hasNext(); // return false
+
+    //179. Largest Number
+    //std::vector<int> nums{ 1,12,24,59,9 };
+    //std::string r = largestNumber(nums);
+
+    //187. Repeated DNA Sequences
+    //std::vector<std::string> r = findRepeatedDnaSequences_network("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT");
+
+    //189. Rotate Array
+    //std::vector<int> nums{ -1,2,3,4,5,6 };
+    //rotate(nums, 2);
+
+//190. Reverse Bits
+uint32_t r = reverseBits(2);
+
 
     return 0;
 }
