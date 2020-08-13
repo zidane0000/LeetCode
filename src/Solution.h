@@ -5331,3 +5331,173 @@ int rob(std::vector<int>& nums) {
 
     return std::max(nums[size - 1], nums[size - 2]);
 }
+
+//199. Binary Tree Right Side View
+//初解 runtime beats:80.47% memory beats:11.44%
+std::vector<int> rightSideView(TreeNode* root) {
+    if (!root)
+        return {};
+    std::vector<int> ans;
+    //BFS
+    std::queue<TreeNode*> q1, q2;
+    q1.push(root);
+    ans.push_back(root->val);
+
+    while (!q1.empty()) {
+        TreeNode* tmp = q1.front();
+        q1.pop();
+        if (tmp->right)
+            q2.push(tmp->right);
+
+        if (tmp->left)
+            q2.push(tmp->left);
+
+        if (q1.empty() && !q2.empty()) {
+            ans.push_back(q2.front()->val);
+            while (!q2.empty()) {
+                tmp = q2.front();
+                q2.pop();
+                q1.push(tmp);
+            }
+        }
+    }
+
+    return ans;
+}
+
+//二解 runtime beats:80.47% memory beats:51.17%
+void rightSideView_DFS(TreeNode* node, std::vector<int>& ans, int& level) {
+    if (ans.size() <= level) {
+        ans.push_back(node->val);
+    }
+
+    if (node->right) {
+        level += 1;
+        rightSideView_DFS(node->right, ans, level);
+        level -= 1;
+    }
+
+    if (node->left) {
+        level += 1;
+        rightSideView_DFS(node->left, ans, level);
+        level -= 1;
+    }
+}
+
+std::vector<int> rightSideView_2(TreeNode* root) {
+    if (!root)
+        return {};
+    std::vector<int> ans;
+    int level = 0;
+    rightSideView_DFS(root, ans, level);
+    return ans;
+}
+
+//200. Number of Islands
+//初解 runtime beats:89.97% memory beats:71.50%
+void numIslands_helper(std::vector<std::vector<char>>& grid, std::vector<std::vector<bool>>& DP, int i, int j) {
+    if (i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size())
+        return;
+
+    if (grid[i][j] == '0') {
+        DP[i][j] = false;
+        return;
+    }
+    else {
+        if (DP[i][j]) {
+            DP[i][j] = false;
+            numIslands_helper(grid, DP, i + 1, j);
+            numIslands_helper(grid, DP, i, j + 1);
+            numIslands_helper(grid, DP, i - 1, j);
+            numIslands_helper(grid, DP, i, j - 1);
+        }
+    }
+}
+
+int numIslands(std::vector<std::vector<char>>& grid) {
+    int ans = 0;
+    int h = grid.size();
+    if (h == 0)
+        return ans;
+    int w = grid[0].size();
+    std::vector<std::vector<bool>> DP(h, std::vector<bool>(w, true));
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            if (DP[i][j] && grid[i][j] == '1') {
+                ans++;
+                numIslands_helper(grid, DP, i, j);
+            }
+        }
+    }
+
+    return ans;
+}
+
+//201. Bitwise AND of Numbers Range
+//初解 runtime beats:05.04% memory beats:98.73%
+int rangeBitwiseAnd(long m, long n) {
+    if (m == 0)
+        return 0;
+    int ans = m;
+    while ((++m) <= n) {
+        ans &= m;
+        if (ans == 0)
+            return 0;
+    }
+
+    return ans;
+}
+
+//https://www.cnblogs.com/grandyang/p/4431646.html
+//網解 runtime beats:67.96% memory beats:61.70%
+int rangeBitwiseAnd_network(int m, int n) {
+    unsigned int d = INT_MAX;
+    while ((m & d) != (n & d))
+        d <<= 1;
+    return m & d;
+}
+
+//202. Happy Number
+//初解 runtime beats:63.86%  memory beats:33.09%
+bool isHappy(int n) {
+    std::set<int> exist;
+    exist.insert(n);
+    int tmp = 0;
+    while (n != 1 || tmp != 0) {
+        tmp += std::pow(n % 10, 2);
+        n /= 10;
+        if (n == 0 && tmp != 0) {
+            n = tmp;
+            if (!exist.count(n))
+                exist.insert(n);
+            else
+                return false;
+            tmp = 0;
+        }            
+    }
+
+    return true;
+}
+
+//網解 runtime beats:100.00%  memory beats:77.58%
+int isHappy_next(int n) {
+    int res = 0;
+    while (n > 0) {
+        int sum = n % 10;
+        res += (sum * sum);
+        n /= 10;
+    }
+    return res;
+}
+
+bool isHappy(int n) {
+    int slow = n, fast = n; //利用快慢指針，當快慢指針相同時，代表一定會陷入迴圈
+    while (true) {
+        slow = isHappy_next(slow);
+        fast = isHappy_next(fast);
+        fast = isHappy_next(fast);
+        if (slow == fast)break;
+    }
+    return slow == 1;
+}

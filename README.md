@@ -281,3 +281,43 @@ Record the Problem-solving process
 - 167. Two Sum II - Input array is sorted
 	- 初解 runtime beats:69.97% memory beats:06.00%
 	- 網解 runtime beats:96.92% memory beats:68.33%
+- 168. Excel Sheet Column Title
+	- 初解 runtime beats:100.00% memory beats:60.85%
+	- 網解 runtime beats:100.00% memory beats:92.12%
+- 169. Majority Element
+	- 初解 runtime beats:73.77% memory beats:27.05%
+	- 網解 runtime beats:97.66% memory beats:41.27%
+- 171. Excel Sheet Column Number
+	- 初解 runtime beats:100.00% memory beats:10.75%
+	- 網解 runtime beats:100.00% memory beats:67.40%
+- 173. Binary Search Tree Iterator
+	- 初解 runtime beats:43.72% memory beats:05.02%
+	- 二解 runtime beats:96.80% memory beats:05.02%
+	- 網解 runtime beats:91.31% memory beats:99.00%
+- 179. Largest Number
+	- 初解 runtime beats:05.28% memory beats:77.40%
+	- 網解 runtime beats:43.80% memory beats:80.71%
+	- 網解 runtime beats:99.05% memory beats:23.09%
+- 187. Repeated DNA Sequences
+	- 網解 runtime beats:81.32% memory beats:66.99%
+	- 網解 runtime beats:81.32% memory beats:66.99%
+- 189. Rotate Array
+	- 初解 runtime beats:08.09% memory beats:80.70%
+	- 二解 runtime beats:88.58% memory beats:33.31%
+- 190. Reverse Bits
+	- 初解 runtime beats:69.68% memory beats:82.94%
+- 191. Number of 1 Bits
+	- 初解 runtime beats:100.00% memory beats:97.21%
+- 198. House Robber
+	- 初解 runtime beats:100.00% memory beats:95.05%
+- 199. Binary Tree Right Side View
+	- 初解 runtime beats:80.47% memory beats:11.44%
+	- 二解 runtime beats:80.47% memory beats:51.17%
+- 200. Number of Islands
+	- 初解 runtime beats:89.97% memory beats:71.50%
+- 201. Bitwise AND of Numbers Range
+	- 初解 runtime beats:05.04% memory beats:98.73%
+	- 網解 runtime beats:67.96% memory beats:61.70% [參考網址](https://www.cnblogs.com/grandyang/p/4431646.html)
+- 202. Happy Number
+	- 初解 runtime beats:63.86%  memory beats:33.09%
+	- 網解 runtime beats:100.00%  memory beats:77.58%

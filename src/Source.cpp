@@ -602,8 +602,21 @@ int main()
     //std::vector<int> nums{ -1,2,3,4,5,6 };
     //rotate(nums, 2);
 
-//190. Reverse Bits
-uint32_t r = reverseBits(2);
+    //190. Reverse Bits
+    //uint32_t r = reverseBits(2);
+
+    //200. Number of Islands
+    //std::vector<std::vector<char>> grid{
+    //    {'1','1','0','0','1'},
+    //    {'1','1','0','0','1'},
+    //    {'0','1','0','0','1'},
+    //    {'0','1','0','0','1'},
+    //    {'1','1','0','0','1'}
+    //};
+    //int r = numIslands(grid);
+
+    //202. Happy Number
+    bool r = isHappy(20);
 
 
     return 0;
