@@ -5031,7 +5031,7 @@ int majorityElement_network(std::vector<int>& nums) {
 int titleToNumber(std::string s) {
     long ans = 0;
     for (int i = 0; i < s.size(); i++)
-        ans = ans + pow(26, s.size() - 1 - i) * (s[i] - 64);
+        ans = ans + pow(26, s.size() - 1 - i) * (s[i] - '@');
     return ans;
 }
 
@@ -5491,7 +5491,7 @@ int isHappy_next(int n) {
     return res;
 }
 
-bool isHappy(int n) {
+bool isHappy_network(int n) {
     int slow = n, fast = n; //利用快慢指針，當快慢指針相同時，代表一定會陷入迴圈
     while (true) {
         slow = isHappy_next(slow);
@@ -5500,4 +5500,443 @@ bool isHappy(int n) {
         if (slow == fast)break;
     }
     return slow == 1;
+}
+
+//203. Remove Linked List Elements
+//初解 runtime beats:91.80%  memory beats:59.93%
+ListNode* removeElements(ListNode* head, int val) {
+    while (head && head->val == val)
+        head = head->next;
+    if (!head)
+        return head;
+    ListNode* pre = head;
+    ListNode* cur = pre->next;
+    while (cur) {
+        if (cur->val == val) {
+            while (cur && cur->val == val)
+                cur = cur->next;
+            pre->next = cur;
+        }
+        else {
+            pre = pre->next;
+            cur = pre->next;
+        }
+    }
+    return head;
+}
+
+//204. Count Primes
+//https://www.cnblogs.com/grandyang/p/4462810.html
+//網解 runtime beats:91.80%  memory beats:59.93%
+int countPrimes_network(int n) {
+    //埃拉托斯特尼篩法
+    //https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+    int res = 0;
+    std::vector<bool> prime(n, true);
+    for (int i = 2; i < n; ++i) {
+        if (!prime[i])
+            continue;
+        ++res;
+        for (int j = 2; i * j < n; ++j)
+            prime[i * j] = false;
+    }
+    return res;
+}
+
+//205. Isomorphic Strings
+//https://www.cnblogs.com/grandyang/p/4465779.html
+//網解 runtime beats:99.46%  memory beats:70.87%
+bool isIsomorphic(std::string s, std::string t) {
+    //s跟t中的各字元存在1對1映射之關係
+    int m1[256] = { 0 }, m2[256] = { 0 }, n = s.size();
+    for (int i = 0; i < n; ++i) {
+        if (m1[s[i]] != m2[t[i]])   
+            return false;
+        //在m1,m2中要記錄出現的位置
+        //為了與初始值0做區隔，所以+1
+        m1[s[i]] = i + 1;
+        m2[t[i]] = i + 1;
+    }
+    return true;
+}
+
+//206. Reverse Linked List
+//初解 runtime beats:96.55%  memory beats:66.14%
+ListNode* reverseList(ListNode* head) {
+    ListNode* pre = NULL;
+    ListNode* cur = head;
+    while (cur) {
+        ListNode* next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = next;
+    }
+
+    return pre;
+}
+
+//207. Course Schedule
+//https://www.cnblogs.com/grandyang/p/4484571.html
+//網解 runtime beats:89.64%  memory beats:65.09%
+bool canFinish(int numCourses, std::vector<std::vector<int>>& prerequisites) {
+    //建立有向圖
+    std::vector<std::vector<int>> graph(numCourses, std::vector<int>());
+    std::vector<int> in(numCourses);    //紀錄indegree，in[1]代表說從1->x
+    for (auto a : prerequisites) {
+        graph[a[1]].push_back(a[0]);
+        ++in[a[0]];
+    }
+    std::queue<int> q;
+    for (int i = 0; i < numCourses; ++i)
+        if (in[i] == 0)     //代表說沒有前置條件即可修的課程
+            q.push(i);
+
+    while (!q.empty()) {
+        int t = q.front();
+        q.pop();
+        for (auto a : graph[t]) {           //在有向圖graoh中，t滿足a
+            --in[a];                        //所以--a，因為也許a的前置條件不只t
+            if (in[a] == 0) q.push(a);      //若a滿足則push至q
+        }
+    }
+
+    for (int i = 0; i < numCourses; ++i)
+        if (in[i] != 0) return false;
+
+    return true;
+}
+
+//208. Implement Trie (Prefix Tree)
+//初解 runtime beats:06.47%  memory beats:96.70%
+class Trie {
+public:
+    /** Initialize your data structure here. */
+    Trie() {
+        trie_set.clear();
+        trie_splt_set.clear();
+    }
+
+    /** Inserts a word into the trie. */
+    void insert(std::string word) {
+        trie_set.insert(word);
+
+        std::string c_m = "";
+        for (auto c : word) {
+            c_m += c;
+            trie_splt_set.insert(c_m);
+        }            
+    }
+
+    /** Returns if the word is in the trie. */
+    bool search(std::string word) {
+        return trie_set.count(word);
+    }
+
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    bool startsWith(std::string prefix) {
+        return trie_splt_set.count(prefix);
+    }
+
+private:
+    std::set<std::string> trie_set;
+    std::set<std::string> trie_splt_set;
+};
+
+//網解 runtime beats:99.09%  memory beats:51.04%
+class Trie_network {
+    struct Trienode {
+        char val;
+        int count;
+        int endsHere;
+        Trienode* child[26];
+    };
+    Trienode* root;
+
+    Trienode* getNode(int index) {
+        Trienode* newnode = new Trienode;
+        newnode->val = 'a' + index;
+        newnode->count = newnode->endsHere = 0;
+        for (int i = 0; i < 26; ++i)
+            newnode->child[i] = NULL;
+        return newnode;
+    }
+public:
+    /** Initialize your data structure here. */
+    Trie_network() {
+        std::ios_base::sync_with_stdio(false);
+        std::cin.tie(NULL);
+        root = getNode('/' - 'a');
+    }
+
+    /** Inserts a word into the trie. */
+    void insert(std::string word) {
+        Trienode* curr = root;
+        int index;
+        for (int i = 0; word[i] != '\0'; ++i) {
+            index = word[i] - 'a';
+            if (curr->child[index] == NULL)
+                curr->child[index] = getNode(index);
+            curr->child[index]->count += 1;
+            curr = curr->child[index];
+        }
+        curr->endsHere += 1;
+    }
+
+    /** Returns if the word is in the trie. */
+    bool search(std::string word) {
+        Trienode* curr = root;
+        int index;
+        for (int i = 0; word[i] != '\0'; ++i)
+        {
+            index = word[i] - 'a';
+            if (curr->child[index] == NULL)
+                return false;
+            curr = curr->child[index];
+        }
+        return (curr->endsHere > 0);
+    }
+
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    bool startsWith(std::string prefix) {
+        Trienode* curr = root;
+        int index;
+        for (int i = 0; prefix[i] != '\0'; ++i)
+        {
+            index = prefix[i] - 'a';
+            if (curr->child[index] == NULL)
+                return false;
+            curr = curr->child[index];
+        }
+        return (curr->count > 0);
+    }
+};
+
+//209. Minimum Size Subarray Sum
+//初解 runtime beats:05.02%  memory beats:66.44%
+int minSubArrayLen(int s, std::vector<int>& nums) {
+    int size = nums.size();
+    if (size == 0)
+        return 0;
+    int ans = INT_MAX;
+
+    for (int i = 0; i < size; i++) {
+        if (nums[i] >= s)
+            return 1;
+        
+        for (int j = i + 1; j < size; j++) {
+            nums[i] += nums[j];
+            if (nums[i] >= s) {
+                ans = std::min(ans, j - i + 1);
+                j = size;
+            }
+        }
+    }
+
+    if (ans == INT_MAX)
+        return 0;
+    else
+        return ans;
+}
+
+//https://www.cnblogs.com/grandyang/p/4501934.html
+//網解 runtime beats:84.79%  memory beats:63.96%
+int minSubArrayLen_network(int s, std::vector<int>& nums) {
+    if (nums.empty()) return 0;
+    int left = 0, right = 0, sum = 0, len = nums.size(), res = len + 1;
+    while (right < len) {
+        while (sum < s && right < len) {
+            sum += nums[right++];
+        }
+        while (sum >= s) {
+            res = std::min(res, right - left);
+            sum -= nums[left++];
+        }
+    }
+    return res == len + 1 ? 0 : res;
+}
+
+//210. Course Schedule II
+//初解 runtime beats:91.10%  memory beats:54.85%
+std::vector<int> findOrder(int numCourses, std::vector<std::vector<int>>& prerequisites) {
+    std::vector<int> ans;
+    //BFS
+    //建立有向圖
+    std::vector<std::vector<int>> graph(numCourses, std::vector<int>());
+    std::vector<int> in(numCourses);    //紀錄indegree，in[1]代表說從1->x
+    for (auto a : prerequisites) {
+        graph[a[1]].push_back(a[0]);
+        ++in[a[0]];
+    }
+
+    std::queue<int> q;
+    for (int i = 0; i < numCourses; ++i)
+        if (in[i] == 0)     //代表說沒有前置條件即可修的課程
+            q.push(i);
+
+    while (!q.empty()) {
+        int t = q.front();
+        q.pop();
+        ans.push_back(t);                   //修t課程
+        for (auto a : graph[t]) {           //在有向圖graoh中，t滿足a
+            --in[a];                        //所以--a，因為也許a的前置條件不只t
+            if (in[a] == 0) q.push(a);      //若a滿足則push至q
+        }
+    }
+
+    if (ans.size() == numCourses)           //若修行課程數量與課程數量一致代表課程已全數修讀
+        return ans;
+    else
+        return {};
+}
+
+//211. Design Add and Search Words Data Structure
+//初解 runtime beats:99.80%  memory beats:77.46%
+class WordDictionary {
+
+private:
+    struct Trienode {
+        char val;
+        int count;
+        int endsHere;
+        Trienode* child[26];
+    };
+    Trienode* root = NULL;
+
+    Trienode* getNode(int index) {
+        Trienode* newnode = new Trienode;
+        newnode->val = 'a' + index;
+        newnode->count = newnode->endsHere = 0;
+        for (int i = 0; i < 26; ++i)
+            newnode->child[i] = NULL;
+        return newnode;
+    }
+
+    bool search_DFS(Trienode* curr, std::string& word, int i) {
+        if (i == word.size())
+            return (curr->endsHere > 0);
+        int index = 0;
+        if (word[i] == '.') {
+            for (index = 0; index < 26; index++) {
+                if (curr->child[index] != NULL)
+                    if (search_DFS(curr->child[index], word, i + 1))
+                        return true;
+            }
+            return false;
+        }
+
+        index = word[i] - 'a';
+        if (curr->child[index] == NULL)
+            return false;
+        return search_DFS(curr->child[index], word, i + 1);
+    }
+
+public:
+    /** Initialize your data structure here. */
+    WordDictionary() {
+        std::ios_base::sync_with_stdio(false);
+        std::cin.tie(NULL);
+        root = getNode('/' - 'a');
+    }
+
+    /** Adds a word into the data structure. */
+    void addWord(std::string word) {
+        Trienode* curr = root;
+        int index;
+        for (int i = 0; word[i] != '\0'; ++i) {
+            index = word[i] - 'a';
+            if (curr->child[index] == NULL)
+                curr->child[index] = getNode(index);
+            curr->child[index]->count += 1;
+            curr = curr->child[index];
+        }
+        curr->endsHere += 1;
+    }
+
+    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
+    bool search(std::string word) {
+        Trienode* curr = root;
+        return search_DFS(root, word, 0);
+    }
+};
+
+//212. Word Search II
+//初解 runtime beats:05.00%  memory beats:99.23%
+std::vector<std::string> findWords(std::vector<std::vector<char>>& board, std::vector<std::string>& words) {
+    std::vector<std::string> ans;
+
+    for (int i = 0; i < board.size(); i++)
+        for (int j = 0; j < board[0].size(); j++)
+            for (int p = 0; p < words.size(); p++) {
+                if (exist(board, i, j, words[p], 0)) {
+                    ans.push_back(words[p]);
+                    words.erase(words.begin() + p);
+                    p--;
+                }
+            }
+    return ans;
+}
+
+//網解 runtime beats:99.37%  memory beats:79.11%
+class findWords_netword_Solution {
+public:
+    std::vector<std::string> findWords_network(std::vector<std::vector<char>>& board, std::vector<std::string>& words) {
+        std::vector<std::string> res;
+        if (board.empty() || board[0].empty() || words.empty()) return res;
+        auto root = buildTrie(words);
+        for (int i = 0; i < board.size(); ++i) {
+            for (int j = 0; j < board[0].size(); ++j) {
+                dfs(board, words, res, root, i, j);
+            }
+        }
+        return res;
+    }
+
+private:
+    struct TrieNode {
+        TrieNode* next[26] = { nullptr };
+        int wordIdx;
+
+        TrieNode() {
+            for (auto& n : next) n = nullptr;
+            wordIdx = -1;
+        }
+    };
+
+    TrieNode* buildTrie(std::vector<std::string>& words) {
+        auto root = new TrieNode();
+        for (int i = 0; i < words.size(); ++i) {
+            TrieNode* node = root;
+            for (char c : words[i]) {
+                c -= 'a';
+                if (!node->next[c]) node->next[c] = new TrieNode();
+                node = node->next[c];
+            }
+            node->wordIdx = i;
+        }
+        return root;
+    }
+
+    void dfs(std::vector<std::vector<char>>& board, std::vector<std::string>& words, std::vector<std::string>& res, TrieNode* node, int i, int j) {
+        char c = board[i][j];
+        if (c == '#' || !node->next[c - 'a']) return;
+        node = node->next[c - 'a'];
+        if (node->wordIdx != -1) {
+            res.push_back(words[node->wordIdx]);
+            node->wordIdx = -1;
+        }
+
+        board[i][j] = '#';
+        if (i > 0) dfs(board, words, res, node, i - 1, j);
+        if (i < board.size() - 1) dfs(board, words, res, node, i + 1, j);
+        if (j > 0) dfs(board, words, res, node, i, j - 1);
+        if (j < board[0].size() - 1) dfs(board, words, res, node, i, j + 1);
+        board[i][j] = c;
+    }
+};
+
+//215. Kth Largest Element in an Array
+//初解 runtime beats:68.83%  memory beats:99.06%
+int findKthLargest(std::vector<int>& nums, int k) {
+    sort(nums.begin(), nums.end());
+    return nums[nums.size() - k];
 }

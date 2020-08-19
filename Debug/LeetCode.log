@@ -78,6 +78,11 @@ E:\Dave\VS2019\LeetCode\src\Solution.h(5370,20): warning C4018: '<=': signed/uns
 E:\Dave\VS2019\LeetCode\src\Solution.h(5399,29): warning C4018: '>=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(5399,49): warning C4018: '>=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(5468,35): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+E:\Dave\VS2019\LeetCode\src\Solution.h(5867,20): warning C4018: '>=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(5867,50): warning C4018: '>=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(5882,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(5883,27): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(5884,31): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(56,28): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(63,19): warning C4018: '>=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(82,28): warning C4018: '<': signed/unsigned mismatch

@@ -616,7 +616,41 @@ int main()
     //int r = numIslands(grid);
 
     //202. Happy Number
-    bool r = isHappy(20);
+    //bool r = isHappy(20);
+
+    //203. Remove Linked List Elements
+    //ListNode* r = removeElements(toList({ 1,2,3,6,6,4,5,6 }), 6);
+
+    //205. Isomorphic Strings
+    //bool r = isIsomorphic("a", "b");
+
+    //207. Course Schedule
+    //std::vector<std::vector<int>> prerequisites{ {0,2},{1,2},{2,0} };
+    //bool r = canFinish(3, prerequisites);
+
+    //209. Minimum Size Subarray Sum
+    //std::vector<int> nums{ 2,3,1,2,4,3 };
+    //int r = minSubArrayLen( 7, nums);
+
+    //211. Design Add and Search Words Data Structure
+    //WordDictionary wordDictionary = WordDictionary();
+    //wordDictionary.addWord("bad");
+    //wordDictionary.addWord("dad");
+    //wordDictionary.addWord("mad");
+    //wordDictionary.search("pad"); // return False
+    //wordDictionary.search("bad"); // return True
+    //wordDictionary.search(".ad"); // return True
+    //wordDictionary.search("c.."); // return True
+
+    //212. Word Search II
+    //std::vector<std::vector<char>> board{
+    //    {'o','a','a','n'},
+    //    {'e','t','a','e'},
+    //    {'i','h','k','r'},
+    //    {'i','f','l','v'}
+    //};
+    //std::vector<std::string> words{ "oath","pea","eat","rain" };
+    //std::vector<std::string> r = findWords(board, words);
 
 
     return 0;
