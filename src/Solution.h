@@ -2216,9 +2216,7 @@ std::string getPermutation_network(int n, int k)
 //62. Unique Paths
 //初解 runtime beats:18.41% memory beats:97.66%
 int uniquePaths(int m, int n) {
-    if (m == 1)
-        return 1;
-    else if (n == 1)
+    if (m == 1 || n == 1)
         return 1;
     else if (n == 2)    //從n == 2之後皆是為了加速計算速度而找出的規律
         return m;
@@ -2231,6 +2229,67 @@ int uniquePaths(int m, int n) {
         return tmp;
     }
     return uniquePaths(m, n - 1) + uniquePaths(m - 1, n);
+}
+
+//https://www.cnblogs.com/grandyang/p/4353555.html
+//網解 runtime beats:100.00% memory beats:75.88%
+int uniquePaths_netwrok(int m, int n) {
+    std::vector<int> dp(n, 1);
+    for (int i = 1; i < m; ++i) {
+        for (int j = 1; j < n; ++j) {
+            dp[j] += dp[j - 1];
+        }
+    }
+    return dp[n - 1];
+}
+
+//網解 runtime beats:100.00% memory beats:99.40%
+int uniquePaths_netwrok_2(int m, int n) {
+    double num = 1, denom = 1;
+    double tmp;
+    int small = m > n ? n : m;
+    for (int i = 1; i <= small - 1; ++i) {
+        tmp = m;
+        tmp += n;
+        tmp = tmp - 1 - i;
+        num = num * tmp;
+        denom *= i;
+    }
+    return (int)(num / denom);
+}
+
+//63. Unique Paths II
+//https://www.cnblogs.com/grandyang/p/4353680.html
+//網解 runtime beats:97.01% memory beats:34.45%
+int uniquePathsWithObstacles_network(std::vector<std::vector<int>>& obstacleGrid) {
+    if (obstacleGrid.empty() || obstacleGrid[0].empty() || obstacleGrid[0][0] == 1)
+        return 0;
+    int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+    //+1是為了處理邊緣是障礙物的情況
+    std::vector<std::vector<long>> dp(m + 1, std::vector<long>(n + 1, 0));
+    dp[0][1] = 1;
+    for (int i = 1; i <= m; ++i) {
+        for (int j = 1; j <= n; ++j) {
+            if (obstacleGrid[i - 1][j - 1] != 0) continue;
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+        }
+    }
+    return dp[m][n];
+}
+
+//網解 runtime beats:43.85% memory beats:78.91%
+int uniquePathsWithObstacles_network_2(std::vector<std::vector<int>>& obstacleGrid) {
+    if (obstacleGrid.empty() || obstacleGrid[0].empty() || obstacleGrid[0][0] == 1) return 0;
+    int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+    std::vector<long> dp(n, 0);
+    dp[0] = 1;
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (obstacleGrid[i][j] == 1) dp[j] = 0;
+            else if (j > 0) dp[j] += dp[j - 1];
+        }
+    }
+    return dp[n - 1];
 }
 
 //64. Minimum Path Sum
@@ -2765,6 +2824,11 @@ int largestRectangleArea_network_2(std::vector<int>& heights) {
     }
     return res;
 }
+
+//85. Maximal Rectangle
+//int maximalRectangle(std::vector<std::vector<char>>& matrix) {
+//
+//}
 
 //86. Partition List
 //初解 runtime beats:100.00% memory beats:61.95%
@@ -4405,6 +4469,104 @@ bool wordBreak_network(std::string s, std::vector<std::string>& wordDict) {
     return dp[s.size()];
 }
 
+//140. Word Break II
+//https://www.cnblogs.com/grandyang/p/4576240.html
+//網解 runtime beats:49.42% memory beats:70.49%
+std::vector<std::string> wordBreak2_helper(std::string s, std::vector<std::string>& wordDict, std::unordered_map<std::string, std::vector<std::string>>& m) {
+    if (m.count(s)) 
+        return m[s];
+    if (s.empty()) return { "" };
+    std::vector<std::string> res;
+    for (std::string word : wordDict) {
+        if (s.substr(0, word.size()) != word) continue;
+        std::vector<std::string> rem = wordBreak2_helper(s.substr(word.size()), wordDict, m);
+        for (std::string str : rem) {
+            res.push_back(word + (str.empty() ? "" : " ") + str);
+        }
+    }
+    return m[s] = res;
+}
+
+std::vector<std::string> wordBreak2(std::string s, std::vector<std::string>& wordDict) {
+    if (wordDict.empty() || s == "")
+        return {};
+
+    std::unordered_map<std::string, std::vector<std::string>> m;
+    return wordBreak2_helper(s, wordDict, m);
+}
+
+//網解 runtime beats:92.62% memory beats:100.00%
+// check for invalid characters in s that are not in dict
+bool validateWords(std::string& s, std::vector<std::string>& wordDict) {
+    std::unordered_set<char> cs;
+    for (std::string& word : wordDict)
+        for (char c : word)
+            cs.insert(c);
+
+    for (char c : s)
+        if (cs.find(c) == cs.end())
+            return false;
+
+    return true;
+}
+
+std::vector<std::string> wordBreak2_network(std::string s, std::vector<std::string>& wordDict) {
+    if (!validateWords(s, wordDict))
+        return {};
+
+    std::vector<std::string> res;
+    std::vector<int> pos;
+
+    const int n = s.size();
+
+    for (std::string& word : wordDict) {
+        const int wn = word.size();
+        if (s.compare(0, wn, word) == 0) {
+            res.push_back(word);
+            pos.push_back(wn);
+        }
+    }
+
+    for (;;) {
+        const int m = res.size();
+        int up{};
+        for (int i{}; i < m; ++i) {
+            if (pos[i] < n) {
+                std::string curr = res[i];
+                int loc = pos[i];
+                int j{};
+                for (std::string& word : wordDict) {
+                    int wn = word.size();
+                    if (s.compare(loc, wn, word) == 0) {
+                        if (j) {
+                            res.push_back(curr + " " + word);
+                            pos.push_back(loc + wn);
+                        }
+                        else {
+                            res[i] += " " + word;
+                            pos[i] += wn;
+                        }
+                        ++j;
+                    }
+                }
+                up += j;
+            }
+        }
+        if (up == 0) { break; }
+    }
+
+    for (int i{}; i < pos.size();) {
+        if (pos[i] < n) {
+            res.erase(res.begin() + i);
+            pos.erase(pos.begin() + i);
+        }
+        else {
+            ++i;
+        }
+    }
+    return res;
+}
+
 //141. Linked List Cycle
 //初解 runtime beats:21.57% memory beats:07.88%
 bool hasCycle(ListNode* head) {
@@ -4576,7 +4738,7 @@ public:
 
     LRUCache_network(int capacity) {
         sz = capacity;
-        std::ios_base::sync_with_stdio(false);
+        std::ios_base::sync_with_stdio(false);        //取消同步
         std::cin.tie(NULL);
     }
 
@@ -5021,17 +5183,20 @@ int majorityElement_network(std::vector<int>& nums) {
                 count = 1;
             }
         }
-
     }
     return maj_elem;
 }
 
 //171. Excel Sheet Column Number
-//初解 runtime beats:100.00% memory beats:10.75%
+//初解 runtime beats:100.00% memory beats:28.89%
 int titleToNumber(std::string s) {
     long ans = 0;
-    for (int i = 0; i < s.size(); i++)
-        ans = ans + pow(26, s.size() - 1 - i) * (s[i] - '@');
+    long tmp;
+    for (int i = 0; i < s.size(); i++) {
+        tmp = s[i] - 64;
+        ans = ans + pow(26, s.size() - 1 - i) * tmp;
+    }
+        
     return ans;
 }
 
@@ -5934,9 +6099,354 @@ private:
     }
 };
 
+//213.213. House Robber II
+//https://www.cnblogs.com/grandyang/p/4518674.html
+//網解 runtime beats:52.12%  memory beats:11.18%
+int rob2_helper(std::vector<int>& nums, int left, int right) {
+    if (right - left <= 1)
+        return nums[left];
+    std::vector<int> dp(right, 0);
+    dp[left] = nums[left];
+    dp[left + 1] = std::max(nums[left], nums[left + 1]);
+    for (int i = left + 2; i < right; ++i)
+        dp[i] = std::max(nums[i] + dp[i - 2], dp[i - 1]);
+
+    return dp.back();
+}
+
+int rob2_network(std::vector<int>& nums) {
+    if (nums.size() <= 1)
+        return nums.empty() ? 0 : nums[0];
+
+    return std::max(rob2_helper(nums, 0, nums.size() - 1), rob2_helper(nums, 1, nums.size()));
+}
+
 //215. Kth Largest Element in an Array
 //初解 runtime beats:68.83%  memory beats:99.06%
 int findKthLargest(std::vector<int>& nums, int k) {
     sort(nums.begin(), nums.end());
     return nums[nums.size() - k];
+}
+
+//216. Combination Sum III
+//初解 runtime beats:100.00%  memory beats:97.35%
+void combinationSum3_helper(std::vector<std::vector<int>>& ans, std::vector<int>& sub_ans, int& sum, int start, int& k, int& n) {
+    if (sub_ans.size() == k && sum == n) {
+        ans.push_back(sub_ans);
+        return;
+    }
+
+    for (int i = start; i < 10; i++) {
+        sub_ans.push_back(i);
+        sum += i;
+        combinationSum3_helper(ans, sub_ans, sum, i + 1, k, n);
+        sum -= i;
+        sub_ans.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> combinationSum3(int k, int n) {
+    std::vector<std::vector<int>> ans;
+    std::vector<int> sub_ans;
+    int sum = 0;
+    combinationSum3_helper(ans, sub_ans, sum, 1, k, n);
+    return ans;
+}
+
+//217. Contains Duplicate
+//初解 runtime beats:19.48%  memory beats:93.68%
+bool containsDuplicate(std::vector<int>& nums) {
+    if (nums.size() < 2)
+        return false;
+    sort(nums.begin(), nums.end());
+
+    for (int i = 0; i < nums.size() - 1; i++)
+        if (nums[i] == nums[i + 1])
+            return true;
+
+    return false;
+}
+
+//二解 runtime beats:74.18%  memory beats:60.41%
+bool containsDuplicate_2(std::vector<int>& nums) {
+    if (nums.size() < 2)
+        return false;
+    
+    std::unordered_set<int> once;
+    for (auto num : nums)
+        if (once.count(num) != 0)
+            return true;
+        else
+            once.insert(num);
+
+    return false;
+}
+
+//221. Maximal Square
+//網解 runtime beats:96.40%  memory beats:94.70%
+int maximalSquare(std::vector<std::vector<char>>& matrix) {
+    int result = 0;
+    for (int i = 1; i < matrix.size(); i++)
+        for (int j = 1; j < matrix[0].size(); j++)
+            //邏輯：m[i][j]是'1'且左上，上，左皆非'0'，即形成一正方形
+            if (matrix[i][j] == '1' && matrix[i - 1][j - 1] > '0' && matrix[i][j - 1] > '0' && matrix[i - 1][j] > '0') {
+                int mini = std::min(std::min(matrix[i - 1][j - 1], matrix[i][j - 1]), matrix[i - 1][j]);
+                matrix[i][j] = mini + 1;
+            }
+
+    for (int i = 0; i < matrix.size(); i++)
+        for (int j = 0; j < matrix[0].size(); j++)
+            result = std::max((matrix[i][j] - '0') * (matrix[i][j] - '0'), result);
+
+    return result;
+}
+
+//222. Count Complete Tree Nodes
+//初解 runtime beats:21.84%  memory beats:06.75%
+int countNodes(TreeNode* root) {
+    if (!root)
+        return 0;
+    std::queue<TreeNode*> wait;
+    wait.push(root);
+    int ans = 0;
+    while (!wait.empty()) {
+        ans++;
+        root = wait.front();
+        wait.pop();
+        if (root->left)
+            wait.push(root->left);
+        if (root->right)
+            wait.push(root->right);
+    }
+    return ans;
+}
+
+//二解 runtime beats:41.45%  memory beats:65.02%
+void countNodes_DFS(TreeNode* node, int& ans) {
+    if (!node)
+        return;
+    ans++;
+    countNodes_DFS(node->left, ans);
+    countNodes_DFS(node->right, ans);
+}
+
+int countNodes_2(TreeNode* root) {
+    int ans = 0;
+    countNodes_DFS(root, ans);
+    return ans;
+}
+
+//226. Invert Binary Tree
+//初解 runtime beats:100.00%  memory beats:81.89%
+void invertTree_DFS(TreeNode* node) {
+    if (!node)
+        return;
+
+    TreeNode* tmp = node->left;
+    node->left = node->right;
+    node->right = tmp;
+    invertTree_DFS(node->left);
+    invertTree_DFS(node->right);
+}
+
+TreeNode* invertTree(TreeNode* root) {
+    invertTree_DFS(root);
+    return root;
+}
+
+//229. Majority Element II
+//初解 runtime beats:35.40%  memory beats:38.24%
+std::vector<int> majorityElement2(std::vector<int>& nums) {
+    std::set<int> ans;
+    std::unordered_map<int, int> exist;
+    int a = nums.size() / 3;
+    for (auto num : nums) {
+        exist[num]++;
+        if (exist[num] > a)
+            ans.insert(num);
+    }
+
+    return { ans.begin(), ans.end() };
+}
+
+//https://www.cnblogs.com/grandyang/p/4606822.html
+//網解 runtime beats:35.61%  memory beats:36.90%
+std::vector<int> majorityElement2_network(std::vector<int>& nums) {
+    std::vector<int> res;
+    int a = 0, b = 0, cnt1 = 0, cnt2 = 0, n = nums.size();
+    for (int num : nums) {
+        if (num == a) ++cnt1;
+        else if (num == b) ++cnt2;
+        else if (cnt1 == 0) { a = num; cnt1 = 1; }
+        else if (cnt2 == 0) { b = num; cnt2 = 1; }
+        else { --cnt1; --cnt2; }
+    }
+    cnt1 = cnt2 = 0;
+    for (int num : nums) {
+        if (num == a) ++cnt1;
+        else if (num == b) ++cnt2;
+    }
+    if (cnt1 > n / 3) res.push_back(a);
+    if (cnt2 > n / 3) res.push_back(b);
+    return res;
+}
+
+//230. Kth Smallest Element in a BST
+//初解 runtime beats:76.14%  memory beats:80.97%
+void kthSmallest_helper(TreeNode* node, int& k, int& ans) {
+    if (!node || k == 0)
+        return;
+
+    kthSmallest_helper(node->left, k, ans);
+    k--;
+    if (k == 0)
+        ans = node->val;
+    kthSmallest_helper(node->right, k, ans);
+}
+
+int kthSmallest(TreeNode* root, int k) {
+    int ans = root->val;
+    kthSmallest_helper(root, k, ans);
+    return ans;
+}
+
+//231. Power of Two
+//初解 runtime beats:100.00%  memory beats:68.20%
+bool isPowerOfTwo(int n) {
+    if (n == 1)
+        return true;
+    long a = 2;
+
+    while (a < n)
+        a *= 2;
+
+    if (a == n)
+        return true;
+    else
+        return false;
+}
+
+//二解 runtime beats:100.00%  memory beats:20.26%
+bool isPowerOfTwo_2(int n) {
+    if (n == 0)
+        return false;
+    else if (n == 1 || n == 2)
+        return true;
+
+    if (n % 2 == 0)
+        return isPowerOfTwo(n / 2);
+    else
+        return false;
+}
+
+//234. Palindrome Linked List
+//初解 runtime beats:42.50%   memory beats:14.12%
+bool isPalindrome(ListNode* head) {
+    std::vector<ListNode*> list;
+    while (head) {
+        list.push_back(head);
+        head = head->next;
+    }
+
+    for (int i = 0; i < (list.size() / 2); i++) {
+        if (list[i]->val != list[list.size() - 1 - i]->val)
+            return false;
+    }
+    return true;
+}
+
+//網解 runtime beats:88.70%  memory beats:94.21%
+bool isPalindrome(ListNode* head) {
+    std::ios::sync_with_stdio(false); 
+    std::cin.tie(nullptr);
+    int count = 0;
+    if (!head || !head->next)
+        return true;
+    ListNode* r1 = head, * r2 = head->next;
+    while (r1 && r2) {
+        r1 = r1->next;
+        r2 = r2->next;
+        if (r2)
+            r2 = r2->next;
+        count++;
+    }
+    ListNode* halfRev = reverseList(r1);
+    r1 = head;
+    for (int i = 0; i < count; i++) {
+        if (halfRev->val ^ r1->val)
+            return false;
+        halfRev = halfRev->next;
+        r1 = r1->next;
+    }
+    return true;
+}
+
+//https://www.cnblogs.com/grandyang/p/4635425.html
+//網解 runtime beats:68.16%   memory beats:48.67%
+bool isPalindrome_network_2(ListNode* head) {
+    if (!head || !head->next) 
+        return true;
+    //利用快慢指針找到一半
+    ListNode* slow = head, * fast = head;
+    while (fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    ListNode* last = slow->next, * pre = head;
+
+    while (last->next) {
+        ListNode* tmp = last->next;
+        last->next = tmp->next;
+        tmp->next = slow->next;
+        slow->next = tmp;
+    }
+
+    while (slow->next) {
+        slow = slow->next;
+        if (pre->val != slow->val) return false;
+        pre = pre->next;
+    }
+    return true;
+}
+
+//235. Lowest Common Ancestor of a Binary Search Tree
+//初解 runtime beats:94.34%   memory beats:05.11%
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (p->val > q->val)
+        return lowestCommonAncestor(root, q, p);
+
+    if (root->val < p->val)
+        return lowestCommonAncestor(root->right, p, q);
+    else if (root->val > q->val)
+        return lowestCommonAncestor(root->left, p, q);
+    
+    return root;
+}
+
+//236. Lowest Common Ancestor of a Binary Tree
+//https://www.cnblogs.com/grandyang/p/4641968.html.
+//網解 runtime beats:43.40%   memory beats:26.75%
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (!root || p == root || q == root)
+        return root;
+
+    TreeNode* left = lowestCommonAncestor(root->left, p, q);
+    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+    if (left && right) 
+        return root;
+    return left ? left : right;
+}
+
+//網解 runtime beats:89.35%   memory beats:78.78%
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (!root || p == root || q == root)
+        return root;
+    TreeNode* left = lowestCommonAncestor(root->left, p, q);
+    if (left && left != p && left != q)
+        return left;
+    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+    if (left && right)
+        return root;
+
+    return left ? left : right;
 }

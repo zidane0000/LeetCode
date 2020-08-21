@@ -1,5 +1,7 @@
 #include "Solution.h"
 
+#define null NULL
+
 ListNode* toList(std::vector<int> vec) {
     ListNode* a = nullptr;
     ListNode* cur = nullptr;
@@ -534,6 +536,12 @@ int main()
     //std::vector<std::string> wordDict{ "a","abc","b","cd" };
     //bool r = wordBreak_network("abcd", wordDict);
 
+    //140. Word Break II
+    //std::vector<std::string> wordDict{ "cat", "cats", "and", "sand", "dog" };
+    //std::vector<std::string> r = wordBreak2("catsanddog", wordDict);
+    //std::vector<std::string> wordDict{ "apple", "pen", "applepen", "pine", "pineapple" };
+    //std::vector<std::string> r = wordBreak2("pineapplepenapple", wordDict);
+
     //141. Linked List Cycle
     //bool r = hasCycle_network(toList({ 1,2,4 }, 1));
 
@@ -652,6 +660,19 @@ int main()
     //std::vector<std::string> words{ "oath","pea","eat","rain" };
     //std::vector<std::string> r = findWords(board, words);
 
+    //216. Combination Sum III
+    //std::vector<std::vector<int>> r = combinationSum3(4, 30);
+
+    //221. Maximal Square
+    //std::vector<std::vector<char>> matrix{
+    //    {'1','1','1','0','1','1','1','1'},
+    //    {'1','1','1','0','1','1','1','1'},
+    //    {'1','1','1','0','1','1','1','1'}
+    //};
+    //int r = maximalSquare(matrix);
+
+    //230. Kth Smallest Element in a BST
+    int r = kthSmallest(toTree({ 5,3,6,2,4,null,null,1 }), 2);
 
     return 0;
 }
