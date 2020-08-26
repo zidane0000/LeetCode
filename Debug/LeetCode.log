@@ -92,12 +92,17 @@ E:\Dave\VS2019\LeetCode\src\Solution.h(6189,23): warning C4018: '<': signed/unsi
 E:\Dave\VS2019\LeetCode\src\Solution.h(6190,27): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(6197,23): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Solution.h(6198,27): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(6351,23): warning C4018: '<': signed/unsigned mismatch
-E:\Dave\VS2019\LeetCode\src\Solution.h(6359,35): error C2084: function 'bool isPalindrome(ListNode *)' already has a body
-E:\Dave\VS2019\LeetCode\src\Solution.h(6344): message : see previous definition of 'isPalindrome'
-E:\Dave\VS2019\LeetCode\src\Solution.h(6428,74): error C2084: function 'TreeNode *lowestCommonAncestor(TreeNode *,TreeNode *,TreeNode *)' already has a body
-E:\Dave\VS2019\LeetCode\src\Solution.h(6414): message : see previous definition of 'lowestCommonAncestor'
+E:\Dave\VS2019\LeetCode\src\Solution.h(6258,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6456,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6611,19): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6625,41): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6666,23): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6690,31): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6711,24): warning C4018: '<': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6718,20): warning C4018: '>=': signed/unsigned mismatch
+E:\Dave\VS2019\LeetCode\src\Solution.h(6788,23): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(58,28): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(65,19): warning C4018: '>=': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(84,28): warning C4018: '<': signed/unsigned mismatch
 E:\Dave\VS2019\LeetCode\src\Source.cpp(91,19): warning C4018: '>=': signed/unsigned mismatch
+  LeetCode.vcxproj -> E:\Dave\VS2019\LeetCode\Debug\LeetCode.exe

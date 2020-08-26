@@ -192,7 +192,7 @@ int main()
     //ListNode* r = mergeTwoLists_2(toList({ 1,2,4 }), toList({ 1,3,4 }));
     //ListNode* r = mergeTwoLists_2(toList({ 5 }), toList({ 1,3,4 }));
     //ListNode* r = mergeTwoLists_2(toList({ 1 }), toList({ 2 }));
-    
+
     //22. Generate Parentheses
     //std::vector<std::string> r = generateParenthesis(6);
     //std::vector<std::string> r = generateParenthesis_network(6);
@@ -586,7 +586,7 @@ int main()
     //r = titleToNumber("AA");
     //r = titleToNumber("FXSHRXW");
     //r = titleToNumber("FXSHRXA");
-    
+
     //173. Binary Search Tree Iterator
     //BSTIterator iterator = BSTIterator(toTree({ 3, 7, 15, NULL, NULL, 9, 20 }));
     //iterator.next();    // return 3
@@ -671,8 +671,53 @@ int main()
     //};
     //int r = maximalSquare(matrix);
 
+    //227. Basic Calculator II
+    //int r = calculate("0-2147483647");
+    //int r = calculate(" 3/2 ");
+    //int r = calculate("1-1+1");
+
     //230. Kth Smallest Element in a BST
-    int r = kthSmallest(toTree({ 5,3,6,2,4,null,null,1 }), 2);
+    //int r = kthSmallest(toTree({ 5,3,6,2,4,null,null,1 }), 2);
+
+    //238. Product of Array Except Self
+    //std::vector<int> nums = { 4,5,1,8,2 };
+    //std::vector<int> r = productExceptSelf(nums);
+
+    //239. Sliding Window Maximum
+    //std::vector<int> nums{ 3,4,5,6,7 };
+    //std::vector<int> r = maxSlidingWindow(nums, 1);
+
+    //240. Search a 2D Matrix II
+    //std::vector<std::vector<int>> matrix{
+    //    {48, 65, 70, 113, 133, 163, 170, 216, 298, 389},
+    //    {89, 169, 215, 222, 250, 348, 379, 426, 469, 554},
+    //    {178, 202, 253, 294, 367, 392, 428, 434, 499, 651},
+    //    {257, 276, 284, 332, 380, 470, 516, 561, 657, 698},
+    //    {275, 331, 391, 432, 500, 595, 602, 673, 758, 783},
+    //    {357, 365, 412, 450, 556, 642, 690, 752, 801, 887},
+    //    {359, 451, 534, 609, 654, 662, 693, 766, 803, 964},
+    //    {390, 484, 614, 669, 684, 711, 767, 804, 857, 1055},
+    //    {400, 515, 683, 732, 812, 834, 880, 930, 1012, 1130},
+    //    {480, 538, 695, 751, 864, 939, 966, 1027, 1089, 1224} };
+    //bool r = searchMatrix2(matrix, 20);
+
+    //242. Valid Anagram
+    //bool r = isAnagram("dsaasd", "asddsa");
+
+    //257. Binary Tree Paths
+    //std::vector<std::string> r = binaryTreePaths(toTree({ 1, 2, 3, null, 5 }));
+
+    //260. Single Number III
+    //std::vector<int> nums{ 1, 2, 1, 3, 2, 5 };
+    //std::vector<int> r = singleNumber3(nums);
+
+    //264. Ugly Number II
+    //int r = nthUglyNumber_network(10);
+
+    //278. First Bad Version
+    //int r = firstBadVersion(5);
+    
+        
 
     return 0;
 }

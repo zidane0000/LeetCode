@@ -6249,6 +6249,67 @@ void invertTree_DFS(TreeNode* node) {
     invertTree_DFS(node->right);
 }
 
+//227. Basic Calculator II
+//網解 runtime beats:93.43%  memory beats:98.14%
+int calculate(std::string s) {
+    int temp = 0, sum = 0;
+    char sign = '+';
+    int num = 0;
+    for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        if (isdigit(c))
+            num = (num * 10) + (c - '0');
+        if (!isdigit(c) && c != ' ' || i == s.length() - 1) {
+            if (sign == '+') {
+                sum += temp;
+                temp = num;
+            }
+            else if (sign == '-') {
+                sum += temp;
+                temp = -num;
+            }
+            else if (sign == '/') {
+                temp /= num;
+            }
+            else if (sign == '*') {
+                temp *= num;
+            }
+            sign = c;
+            num = 0;
+        }
+    }
+    sum += temp;
+    return sum;
+}
+
+//https://www.cnblogs.com/grandyang/p/4601208.html
+//網解 runtime beats:52.04%  memory beats:48.44%
+int calculate_network(std::string s) {
+    long res = 0, num = 0, n = s.size();
+    char op = '+';
+    std::stack<int> st;
+    for (int i = 0; i < n; ++i) {
+        if (s[i] >= '0')
+            num = num * 10 + s[i] - '0';
+        if ((s[i] < '0' && s[i] != ' ') || i == n - 1) {
+            if (op == '+') st.push(num);
+            if (op == '-') st.push(-num);
+            if (op == '*' || op == '/') {
+                int tmp = (op == '*') ? st.top() * num : st.top() / num;
+                st.pop();
+                st.push(tmp);
+            }
+            op = s[i];
+            num = 0;
+        }
+    }
+    while (!st.empty()) {
+        res += st.top();
+        st.pop();
+    }
+    return res;
+}
+
 TreeNode* invertTree(TreeNode* root) {
     invertTree_DFS(root);
     return root;
@@ -6339,6 +6400,50 @@ bool isPowerOfTwo_2(int n) {
         return false;
 }
 
+//232. Implement Queue using Stacks
+//初解 runtime beats:100.00%  memory beats:78.63%
+class MyQueue {
+private:
+    std::stack<int> st;
+public:
+    /** Initialize your data structure here. */
+    MyQueue() {
+        while (!st.empty())
+            st.pop();
+    }
+
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        std::stack<int> tmp;
+        while (!st.empty()) {
+            tmp.push(st.top());
+            st.pop();
+        }
+        tmp.push(x);
+        while (!tmp.empty()) {
+            st.push(tmp.top());
+            tmp.pop();
+        }
+    }
+
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {
+        int top = st.top();
+        st.pop();
+        return top;
+    }
+
+    /** Get the front element. */
+    int peek() {
+        return st.top();
+    }
+
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return st.empty();
+    }
+};
+
 //234. Palindrome Linked List
 //初解 runtime beats:42.50%   memory beats:14.12%
 bool isPalindrome(ListNode* head) {
@@ -6356,7 +6461,7 @@ bool isPalindrome(ListNode* head) {
 }
 
 //網解 runtime beats:88.70%  memory beats:94.21%
-bool isPalindrome(ListNode* head) {
+bool isPalindrome_network(ListNode* head) {
     std::ios::sync_with_stdio(false); 
     std::cin.tie(nullptr);
     int count = 0;
@@ -6426,27 +6531,314 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 //236. Lowest Common Ancestor of a Binary Tree
 //https://www.cnblogs.com/grandyang/p/4641968.html.
 //網解 runtime beats:43.40%   memory beats:26.75%
-TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+TreeNode* lowestCommonAncestor_network(TreeNode* root, TreeNode* p, TreeNode* q) {
     if (!root || p == root || q == root)
         return root;
 
-    TreeNode* left = lowestCommonAncestor(root->left, p, q);
-    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+    TreeNode* left = lowestCommonAncestor_network(root->left, p, q);
+    TreeNode* right = lowestCommonAncestor_network(root->right, p, q);
     if (left && right) 
         return root;
     return left ? left : right;
 }
 
 //網解 runtime beats:89.35%   memory beats:78.78%
-TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+TreeNode* lowestCommonAncestor_network_2(TreeNode* root, TreeNode* p, TreeNode* q) {
     if (!root || p == root || q == root)
         return root;
-    TreeNode* left = lowestCommonAncestor(root->left, p, q);
+    TreeNode* left = lowestCommonAncestor_network_2(root->left, p, q);
     if (left && left != p && left != q)
         return left;
-    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+    TreeNode* right = lowestCommonAncestor_network_2(root->right, p, q);
     if (left && right)
         return root;
 
     return left ? left : right;
+}
+
+//238. Product of Array Except Self
+//初解 runtime beats:38.57%   memory beats:32.62%
+std::vector<int> productExceptSelf(std::vector<int>& nums) {
+    //參考題目solution
+    int size = nums.size();
+    std::vector<int> L(size, 1), R(size, 1);
+    int i = 0;
+
+    for (i = 1; i < size; i++)
+        L[i] = L[i - 1] * nums[i - 1];
+
+    for (i = size - 2; i >= 0; i--)
+        R[i] = R[i + 1] * nums[i + 1];
+
+    for (i = 0; i < size; i++)
+        nums[i] = L[i] * R[i];
+
+    return nums;
+}
+
+//二解 runtime beats:85.81%  memory beats:57.38%
+std::vector<int> productExceptSelf_2(std::vector<int>& nums) {
+    //參考題目solution
+    int size = nums.size();
+    std::vector<int> ans(size, 1);
+    int i = 0;
+    for (i = 1; i < size; i++)
+        ans[i] = ans[i - 1] * nums[i - 1];
+    int right = 1;
+    for (i = size - 1; i >= 0; i--) {
+        ans[i] *= right;
+        right *= nums[i];
+    }
+
+    return ans;
+}
+
+//239. Sliding Window Maximum
+//初解 runtime beats:05.23%   memory beats:05.08%
+std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) {
+    int size = nums.size();
+    if (size < k)
+        return {};
+    std::vector<int> ans;
+    std::multiset<int> max;
+    int i = 0;
+    for (i = 0; i < k; i++)
+        max.insert(nums[i]);
+    
+    if(!max.empty())
+        ans.push_back(*(--max.end()));
+
+    for (i = k; i < nums.size(); i++) {
+        max.insert(nums[i]);
+        max.erase(max.find(nums[i - k]));
+        ans.push_back(*(--max.end()));
+    }
+
+    return ans;
+}
+
+//網解 runtime beats:43.48%   memory beats:99.77%
+std::vector<int> maxSlidingWindow_network(std::vector<int>& nums, int k) {
+    if (k == 0)
+        return nums;
+
+    if (nums.size() == 0 || nums.size() < k)
+        return {};
+
+    int n = nums.size();
+    std::vector<int> result(n - k + 1);
+    int maxVal = INT_MIN;
+    int maxId = -1;
+    for (int i = 0; i < k; i++) {
+        if (maxVal < nums[i]) {
+            maxId = i;
+            maxVal = nums[i];
+        }
+    }
+    result[0] = maxVal;
+    for (int i = 1; i < (n - k + 1); i++) {
+        if (i <= maxId) {
+            if (maxVal < nums[i + k - 1]) {
+                maxId = i + k - 1;
+                maxVal = nums[i + k - 1];
+            }
+        }
+        else {
+            maxVal = INT_MIN;
+            maxId = -1;
+            for (int j = i; j < (i + k); j++) {
+                if (maxVal < nums[j]) {
+                    maxId = j;
+                    maxVal = nums[j];
+                }
+            }
+        }
+        result[i] = maxVal;
+    }
+    return result;
+}
+
+//https://www.cnblogs.com/grandyang/p/4656517.html
+//網解 runtime beats:61.26% memory beats:69.87%
+std::vector<int> maxSlidingWindow_network_2(std::vector<int>& nums, int k) {
+    std::vector<int> res;
+    std::deque<int> q;
+    for (int i = 0; i < nums.size(); ++i) {
+        if (!q.empty() && q.front() == i - k)
+            q.pop_front();
+        while (!q.empty() && nums[q.back()] < nums[i])
+            q.pop_back();
+        q.push_back(i);
+        if (i >= k - 1)
+            res.push_back(nums[q.front()]);
+    }
+    return res;
+}
+
+//240. Search a 2D Matrix II
+//網解 runtime beats:99.02% memory beats:98.39%
+bool searchMatrix2_network(std::vector<std::vector<int>>& matrix, int target) {
+    std::ios::sync_with_stdio(0);
+    if (matrix.size() == 1 && matrix[0].size() == 0)
+        return false;
+
+    while (matrix.size() != 0) {
+        int temp = matrix[0][matrix[0].size() - 1];
+        if (temp == target)
+            return true;
+        else if (temp > target) {
+            for (int i = 0; i < matrix.size(); i++) {
+                matrix[i].pop_back();
+                if (matrix[i].size() == 0)
+                    matrix.erase(matrix.begin() + i);
+            }
+        }
+        else
+            matrix.erase(matrix.begin());
+    }
+    return false;
+}
+
+//初解 runtime beats:22.90% memory beats:97.06%
+bool searchMatrix2(std::vector<std::vector<int>>& matrix, int target) {
+    //從左下角往右或往上
+    //從右上角往左或往下
+    std::ios::sync_with_stdio(0);
+    if (matrix.size() == 0 || matrix[0].size() == 0)
+        return false;
+
+    int i = matrix.size() - 1, j = 0;   //左下角
+    while (i >= 0 && j < matrix[0].size() && matrix[i][j] != target) {
+        if (matrix[i][j] < target)
+            j++;    //比目標小，要往大的找
+        else
+            i--;
+    }
+
+    if (i < 0 || j >= matrix[0].size() || matrix[i][j] != target)
+        return false;
+    else
+        return true;
+}
+
+//242. Valid Anagram
+//初解 runtime beats:29.03% memory beats:45.12%
+bool isAnagram(std::string s, std::string t) {
+    if (s.size() != t.size())
+        return false;
+    sort(s.begin(), s.end());
+    sort(t.begin(), t.end());
+    return s == t;
+}
+
+//257. Binary Tree Paths
+//初解 runtime beats:100.00% memory beats:38.29%
+void binaryTreePaths_DFS(TreeNode* node, std::string Path, std::vector<std::string>& ans) {
+    if (!node)
+        return;
+        
+    if (!node->left && !node->right) {
+        ans.push_back(Path + "->" + std::to_string(node->val));
+        return;
+    }
+
+    binaryTreePaths_DFS(node->left, Path + "->" + std::to_string(node->val), ans);
+    binaryTreePaths_DFS(node->right, Path + "->" + std::to_string(node->val), ans);
+}
+
+std::vector<std::string> binaryTreePaths(TreeNode* root) {
+    if (!root)
+        return {};
+
+    std::vector<std::string> ans;
+    if (!root->left && !root->right) {
+        ans.push_back(std::to_string(root->val));
+        return ans;
+    }
+
+    binaryTreePaths_DFS(root->left, std::to_string(root->val), ans);
+    binaryTreePaths_DFS(root->right, std::to_string(root->val), ans);
+    return ans;
+}
+
+//260. Single Number III
+//初解 runtime beats:15.06% memory beats:05.16%
+std::vector<int> singleNumber3(std::vector<int>& nums) {
+    if (nums.size() < 3)
+        return nums;
+    
+    std::multiset<int> mulst(nums.begin(), nums.end());
+    std::vector<int> ans;
+
+    for (auto num : nums) {
+        if (mulst.count(num) == 1) {
+            ans.push_back(num);
+            if (ans.size() == 2)
+                return ans;
+        }            
+    }
+
+    return ans;
+}
+
+//網解 runtime beats:94.67% memory beats:98.06%
+std::vector<int> singleNumber3_network(std::vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    std::vector<int> vc;
+    for (int i = 0; i < nums.size() - 1; i++) {
+        if (nums[i] != nums[i + 1])
+            vc.push_back(nums[i]);
+        else
+            i++;
+    }
+    if (nums.size() > 1 && nums[nums.size() - 1] != nums[nums.size() - 2])
+        vc.push_back(nums[nums.size() - 1]);
+    return vc;
+}
+
+//264. Ugly Number II
+//網解 runtime beats:97.58% memory beats:62.44%
+int nthUglyNumber_network(int n) {
+    std::vector<int> dp(n, 0);
+    dp[0] = 1;
+    int i2 = 0, i3 = 0, i5 = 0;
+    int n2 = 2, n3 = 3, n5 = 5;
+    for (int i = 1; i < n; i++) {
+        int next = std::min(n2, std::min(n3, n5));
+        dp[i] = next;
+        if (next == n2) {
+            i2++;
+            n2 = dp[i2] * 2;
+        }
+        if (next == n3) { i3++; n3 = dp[i3] * 3; }
+        if (next == n5) { i5++; n5 = dp[i5] * 5; }
+    }
+    return dp.back();
+}
+
+//278. First Bad Version
+//網解 runtime beats:100.00% memory beats:54.89%
+bool isBadVersion(long long version) {
+    if (version >= 4)
+        return true;
+    else
+        return false;
+}
+
+int firstBadVersion(int n)
+{
+    int first = 1;
+    while (first <= n) {
+        int mid = first + (n - first) / 2;
+        bool isBad = isBadVersion(mid);
+
+        if (isBad && !isBadVersion(mid - 1))
+            return mid;
+
+        if (!isBad)
+            first = mid + 1;
+        else
+            n = mid;
+    }
+    return -1;
 }
