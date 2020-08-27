@@ -6818,20 +6818,18 @@ int nthUglyNumber_network(int n) {
 
 //278. First Bad Version
 //網解 runtime beats:100.00% memory beats:54.89%
-bool isBadVersion(long long version) {
+bool isBadVersion(int version) {
     if (version >= 4)
         return true;
     else
         return false;
 }
 
-int firstBadVersion(int n)
-{
+int firstBadVersion(int n) {
     int first = 1;
     while (first <= n) {
         int mid = first + (n - first) / 2;
         bool isBad = isBadVersion(mid);
-
         if (isBad && !isBadVersion(mid - 1))
             return mid;
 
@@ -6841,4 +6839,45 @@ int firstBadVersion(int n)
             n = mid;
     }
     return -1;
+}
+
+//279. Perfect Squares
+//https://www.cnblogs.com/grandyang/p/4800552.html
+//網解 runtime beats:100.00% memory beats:99.53%
+int numSquares(int n) {
+    while (n % 4 == 0) n /= 4;
+    if (n % 8 == 7) return 4;
+    for (int a = 0; a * a <= n; ++a) {
+        int b = sqrt(n - a * a);
+        if (a * a + b * b == n) {
+            return !!a + !!b;
+        }
+    }
+    return 3;
+}
+
+//283. Move Zeroes
+//初解 runtime beats:58.98% memory beats:57.69%
+void moveZeroes(std::vector<int>& nums) {
+    for (auto it = nums.rbegin(); it != nums.rend(); ++it) {
+        if (*it == 0) {
+            nums.erase(--(it.base()));
+            nums.push_back(0);
+        }
+    }
+}
+
+//網解 runtime beats:99.69% memory beats:73.38%
+void moveZeroes(std::vector<int>& nums) {
+    int i = 0;
+    for (int j = 0; j < nums.size(); j++) {
+        if (nums[j] != 0) {
+            nums[i] = nums[j];
+            i++;
+        }
+    }
+    while (i < nums.size()) {
+        nums[i] = 0;
+        i++;
+    }
 }
