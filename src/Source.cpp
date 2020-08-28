@@ -717,7 +717,47 @@ int main()
     //278. First Bad Version
     //int r = firstBadVersion(5);
     
-        
+    //287. Find the Duplicate Number
+    //std::vector<int> nums{ 1,3,4,2,2, };
+    //int r = findDuplicate(nums);
+
+    //290. Word Pattern
+    //bool r = wordPattern("abba", "dog cat cat dog");
+
+    //295. Find Median from Data Stream
+    //MedianFinder obj;
+    //obj.addNum(-1);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(-2);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(-3);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(-4);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(-5);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(6);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(10);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(2);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(6);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(5);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(0);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(6);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(3);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(1);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(0);
+    //std::cout << obj.findMedian() << std::endl;
+    //obj.addNum(0);
+    //std::cout << obj.findMedian() << std::endl;
 
     return 0;
 }

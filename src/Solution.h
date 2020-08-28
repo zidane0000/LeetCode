@@ -11,6 +11,7 @@
 #include <queue>
 #include <functional>
 #include <unordered_map>
+#include <sstream>          //stringstream
 
 //1. Two Sum
 //初解 runtime beats:12.97% memory beats:89.01%
@@ -6868,7 +6869,7 @@ void moveZeroes(std::vector<int>& nums) {
 }
 
 //網解 runtime beats:99.69% memory beats:73.38%
-void moveZeroes(std::vector<int>& nums) {
+void moveZeroes_network(std::vector<int>& nums) {
     int i = 0;
     for (int j = 0; j < nums.size(); j++) {
         if (nums[j] != 0) {
@@ -6881,3 +6882,266 @@ void moveZeroes(std::vector<int>& nums) {
         i++;
     }
 }
+
+//287. Find the Duplicate Number
+//初解 runtime beats:17.68% memory beats:12.39%
+int findDuplicate(std::vector<int>& nums) {
+    std::set<int> exist;
+    for (auto num : nums) {
+        if (exist.count(num) > 0)
+            return num;
+        else
+            exist.insert(num);
+    }
+    return 0;
+}
+
+//https://www.cnblogs.com/grandyang/p/4843654.html
+//網解 runtime beats:97.43% memory beats:71.57%
+int findDuplicate_network(std::vector<int>& nums) {
+    int slow = 0, fast = 0, t = 0;
+    while (true) {              //設true因為slow跟fast初始數值一致
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+        if (slow == fast) break;
+    }
+    while (true) {
+        slow = nums[slow];
+        t = nums[t];
+        if (slow == t) break;
+    }
+    return slow;
+}
+
+//289. Game of Life
+//初解 runtime beats:100.00% memory beats:11.67%
+void gameOfLife(std::vector<std::vector<int>>& board) {
+    //https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+    //Remember that the board needs to be updated at the same time
+    int x_size = board.size();
+    if (x_size == 0)
+        return;
+    int y_size = board[0].size();
+    std::vector<std::vector<int>> world(x_size + 2, std::vector<int>(y_size + 2, 0));
+
+    int i, j, alive;
+    for (i = 0; i < x_size; i++)
+        for (j = 0; j < y_size; j++)
+            world[i + 1][j + 1] = board[i][j];
+
+    for (i = 1; i < x_size + 1; i++)
+        for (j = 1; j < y_size + 1; j++) {
+            alive = world[i - 1][j - 1] + world[i - 1][j] + world[i - 1][j + 1] +
+                world[i][j - 1] + world[i][j + 1] +
+                world[i + 1][j - 1] + world[i + 1][j] + world[i + 1][j + 1];
+            if (alive == 3)
+                board[i - 1][j - 1] = 1;
+            else if (alive > 3 || alive < 2)
+                board[i - 1][j - 1] = 0;
+        }
+}
+
+//https://www.cnblogs.com/grandyang/p/4854466.html
+//網解 runtime beats:100.00% memory beats:27.99%
+void gameOfLife_network(std::vector<std::vector<int> >& board) {
+    int m = board.size(), n = m ? board[0].size() : 0;
+    std::vector<int> dx{ -1, -1, -1, 0, 1, 1, 1, 0 };
+    std::vector<int> dy{ -1, 0, 1, 1, 1, 0, -1, -1 };
+    //概念為因為要in-place，所以將細胞變化可能列出，所以就算狀態改變還是會知道身前是死是活
+    //狀態0:死轉死
+    //狀態1:活轉活
+    //狀態2:活轉死
+    //狀態3:死轉活
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            int cnt = 0;
+            for (int k = 0; k < 8; ++k) {
+                int x = i + dx[k], y = j + dy[k];
+                if (x >= 0 && x < m && y >= 0 && y < n && (board[x][y] == 1 || board[x][y] == 2))
+                    ++cnt;
+            }
+            if (board[i][j] && (cnt < 2 || cnt > 3))
+                board[i][j] = 2;                //2表示狀態2->活轉死
+            else if (!board[i][j] && cnt == 3)
+                board[i][j] = 3;                //狀態3->死轉活
+        }
+    }
+    for (int i = 0; i < m; ++i)
+        for (int j = 0; j < n; ++j)
+            board[i][j] %= 2;
+}
+
+//290. Word Pattern
+//初解 runtime beats:100.00% memory beats:05.04%
+bool wordPattern(std::string pattern, std::string str) {
+    str += " ";
+    std::unordered_map<char, std::string> map1;
+    std::unordered_map<std::string, char> map2;
+    int cut_p;
+    std::string cut_s;
+    for (char p : pattern) {
+        cut_p = str.find(' ');
+        cut_s = str.substr(0, cut_p);
+        if (cut_s == "")
+            return false;
+
+        if (map1[p] == "")
+            map1[p] = cut_s;
+        else
+            if (map1[p] != cut_s)
+                return false;
+
+        if (!map2[cut_s])
+            map2[cut_s] = p;
+        else
+            if (map2[cut_s] != p)
+                return false;
+        str = str.substr(cut_p + 1, str.size() - cut_p);
+    }
+
+    if (str == "")
+        return true;
+    else
+        return false;
+}
+
+//網解 runtime beats:100.00% memory beats:05.04%
+bool wordPattern_network(std::string pattern, std::string str) {
+    std::vector<std::string> words;
+    std::string token;
+    std::stringstream ss(str);
+    while (getline(ss, token, ' ')) 
+        words.push_back(token);
+    if (pattern.size() != words.size()) return false;
+    for (int i = 0; i < words.size() - 1; i++)
+    {
+        for (int j = i + 1; j < words.size(); j++)
+        {
+            if (pattern[i] == pattern[j] and words[i] == words[j]) continue;
+            else if (pattern[i] != pattern[j] and words[i] != words[j]) continue;
+            else return false;
+        }
+    }
+    return true;
+}
+
+//295. Find Median from Data Stream
+//初解 runtime beats:05.12% memory beats:95.33%
+class MedianFinder {
+private:
+    std::vector<int> nums;
+public:
+    /** initialize your data structure here. */
+    MedianFinder() {
+        nums.clear();
+    }
+
+    void addNum(int num) {
+        int posi = 0;
+        while (posi < nums.size() && nums[posi] < num)
+            posi++;
+        nums.insert(nums.begin() + posi, num);
+    }
+
+    double findMedian() {
+        int size = nums.size();
+        if (size % 2 == 0)
+            return (double)nums[size / 2 - 1] / 2.0 + (double)nums[size / 2] / 2.0;
+        else
+            return nums[size / 2];
+    }
+};
+
+//網解 runtime beats:92.74% memory beats:32.95%
+class MedianFinder_network {
+public:
+    /** initialize your data structure here. */
+    std::priority_queue<int, std::vector<int>, std::greater<int>> upperHeap;
+    std::priority_queue<int> lowerHeap;
+    int total;
+    MedianFinder_network() :total(0) {
+
+    }
+
+    inline void moveToAnother(bool toLower) {
+        if (toLower) {
+            int curtop = upperHeap.top();
+            upperHeap.pop();
+            lowerHeap.push(curtop);
+        }
+        else {
+            int curtop = lowerHeap.top();
+            lowerHeap.pop();
+            upperHeap.push(curtop);
+        }
+    }
+
+    void addNum(int num) {
+        ++total;
+        if (lowerHeap.size() == 0 || num <= lowerHeap.top())
+            lowerHeap.push(num);
+        else
+            upperHeap.push(num);
+        // rebalance heaps
+        if ((total & 1) == 0) {
+            if (lowerHeap.size() > upperHeap.size())
+                moveToAnother(false);
+            else if (lowerHeap.size() < upperHeap.size())
+                moveToAnother(true);
+        }
+        else if ((int)lowerHeap.size() - (int)upperHeap.size() > 1)
+            moveToAnother(false);
+        else if ((int)upperHeap.size() - (int)lowerHeap.size() > 1)
+            moveToAnother(true);
+    }
+
+    double findMedian() {
+        if (total == 0)
+            return 0;
+        if (total == 1)
+            return lowerHeap.top();
+
+        if ((total & 1) == 0)
+            return 1. * ((double)lowerHeap.top() + upperHeap.top()) / 2;
+        else
+            return (upperHeap.size() > lowerHeap.size()) ? upperHeap.top() : lowerHeap.top();
+    }
+};
+
+//297. Serialize and Deserialize Binary Tree
+//https://www.cnblogs.com/grandyang/p/4913869.html
+//網解 runtime beats:92.88% memory beats:72.40%
+class Codec_network {
+public:
+    // Encodes a tree to a single string.
+    std::string serialize(TreeNode* root) {
+        std::ostringstream out;
+        serialize(root, out);
+        return out.str();
+    }
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(std::string data) {
+        std::istringstream in(data);
+        return deserialize(in);
+    }
+private:
+    void serialize(TreeNode* root, std::ostringstream& out) {
+        if (root) {
+            out << root->val << ' ';
+            serialize(root->left, out);
+            serialize(root->right, out);
+        }
+        else {
+            out << "# ";
+        }
+    }
+    TreeNode* deserialize(std::istringstream& in) {
+        std::string val;
+        in >> val;
+        if (val == "#") return nullptr;
+        TreeNode* root = new TreeNode(stoi(val));
+        root->left = deserialize(in);
+        root->right = deserialize(in);
+        return root;
+    }
+};

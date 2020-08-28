@@ -270,7 +270,7 @@ Record the Problem-solving process
 	- 初解 runtime beats:27.18% memory beats:42.28%
 	- 網解 runtime beats:55.30% memory beats:32.52%
 - 152. Maximum Product Subarray
-	- 網解 runtime beats:80.49% memory beats:46.85% [參考網址](http://bangbingsyb.blogspot.com/2014/11/leetcode-maximum-product-subarray.html)
+	- 網解 runtime beats:80.49% memory beats:46.85% [參考網址](http:- bangbingsyb.blogspot.com/2014/11/leetcode-maximum-product-subarray.html)
 	- 網解 runtime beats:98.29% memory beats:46.85%
 - 153. Find Minimum in Rotated Sorted Array
 	- 初解 runtime beats:98.29% memory beats:88.67%
@@ -321,3 +321,104 @@ Record the Problem-solving process
 - 202. Happy Number
 	- 初解 runtime beats:63.86%  memory beats:33.09%
 	- 網解 runtime beats:100.00%  memory beats:77.58%
+- 203. Remove Linked List Elements
+	- 初解 runtime beats:91.80%  memory beats:59.93%
+- 204. Count Primes
+	- 網解 runtime beats:91.80%  memory beats:59.93% [參考網址](https://www.cnblogs.com/grandyang/p/4462810.html)
+- 205. Isomorphic Strings
+	- 網解 runtime beats:99.46%  memory beats:70.87% [參考網址](https://www.cnblogs.com/grandyang/p/4465779.html)
+- 206. Reverse Linked List
+	- 初解 runtime beats:96.55%  memory beats:66.14%
+- 207. Course Schedule
+	- 網解 runtime beats:89.64%  memory beats:65.09% [參考網址](https://www.cnblogs.com/grandyang/p/4484571.html)
+- 208. Implement Trie (Prefix Tree)
+	- 初解 runtime beats:06.47%  memory beats:96.70%
+	- 網解 runtime beats:99.09%  memory beats:51.04%
+- 209. Minimum Size Subarray Sum
+	- 初解 runtime beats:05.02%  memory beats:66.44%
+	- 網解 runtime beats:84.79%  memory beats:63.96% [參考網址](https://www.cnblogs.com/grandyang/p/4501934.html)
+- 210. Course Schedule II
+	- 初解 runtime beats:91.10%  memory beats:54.85%
+- 211. Design Add and Search Words Data Structure
+	- 初解 runtime beats:99.80%  memory beats:77.46%
+- 212. Word Search II
+	- 初解 runtime beats:05.00%  memory beats:99.23%
+	- 網解 runtime beats:99.37%  memory beats:79.11%
+- 213. House Robber II
+	- 網解 runtime beats:52.12%  memory beats:11.18% [參考網址](https://www.cnblogs.com/grandyang/p/4518674.html)
+- 215. Kth Largest Element in an Array
+	- 初解 runtime beats:68.83%  memory beats:99.06%
+- 216. Combination Sum III
+	- 初解 runtime beats:100.00%  memory beats:97.35%
+- 217. Contains Duplicate
+	- 初解 runtime beats:19.48%  memory beats:93.68%
+	- 二解 runtime beats:74.18%  memory beats:60.41%
+- 221. Maximal Square
+	- 網解 runtime beats:96.40%  memory beats:94.70%
+- 222. Count Complete Tree Nodes
+	- 初解 runtime beats:21.84%  memory beats:06.75%
+	- 二解 runtime beats:41.45%  memory beats:65.02%
+- 226. Invert Binary Tree
+	- 初解 runtime beats:100.00%  memory beats:81.89%
+- 227. Basic Calculator II
+	- 網解 runtime beats:93.43%  memory beats:98.14%
+	- 網解 runtime beats:52.04%  memory beats:48.44% [參考網址](https://www.cnblogs.com/grandyang/p/4601208.html)
+- 229. Majority Element II
+	- 初解 runtime beats:35.40%  memory beats:38.24%
+	- 網解 runtime beats:35.61%  memory beats:36.90% [參考網址](https://www.cnblogs.com/grandyang/p/4606822.html)
+- 230. Kth Smallest Element in a BST
+	- 初解 runtime beats:76.14%  memory beats:80.97%
+- 231. Power of Two
+	- 初解 runtime beats:100.00%  memory beats:68.20%
+	- 二解 runtime beats:100.00%  memory beats:20.26%
+- 232. Implement Queue using Stacks
+	- 初解 runtime beats:100.00%  memory beats:78.63%
+- 234. Palindrome Linked List
+	- 初解 runtime beats:42.50%   memory beats:14.12%
+	- 網解 runtime beats:88.70%  memory beats:94.21%
+	- 網解 runtime beats:68.16%   memory beats:48.67% [參考網址](https://www.cnblogs.com/grandyang/p/4635425.html)
+- 235. Lowest Common Ancestor of a Binary Search Tree
+	- 初解 runtime beats:94.34%   memory beats:05.11%
+- 236. Lowest Common Ancestor of a Binary Tree
+	- 網解 runtime beats:43.40%   memory beats:26.75% [參考網址](https://www.cnblogs.com/grandyang/p/4641968.html.)
+	- 網解 runtime beats:89.35%   memory beats:78.78%
+- 238. Product of Array Except Self
+	- 初解 runtime beats:38.57%   memory beats:32.62%
+	- 二解 runtime beats:85.81%  memory beats:57.38%
+- 239. Sliding Window Maximum
+	- 初解 runtime beats:05.23%   memory beats:05.08%
+	- 網解 runtime beats:43.48%   memory beats:99.77%
+	- 網解 runtime beats:61.26% memory beats:69.87% [參考網址](https://www.cnblogs.com/grandyang/p/4656517.html)
+- 240. Search a 2D Matrix II
+	- 網解 runtime beats:99.02% memory beats:98.39%
+	- 初解 runtime beats:22.90% memory beats:97.06%
+- 242. Valid Anagram
+	- 初解 runtime beats:29.03% memory beats:45.12%
+- 257. Binary Tree Paths
+	- 初解 runtime beats:100.00% memory beats:38.29%
+- 260. Single Number III
+	- 初解 runtime beats:15.06% memory beats:05.16%
+	- 網解 runtime beats:94.67% memory beats:98.06%
+- 264. Ugly Number II
+	- 網解 runtime beats:97.58% memory beats:62.44%
+- 278. First Bad Version
+	- 網解 runtime beats:100.00% memory beats:54.89%
+- 279. Perfect Squares
+	- 網解 runtime beats:100.00% memory beats:99.53% [參考網址](https://www.cnblogs.com/grandyang/p/4800552.html)
+- 283. Move Zeroes
+	- 初解 runtime beats:58.98% memory beats:57.69%
+	- 網解 runtime beats:99.69% memory beats:73.38%
+- 287. Find the Duplicate Number
+	- 初解 runtime beats:17.68% memory beats:12.39%
+	- 網解 runtime beats:97.43% memory beats:71.57% [參考網址](https://www.cnblogs.com/grandyang/p/4843654.html)
+- 289. Game of Life
+	- 初解 runtime beats:100.00% memory beats:11.67%
+	- 網解 runtime beats:100.00% memory beats:27.99% [參考網址](https://www.cnblogs.com/grandyang/p/4854466.html)
+- 290. Word Pattern
+	- 初解 runtime beats:100.00% memory beats:05.04%
+	- 網解 runtime beats:100.00% memory beats:05.04%
+- 295. Find Median from Data Stream
+	- 初解 runtime beats:05.12% memory beats:95.33%
+	- 網解 runtime beats:92.74% memory beats:32.95%
+- 297. Serialize and Deserialize Binary Tree
+	- 網解 runtime beats:92.88% memory beats:72.40% [參考網址](https://www.cnblogs.com/grandyang/p/4913869.html)
