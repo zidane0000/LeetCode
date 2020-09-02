@@ -2,6 +2,10 @@
 
 #define null NULL
 
+using std::cout;
+using std::endl;
+
+
 ListNode* toList(std::vector<int> vec) {
     ListNode* a = nullptr;
     ListNode* cur = nullptr;
@@ -556,13 +560,13 @@ int main()
     //LRUCache cache = LRUCache(2 /* capacity */);
     //cache.put(1, 1);
     //cache.put(2, 2);
-    //std::cout << cache.get(1) << std::endl;       // returns 1
+    //cout << cache.get(1) << endl;       // returns 1
     //cache.put(3, 3);    // evicts key 2
-    //std::cout << cache.get(2) << std::endl;       // returns -1 (not found)
+    //cout << cache.get(2) << endl;       // returns -1 (not found)
     //cache.put(4, 4);    // evicts key 1
-    //std::cout << cache.get(1) << std::endl;       // returns -1 (not found)
-    //std::cout << cache.get(3) << std::endl;       // returns 3
-    //std::cout << cache.get(4) << std::endl;       // returns 4
+    //cout << cache.get(1) << endl;       // returns -1 (not found)
+    //cout << cache.get(3) << endl;       // returns 3
+    //cout << cache.get(4) << endl;       // returns 4
 
     //155. Min Stack
     //MinStack minStack = MinStack();
@@ -727,37 +731,53 @@ int main()
     //295. Find Median from Data Stream
     //MedianFinder obj;
     //obj.addNum(-1);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(-2);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(-3);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(-4);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(-5);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(6);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(10);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(2);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(6);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(5);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(0);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(6);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(3);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(1);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(0);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
     //obj.addNum(0);
-    //std::cout << obj.findMedian() << std::endl;
+    //cout << obj.findMedian() << endl;
+
+    //307. Range Sum Query - Mutable
+    //std::vector<int> nums{ 1,3,4,5 };
+    //NumArray a(nums);
+    //cout << a.sumRange(0, 2) << endl;
+    //a.update(1, 2);
+    //cout << a.sumRange(0, 2) << endl;
+
+    //309. Best Time to Buy and Sell Stock with Cooldown
+    //std::vector<int> prices{ 1,2,3,0,2 };
+    //int r = maxProfit_Cooldown(prices);
+
+    //310. Minimum Height Trees
+    std::vector<std::vector<int>> edges{ {1, 0},{1, 2},{1, 3} };
+    std::vector<int> r = findMinHeightTrees(4, edges);
+
 
     return 0;
 }

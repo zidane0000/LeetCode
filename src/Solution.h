@@ -7145,3 +7145,233 @@ private:
         return root;
     }
 };
+
+//300. Longest Increasing Subsequence
+//初解 runtime beats:44.00% memory beats:73.52%
+int lengthOfLIS(std::vector<int>& nums) {
+    //參考Solution
+    int size = nums.size();
+    if (size == 0)
+        return 0;
+    int ans = 1;
+    std::vector<int> DP(size, 1);
+    for (int i = 1; i < size; i++) {
+        for (int j = 0; j < i; j++)
+            if (nums[j] < nums[i])
+                DP[i] = std::max(DP[i], DP[j] + 1);
+        ans = std::max(ans, DP[i]);
+    }
+
+    return ans;
+}
+
+//301. Remove Invalid Parentheses
+//https://www.cnblogs.com/grandyang/p/4944875.html
+//網解 runtime beats:39.74% memory beats:46.59%
+bool InvalidParentheses(std::string t) {
+    int cnt = 0;
+    for (int i = 0; i < t.size(); ++i) {
+        if (t[i] == '(') ++cnt;
+        else if (t[i] == ')' && --cnt < 0) return false;
+    }
+    return cnt == 0;
+}
+
+std::vector<std::string> removeInvalidParentheses_network(std::string s) {
+    std::vector<std::string> res;
+    std::unordered_set<std::string> visited{ {s} };
+    std::queue<std::string> q{ {s} };
+    bool found = false;                 //用意為若有找到一組解，則不用在往下分解'('或')'
+    while (!q.empty()) {
+        s = q.front(); q.pop();
+        if (InvalidParentheses(s)) {
+            res.push_back(s);
+            found = true;
+        }
+
+        if (found) continue;
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] != '(' && s[i] != ')') continue;
+            std::string str = s.substr(0, i) + s.substr(i + 1);
+            if (!visited.count(str)) {
+                q.push(str);
+                visited.insert(str);
+            }
+        }
+    }
+    return res;
+}
+
+//網解 runtime beats:100.00% memory beats:83.91%
+void removeInvalidParentheses_helper(std::string s, int last_i, int last_j, std::vector<char> p, std::vector<std::string>& res) {
+    //last_i : 當前遍歷位置
+    //last_j : 上次刪除位置
+    int cnt = 0;            //表示'('出現次數
+    for (int i = last_i; i < s.size(); ++i) {
+        if (s[i] == p[0]) ++cnt;
+        else if (s[i] == p[1]) --cnt;
+        if (cnt >= 0) continue;
+        //在此迴圈時，')'數量大於'('，所以做完之後可以直接return，不用重複計算'('數量大於')'之情況
+        //刪除多餘的')'
+        for (int j = last_j; j <= i; ++j) {
+            if (s[j] == p[1] && (j == last_j || s[j] != s[j - 1])) {
+                removeInvalidParentheses_helper(s.substr(0, j) + s.substr(j + 1), i, j, p, res);
+            }
+        }
+        return;
+    }
+    //此時可能'('數量大於')'
+    //所以將s反轉後再次計算
+    std::string rev = std::string(s.rbegin(), s.rend());
+    if (p[0] == '(') removeInvalidParentheses_helper(rev, 0, 0, { ')', '(' }, res);
+    else res.push_back(rev);
+}
+
+std::vector<std::string> removeInvalidParentheses(std::string s) {
+    std::vector<std::string> res;
+    removeInvalidParentheses_helper(s, 0, 0, { '(', ')' }, res);
+    return res;
+}
+
+//304. Range Sum Query 2D - Immutable
+//初解 runtime beats:83.63% memory beats:95.14%
+class NumMatrix {
+private:
+    std::vector<std::vector<int>>* DP = nullptr;
+public:
+    NumMatrix(std::vector<std::vector<int>>& matrix) {
+        if (DP)
+            DP->clear();
+        int size = matrix.size();
+        if (size == 0)
+            return;
+        DP = new std::vector<std::vector<int>>(matrix.size() + 1, std::vector<int>(matrix[0].size() + 1, 0));
+        for (int i = 0; i < matrix.size(); i++)
+            for (int j = 0; j < matrix[0].size(); j++)
+                (*DP)[i + 1][j + 1] = (*DP)[i][j + 1] + (*DP)[i + 1][j] - (*DP)[i][j] + matrix[i][j];
+    }
+
+    int sumRegion(int row1, int col1, int row2, int col2) {
+        if (DP == nullptr)
+            return 0;
+        return (*DP)[row2 + 1][col2 + 1] - (*DP)[row2 + 1][col1] - (*DP)[row1][col2 + 1] + (*DP)[row1][col1];
+    }
+};
+
+//307. Range Sum Query - Mutable
+//初解 runtime beats:05.36% memory beats:97.68%
+class NumArray {
+private:
+    std::vector<int> DP;
+public:
+    NumArray(std::vector<int>& nums) {
+        DP.clear();
+        DP.resize(nums.size() + 1, 0);
+        for (int i = 0; i < nums.size(); i++)
+            DP[i + 1] = nums[i] + DP[i];
+    }
+
+    void update(int i, int val) {
+        int deviation = DP[i + 1] - DP[i] - val;
+        while (i < DP.size() - 1) {
+            DP[i + 1] -= deviation;
+            i++;
+        }
+    }
+
+    int sumRange(int i, int j) {
+        return DP[j + 1] - DP[i];
+    }
+};
+
+//https://www.cnblogs.com/grandyang/p/4985506.html
+//網解 runtime beats:34.01% memory beats:51.62%
+class NumArray_network {
+public:
+    NumArray_network(std::vector<int> nums) {
+        n = nums.size();
+        tree.resize(n * 2);
+        buildTree(nums);
+    }
+
+    void buildTree(std::vector<int>& nums) {
+        for (int i = n; i < n * 2; ++i)
+            tree[i] = nums[i - n];
+        for (int i = n - 1; i > 0; --i)
+            tree[i] = tree[i * 2] + tree[i * 2 + 1];
+    }
+
+    void update(int i, int val) {
+        tree[i += n] = val;
+        while (i > 0) {
+            tree[i / 2] = tree[i] + tree[i ^ 1];
+            i /= 2;
+        }
+    }
+
+    int sumRange(int i, int j) {
+        int sum = 0;
+        for (i += n, j += n; i <= j; i /= 2, j /= 2) {
+            if ((i & 1) == 1) sum += tree[i++];
+            if ((j & 1) == 0) sum += tree[j--];
+        }
+        return sum;
+    }
+
+private:
+    int n;
+    std::vector<int> tree;
+};
+
+//309. Best Time to Buy and Sell Stock with Cooldown
+//https://www.cnblogs.com/grandyang/p/4997417.html
+//網解 runtime beats:88.82% memory beats:82.96%
+int maxProfit_Cooldown(std::vector<int>& prices) {
+    int buy = INT_MIN, pre_buy = 0, sell = 0, pre_sell = 0;
+    for (int price : prices) {
+        pre_buy = buy;
+        buy = std::max(pre_sell - price, pre_buy);
+        pre_sell = sell;
+        sell = std::max(pre_buy + price, pre_sell);
+    }
+    return sell;
+}
+
+//310. Minimum Height Trees
+//https://www.cnblogs.com/grandyang/p/5000291.html
+//網解 runtime beats:67.00% memory beats:30.85%
+std::vector<int> findMinHeightTrees(int n, std::vector<std::vector<int>>& edges) {
+    if (n == 1) return { 0 };
+    std::vector<int> res;
+    std::vector<std::unordered_set<int>> adj(n);
+    std::queue<int> q;
+    for (auto edge : edges) {
+        adj[edge[0]].insert(edge[1]);
+        adj[edge[1]].insert(edge[0]);
+    }
+
+    for (int i = 0; i < n; ++i)
+        if (adj[i].size() == 1)
+            q.push(i);
+
+    while (n > 2) {
+        int size = q.size();
+        n -= size;
+        for (int i = 0; i < size; ++i) {
+            int t = q.front();
+            q.pop();
+            for (auto a : adj[t]) {
+                adj[a].erase(t);
+                if (adj[a].size() == 1)
+                    q.push(a);
+            }
+        }
+    }
+
+    while (!q.empty()) {
+        res.push_back(q.front());
+        q.pop();
+    }
+
+    return res;
+}
