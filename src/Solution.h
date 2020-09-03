@@ -7326,7 +7326,7 @@ private:
 //309. Best Time to Buy and Sell Stock with Cooldown
 //https://www.cnblogs.com/grandyang/p/4997417.html
 //網解 runtime beats:88.82% memory beats:82.96%
-int maxProfit_Cooldown(std::vector<int>& prices) {
+int maxProfit_Cooldown_network(std::vector<int>& prices) {
     int buy = INT_MIN, pre_buy = 0, sell = 0, pre_sell = 0;
     for (int price : prices) {
         pre_buy = buy;
@@ -7340,7 +7340,7 @@ int maxProfit_Cooldown(std::vector<int>& prices) {
 //310. Minimum Height Trees
 //https://www.cnblogs.com/grandyang/p/5000291.html
 //網解 runtime beats:67.00% memory beats:30.85%
-std::vector<int> findMinHeightTrees(int n, std::vector<std::vector<int>>& edges) {
+std::vector<int> findMinHeightTrees_network(int n, std::vector<std::vector<int>>& edges) {
     if (n == 1) return { 0 };
     std::vector<int> res;
     std::vector<std::unordered_set<int>> adj(n);
@@ -7374,4 +7374,82 @@ std::vector<int> findMinHeightTrees(int n, std::vector<std::vector<int>>& edges)
     }
 
     return res;
+}
+
+//312. Burst Balloons
+//https://www.cnblogs.com/grandyang/p/5006441.html
+//網解 runtime beats:42.15% memory beats:37.62%
+int maxCoins_network(std::vector<int>& nums) {
+    int n = nums.size();
+    nums.insert(nums.begin(), 1);
+    nums.push_back(1);
+    std::vector<std::vector<int>> dp(n + 2, std::vector<int>(n + 2, 0));
+    for (int len = 1; len <= n; ++len) {
+        for (int i = 1; i <= n - len + 1; ++i) {
+            int j = i + len - 1;
+            for (int k = i; k <= j; ++k)
+                dp[i][j] = std::max(dp[i][j], nums[i - 1] * nums[k] * nums[j + 1] + dp[i][k - 1] + dp[k + 1][j]);
+        }
+    }
+    return dp[1][n];
+}
+
+//313. Super Ugly Number
+//初解 runtime beats:74.24% memory beats:51.60%
+int nthSuperUglyNumber(int n, std::vector<int>& primes) {
+    //參考Ugly Number II
+    std::vector<int> dp(n, 0);
+    dp[0] = 1;
+    std::vector<int> i_primes(primes.size(), 0);
+    std::vector<int> n_primes(primes.begin(), primes.end());
+
+    for (int i = 1; i < n; i++) {
+        int next = *std::min_element(n_primes.begin(), n_primes.end());
+        dp[i] = next;
+        for (int j = 0; j < primes.size(); j++) {
+            if (next == n_primes[j]) {
+                i_primes[j]++;
+                n_primes[j] = dp[i_primes[j]] * primes[j];
+            }
+        }
+    }
+    return dp.back();
+}
+
+//315. Count of Smaller Numbers After Self
+//https://www.cnblogs.com/grandyang/p/5078490.html
+//網解 runtime beats:19.68% memory beats:90.01%
+std::vector<int> countSmaller_network(std::vector<int>& nums) {
+    std::vector<int> t, res(nums.size());
+    for (int i = nums.size() - 1; i >= 0; --i) {
+        int left = 0, right = t.size();
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (t[mid] >= nums[i]) right = mid;
+            else left = mid + 1;
+        }
+        res[i] = right;
+        t.insert(t.begin() + right, nums[i]);
+    }
+    return res;
+}
+
+//316. Remove Duplicate Letters
+//網解 runtime beats:95.10% memory beats:70.99%
+std::string removeDuplicateLetters(std::string s) {
+    int m[256] = { 0 }, visited[256] = { 0 };
+    std::string res = "0";
+    for (auto a : s)
+        ++m[a];
+    for (auto a : s) {
+        --m[a];
+        if (visited[a]) continue;
+        while (a < res.back() && m[res.back()]) {
+            visited[res.back()] = 0;
+            res.pop_back();
+        }
+        res += a;
+        visited[a] = 1;
+    }
+    return res.substr(1);
 }

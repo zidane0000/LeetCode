@@ -775,8 +775,24 @@ int main()
     //int r = maxProfit_Cooldown(prices);
 
     //310. Minimum Height Trees
-    std::vector<std::vector<int>> edges{ {1, 0},{1, 2},{1, 3} };
-    std::vector<int> r = findMinHeightTrees(4, edges);
+    //std::vector<std::vector<int>> edges{ {1, 0},{1, 2},{1, 3} };
+    //std::vector<int> r = findMinHeightTrees(4, edges);
+
+    //313. Super Ugly Number
+    //std::vector<int> primes{ 2,7,13,19 };
+    //int r = nthSuperUglyNumber(12, primes);
+
+    //315. Count of Smaller Numbers After Self
+    std::vector<int> nums{ 2,0,1 };
+    std::vector<int> r = countSmaller_network(nums);
+
+
+
+
+
+
+
+
 
 
     return 0;
