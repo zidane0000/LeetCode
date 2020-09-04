@@ -422,3 +422,32 @@ Record the Problem-solving process
 	- 網解 runtime beats:92.74% memory beats:32.95%
 - [297]. Serialize and Deserialize Binary Tree
 	- 網解 runtime beats:92.88% memory beats:72.40% [參考網址](https://www.cnblogs.com/grandyang/p/4913869.html)
+- [300]. Longest Increasing Subsequence
+	- 初解 runtime beats:44.00% memory beats:73.52%
+- [301]. Remove Invalid Parentheses
+	- 網解 runtime beats:39.74% memory beats:46.59% [參考網址](https://www.cnblogs.com/grandyang/p/4944875.html)
+	- 網解 runtime beats:100.00% memory beats:83.91%
+- [304]. Range Sum Query 2D - Immutable
+	- 初解 runtime beats:83.63% memory beats:95.14%
+- [307]. Range Sum Query - Mutable
+	- 初解 runtime beats:05.36% memory beats:97.68%
+	- 網解 runtime beats:34.01% memory beats:51.62% [參考網址](https://www.cnblogs.com/grandyang/p/4985506.html)
+- [309]. Best Time to Buy and Sell Stock with Cooldown
+	- 網解 runtime beats:88.82% memory beats:82.96% [參考網址](https://www.cnblogs.com/grandyang/p/4997417.html)
+- [310]. Minimum Height Trees
+	- 網解 runtime beats:67.00% memory beats:30.85% [參考網址](https://www.cnblogs.com/grandyang/p/5000291.html)
+- [312]. Burst Balloons
+	- 網解 runtime beats:42.15% memory beats:37.62% [參考網址](https://www.cnblogs.com/grandyang/p/5006441.html)
+- [313]. Super Ugly Number
+	- 初解 runtime beats:74.24% memory beats:51.60%
+- [315]. Count of Smaller Numbers After Self
+	- 網解 runtime beats:19.68% memory beats:90.01% [參考網址](https://www.cnblogs.com/grandyang/p/5078490.html
+- [316]. Remove Duplicate Letters
+	- 網解 runtime beats:95.10% memory beats:70.99% [參考網址](https://www.cnblogs.com/grandyang/p/5085379.html)
+- [318]. Maximum Product of Word Lengths
+	- 網解 runtime beats:96.25% memory beats:80.75% [參考網址](https://www.cnblogs.com/grandyang/p/5090058.html)
+- [321]. Create Maximum Number
+	- 網解 runtime beats:99.79% memory beats:95.00%
+- [322]. Coin Change
+	- 網解 runtime beats:68.79% memory beats:17.03% [參考網址](https://www.cnblogs.com/grandyang/p/5138186.html)
+	- 網解 runtime beats:99.88% memory beats:91.38%

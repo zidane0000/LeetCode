@@ -783,15 +783,16 @@ int main()
     //int r = nthSuperUglyNumber(12, primes);
 
     //315. Count of Smaller Numbers After Self
-    std::vector<int> nums{ 2,0,1 };
-    std::vector<int> r = countSmaller_network(nums);
+    //std::vector<int> nums{ 2,0,1 };
+    //std::vector<int> r = countSmaller_network(nums);
 
+    //316. Remove Duplicate Letters
+    //std::string r = removeDuplicateLetters("bcabc");
 
-
-
-
-
-
+    //322. Coin Change
+    //std::vector<int> coins{ 186, 419, 83, 408 };
+    //int r = coinChange_network(coins, 6249);
+    
 
 
 

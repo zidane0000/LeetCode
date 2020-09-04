@@ -7435,9 +7435,13 @@ std::vector<int> countSmaller_network(std::vector<int>& nums) {
 }
 
 //316. Remove Duplicate Letters
+//https://www.cnblogs.com/grandyang/p/5085379.html
 //網解 runtime beats:95.10% memory beats:70.99%
 std::string removeDuplicateLetters(std::string s) {
-    int m[256] = { 0 }, visited[256] = { 0 };
+    //解題思路為先計算每個字母出現次數
+    //然後再次遍歷s，若c比res.back小則將visited[res.back]設為0，意思為尚未走訪，且必須符合res.back在後面還會出現，也就是m[res.back] > 0
+    //為防止res若為空無法比較res.back，給予res初始值'0' = 48，因為'0'小於任何字母
+    int m[256] = { 0 }, visited[256] = { 0 };   //m:統計每個字母出現次數, visited:紀錄每個字母是否被訪問過
     std::string res = "0";
     for (auto a : s)
         ++m[a];
@@ -7452,4 +7456,155 @@ std::string removeDuplicateLetters(std::string s) {
         visited[a] = 1;
     }
     return res.substr(1);
+}
+
+//318. Maximum Product of Word Lengths
+//https://www.cnblogs.com/grandyang/p/5090058.html
+//網解 runtime beats:96.25% memory beats:80.75%
+int maxProduct(std::vector<std::string>& words) {
+    //解題思路為以int取代set來判斷words裡出現哪些字母
+    //因為只有lowercase所以int(32bits)的後26bits可以代表字母
+    //可以相乘的兩個word在&之後要是0，代表沒有重複的字母，才可以相乘
+    int res = 0;    
+    std::vector<int> mask(words.size(), 0);
+    for (int i = 0; i < words.size(); ++i) {
+        for (char c : words[i])
+            mask[i] |= 1 << (c - 'a');
+        for (int j = 0; j < i; ++j)
+            if (!(mask[i] & mask[j]))
+                res = std::max(res, int(words[i].size() * words[j].size()));
+    }
+    return res;
+}
+
+//321. Create Maximum Number
+//網解 runtime beats:99.79% memory beats:95.00%
+void maxNumber_getMax(int* num, int& len, int* result, int& t, int& sortedLen) {
+    int n, top = 0;
+    result[0] = num[0];
+    const int need2drop = len - t;
+    for (int i = 1; i < len; ++i) {
+        n = num[i];
+        while (top >= 0 && result[top] < n && (i - top) <= need2drop) --top; // i - top means already dropped i - top numbers
+        if (i - top > need2drop) {
+            sortedLen = std::max(1, top);
+            while (++top < t)
+                result[top] = num[i++];
+            return;
+        }
+        if (++top < t)
+            result[top] = n;
+        else
+            top = t - 1;
+    }
+}
+
+void maxNumber_dp(int* num, int len, int& sortedLen, int& minL, int& maxL, int* res, int& k) {
+    // create max number of different length from single vector
+    int  j, * head, * prevhead = res;
+    const int soi = sizeof(int);
+    maxNumber_getMax(num, len, res, maxL, sortedLen);
+    for (int l = maxL; l > std::max(minL, 1); --l) {
+        head = prevhead + k;
+        memcpy(head, prevhead, l * soi);
+        for (j = sortedLen; j < l; ++j) {
+            if (head[j] > head[j - 1]) {
+                sortedLen = std::max(1, j - 1);
+                memcpy(head + j - 1, prevhead + j, soi * (l - j));
+                break;
+            }
+        }
+        if (j == l) sortedLen = l;
+        prevhead = head;
+    }
+}
+
+void maxNumber_merge(int* num1, int len1, int* num2, int len2, int* result, int& resSize) {
+    // merge max number created from single vector
+    int i = 0, j = 0, k = 0;
+    while (i < resSize) {
+        if (j < len1&& k < len2) {
+            if (num1[j] > num2[k])
+                result[i++] = num1[j++];
+            else if (num1[j] < num2[k])
+                result[i++] = num2[k++];
+            else {
+                int remaining1 = len1 - j, remaining2 = len2 - k, tmp = num1[j];
+                int flag = memcmp(num1 + j, num2 + k, sizeof(int) * std::min(remaining1, remaining2));
+                flag = (flag == 0 ? (remaining1 > remaining2 ? 1 : -1) : flag);
+                int* num = flag > 0 ? num1 : num2;
+                int& cnt = flag > 0 ? j : k;
+                int len = flag > 0 ? len1 : len2;
+                while (num[cnt] == tmp && cnt < len && i < resSize) result[i++] = num[cnt++];
+            }
+        }
+        else if (j < len1) result[i++] = num1[j++];
+        else result[i++] = num2[k++];
+    }
+}
+
+std::vector<int> maxNumber_network(std::vector<int>& nums1, std::vector<int>& nums2, int k) {
+    int soi = sizeof(int), len1 = nums1.size(), len2 = nums2.size(), step = k * soi;
+    int minL1 = std::max(0, k - len2), maxL1 = std::min(k, len1), minL2 = k - maxL1, maxL2 = k - minL1, range = maxL1 - minL1 + 1;
+    int* res = new int[range * k * 2 + 2 * k], * dp1 = res + k, * dp2 = res + range * k + k, * tmp = res + range * 2 * k + k;
+    memset(res, 0, step);
+    int sortedLen1 = 1, sortedLen2 = 1;
+    if (len1 == 0 && len2 > 0) maxNumber_getMax(&nums2[0], len2, res, k, sortedLen2);
+    else if (len1 > 0 && len2 == 0) maxNumber_getMax(&nums1[0], len1, res, k, sortedLen2);
+    else if (len1 > 0 && len2 > 0) {
+        maxNumber_dp(&nums1[0], len1, sortedLen1, minL1, maxL1, dp1, k);
+        maxNumber_dp(&nums2[0], len2, sortedLen2, minL2, maxL2, dp2, k);
+        if (sortedLen1 + sortedLen2 > k) {
+            maxNumber_merge(dp1 + k * (maxL1 - sortedLen1), sortedLen1, dp2 + k * (maxL2 - sortedLen2), sortedLen2, tmp, k);
+            std::vector<int> resv(tmp, tmp + k);
+            delete[] res;
+            return resv;
+        }
+        for (int i = minL1; i <= maxL1; ++i) {
+            maxNumber_merge(dp1 + k * (maxL1 - i), i, dp2 + k * (maxL2 - k + i), (k - i), tmp, k);
+            if (memcmp(res, tmp, step) < 0) memcpy(res, tmp, step);
+        }
+    }
+    std::vector<int> resv(res, res + k);
+    delete[] res;
+    return resv;
+}
+
+//322. Coin Change
+//https://www.cnblogs.com/grandyang/p/5138186.html
+//網解 runtime beats:68.79% memory beats:17.03%
+int coinChange_network(std::vector<int>& coins, int amount) {
+    //解題思路為i為當前amount，j是在coins中的位置
+    //如果i > coins[j]代表說現在的amount可以被1個coins[j] + ?個其他硬幣組合
+    //?個其他硬幣就是DP，DP儲存在第i時可以被幾個硬幣組合
+    //所以DP初始為amount + 1，因為在DP[0]代表0元的硬幣組合
+    std::vector<int> dp(amount + 1, amount + 1);    //初使值為amount+1是因為最多就amount個硬幣，所以amount + 1就大於最大值了
+    dp[0] = 0;
+    for (int i = 1; i <= amount; ++i)
+        for (int j = 0; j < coins.size(); ++j)
+            if (coins[j] <= i)
+                dp[i] = std::min(dp[i], dp[i - coins[j]] + 1);
+    return (dp[amount] > amount) ? -1 : dp[amount];
+}
+
+//網解 runtime beats:99.88% memory beats:91.38%
+void coinChange_helper(int& res, std::vector<int>& coins, int target, int idx, int count) {
+    if (idx < 0)
+        return;
+    if (target % coins[idx] == 0) {
+        res = std::min(res, count + target / coins[idx]);
+        return;
+    }
+
+    for (int i = target / coins[idx]; i >= 0; --i) {
+        if (count + i >= res - 1) break;    // pruing
+        coinChange_helper(res, coins, target - i * coins[idx], idx - 1, count + i);
+    }
+}
+
+int coinChange(std::vector<int>& coins, int amount) {
+    std::sort(coins.begin(), coins.end());
+    int res = amount + 1;
+    coinChange_helper(res, coins, amount, coins.size() - 1, 0);
+    return res > amount ? -1 : res;
 }
