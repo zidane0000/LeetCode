@@ -7609,59 +7609,24 @@ int coinChange(std::vector<int>& coins, int amount) {
     return res > amount ? -1 : res;
 }
 
-//324.Wiggle Sort II
-//網解 runtime beats:90.86% memory beats:97.40%
-void wiggleSort_network(std::vector<int>& nums) {
-    int c[5002] = { 0 };
-    for (auto n : nums)
-        c[n + 1]++;
-    int acc = 0;
-    int i = 0;
-    for (; i < 5002; i++) {
-        acc += c[i];
-        if (acc > nums.size() / 2)
-            break;
+
+// 6. Zigzag Conversion
+//初解 runtime beats:44.06% memory beats:49.42%
+std::string convert(std::string s, int numRows) {
+    if (numRows == 1)
+        return s;
+
+    std::vector<std::string> ans(numRows, "");
+    int len = s.length();
+    int row_posi = 0;
+    int arrow = 1;
+    for (int i = 0; i < len; i++) {
+        ans[row_posi] = ans[row_posi] + s[i];
+        if (i % (numRows - 1) == 0 && i != 0) { arrow *= -1; }
+        row_posi += arrow;
     }
-
-    int cs = nums.size() / 2 - (acc - c[i]);
-    if (nums.size() % 2 == 1)
-        cs += 1;
-
-    //move star to left of array
-    c[i] -= cs;
-    c[0] = cs;
-
-    //generate pairs from index
-    int s = 0, e = 5001, n = 0;
-    while (s < e) {
-        while (s < e && c[s] <= 0)
-            s++;
-        while (s < e && c[e] <= 0)
-            e--;
-        if (s >= e)
-            break;
-        c[s] -= 1;
-        c[e] -= 1;
-        nums[n++] = s == 0 ? i - 1 : s - 1;
-        nums[n++] = e - 1;
-    }
-
-    if (n == nums.size() - 1)
-        nums[n] = s == 0 ? i - 1 : s - 1;
-};
-
-//網解 runtime beats:90.86% memory beats:94.18%
-void wiggleSort_network_2(std::vector<int>& nums) {
-    nth_element(nums.begin(), nums.begin() + nums.size() / 2, nums.end());
-
-    int len = nums.size(), low = 0, high = len - 1, mid = nums[len / 2], i = 0;
-
-    while (i <= high) {
-        if (nums[(1 + i * 2) % (len | 1)] > mid)
-            std::swap(nums[(1 + i++ * 2) % (len | 1)], nums[(1 + low++ * 2) % (len | 1)]);
-        else if (nums[(1 + i * 2) % (len | 1)] < mid)
-            std::swap(nums[(1 + i * 2) % (len | 1)], nums[(1 + high-- * 2) % (len | 1)]);
-        else
-            i++;
-    }
-};
+    
+    s = "";
+    for (int i = 0; i < numRows; i++) { s += ans[i]; }
+    return s;
+}

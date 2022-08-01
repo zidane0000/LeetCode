@@ -3,6 +3,11 @@ Record the Problem-solving process
 
 [Code Link](https://github.com/zidane0000/LeetCode/blob/master/src/Solution.h)
 
+## 2022
+- [6]. Zigzag Conversion
+	- 初解 runtime beats:44.06% memory beats:49.42%
+
+## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
 	- 二解 runtime beats:55.88% memory beats:42.01%
