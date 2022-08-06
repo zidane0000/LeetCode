@@ -7630,3 +7630,86 @@ std::string convert(std::string s, int numRows) {
     for (int i = 0; i < numRows; i++) { s += ans[i]; }
     return s;
 }
+
+// 7. Reverse Integer
+//ªì¸Ñ runtime beats:100.00% memory beats:76.02%
+int reverse(int x) {
+    if (INT_MIN >= x or INT_MAX <= x)
+        return 0;
+
+    long ans = 0;
+    bool is_negative = false;
+    if (x < 0) {
+        x = -x;
+        is_negative = true;
+    }
+
+    while (x > 0) {
+        if (ans * 10 > INT_MAX) return 0;
+        ans = ans * 10 + x % 10;
+        x = x / 10;
+    }
+
+    if (is_negative) ans = -ans;
+    return (int)ans;
+}
+
+// 8. String to Integer (atoi)
+//ªì¸Ñ runtime beats:82.99% memory beats:12.81%
+int myAtoi(std::string s) {
+    int posi = 0;
+    int len = s.length();
+    bool is_negative = false;
+    bool have_ans = false;
+
+    while (posi < len) {
+        // ascii code :  ' ' -> 32, + -> 43, - -> 45, 0 -> 48, 9 -> 57
+        int ascii = int(s[posi++]);
+
+        // step1. Read in and ignore any leading whitespace.
+        if (ascii == 32) {
+            if (have_ans) break;
+            else continue;
+        }
+
+        // step2. Check if the next character (if not already at the end of the string) is '-' or '+'
+        if (ascii == 43 or ascii == 45 or (ascii >= 48 and ascii <= 57)) {
+            if (ascii == 45) is_negative = true;
+            // step3. Read in next the characters until the next non-digit character or the end of the input is reached. The rest of the string is ignored.
+            while (posi < len) {
+                have_ans = true;
+                ascii = int(s[posi++]);
+                if (ascii >= 48 and ascii <= 57) {
+                    continue;
+                }
+                else
+                    break;
+            }
+        }
+        else
+            break;
+
+        if (have_ans) break;
+    }
+
+    // step4. Convert these digits into an integer. If no digits were read, then the integer is 0. Change the sign as necessary.
+    int ans = 0;
+    s = s.substr(0, posi);
+    len = s.length();
+    posi = 0;
+    while (posi < len) {
+        int ascii = int(s[posi]);
+        posi++;
+        if (ascii >= 48 and ascii <= 57) {
+            // step5. If the integer is out of the 32-bit signed integer range, then clamp the integer so that it remains in the range.
+            if (ans > (INT_MAX / 10)) { return is_negative ? INT_MIN : INT_MAX; }
+            ans = ans * 10;
+            if (ans == INT_MAX - 7 and (ascii - 48) > 7) { return is_negative ? INT_MIN : INT_MAX; }
+            ans = ans + (ascii - 48);
+        }
+    }
+    ans = is_negative ? -ans : ans;
+
+    // step6. Return the integer as the final result
+    return (int)ans;
+}

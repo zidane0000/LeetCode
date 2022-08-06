@@ -796,5 +796,22 @@ int main()
     //6. Zigzag Conversion
     //convert("ABCDEFG", 4);
 
+    // 7. Reverse Integer
+    //std::cout << (0 == reverse(1563847412)) << std::endl;
+    //std::cout << (2147483641 == reverse(1463847412)) << std::endl;
+
+    // 8. String to Integer (atoi)
+    std::cout << myAtoi("-3147483647") << std::endl;
+    std::cout << myAtoi("3147483647") << std::endl;
+    std::cout << myAtoi("- 1234 to 4567") << std::endl;
+    std::cout << myAtoi("+1234 to 4567") << std::endl;
+    std::cout << myAtoi("12+34 to 4567") << std::endl;
+    std::cout << myAtoi("-45") << std::endl;
+    std::cout << myAtoi("+5") << std::endl;
+    std::cout << myAtoi(".5") << std::endl;
+    std::cout << myAtoi("579878 is integer 418") << std::endl;
+    std::cout << myAtoi("579878000000000") << std::endl;
+    std::cout << myAtoi("words and 987") << std::endl;
+
     return 0;
 }

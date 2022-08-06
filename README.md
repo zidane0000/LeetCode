@@ -6,6 +6,10 @@ Record the Problem-solving process
 ## 2022
 - [6]. Zigzag Conversion
 	- 初解 runtime beats:44.06% memory beats:49.42%
+- [7]. Reverse Integer
+	- 初解 runtime beats:100.00% memory beats:76.02%
+- [8]. String to Integer (atoi)
+	- 初解 runtime beats:82.99% memory beats:12.81%
 
 ## 2020
 - [1]. Two Sum
