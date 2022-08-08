@@ -801,7 +801,7 @@ int main()
     //std::cout << (2147483641 == reverse(1463847412)) << std::endl;
 
     // 8. String to Integer (atoi)
-    std::cout << myAtoi("-3147483647") << std::endl;
+    /*std::cout << myAtoi("-3147483647") << std::endl;
     std::cout << myAtoi("3147483647") << std::endl;
     std::cout << myAtoi("- 1234 to 4567") << std::endl;
     std::cout << myAtoi("+1234 to 4567") << std::endl;
@@ -811,7 +811,21 @@ int main()
     std::cout << myAtoi(".5") << std::endl;
     std::cout << myAtoi("579878 is integer 418") << std::endl;
     std::cout << myAtoi("579878000000000") << std::endl;
-    std::cout << myAtoi("words and 987") << std::endl;
+    std::cout << myAtoi("words and 987") << std::endl;*/
+
+    // 13. Roman to Integer
+    /*std::cout << romanToInt("IV") << std::endl;
+    std::cout << romanToInt("DXL") << std::endl;
+    std::cout << romanToInt("LVIII") << std::endl;
+    std::cout << romanToInt("MCMXCIV") << std::endl;*/
+
+    // 29. Divide Two Integers
+    std::cout << divide(-2147483648, 2) << std::endl;
+    std::cout << divide(-2147483648, -1) << std::endl;
+    std::cout << divide(-2147483647, -1) << std::endl;
+    std::cout << divide(2147483647, -1) << std::endl;
+    std::cout << divide(2147483647, 1) << std::endl;
+
 
     return 0;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <climits>
 #include <vector>
 #include <map>
 #include <string>
@@ -7712,4 +7713,92 @@ int myAtoi(std::string s) {
 
     // step6. Return the integer as the final result
     return (int)ans;
+}
+
+// 13. Roman to Integer
+//ªì¸Ñ runtime beats:77.18% memory beats:64.52%
+int romanToInt(std::string s) {
+    /*
+    Symbol       Value
+    I            1
+    V            5
+    X            10
+    L            50
+    C            100
+    D            500
+    M            1000
+
+    It is guaranteed that s is a valid roman numeral in the range [1, 3999]
+    I can be placed before V (5) and X (10) to make 4 and 9.
+    X can be placed before L (50) and C (100) to make 40 and 90.
+    C can be placed before D (500) and M (1000) to make 400 and 900.
+    */
+    int ans = 0;
+    int len = s.length();
+    int before = 0;
+    for (int i = 0; i < len; i++) {
+        before = i - 1;
+        if (s[i] == 'I') { ans += 1; }
+        else if (s[i] == 'V') {
+            if (before > -1 and s[before] == 'I') { ans += 3; }
+            else { ans += 5; }
+        }
+        else if (s[i] == 'X') {
+            if (before > -1 and s[before] == 'I') { ans += 8; }
+            else { ans += 10; }
+        }
+        else if (s[i] == 'L') {
+            if (before > -1 and s[before] == 'X') { ans += 30; }
+            else { ans += 50; }
+        }
+        else if (s[i] == 'C') {
+            if (before > -1 and s[before] == 'X') { ans += 80; }
+            else { ans += 100; }
+        }
+        else if (s[i] == 'D') {
+            if (before > -1 and s[before] == 'C') { ans += 300; }
+            else { ans += 500; }
+        }
+        else if (s[i] == 'M') {
+            if (before > -1 and s[before] == 'C') { ans += 800; }
+            else { ans += 1000; }
+        }
+    }
+
+    return ans;
+}
+
+// 29. Divide Two Integers
+//https://medium.com/@ChYuan/leetcode-29-divide-two-integers-%E5%BF%83%E5%BE%97-medium-91e5fccb29fa
+//ºô¸Ñ runtime beats:100.00% memory beats:29.23%
+int divide(int dividend, int divisor) {
+    //  divide two integers without using multiplication, division, and mod operator
+    if (divisor == 1) return dividend;
+    if (divisor == -1) {
+        if (dividend == INT_MIN) { return INT_MAX; }
+        else { return -dividend; }
+    }
+
+    int sign = (dividend >= 0 ^ divisor >= 0) ? -1 : 1;
+    long long int quotient = 0;
+    long long int sum = 0;
+
+    long long int dividendL = dividend;
+    dividendL = abs(dividendL);
+    long long int divisorL = divisor;
+    divisorL = abs(divisorL);
+
+    for (int i = 31; i >= 0; i--)
+    {
+        if ((dividendL >> i) >= divisorL)
+        {
+            dividendL -= (divisorL << i);
+            quotient += (1LL << i);
+        }
+    }
+
+    if (sign * quotient > INT_MAX)
+        return INT_MAX;
+
+    return sign * quotient;
 }

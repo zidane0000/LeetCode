@@ -10,6 +10,10 @@ Record the Problem-solving process
 	- 初解 runtime beats:100.00% memory beats:76.02%
 - [8]. String to Integer (atoi)
 	- 初解 runtime beats:82.99% memory beats:12.81%
+- [13]. Roman to Integer
+	- 初解 runtime beats:77.18% memory beats:64.52%
+- [29]. Divide Two Integers
+	- 網解 runtime beats:100.00% memory beats:29.23% [參考網址](https://medium.com/@ChYuan/leetcode-29-divide-two-integers-%E5%BF%83%E5%BE%97-medium-91e5fccb29fa)
 
 ## 2020
 - [1]. Two Sum
