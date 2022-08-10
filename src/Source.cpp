@@ -801,31 +801,40 @@ int main()
     //std::cout << (2147483641 == reverse(1463847412)) << std::endl;
 
     // 8. String to Integer (atoi)
-    /*std::cout << myAtoi("-3147483647") << std::endl;
-    std::cout << myAtoi("3147483647") << std::endl;
-    std::cout << myAtoi("- 1234 to 4567") << std::endl;
-    std::cout << myAtoi("+1234 to 4567") << std::endl;
-    std::cout << myAtoi("12+34 to 4567") << std::endl;
-    std::cout << myAtoi("-45") << std::endl;
-    std::cout << myAtoi("+5") << std::endl;
-    std::cout << myAtoi(".5") << std::endl;
-    std::cout << myAtoi("579878 is integer 418") << std::endl;
-    std::cout << myAtoi("579878000000000") << std::endl;
-    std::cout << myAtoi("words and 987") << std::endl;*/
+    //std::cout << myatoi("-3147483647") << std::endl;
+    //std::cout << myatoi("3147483647") << std::endl;
+    //std::cout << myatoi("- 1234 to 4567") << std::endl;
+    //std::cout << myatoi("+1234 to 4567") << std::endl;
+    //std::cout << myatoi("12+34 to 4567") << std::endl;
+    //std::cout << myatoi("-45") << std::endl;
+    //std::cout << myatoi("+5") << std::endl;
+    //std::cout << myatoi(".5") << std::endl;
+    //std::cout << myatoi("579878 is integer 418") << std::endl;
+    //std::cout << myatoi("579878000000000") << std::endl;
+    //std::cout << myatoi("words and 987") << std::endl;
 
     // 13. Roman to Integer
-    /*std::cout << romanToInt("IV") << std::endl;
-    std::cout << romanToInt("DXL") << std::endl;
-    std::cout << romanToInt("LVIII") << std::endl;
-    std::cout << romanToInt("MCMXCIV") << std::endl;*/
+    //std::cout << romanToInt("IV") << std::endl;
+    //std::cout << romanToInt("DXL") << std::endl;
+    //std::cout << romanToInt("LVIII") << std::endl;
+    //std::cout << romanToInt("MCMXCIV") << std::endl;
 
     // 29. Divide Two Integers
-    std::cout << divide(-2147483648, 2) << std::endl;
-    std::cout << divide(-2147483648, -1) << std::endl;
-    std::cout << divide(-2147483647, -1) << std::endl;
-    std::cout << divide(2147483647, -1) << std::endl;
-    std::cout << divide(2147483647, 1) << std::endl;
+    //std::cout << divide(-2147483648, 2) << std::endl;
+    //std::cout << divide(-2147483648, -1) << std::endl;
+    //std::cout << divide(-2147483647, -1) << std::endl;
+    //std::cout << divide(2147483647, -1) << std::endl;
+    //std::cout << divide(2147483647, 1) << std::endl;
 
+    // 543. Diameter of Binary Tree
+    //TreeNode* tree = toTree({ 4,-7,-3,null,null,-9,-3,9,-7,-4,null,6,null,-6,-6,null,null,0,6,5,null,9,null,null,-1,-4,null,null,null,-2 }); // expect 8
+    //std:cout << diameterOfBinaryTree(tree) << std::endl;
+
+    // 347. Top K Frequent Elements
+    //std::vector<int> v({ 4, 1, -1, 2, -1, 2, 3 });
+    //std::vector<int> ans = topKFrequent(v, 2);
+    //for (int i : ans)
+    //    std::cout << i << ' ';
 
     return 0;
 }

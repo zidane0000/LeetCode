@@ -7779,7 +7779,7 @@ int divide(int dividend, int divisor) {
         else { return -dividend; }
     }
 
-    int sign = (dividend >= 0 ^ divisor >= 0) ? -1 : 1;
+    int sign = ((dividend >= 0) ^ (divisor >= 0)) ? -1 : 1;
     long long int quotient = 0;
     long long int sum = 0;
 
@@ -7801,4 +7801,58 @@ int divide(int dividend, int divisor) {
         return INT_MAX;
 
     return sign * quotient;
+}
+
+// 543. Diameter of Binary Tree
+//ªì¸Ñ runtime beats:58.77% memory beats:93.14%
+int getDeepest(int* ans, TreeNode* node) {
+    int left_deepest = 0, right_deepest = 0;
+    if (node->left) { left_deepest = getDeepest(ans, node->left) + 1; }
+
+    if (node->right) { right_deepest = getDeepest(ans, node->right) + 1; }
+    node->val = left_deepest + right_deepest;
+    *ans = (*ans > node->val) ? *ans : node->val;
+    return left_deepest > right_deepest ? left_deepest : right_deepest;
+}
+
+int diameterOfBinaryTree(TreeNode* root) {
+    int ans = -1;
+    getDeepest(&ans, root);
+    return ans;
+}
+
+// 347. Top K Frequent Elements
+//ªì¸Ñ runtime beats:05.22% memory beats:99.98%
+std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
+    std::vector<int> ans;
+    std::vector<int> count;
+    int index = 0, index_before = 0, tmp = 0;
+    for (int i = 0; i < nums.size(); i++) {
+        auto it = std::find(ans.begin(), ans.end(), nums[i]);
+        if (it == ans.end()) {
+            ans.push_back(nums[i]);
+            count.push_back(1);
+        }
+        else {
+            index = std::distance(ans.begin(), it);
+            count[index]++;
+
+            index_before = index - 1;
+            while ((index_before > -1) and (count[index] > count[index_before])) {
+                // switch index and index_before
+                tmp = count[index];
+                count[index] = count[index_before];
+                count[index_before] = tmp;
+
+                tmp = ans[index];
+                ans[index] = ans[index_before];
+                ans[index_before] = tmp;
+
+                index--;
+                index_before = index - 1;
+            }
+        }
+    }
+        
+    return std::vector<int>(ans.begin(), ans.begin()+k);
 }

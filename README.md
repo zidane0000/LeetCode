@@ -14,6 +14,10 @@ Record the Problem-solving process
 	- 初解 runtime beats:77.18% memory beats:64.52%
 - [29]. Divide Two Integers
 	- 網解 runtime beats:100.00% memory beats:29.23% [參考網址](https://medium.com/@ChYuan/leetcode-29-divide-two-integers-%E5%BF%83%E5%BE%97-medium-91e5fccb29fa)
+- [543]. Diameter of Binary Tree
+	- 初解 runtime beats:58.77% memory beats:93.14%
+- [347]. Top K Frequent Elements
+	- 初解 runtime beats:05.22% memory beats:99.98%
 
 ## 2020
 - [1]. Two Sum
