@@ -836,5 +836,8 @@ int main()
     //for (int i : ans)
     //    std::cout << i << ' ';
 
+    // 378. Kth Smallest Element in a Sorted Matrix
+    std::vector<std::vector<int>> matrix{ {1, 5, 9},{10, 11, 13},{12, 13, 15} };
+    std::cout << kthSmallest(matrix, 8) << std::endl;
     return 0;
 }

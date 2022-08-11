@@ -7823,36 +7823,100 @@ int diameterOfBinaryTree(TreeNode* root) {
 
 // 347. Top K Frequent Elements
 //初解 runtime beats:05.22% memory beats:99.98%
+//std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
+//    std::vector<int> ans;
+//    std::vector<int> count;
+//    int index = 0, index_before = 0, tmp = 0;
+//    for (int i = 0; i < nums.size(); i++) {
+//        auto it = std::find(ans.begin(), ans.end(), nums[i]);
+//        if (it == ans.end()) {
+//            ans.push_back(nums[i]);
+//            count.push_back(1);
+//        }
+//        else {
+//            index = std::distance(ans.begin(), it);
+//            count[index]++;
+//
+//            index_before = index - 1;
+//            while ((index_before > -1) and (count[index] > count[index_before])) {
+//                // switch index and index_before
+//                tmp = count[index];
+//                count[index] = count[index_before];
+//                count[index_before] = tmp;
+//
+//                tmp = ans[index];
+//                ans[index] = ans[index_before];
+//                ans[index_before] = tmp;
+//
+//                index--;
+//                index_before = index - 1;
+//            }
+//        }
+//    }
+//        
+//    return std::vector<int>(ans.begin(), ans.begin()+k);
+//}
+
+//https://www.youtube.com/watch?v=YPTqKIgVk-k
+//網解 runtime beats:86.35% memory beats:06.25%
 std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
+    // bucket sort
+    std::unordered_map<int, int> count;
+
+    for (auto num : nums) { count[num] = 1 + count[num]; }
+
+    int len = nums.size();
+    std::vector<std::vector<int>> freq(len);
+    for (auto it : count) { freq[it.second - 1].push_back(it.first); }
+
     std::vector<int> ans;
-    std::vector<int> count;
-    int index = 0, index_before = 0, tmp = 0;
-    for (int i = 0; i < nums.size(); i++) {
-        auto it = std::find(ans.begin(), ans.end(), nums[i]);
-        if (it == ans.end()) {
-            ans.push_back(nums[i]);
-            count.push_back(1);
-        }
-        else {
-            index = std::distance(ans.begin(), it);
-            count[index]++;
-
-            index_before = index - 1;
-            while ((index_before > -1) and (count[index] > count[index_before])) {
-                // switch index and index_before
-                tmp = count[index];
-                count[index] = count[index_before];
-                count[index_before] = tmp;
-
-                tmp = ans[index];
-                ans[index] = ans[index_before];
-                ans[index_before] = tmp;
-
-                index--;
-                index_before = index - 1;
-            }
-        }
+    for (int i = 0; i < len; i++) {
+        std::vector<int> part_ans = freq[len - 1 - i];
+        ans.insert(ans.end(), part_ans.begin(), part_ans.end());
+        if (ans.size() >= k) { break; }
     }
-        
-    return std::vector<int>(ans.begin(), ans.begin()+k);
+
+    return ans;
+}
+
+//378. Kth Smallest Element in a Sorted Matrix
+//初解 runtime beats:11.05% memory beats:05.69%
+//int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
+//    int n = matrix[0].size();
+//
+//    std::multiset<int> mset;
+//    for (int i = 0; i < n; i++) {
+//        for (int j = 0; j < n; j++) {
+//            mset.insert(matrix[i][j]);
+//        }
+//    }
+//
+//    int ans = *std::next(mset.begin(), k - 1);
+//    return ans;
+//}
+
+//https://yoyoman822.pixnet.net/blog/post/65621230
+//網解 runtime beats:48.20% memory beats:92.86%
+int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
+    int m, n;
+    m = matrix.size(), n = matrix[0].size(); // For general, the matrix need not be a square
+    int left = matrix[0][0], right = matrix[m - 1][n - 1], ans = -1;
+    while (left <= right) {
+        int mid = (left + right) >> 1;
+        if (countLessOrEqual(matrix, mid) >= k) {
+            ans = mid;
+            right = mid - 1; // try to looking for a smaller value in the left side
+        }
+        else left = mid + 1; // try to looking for a bigger value in the right side
+    }
+    return ans;
+}
+
+int countLessOrEqual(std::vector<std::vector<int>>& matrix, int x) {
+    int cnt = 0, c = n - 1; // start with the rightmost column
+    for (int r = 0; r < m; ++r) {
+        while (c >= 0 && matrix[r][c] > x) --c;  // decrease column until matrix[r][c] <= x
+        cnt += (c + 1);
+    }
+    return cnt;
 }

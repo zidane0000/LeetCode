@@ -18,6 +18,10 @@ Record the Problem-solving process
 	- 初解 runtime beats:58.77% memory beats:93.14%
 - [347]. Top K Frequent Elements
 	- 初解 runtime beats:05.22% memory beats:99.98%
+	- 網解 runtime beats:86.35% memory beats:06.25% [參考網址](https://www.youtube.com/watch?v=YPTqKIgVk-k)
+- [378]. Kth Smallest Element in a Sorted Matrix
+	- 初解 runtime beats:11.05% memory beats:05.69%
+	- 網解 runtime beats:48.20% memory beats:92.86% [參考網址](https://yoyoman822.pixnet.net/blog/post/65621230)
 
 ## 2020
 - [1]. Two Sum
