@@ -22,6 +22,8 @@ Record the Problem-solving process
 - [378]. Kth Smallest Element in a Sorted Matrix
 	- 初解 runtime beats:11.05% memory beats:05.69%
 	- 網解 runtime beats:48.20% memory beats:92.86% [參考網址](https://yoyoman822.pixnet.net/blog/post/65621230)
+- [394]. Decode String
+	- 初解 runtime beats:100.00% memory beats:56.76%
 
 ## 2020
 - [1]. Two Sum

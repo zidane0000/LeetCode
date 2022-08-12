@@ -7881,42 +7881,111 @@ std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
 
 //378. Kth Smallest Element in a Sorted Matrix
 //初解 runtime beats:11.05% memory beats:05.69%
-//int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
-//    int n = matrix[0].size();
-//
-//    std::multiset<int> mset;
-//    for (int i = 0; i < n; i++) {
-//        for (int j = 0; j < n; j++) {
-//            mset.insert(matrix[i][j]);
-//        }
-//    }
-//
-//    int ans = *std::next(mset.begin(), k - 1);
-//    return ans;
-//}
-
-//https://yoyoman822.pixnet.net/blog/post/65621230
-//網解 runtime beats:48.20% memory beats:92.86%
 int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
-    int m, n;
-    m = matrix.size(), n = matrix[0].size(); // For general, the matrix need not be a square
-    int left = matrix[0][0], right = matrix[m - 1][n - 1], ans = -1;
-    while (left <= right) {
-        int mid = (left + right) >> 1;
-        if (countLessOrEqual(matrix, mid) >= k) {
-            ans = mid;
-            right = mid - 1; // try to looking for a smaller value in the left side
+    int n = matrix[0].size();
+
+    std::multiset<int> mset;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            mset.insert(matrix[i][j]);
         }
-        else left = mid + 1; // try to looking for a bigger value in the right side
     }
+
+    int ans = *std::next(mset.begin(), k - 1);
     return ans;
 }
 
-int countLessOrEqual(std::vector<std::vector<int>>& matrix, int x) {
-    int cnt = 0, c = n - 1; // start with the rightmost column
-    for (int r = 0; r < m; ++r) {
-        while (c >= 0 && matrix[r][c] > x) --c;  // decrease column until matrix[r][c] <= x
-        cnt += (c + 1);
+//https://yoyoman822.pixnet.net/blog/post/65621230
+//網解 runtime beats:48.20% memory beats:92.86%
+//int m, n;
+//int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
+//    m = matrix.size(), n = matrix[0].size(); // For general, the matrix need not be a square
+//    int left = matrix[0][0], right = matrix[m - 1][n - 1], ans = -1;
+//    while (left <= right) {
+//        int mid = (left + right) >> 1;
+//        if (countLessOrEqual(matrix, mid) >= k) {
+//            ans = mid;
+//            right = mid - 1; // try to looking for a smaller value in the left side
+//        }
+//        else left = mid + 1; // try to looking for a bigger value in the right side
+//    }
+//    return ans;
+//}
+//
+//int countLessOrEqual(std::vector<std::vector<int>>& matrix, int x) {
+//    int cnt = 0, c = n - 1; // start with the rightmost column
+//    for (int r = 0; r < m; ++r) {
+//        while (c >= 0 && matrix[r][c] > x) --c;  // decrease column until matrix[r][c] <= x
+//        cnt += (c + 1);
+//    }
+//    return cnt;
+//}
+
+//394. Decode String
+//初解 runtime beats:100.00% memory beats:56.76%
+std::string decodeString(std::string s) {
+    int squareBracketsCount = 0;
+
+    std::stack<int> times;
+    std::stack<std::string> candidates;
+    std::string ans = "";
+    int ascii;
+    for (char c : s) {
+        if (c == '[') { //square brackets
+            squareBracketsCount += 1;
+            candidates.push("");
+        }
+        else if (c == ']') {
+            squareBracketsCount--;
+
+            std::string part_ans = "";
+            for (int i = 0; i < times.top(); i++) {
+                part_ans += candidates.top();
+            }
+            candidates.pop();
+            times.pop();
+            
+            if ((squareBracketsCount <= 0) or (squareBracketsCount > times.size())) {
+                ans += part_ans;
+            }
+            else {
+                if (!candidates.empty()) {
+                    part_ans = candidates.top() + part_ans;
+                    candidates.pop();
+                }
+                candidates.push(part_ans);
+            }
+        }
+
+        ascii = int(c);
+        if (ascii >= 48 and ascii < 58) { //digits
+            if ((times.empty()) or (squareBracketsCount >= times.size())) {
+                times.push(ascii - 48);
+            }
+            else {
+                int tmp = times.top();
+                times.pop();
+                times.push(tmp * 10 + ascii - 48);
+            }
+        }
+        else if (ascii >= 97 and ascii <= 122) { //lowercase English letters
+            if (squareBracketsCount == 0) {
+                ans += c;
+            }
+            else if ((candidates.empty()) or (squareBracketsCount > candidates.size())) {
+                candidates.push(std::string(1, c));
+            }
+            else {
+                std::string tmp = candidates.top();
+                candidates.pop();
+                candidates.push(tmp + c);
+            }
+        }
     }
-    return cnt;
+
+    while (!candidates.empty()) {
+        ans = ans + candidates.top();
+        candidates.pop();
+    }
+    return ans;
 }

@@ -837,7 +837,13 @@ int main()
     //    std::cout << i << ' ';
 
     // 378. Kth Smallest Element in a Sorted Matrix
-    std::vector<std::vector<int>> matrix{ {1, 5, 9},{10, 11, 13},{12, 13, 15} };
-    std::cout << kthSmallest(matrix, 8) << std::endl;
+    //std::vector<std::vector<int>> matrix{ {1, 5, 9},{10, 11, 13},{12, 13, 15} };
+    //std::cout << kthSmallest(matrix, 8) << std::endl;
+
+    //394. Decode String
+    std::cout << decodeString("3[z]2[2[y]pq4[2[jk]e1[f]]]ef") << std::endl;
+    std::cout << decodeString("abc3[cd]xyz") << std::endl;
+    std::cout << decodeString("2[abc]3[cd]ef") << std::endl;
+    std::cout << decodeString("3[a2[c]]") << std::endl;
     return 0;
 }
