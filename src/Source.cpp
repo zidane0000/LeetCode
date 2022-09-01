@@ -841,9 +841,29 @@ int main()
     //std::cout << kthSmallest(matrix, 8) << std::endl;
 
     //394. Decode String
-    std::cout << decodeString("3[z]2[2[y]pq4[2[jk]e1[f]]]ef") << std::endl;
-    std::cout << decodeString("abc3[cd]xyz") << std::endl;
-    std::cout << decodeString("2[abc]3[cd]ef") << std::endl;
-    std::cout << decodeString("3[a2[c]]") << std::endl;
+    //std::cout << decodeString("3[z]2[2[y]pq4[2[jk]e1[f]]]ef") << std::endl;
+    //std::cout << decodeString("abc3[cd]xyz") << std::endl;
+    //std::cout << decodeString("2[abc]3[cd]ef") << std::endl;
+    //std::cout << decodeString("3[a2[c]]") << std::endl;
+
+    //437. Path Sum III
+    //TreeNode* root = toTree({ 5,4,8,11,null,13,4,7,2,null,null,5,1 }); // expect 8
+    //std::cout << pathSum3(root, 22) << std::endl;
+    
+    //560. Subarray Sum Equals K
+    //std::vector<int> nums({ 1,2,3,-3 });
+    //std::cout << subarraySum(nums, 3) << std::endl;
+
+    //1448. Count Good Nodes in Binary Tree
+    //TreeNode* root = toTree({ -4,-4,5,null,null,4,-5,-5,2,1,null,null,-2,null,5,null,null,null,-4,null,null,-4,null,2,null,-1 });
+    //std::cout << goodNodes(root) << std::endl;
+
+    //54. Spiral Matrix
+    std::vector<std::vector<int>> matrix{ {1,2,3}, {4,5,6}, {7,8,9} };
+    //std::vector<std::vector<int>> matrix{ {1}, {4}, {7} };
+    std::vector<int> ans = spiralOrder(matrix);
+    //for (auto a : ans)
+    //    std::cout << a << " ";
+
     return 0;
 }

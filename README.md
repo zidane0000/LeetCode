@@ -24,6 +24,15 @@ Record the Problem-solving process
 	- 網解 runtime beats:48.20% memory beats:92.86% [參考網址](https://yoyoman822.pixnet.net/blog/post/65621230)
 - [394]. Decode String
 	- 初解 runtime beats:100.00% memory beats:56.76%
+- [437]. Path Sum III
+	- 初解 runtime beats:05.57% memory beats:05.03%
+	- 網解 runtime beats:51.58% memory beats:76.91% [參考網址](https://www.cnblogs.com/grandyang/p/6007336.html)
+- [560]. Subarray Sum Equals K
+	- 初解 runtime beats:51.58% memory beats:76.91%
+- [1448]. Count Good Nodes in Binary Tree
+	- 初解 runtime beats:09.50% memory beats:91.25%
+- [54]. Spiral Matrix
+	- 初解 runtime beats:28.19% memory beats:29.77%
 
 ## 2020
 - [1]. Two Sum
@@ -127,8 +136,6 @@ Record the Problem-solving process
 	- 初解 runtime beats:41.91% memory beats:82.06%
 - [53]. Maximum Subarray
 	- 初解 runtime beats:46.64% memory beats:70.04%
-- [54]. Spiral Matrix
-	- [fail
 - [55]. Jump Game
 	- 初解 runtime beats:81.88% memory beats:37.69%
 - [56]. Merge Intervals

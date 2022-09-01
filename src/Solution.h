@@ -1942,9 +1942,6 @@ int maxSubArray(std::vector<int>& nums) {
     return max_Sub;
 }
 
-//54. Spiral Matrix
-//fail
-
 //55. Jump Game
 //初解 runtime beats:81.88% memory beats:37.69%
 bool canJump(std::vector<int>& nums) {
@@ -7987,5 +7984,144 @@ std::string decodeString(std::string s) {
         ans = ans + candidates.top();
         candidates.pop();
     }
+    return ans;
+}
+
+//437. Path Sum III
+//初解 runtime beats:05.57% memory beats:05.03%
+//void RecrsivePathSum(TreeNode* node, int& targetSum, int& ans, std::queue<long long> candidates, std::queue<long long> new_candidates) {
+//    if (!node) return;
+//    int node_val = node->val;
+//    if (node_val == targetSum)
+//        ans += 1;
+//
+//    new_candidates.push(node_val);
+//
+//    while (!candidates.empty()) {
+//        long long front = candidates.front();
+//        if ((front + node_val) == targetSum)
+//            ans += 1;
+//        new_candidates.push(front + node_val);
+//        candidates.pop();
+//    }
+//
+//    if (node->left)
+//        RecrsivePathSum(node->left, targetSum, ans, new_candidates, candidates);
+//
+//    if (node->right)
+//        RecrsivePathSum(node->right, targetSum, ans, new_candidates, candidates);
+//
+//    while (!new_candidates.empty()) {
+//        long long front = new_candidates.front();
+//        candidates.push(front - node_val);
+//        new_candidates.pop();
+//    }
+//}
+//
+//
+//int pathSum3(TreeNode* root, int targetSum) {
+//    int ans = 0;
+//    std::queue<long long> candidates;
+//    std::queue<long long> new_candidates;
+//    RecrsivePathSum(root, targetSum, ans, candidates, new_candidates);
+//    return ans;
+//}
+
+//https://www.cnblogs.com/grandyang/p/6007336.html
+//網解 runtime beats:51.58% memory beats:76.91%
+int sumUp(TreeNode* node, long long pre, int& sum) {
+    if (!node) return 0;
+    long long cur = pre + node->val;
+    return (cur == sum) + sumUp(node->left, cur, sum) + sumUp(node->right, cur, sum);
+}
+
+int pathSum3(TreeNode* root, int sum) {
+    if (!root) return 0;
+    return sumUp(root, 0, sum) + pathSum3(root->left, sum) + pathSum3(root->right, sum);
+}
+
+//560. Subarray Sum Equals K
+//初解 runtime beats:51.58% memory beats:76.91%
+int RecursiveSubarraySum(std::vector<int>& nums, int& k, int posi, int sum) {
+    if (posi >= nums.size()) { 
+        return sum == k; 
+    }
+    int c = RecursiveSubarraySum(nums, k, posi + 1, sum);
+    int d = RecursiveSubarraySum(nums, k, posi + 1, sum + nums[posi]);
+    return c + d;
+}
+
+int subarraySum(std::vector<int>& nums, int k) {
+    // Given an array of integers numsand an integer k, return the total number of subarrays whose sum equals to k.
+    // A subarray is a contiguous non - empty sequence of elements within an array.
+    return RecursiveSubarraySum(nums, k, 0, 0);
+}
+
+//1448. Count Good Nodes in Binary Tree
+//初解 runtime beats:09.50% memory beats:91.25%
+void goodNodesDFS(TreeNode* node, int max, int& goods) {
+    if (!node) return;
+    if (node->val >= max) {
+        goods = goods + 1;
+        max = node->val;
+    }
+
+    goodNodesDFS(node->left, max, goods);
+    goodNodesDFS(node->right, max, goods);
+}
+
+int goodNodes(TreeNode* root) {
+    int goods = 0;
+    goodNodesDFS(root, INT_MIN, goods);
+    return goods;      
+}
+
+//54. Spiral Matrix
+//初解 runtime beats:28.19% memory beats:29.77%
+void getLine(std::vector<std::vector<int>>& matrix, std::vector<int>& ans, bool head) {
+    if (head) {
+        for (std::vector<std::vector<int>>::reverse_iterator i = matrix.rbegin(); i != matrix.rend(); ++i) {
+            std::vector<int>& m_vector = *i;
+            if (m_vector.size() > 0) {
+                ans.push_back(m_vector.front());
+                m_vector.erase(m_vector.begin());
+            }
+        }
+    }
+    else {
+        for (std::vector<int>& m : matrix) {
+            if (m.size() > 0) {
+                ans.push_back(m.back());
+                m.erase(m.end() - 1);
+            }
+        }
+    }
+}
+
+
+std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix) {
+    std::vector<int> ans;
+
+    while (!matrix.empty()) {
+        if (!matrix.empty()) {
+            ans.insert(ans.end(), matrix.front().begin(), matrix.front().end());
+            matrix.erase(matrix.begin());
+        }
+
+        if (!matrix.empty())
+            getLine(matrix, ans, false);
+
+        if (!matrix.empty()) {
+            ans.insert(ans.end(), matrix.back().rbegin(), matrix.back().rend());
+            matrix.erase(matrix.end() - 1);
+        }
+
+        if (!matrix.empty())
+            getLine(matrix, ans, true);
+    }
+
+    for (auto a : ans)
+        std::cout << a << " ";
+
     return ans;
 }
