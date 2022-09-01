@@ -859,11 +859,17 @@ int main()
     //std::cout << goodNodes(root) << std::endl;
 
     //54. Spiral Matrix
-    std::vector<std::vector<int>> matrix{ {1,2,3}, {4,5,6}, {7,8,9} };
+    //std::vector<std::vector<int>> matrix{ {1,2,3}, {4,5,6}, {7,8,9} };
     //std::vector<std::vector<int>> matrix{ {1}, {4}, {7} };
-    std::vector<int> ans = spiralOrder(matrix);
+    //std::vector<int> ans = spiralOrder(matrix);
     //for (auto a : ans)
     //    std::cout << a << " ";
+
+    //739. Daily Temperatures
+    std::vector<int> temperatures = { 73,74,75,71,69,72,76,73 };
+    std::vector<int> ans = dailyTemperatures(temperatures);
+    for (auto a : ans)
+        std::cout << a << " ";
 
     return 0;
 }

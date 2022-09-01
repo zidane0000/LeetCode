@@ -8098,7 +8098,6 @@ void getLine(std::vector<std::vector<int>>& matrix, std::vector<int>& ans, bool 
     }
 }
 
-
 std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix) {
     std::vector<int> ans;
 
@@ -8119,9 +8118,45 @@ std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix) {
         if (!matrix.empty())
             getLine(matrix, ans, true);
     }
+    return ans;
+}
 
-    for (auto a : ans)
-        std::cout << a << " ";
+//739. Daily Temperatures
+//https://leetcode.com/problems/daily-temperatures/discuss/384123/100-Speed-and-100-Space-C++
+//ºô¸Ñ runtime beats:27.47% memory beats:71.67%
+std::vector<int> dailyTemperatures(std::vector<int>& T) {
+    if (T.empty()) { return {}; }
+
+    // A stack with values:  
+    // <T[i], Number of days to the next larger number in T>
+    std::stack<std::pair<int, int>> s;
+
+    // The last number in T must have no value larger than it.
+    s.push(std::make_pair(T.back(), 0));
+
+    std::vector<int> ans(T.size(), 0);
+
+    // Start from the back.
+    for (int i = T.size() - 2; i >= 0; i--) {
+        int counter = 1;
+
+        // Pop the stack until its empty or the top number is smaller or equal to T[i]
+        // The counter + the number of elements to the next larger number in T.
+        while (!s.empty() && T[i] >= s.top().first)
+        {
+            counter += s.top().second;
+            s.pop();
+        }
+
+        // If no number on stack is larger than T[i].
+        if (s.empty()) {
+            s.push(std::make_pair(T[i], 0));
+        }
+        else {
+            s.push(std::make_pair(T[i], counter));
+            ans[i] = counter;
+        }
+    }
 
     return ans;
 }

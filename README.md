@@ -33,6 +33,9 @@ Record the Problem-solving process
 	- 初解 runtime beats:09.50% memory beats:91.25%
 - [54]. Spiral Matrix
 	- 初解 runtime beats:28.19% memory beats:29.77%
+- [739]. Daily Temperatures
+	- 網解 runtime beats:27.47% memory beats:71.67% [參考網址](https://leetcode.com/problems/daily-temperatures/discuss/384123/100-Speed-and-100-Space-C++)
+
 
 ## 2020
 - [1]. Two Sum
