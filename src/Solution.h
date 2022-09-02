@@ -8160,3 +8160,43 @@ std::vector<int> dailyTemperatures(std::vector<int>& T) {
 
     return ans;
 }
+
+//637. Average of Levels in Binary Tree
+//ªì¸Ñ runtime beats:65.95% memory beats:72.83%
+std::vector<double> averageOfLevels(TreeNode* root) {
+    std::vector<double> ans({0.0});
+
+    //BFS
+    std::queue<TreeNode*> q({ root });
+    int now = 1; // first level count
+    int now_record = 1;
+    int next = 0;
+
+    while (!q.empty()) {
+        TreeNode* node = q.front();
+        q.pop();
+        now--;
+        ans[ans.size() - 1] += node->val;
+
+        if (node->left) {
+            q.push(node->left);
+            next++;
+        }
+
+        if (node->right) {
+            q.push(node->right);
+            next++;
+        }
+
+        if (now == 0) {
+            //next level;
+            ans[ans.size() - 1] = ans[ans.size() - 1] / now_record;
+            if (next > 0)
+                ans.push_back(0);
+            now = now_record = next;
+            next = 0;
+        }
+    }
+
+    return ans;
+}

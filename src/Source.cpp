@@ -866,10 +866,14 @@ int main()
     //    std::cout << a << " ";
 
     //739. Daily Temperatures
-    std::vector<int> temperatures = { 73,74,75,71,69,72,76,73 };
-    std::vector<int> ans = dailyTemperatures(temperatures);
-    for (auto a : ans)
-        std::cout << a << " ";
+    //std::vector<int> temperatures = { 73,74,75,71,69,72,76,73 };
+    //std::vector<int> ans = dailyTemperatures(temperatures);
+    //for (auto a : ans)
+    //    std::cout << a << " ";
+
+    //637. Average of Levels in Binary Tree
+    TreeNode* root = toTree({ 3,9,20,15,7 });
+    std::vector<double> ans = averageOfLevels(root);
 
     return 0;
 }

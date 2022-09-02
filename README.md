@@ -35,6 +35,8 @@ Record the Problem-solving process
 	- 初解 runtime beats:28.19% memory beats:29.77%
 - [739]. Daily Temperatures
 	- 網解 runtime beats:27.47% memory beats:71.67% [參考網址](https://leetcode.com/problems/daily-temperatures/discuss/384123/100-Speed-and-100-Space-C++)
+- [637]. Average of Levels in Binary Tree
+	- 初解 runtime beats:65.95% memory beats:72.83%
 
 
 ## 2020
