@@ -37,7 +37,8 @@ Record the Problem-solving process
 	- 網解 runtime beats:27.47% memory beats:71.67% [參考網址](https://leetcode.com/problems/daily-temperatures/discuss/384123/100-Speed-and-100-Space-C++)
 - [637]. Average of Levels in Binary Tree
 	- 初解 runtime beats:65.95% memory beats:72.83%
-
+- [967]. Numbers With Same Consecutive Differences
+	- 網解 runtime beats:100.00% memory beats:90.47% [參考網址](https://haren-lin-1.gitbook.io/leetcode-training/backtracking/967.-numbers-with-same-consecutive-differences)
 
 ## 2020
 - [1]. Two Sum

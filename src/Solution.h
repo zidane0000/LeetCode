@@ -8200,3 +8200,28 @@ std::vector<double> averageOfLevels(TreeNode* root) {
 
     return ans;
 }
+
+//967. Numbers With Same Consecutive Differences
+//https://haren-lin-1.gitbook.io/leetcode-training/backtracking/967.-numbers-with-same-consecutive-differences
+//ºô¸Ñ runtime beats:100.00% memory beats:90.47%
+std::vector<int> numsSameConsecDiff(int n, int k) {
+    // 1. Maintain a queue for BFS traversal
+    std::deque<int> que;
+    for (int startnum = 1; startnum < 10; startnum++) que.push_back(startnum);
+    // 2. Traversal by bit numbers, stop when n is reached
+    for (int i = 1; i < n; i++) {
+        int que_size = que.size();
+        // BFS traveral
+        for (int i = 0; i < que_size; i++) {
+            int curNum = que.front(); que.pop_front();
+            int right_most_num = curNum % 10;
+            if (right_most_num + k < 10)
+                que.push_back(curNum * 10 + right_most_num + k);
+            if (k != 0 && right_most_num - k >= 0)
+                que.push_back(curNum * 10 + right_most_num - k);
+        }
+    }
+    // 3. Push the valid numbers from queue into results
+    std::vector<int> res(que.begin(), que.end());
+    return res;
+}

@@ -872,8 +872,14 @@ int main()
     //    std::cout << a << " ";
 
     //637. Average of Levels in Binary Tree
-    TreeNode* root = toTree({ 3,9,20,15,7 });
-    std::vector<double> ans = averageOfLevels(root);
+    //TreeNode* root = toTree({ 3,9,20,15,7 });
+    //std::vector<double> ans = averageOfLevels(root);
+
+    //967. Numbers With Same Consecutive Differences
+    std::vector<int> ans = numsSameConsecDiff(2, 1);
+    for (auto a : ans)
+        std::cout << a << " ";
+
 
     return 0;
 }
