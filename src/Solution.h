@@ -8282,5 +8282,57 @@ int longestNiceSubarray(std::vector<int>& nums) {
 //2402. Meeting Rooms III
 //ªì¸Ñ runtime beats:50.00% memory beats:50.00%
 int mostBooked(int n, std::vector<std::vector<int>>& meetings) {
+    return 0;
+}
 
+//987. Vertical Order Traversal of a Binary Tree
+//ªì¸Ñ runtime beats:39.72% memory beats:63.58%
+void verticalTraversalDFS(TreeNode* node, int row, int col, int& col_offset, 
+    std::vector<std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>>>& tmp) {
+    if (!node)
+        return;
+
+    if (node->left) {
+        verticalTraversalDFS(node->left, row + 1, col - 1, col_offset, tmp);
+    }
+
+    if (col_offset > col) {
+        for (int i = 0; i < (col_offset - col); i++) {
+            std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> new_col;
+            tmp.insert(tmp.begin(), new_col);
+        }
+        col_offset = col;
+    }
+
+    if (tmp.size() > (col - col_offset)) {
+        tmp[(col - col_offset)].push(std::make_pair(row, node->val));
+    }
+    else {
+        std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> new_col;
+        new_col.push(std::make_pair(row, node->val));
+        tmp.push_back(new_col);
+    }
+
+    if (node->right) {
+        verticalTraversalDFS(node->right, row + 1, col + 1, col_offset, tmp);
+    }
+}
+
+std::vector<std::vector<int>> verticalTraversal(TreeNode* root) {
+    std::vector<std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>>> tmp;
+    int col_offset = 0;
+    verticalTraversalDFS(root, 0, 0, col_offset, tmp);
+
+    std::vector<std::vector<int>> ans;
+    for (auto& vec : tmp) {
+        std::vector<int> priority_queue_2_vec;
+
+        while (!vec.empty()) {
+            auto top = vec.top(); vec.pop();
+            priority_queue_2_vec.push_back(top.second);
+        }
+
+        ans.push_back(priority_queue_2_vec);
+    }
+    return ans;
 }

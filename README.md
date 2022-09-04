@@ -49,6 +49,9 @@ Record the Problem-solving process
  - [ ] 2402. Meeting Rooms III
 </details>
 
+- [987]. Vertical Order Traversal of a Binary Tree
+	- 初解 runtime beats:39.72% memory beats:63.58%
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%

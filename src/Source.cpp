@@ -880,13 +880,30 @@ int main()
     //for (auto a : ans)
     //    std::cout << a << " ";
 
-    //6167. Check Distances Between Same Letters
+    //2399. Check Distances Between Same Letters
     //std::vector<int> distance({ 1,3,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 });
     //std::cout << checkDistances("abaccb", distance) << endl;
+    
+    //2400. Number of Ways to Reach a Position After Exactly k Steps
+    //int numberOfWays(int startPos, int endPos, int k)
 
-    //6169. Longest Nice Subarray
-    std::vector<int> nums({ 84139415,693324769,614626365,497710833,615598711,264,65552,50331652,1,1048576,16384,544,270532608,151813349,221976871,678178917,845710321,751376227,331656525,739558112,267703680 });
-    std::cout << longestNiceSubarray(nums) << std::endl;
+    //2401. Longest Nice Subarray
+    //std::vector<int> nums({ 84139415,693324769,614626365,497710833,615598711,264,65552,50331652,1,1048576,16384,544,270532608,151813349,221976871,678178917,845710321,751376227,331656525,739558112,267703680 });
+    //std::cout << longestNiceSubarray(nums) << std::endl;
+
+    //2402. Meeting Rooms III
+    //int mostBooked(int n, std::vector<std::vector<int>>& meetings)
+
+    //987. Vertical Order Traversal of a Binary Tree
+    TreeNode* root = toTree({ -1,10,1,null,null,2,4,3,5,null,null,6,null,7,9,8,null,null,null,null,11,null,null,12 });
+    std::vector<std::vector<int>> ans = verticalTraversal(root);
+
+    for (auto vec : ans) {
+        for (auto i : vec) {
+            std::cout << i << " ";
+        }
+        std::cout << std::endl;
+    }
 
     return 0;
 }
