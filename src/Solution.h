@@ -13,6 +13,7 @@
 #include <functional>
 #include <unordered_map>
 #include <sstream>          //stringstream
+#include <bitset>
 
 //1. Two Sum
 //初解 runtime beats:12.97% memory beats:89.01%
@@ -8224,4 +8225,62 @@ std::vector<int> numsSameConsecDiff(int n, int k) {
     // 3. Push the valid numbers from queue into results
     std::vector<int> res(que.begin(), que.end());
     return res;
+}
+
+//Weekly Contest 309
+//2399. Check Distances Between Same Letters
+//初解 runtime beats:50.00% memory beats:50.00%
+bool checkDistances(std::string s, std::vector<int>& distance) {
+    int distance_record[26] = { -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 };
+    int posi = -1;
+    for (int i = 0; i < s.size(); i++) {
+        posi = int(s.at(i)-97);
+        if (distance_record[posi] == -1) {
+            distance_record[posi] = i;
+        }
+        else {
+            if ((i - distance_record[posi] - 1) != distance[posi])
+                return false;
+            distance_record[posi] = i;
+        }
+    }
+
+    return true;
+}
+
+//2400. Number of Ways to Reach a Position After Exactly k Steps
+//初解 runtime beats:50.00% memory beats:50.00%
+int numberOfWays(int startPos, int endPos, int k) {
+    return 0;
+}
+
+//2401. Longest Nice Subarray
+//初解 runtime beats:50.00% memory beats:50.00%
+int longestNiceSubarray(std::vector<int>& nums) {
+    if (nums.size() == 1)
+        return 1;
+    int ans = 1;
+    int now = nums[0];
+    int max = 1;
+    for (int i = 1; i < nums.size(); i++) {
+        //std::cout << "(" << std::bitset< 32 >(now) << ")" << now << " & " << "(" << std::bitset< 32 >(nums[i]) << ")" << nums[i] << " = " << (now & nums[i]) << std::endl;
+        if ((now & nums[i]) == 0) {
+            max++;
+            now = now | nums[i];
+        }
+        else {
+            ans = ans > max ? ans : max;
+            max = 1;
+            now = nums[i];
+        }
+    }
+
+    ans = ans > max ? ans : max;
+    return ans;
+}
+
+//2402. Meeting Rooms III
+//初解 runtime beats:50.00% memory beats:50.00%
+int mostBooked(int n, std::vector<std::vector<int>>& meetings) {
+
 }

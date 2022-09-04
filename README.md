@@ -40,6 +40,15 @@ Record the Problem-solving process
 - [967]. Numbers With Same Consecutive Differences
 	- 網解 runtime beats:100.00% memory beats:90.47% [參考網址](https://haren-lin-1.gitbook.io/leetcode-training/backtracking/967.-numbers-with-same-consecutive-differences)
 
+<details><summary> <b>Weekly Contest 309</b> </summary>
+
+ - Rank : 12269 / 25750
+ - [x] 2399. Check Distances Between Same Letters
+ - [ ] 2400. Number of Ways to Reach a Position After Exactly k Steps
+ - [ ] 2401. Longest Nice Subarray
+ - [ ] 2402. Meeting Rooms III
+</details>
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
