@@ -77,28 +77,50 @@ TreeNode* toTree(std::vector<int> arr) {
     return root;
 }
 
+//Node* toNode(std::vector<int> arr) {
+//    Node* root = NULL;
+//    std::queue<Node*> q;
+//    int i = 0;
+//    Node* t = arr[i] == NULL ? NULL : new Node(arr[i]);
+//    root = t;
+//    q.push(root);
+//    i++;
+//    while (!q.empty() && i < arr.size()) {
+//        Node* t1 = q.front();
+//        q.pop();
+//        if (t1 != NULL) {
+//            t1->left = arr[i] == NULL ? NULL : new Node(arr[i]);
+//            q.push(t1->left);
+//            i++;
+//            if (i >= arr.size()) {
+//                break;
+//            }
+//            t1->right = arr[i] == NULL ? NULL : new Node(arr[i]);
+//            q.push(t1->right);
+//            i++;
+//        }
+//    }
+//    return root;
+//}
+
 Node* toNode(std::vector<int> arr) {
-    Node* root = NULL;
     std::queue<Node*> q;
     int i = 0;
-    Node* t = arr[i] == NULL ? NULL : new Node(arr[i]);
-    root = t;
+    Node* root = arr[i] == NULL ? NULL : new Node(arr[i]);
     q.push(root);
-    i++;
-    while (!q.empty() && i < arr.size()) {
+    i+=2;
+    while (i < arr.size()) {        
         Node* t1 = q.front();
-        q.pop();
-        if (t1 != NULL) {
-            t1->left = arr[i] == NULL ? NULL : new Node(arr[i]);
-            q.push(t1->left);
-            i++;
-            if (i >= arr.size()) {
-                break;
-            }
-            t1->right = arr[i] == NULL ? NULL : new Node(arr[i]);
-            q.push(t1->right);
-            i++;
+
+        if (arr[i] == NULL) {
+            q.pop();
         }
+        else {
+            Node* child = new Node(arr[i]);
+            t1->children.push_back(child);
+            q.push(child);
+        }
+        i++;
     }
     return root;
 }
@@ -885,25 +907,35 @@ int main()
     //std::cout << checkDistances("abaccb", distance) << endl;
     
     //2400. Number of Ways to Reach a Position After Exactly k Steps
-    //int numberOfWays(int startPos, int endPos, int k)
+    std::cout << numberOfWays(1, 4, 7) << std::endl;
 
     //2401. Longest Nice Subarray
     //std::vector<int> nums({ 84139415,693324769,614626365,497710833,615598711,264,65552,50331652,1,1048576,16384,544,270532608,151813349,221976871,678178917,845710321,751376227,331656525,739558112,267703680 });
+    //std::vector<int> nums({ 3,1,5,11,13 });
     //std::cout << longestNiceSubarray(nums) << std::endl;
 
     //2402. Meeting Rooms III
     //int mostBooked(int n, std::vector<std::vector<int>>& meetings)
 
     //987. Vertical Order Traversal of a Binary Tree
-    TreeNode* root = toTree({ -1,10,1,null,null,2,4,3,5,null,null,6,null,7,9,8,null,null,null,null,11,null,null,12 });
-    std::vector<std::vector<int>> ans = verticalTraversal(root);
+    //TreeNode* root = toTree({ -1,10,1,null,null,2,4,3,5,null,null,6,null,7,9,8,null,null,null,null,11,null,null,12 });
+    //std::vector<std::vector<int>> ans = verticalTraversal(root);
+    //for (auto vec : ans) {
+    //    for (auto i : vec) {
+    //        std::cout << i << " ";
+    //    }
+    //    std::cout << std::endl;
+    //}
 
-    for (auto vec : ans) {
-        for (auto i : vec) {
-            std::cout << i << " ";
-        }
-        std::cout << std::endl;
-    }
+    //429. N-ary Tree Level Order Traversal
+    //Node* root = toNode({ 1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14 });
+    //std::vector<std::vector<int>> ans = levelOrder(root);
+    //for (auto vec : ans) {
+    //    for (auto i : vec) {
+    //        std::cout << i << " ";
+    //    }
+    //    std::cout << std::endl;
+    //}
 
     return 0;
 }

@@ -44,13 +44,18 @@ Record the Problem-solving process
 
  - Rank : 12269 / 25750
  - [x] 2399. Check Distances Between Same Letters
+	- 初解 runtime beats:100.00% memory beats:50.00%
  - [ ] 2400. Number of Ways to Reach a Position After Exactly k Steps
+	- 網解 runtime beats:50.00% memory beats:50.00% [參考網址](https://leetcode.com/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/discuss/2527267/Top-Down-+-Bottom-Up-DP)
  - [ ] 2401. Longest Nice Subarray
+	- 初解 runtime beats:33.33% memory beats:100.00%
  - [ ] 2402. Meeting Rooms III
 </details>
 
 - [987]. Vertical Order Traversal of a Binary Tree
 	- 初解 runtime beats:39.72% memory beats:63.58%
+- [429]. N-ary Tree Level Order Traversal
+	- 初解 runtime beats:38.04% memory beats:86.69%
 
 ## 2020
 - [1]. Two Sum

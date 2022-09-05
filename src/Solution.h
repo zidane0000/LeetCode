@@ -3735,95 +3735,95 @@ int numDistinct_network(std::string s, std::string t) {
 }
 
 //116. Populating Next Right Pointers in Each Node
-class Node {
-public:
-    int val;
-    Node* left;
-    Node* right;
-    Node* next;
-
-    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
-
-    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
-
-    Node(int _val, Node* _left, Node* _right, Node* _next)
-        : val(_val), left(_left), right(_right), next(_next) {}
-};
+//class Node {
+//public:
+//    int val;
+//    Node* left;
+//    Node* right;
+//    Node* next;
+//
+//    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+//
+//    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+//
+//    Node(int _val, Node* _left, Node* _right, Node* _next)
+//        : val(_val), left(_left), right(_right), next(_next) {}
+//};
 
 //初解 runtime beats:52.14% memory beats:16.94%
-Node* connect(Node* root) {
-    if (!root)
-        return root;
-    
-    //BFS
-    std::queue<Node*> wait_queue;
-    std::queue<Node*> next_queue;
-    wait_queue.push(root);
-
-    while (!wait_queue.empty()) {
-        Node* tmp = wait_queue.front();
-        wait_queue.pop();
-        if (tmp->left)
-            next_queue.push(tmp->left);
-
-        if (tmp->right)
-            next_queue.push(tmp->right);
-
-        while (!wait_queue.empty()) {
-            Node* tmp_2 = wait_queue.front();
-            wait_queue.pop();
-            if (tmp_2->left)
-                next_queue.push(tmp_2->left);
-
-            if (tmp_2->right)
-                next_queue.push(tmp_2->right);
-
-            tmp->next = tmp_2;
-            tmp = tmp->next;
-        }
-
-        while (!next_queue.empty()) {
-            tmp = next_queue.front();
-            next_queue.pop();
-            wait_queue.push(tmp);
-        }
-    }
-
-    return root;
-}
-
-//網解 runtime beats:94.58% memory beats:99.90%
-Node* connect_network(Node* root) {
-    if (!root)
-        return nullptr;
-    Node* l = root->left;
-    Node* last;
-    std::queue<Node*> q;
-    if (root->right)
-        q.push(root->right);
-
-    while (l && !q.empty())
-    {
-        last = l;
-        int initial_size = q.size();
-        if (l->right)
-            q.push(l->right);
-        for (int i = 1; i <= initial_size; i++)
-        {
-            Node* curr = q.front();
-            if (curr->left)
-                q.push(curr->left);
-            if (curr->right)
-                q.push(curr->right);
-            curr->left = curr->right = nullptr;
-            last->next = curr;
-            last = last->next;
-            q.pop();
-        }
-        l = l->left;
-    }
-    return root;
-}
+//Node* connect(Node* root) {
+//    if (!root)
+//        return root;
+//    
+//    //BFS
+//    std::queue<Node*> wait_queue;
+//    std::queue<Node*> next_queue;
+//    wait_queue.push(root);
+//
+//    while (!wait_queue.empty()) {
+//        Node* tmp = wait_queue.front();
+//        wait_queue.pop();
+//        if (tmp->left)
+//            next_queue.push(tmp->left);
+//
+//        if (tmp->right)
+//            next_queue.push(tmp->right);
+//
+//        while (!wait_queue.empty()) {
+//            Node* tmp_2 = wait_queue.front();
+//            wait_queue.pop();
+//            if (tmp_2->left)
+//                next_queue.push(tmp_2->left);
+//
+//            if (tmp_2->right)
+//                next_queue.push(tmp_2->right);
+//
+//            tmp->next = tmp_2;
+//            tmp = tmp->next;
+//        }
+//
+//        while (!next_queue.empty()) {
+//            tmp = next_queue.front();
+//            next_queue.pop();
+//            wait_queue.push(tmp);
+//        }
+//    }
+//
+//    return root;
+//}
+//
+////網解 runtime beats:94.58% memory beats:99.90%
+//Node* connect_network(Node* root) {
+//    if (!root)
+//        return nullptr;
+//    Node* l = root->left;
+//    Node* last;
+//    std::queue<Node*> q;
+//    if (root->right)
+//        q.push(root->right);
+//
+//    while (l && !q.empty())
+//    {
+//        last = l;
+//        int initial_size = q.size();
+//        if (l->right)
+//            q.push(l->right);
+//        for (int i = 1; i <= initial_size; i++)
+//        {
+//            Node* curr = q.front();
+//            if (curr->left)
+//                q.push(curr->left);
+//            if (curr->right)
+//                q.push(curr->right);
+//            curr->left = curr->right = nullptr;
+//            last->next = curr;
+//            last = last->next;
+//            q.pop();
+//        }
+//        l = l->left;
+//    }
+//    return root;
+//}
 
 //118. Pascal's Triangle
 //初解 runtime beats:100.00% memory beats:45.15%
@@ -8229,7 +8229,7 @@ std::vector<int> numsSameConsecDiff(int n, int k) {
 
 //Weekly Contest 309
 //2399. Check Distances Between Same Letters
-//初解 runtime beats:50.00% memory beats:50.00%
+//初解 runtime beats:100.00% memory beats:50.00%
 bool checkDistances(std::string s, std::vector<int>& distance) {
     int distance_record[26] = { -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 };
     int posi = -1;
@@ -8249,33 +8249,50 @@ bool checkDistances(std::string s, std::vector<int>& distance) {
 }
 
 //2400. Number of Ways to Reach a Position After Exactly k Steps
-//初解 runtime beats:50.00% memory beats:50.00%
-int numberOfWays(int startPos, int endPos, int k) {
-    return 0;
-}
+//https://leetcode.com/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/discuss/2527267/Top-Down-+-Bottom-Up-DP
+//網解 runtime beats:50.00% memory beats:50.00%
+//int numberOfWaysDFS(int d, int k, int dp[][1001], int& mod) {
+//    if (d >= k)
+//        return d == k;
+//    if (dp[d][k] == 0)
+//        dp[d][k] = (1 + numberOfWaysDFS(d + 1, k - 1, dp, mod) + numberOfWaysDFS(abs(d - 1), k - 1, dp, mod)) % mod;
+//    return dp[d][k] - 1;
+//}
+//
+//int numberOfWays(int startPos, int endPos, int k) {
+//    // will cause stack overflow
+//    int dp[1001][1001] = {}, mod = 1000000007;
+//    return numberOfWaysDFS(abs(startPos - endPos), k, dp, mod);
+//}
 
 //2401. Longest Nice Subarray
-//初解 runtime beats:50.00% memory beats:50.00%
+//初解 runtime beats:33.33% memory beats:100.00%
 int longestNiceSubarray(std::vector<int>& nums) {
     if (nums.size() == 1)
         return 1;
     int ans = 1;
-    int now = nums[0];
-    int max = 1;
-    for (int i = 1; i < nums.size(); i++) {
-        //std::cout << "(" << std::bitset< 32 >(now) << ")" << now << " & " << "(" << std::bitset< 32 >(nums[i]) << ")" << nums[i] << " = " << (now & nums[i]) << std::endl;
-        if ((now & nums[i]) == 0) {
-            max++;
-            now = now | nums[i];
+    int start = 0;
+    int end = 1;
+    int sum = nums[start]; // sum of start to end-1
+    int size = nums.size();
+    while(start < size and end < size) {
+        if ((sum & nums[end]) == 0) { //nice
+            sum = sum | nums[end];
+            end++;
+            ans = ans > (end - start) ? ans : (end - start);
         }
         else {
-            ans = ans > max ? ans : max;
-            max = 1;
-            now = nums[i];
+            if ((end - start) == 1) {
+                end++;
+                start++;
+                sum = nums[start];
+            }
+            else {
+                sum = sum ^ nums[start];
+                start++;
+            }
         }
     }
-
-    ans = ans > max ? ans : max;
     return ans;
 }
 
@@ -8333,6 +8350,54 @@ std::vector<std::vector<int>> verticalTraversal(TreeNode* root) {
         }
 
         ans.push_back(priority_queue_2_vec);
+    }
+    return ans;
+}
+
+//429. N-ary Tree Level Order Traversal
+class Node {
+public:
+    int val;
+    std::vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+    }
+
+    Node(int _val, std::vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+
+//初解 runtime beats:38.04% memory beats:86.69%
+std::vector<std::vector<int>> levelOrder(Node* root) {
+    if (!root) { return {}; }
+    std::vector<std::vector<int>> ans({ {} });
+
+    // BFS
+    std::queue<Node*> q({ root });
+    int count = 1; // count the same layer
+    int next_count = 0;
+
+    while (!q.empty()) {
+        Node* front = q.front(); q.pop();
+
+        for (auto child : front->children) {
+            q.push(child);
+            next_count++;
+        }
+
+        ans.back().push_back(front->val);
+        count--;
+
+        if (count <= 0 and next_count > 0) {
+            count = next_count;
+            next_count = 0;
+            ans.push_back({});
+        }
     }
     return ans;
 }
