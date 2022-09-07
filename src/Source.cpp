@@ -1,6 +1,6 @@
 #include "Solution.h"
 
-#define null NULL
+#define null -1
 
 using std::cout;
 using std::endl;
@@ -52,24 +52,24 @@ ListNode* toList(std::vector<int> vec) {
 
 //https://leetcode.com/problems/invert-binary-tree/discuss/62896/Just-wonder-how-to-write-custom-testcase.-Any-examples/499471
 TreeNode* toTree(std::vector<int> arr) {
-    TreeNode* root = NULL;
+    TreeNode* root = nullptr;
     std::queue<TreeNode*> q;
     int i = 0;
-    TreeNode* t = arr[i] == NULL ? NULL : new TreeNode(arr[i]);
+    TreeNode* t = arr[i] == null ? nullptr : new TreeNode(arr[i]);
     root = t;
     q.push(root);
     i++;
     while (!q.empty() && i < arr.size()) {
         TreeNode* t1 = q.front();
         q.pop();
-        if (t1 != NULL) {
-            t1->left = arr[i] == NULL ? NULL : new TreeNode(arr[i]);
+        if (t1 != nullptr) {
+            t1->left = arr[i] == null ? nullptr : new TreeNode(arr[i]);
             q.push(t1->left);
             i++;
             if (i >= arr.size()) {
                 break;
             }
-            t1->right = arr[i] == NULL ? NULL : new TreeNode(arr[i]);
+            t1->right = arr[i] == null ? nullptr : new TreeNode(arr[i]);
             q.push(t1->right);
             i++;
         }
@@ -907,7 +907,7 @@ int main()
     //std::cout << checkDistances("abaccb", distance) << endl;
     
     //2400. Number of Ways to Reach a Position After Exactly k Steps
-    std::cout << numberOfWays(1, 4, 7) << std::endl;
+    //std::cout << numberOfWays(1, 4, 7) << std::endl;
 
     //2401. Longest Nice Subarray
     //std::vector<int> nums({ 84139415,693324769,614626365,497710833,615598711,264,65552,50331652,1,1048576,16384,544,270532608,151813349,221976871,678178917,845710321,751376227,331656525,739558112,267703680 });
@@ -936,6 +936,13 @@ int main()
     //    }
     //    std::cout << std::endl;
     //}
+
+    //814. Binary Tree Pruning
+    //TreeNode* root = toTree({ 0,null,0,1,1,null,1,null,1,null,null,null,null });
+    //TreeNode* res = pruneTree(root);
+
+    //606. Construct String from Binary Tree
+    std::cout << tree2str(toTree({1,2,3,4})) << std::endl;
 
     return 0;
 }

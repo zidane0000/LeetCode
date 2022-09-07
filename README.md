@@ -56,6 +56,10 @@ Record the Problem-solving process
 	- 初解 runtime beats:39.72% memory beats:63.58%
 - [429]. N-ary Tree Level Order Traversal
 	- 初解 runtime beats:38.04% memory beats:86.69%
+- [814]. Binary Tree Pruning
+	- 初解 runtime beats:100.00% memory beats:99.74%
+- [606]. Construct String from Binary Tree
+	- 初解 runtime beats:55.39% memory beats:96.64%
 
 ## 2020
 - [1]. Two Sum

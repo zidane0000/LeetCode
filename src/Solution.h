@@ -8401,3 +8401,57 @@ std::vector<std::vector<int>> levelOrder(Node* root) {
     }
     return ans;
 }
+
+//814. Binary Tree Pruning
+//ªì¸Ñ runtime beats:100.00% memory beats:99.74%
+TreeNode* pruneTree(TreeNode* root) {
+    if (!root)
+        return root;
+
+    if (root->left) {
+        pruneTree(root->left);
+        if ((root->left->val == 0) && !(root->left->left) && !(root->left->right))
+            root->left = nullptr;
+    }
+
+    if (root->right) {
+        pruneTree(root->right);
+        if ((root->right->val == 0) && !(root->right->left) && !(root->right->right))
+            root->right = nullptr;
+    }
+
+    if ((root->val == 0) && !(root->left) && !(root->right))
+        return nullptr;
+    else
+        return root;
+}
+
+//606. Construct String from Binary Tree
+//ªì¸Ñ runtime beats:55.39% memory beats:96.64%
+void tree2strDFS(TreeNode* node, std::string& ans) {
+    if (!node)
+        return;
+
+    //if (node->val and !node->left and !node->right)
+    ans += std::to_string(node->val);
+
+    if (node->left) {
+        ans += "(";
+        tree2strDFS(node->left, ans);
+        ans += ")";
+    }
+
+    if (node->right) {
+        if (!node->left)
+            ans += "()";
+        ans += "(";
+        tree2strDFS(node->right, ans);
+        ans += ")";
+    }
+}
+
+std::string tree2str(TreeNode* root) {
+    std::string ans;
+    tree2strDFS(root, ans);
+    return ans;
+}
