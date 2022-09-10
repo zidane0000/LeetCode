@@ -2995,16 +2995,16 @@ void traversalTree(std::vector<int>& ans, TreeNode* root, int& posi) {
 }
 
 //初解 runtime beats:100.00% memory beats:10.03%
-std::vector<int> inorderTraversal(TreeNode* root) {
-    std::vector<int> ans;
-    int posi = 0;
-    if (root != nullptr) {
-        ans.push_back(root->val);
-        traversalTree(ans, root, posi);
-    }
-    
-    return ans;
-}
+//std::vector<int> inorderTraversal(TreeNode* root) {
+//    std::vector<int> ans;
+//    int posi = 0;
+//    if (root != nullptr) {
+//        ans.push_back(root->val);
+//        traversalTree(ans, root, posi);
+//    }
+//    
+//    return ans;
+//}
 
 //95. Unique Binary Search Trees II
 //網解 runtime beats:92.68% memory beats:87.69%
@@ -8454,4 +8454,86 @@ std::string tree2str(TreeNode* root) {
     std::string ans;
     tree2strDFS(root, ans);
     return ans;
+}
+
+//94. Binary Tree Inorder Traversal
+//初解 runtime beats:100.00% memory beats:75.10%
+void inorderTraversalTreeNode(TreeNode* node, std::vector<int>& ans) {
+    if (!node)
+        return;
+
+    if (node->left) { inorderTraversalTreeNode(node->left, ans); }
+    ans.push_back(node->val);
+    if (node->right) { inorderTraversalTreeNode(node->right, ans); }
+}
+
+std::vector<int> inorderTraversal(TreeNode* root) {
+    std::vector<int> ans;
+    inorderTraversalTreeNode(root, ans);
+    return ans;
+}
+
+//1996. The Number of Weak Characters in the Game
+//https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/discuss/1445186/EASY-C++-solution-with-great-explanation-and-comments-(nlogn)-sorting
+//網解 runtime beats:08.23% memory beats:91.78%
+static bool comp(std::vector<int>& a, std::vector<int>& b){
+    if (a[0] == b[0]) { return a[1] > b[1]; }
+    return a[0] < b[0];
+}
+
+int numberOfWeakCharacters(std::vector<std::vector<int>>& properties)
+{
+    sort(properties.begin(), properties.end(), comp); //sorting the array
+    int mtn = INT_MIN;                                //max till now while moving from right
+    int ans = 0;
+
+    for (int i = properties.size() - 1; i >= 0; i--) {
+        if (properties[i][1] < mtn) // if the second parameter is also less increase the ans
+            ans++;
+        mtn = std::max(mtn, properties[i][1]);
+    }
+    return ans;
+}
+
+//188. Best Time to Buy and Sell Stock IV
+//https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-188-best-time-to-buy-and-sell-stock-iv/
+//網解 runtime beats:83.97% memory beats:98.77%
+int maxProfitIV(int k, std::vector<int>& prices) {
+    const int n = prices.size();
+    std::vector<int> balance(k + 1, INT_MIN);   // balance[i][j] : = max balance by making at to up j buys in first i days. (Most hold a share)
+    std::vector<int> profit(k + 1, 0);          // profit [i][j] : = max profit by making up to j sells in first i days. (Do not hold any share)
+    for (int i = 0; i < n; ++i)
+        for (int j = 1; j <= k; ++j) {
+            balance[j] = std::max(balance[j], profit[j - 1] - prices[i]);
+            profit[j] = std::max(profit[j], balance[j] + prices[i]);
+        }
+    return profit[k];
+}
+
+//509. Fibonacci Number
+//初解 runtime beats:07.99% memory beats:96.11%
+int fib(int n) {
+    if (n <= 1)
+        return n;
+    return fib(n - 1) + fib(n - 2);
+}
+
+//1137. N-th Tribonacci Number
+//初解 runtime beats:100.00% memory beats:20.99%
+int tribonacci_recursive(int n, std::vector<int>& dp) {
+    if (dp[n] != INT_MIN)
+        return dp[n];
+    dp[n] = tribonacci_recursive(n - 1, dp) + tribonacci_recursive(n - 2, dp) + tribonacci_recursive(n - 3, dp);
+    return dp[n];
+}
+
+int tribonacci(int n) {
+    if (n == 0) return 0;
+    if (n <= 2) return 1;
+
+    std::vector<int> dp(n + 1, INT_MIN);
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 1;
+    return tribonacci_recursive(n, dp);
 }

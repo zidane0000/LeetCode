@@ -942,7 +942,28 @@ int main()
     //TreeNode* res = pruneTree(root);
 
     //606. Construct String from Binary Tree
-    std::cout << tree2str(toTree({1,2,3,4})) << std::endl;
+    //std::cout << tree2str(toTree({1,2,3,4})) << std::endl;
+
+    //94. Binary Tree Inorder Traversal
+    //TreeNode* root = toTree({ 1,2,3,null,4,null,5,6,7,8 };
+    //std::vector<int> res = inorderTraversal(root);
+    //for (int i : res) {
+    //    std::cout << i << "  ";
+    //}
+
+    //1996. The Number of Weak Characters in the Game
+    //std::vector<std::vector<int>> properties({ {1,1}, {1,2}, {2,2}, {2,1} });
+    //std::vector<std::vector<int>> properties({ {5,5}, {6,3}, {3,6} });
+    //std::vector<std::vector<int>> properties({ {7, 7}, {1, 2}, {9, 7}, {7, 3}, {3, 10}, {9, 8}, {8, 10}, {4, 3}, {1, 5}, {1, 5} });
+    //std::cout << numberOfWeakCharacters(properties) << std::endl;
+
+    //188. Best Time to Buy and Sell Stock IV
+    //std::vector<int> prices({2,1,0,7,4,10,9});
+    //std::cout << maxProfitIV(3, prices) << std::endl;
+
+    //1137. N-th Tribonacci Number
+    std::cout << tribonacci(4) << std::endl;
+
 
     return 0;
 }

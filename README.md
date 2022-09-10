@@ -60,6 +60,18 @@ Record the Problem-solving process
 	- 初解 runtime beats:100.00% memory beats:99.74%
 - [606]. Construct String from Binary Tree
 	- 初解 runtime beats:55.39% memory beats:96.64%
+- [94]. Binary Tree Inorder Traversal
+	- 初解 runtime beats:100.00% memory beats:75.10%
+- [1996]. The Number of Weak Characters in the Game
+	- 網解 runtime beats:08.23% memory beats:91.78% [參考網址](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/discuss/1445186/EASY-C++-solution-with-great-explanation-and-comments-(nlogn)-sorting)
+- [188]. Best Time to Buy and Sell Stock IV
+	- 網解 runtime beats:83.97% memory beats:98.77% [參考網址](https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-188-best-time-to-buy-and-sell-stock-iv/)
+
+### Dinamic Program Day 1
+- [509]. Fibonacci Number
+	- 初解 runtime beats:07.99% memory beats:96.11%
+- [1137]. N-th Tribonacci Number
+	- 初解 runtime beats:100.00% memory beats:20.99%
 
 ## 2020
 - [1]. Two Sum
@@ -327,7 +339,7 @@ Record the Problem-solving process
 	- 初解 runtime beats:27.18% memory beats:42.28%
 	- 網解 runtime beats:55.30% memory beats:32.52%
 - [152]. Maximum Product Subarray
-	- 網解 runtime beats:80.49% memory beats:46.85% [參考網址](http:- [bangbingsyb.blogspot.com/2014/11/leetcode-maximum-product-subarray.html)
+	- 網解 runtime beats:80.49% memory beats:46.85% [參考網址](http://bangbingsyb.blogspot.com/2014/11/leetcode-maximum-product-subarray.html)
 	- 網解 runtime beats:98.29% memory beats:46.85%
 - [153]. Find Minimum in Rotated Sorted Array
 	- 初解 runtime beats:98.29% memory beats:88.67%
@@ -498,7 +510,7 @@ Record the Problem-solving process
 - [313]. Super Ugly Number
 	- 初解 runtime beats:74.24% memory beats:51.60%
 - [315]. Count of Smaller Numbers After Self
-	- 網解 runtime beats:19.68% memory beats:90.01% [參考網址](https://www.cnblogs.com/grandyang/p/5078490.html
+	- 網解 runtime beats:19.68% memory beats:90.01% [參考網址](https://www.cnblogs.com/grandyang/p/5078490.html)
 - [316]. Remove Duplicate Letters
 	- 網解 runtime beats:95.10% memory beats:70.99% [參考網址](https://www.cnblogs.com/grandyang/p/5085379.html)
 - [318]. Maximum Product of Word Lengths
