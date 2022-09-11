@@ -8636,3 +8636,37 @@ int minCostClimbingStairs(std::vector<int>& cost) {
             cost[i] = cost[i] + std::min(cost[i + 1], cost[i + 2]);
     return std::min(cost[0], cost[1]);
 }
+
+//1383. Maximum Performance of a Team
+//https://youtu.be/Y7UTvogADH0
+//網解 runtime beats:23.24% memory beats:56.16%
+int maxPerformance(int n, std::vector<int>& speed, std::vector<int>& efficiency, int k) {
+    /*
+    解題思路：
+    因題目設計最多選 k 位工程師，表示可以選小於 k 位
+    1. 根據 efficiency 排序每位工程師
+    2. 在第 i 位工程師為了本身最大效率，不得選擇 efficiency 低於自己的工程師 (這沒有遍例所有情況，不過是可能最佳解)
+    3. 前(高)於自己的工程師，因為自己有最低的 efficiency，所以不用考慮前面工程師的 efficiency，只需在意 speed，因此選擇 k - 1 個最大高於自己的工程師
+    4. 根據題目定義，回傳 modulo 1e9 + 7
+    */
+
+    std::vector<std::pair<int, int>> efficiency_speed;  //根據 efficiency 排序每位工程師
+    for (int i = 0; i < n; ++i)
+        efficiency_speed.push_back({ efficiency[i], speed[i] });
+    sort(efficiency_speed.rbegin(), efficiency_speed.rend());   
+
+    std::priority_queue<int, std::vector<int>, std::greater<int>> candidates;        //k 個工程師(k - 1 個最大高於自己的工程師 + 自己)
+    long speed_sum = 0;
+    long ans = 0;                                //最大解
+    for (int i = 0; i < n; ++i) {
+        speed_sum += efficiency_speed[i].second;
+        candidates.push(efficiency_speed[i].second);
+        if (candidates.size() > k) {
+            speed_sum -= candidates.top();
+            candidates.pop();
+        }
+        ans = std::max(ans, speed_sum * efficiency_speed[i].first);
+    }
+
+    return ans % static_cast<int>(1e9 + 7); // 回傳 modulo 1e9 + 7
+}

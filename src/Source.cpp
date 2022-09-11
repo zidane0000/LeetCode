@@ -981,8 +981,14 @@ int main()
     //std::cout << climbStairs(15) << std::endl;
 
     //746. Min Cost Climbing Stairs
-    std::vector<int> cost({10, 15, 20, 40});
-    std::cout << minCostClimbingStairs(cost) << std::endl;
+    //std::vector<int> cost({10, 15, 20, 40});
+    //std::cout << minCostClimbingStairs(cost) << std::endl;
+
+    //1383. Maximum Performance of a Team
+    std::vector<int> speed({ 2,10,3,1,5,8 });
+    std::vector<int> efficiency({ 5,4,3,9,7,2 });
+    std::cout << maxPerformance(6, speed, efficiency, 3) << std::endl;
+
     
     return 0;
 }

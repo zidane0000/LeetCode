@@ -88,6 +88,9 @@ Record the Problem-solving process
 - [746]. Min Cost Climbing Stairs
 	- 初解 runtime beats:55.42% memory beats:96.77%
 
+- [1383]. Maximum Performance of a Team
+	- 網解 runtime beats:23.24% memory beats:56.16% [參考網址](https://youtu.be/Y7UTvogADH0)
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
