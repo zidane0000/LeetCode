@@ -2417,30 +2417,30 @@ std::string addBinary_2(std::string a, std::string b) {
 
 //70. Climbing Stairs
 //初解 runtime beats:13.94% memory beats:70.44%
-int climbStairs(int n) {
-    std::vector<int> stairs{ 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
-    for (int i = 11; i < n; i++) {
-        stairs.push_back(stairs[i] + stairs[i - 1]);
-    }
-    return stairs[n];
-}
+//int climbStairs(int n) {
+//    std::vector<int> stairs{ 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
+//    for (int i = 11; i < n; i++) {
+//        stairs.push_back(stairs[i] + stairs[i - 1]);
+//    }
+//    return stairs[n];
+//}
 
 //二解 runtime beats:100.00% memory beats:80.69%
-int climbStairs_2(int n) {
-    if (n < 4)
-        return n;
-
-    int a = 2, b = 3;
-    n += -3;
-
-    while (n--) {
-        int tmp = a;
-        a = b;
-        b = b + tmp;
-    }
-        
-    return b;
-}
+//int climbStairs_2(int n) {
+//    if (n < 4)
+//        return n;
+//
+//    int a = 2, b = 3;
+//    n += -3;
+//
+//    while (n--) {
+//        int tmp = a;
+//        a = b;
+//        b = b + tmp;
+//    }
+//        
+//    return b;
+//}
 
 //73. Set Matrix Zeroes
 //初解 runtime beats:30.94% memory beats:56.66%
@@ -8606,5 +8606,33 @@ int minGroups(std::vector<std::vector<int>>& intervals) {
 
 //Longest Increasing Subsequence II
 int lengthOfLIS(std::vector<int>& nums, int k) {
+    return -1;
+}
 
+//70. Climbing Stairs
+//初解 runtime beats:100.00% memory beats:16.06%
+int climbStarisRecursive(int n, std::vector<int>& dp) {
+    if (dp[n] != INT_MIN)
+        return dp[n];
+
+    if (n < 3)
+        dp[n] = n;
+    else
+        dp[n] = climbStarisRecursive(n - 1, dp) + climbStarisRecursive(n - 2, dp);
+    return dp[n];
+}
+
+int climbStairs(int n) {
+    std::vector<int> dp(n + 1, INT_MIN);
+    return climbStarisRecursive(n, dp);
+}
+
+//746. Min Cost Climbing Stairs
+//初解 runtime beats:55.42% memory beats:96.77%
+int minCostClimbingStairs(std::vector<int>& cost) {
+    int size = cost.size();
+    if (size == 2)
+        for (int i = size - 3; i >= 0; --i)
+            cost[i] = cost[i] + std::min(cost[i + 1], cost[i + 2]);
+    return std::min(cost[0], cost[1]);
 }

@@ -67,7 +67,7 @@ Record the Problem-solving process
 - [188]. Best Time to Buy and Sell Stock IV
 	- 網解 runtime beats:83.97% memory beats:98.77% [參考網址](https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-188-best-time-to-buy-and-sell-stock-iv/)
 
-### Dinamic Program Day 1
+### Dynamic Program Day 1
 - [509]. Fibonacci Number
 	- 初解 runtime beats:07.99% memory beats:96.11%
 - [1137]. N-th Tribonacci Number
@@ -81,6 +81,12 @@ Record the Problem-solving process
  - [x] 2406. Divide Intervals Into Minimum Number of Groups
  - [ ] 2407. Longest Increasing Subsequence II
 </details>
+
+### Dynamic Program Day 2
+- [70]. Climbing Stairs
+	- 初解 runtime beats:100.00% memory beats:16.06%
+- [746]. Min Cost Climbing Stairs
+	- 初解 runtime beats:55.42% memory beats:96.77%
 
 ## 2020
 - [1]. Two Sum
