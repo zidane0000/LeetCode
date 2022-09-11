@@ -8537,3 +8537,74 @@ int tribonacci(int n) {
     dp[2] = 1;
     return tribonacci_recursive(n, dp);
 }
+
+//Weekly Contest 310
+//Most Frequent Even Element
+int mostFrequentEven(std::vector<int>& nums) {
+    int ans = -1, times = 0;
+
+    std::map<int, int> frequency;
+    for (int num : nums) {
+        if (num % 2 == 0) {
+            frequency[num]++;
+        }
+    }
+
+    for (auto element : frequency) {
+        if (times < element.second) {
+            times = element.second;
+            ans = element.first;
+        }
+    }
+    return ans;
+}
+
+//Optimal Partition of String
+int partitionString(std::string s) {
+    int ans = 0;
+    std::string substring;
+
+    for (char c : s) {
+        if (substring.find(c) != std::string::npos) {
+            ans++;
+            substring = c;
+        }
+        else {
+            substring += c;
+        }
+    }
+
+    ans += 1;
+    substring = "";
+
+    return ans;
+}
+
+//Divide Intervals Into Minimum Number of Groups
+static bool minGroupsCompare(std::vector<int>& a, std::vector<int>& b) {
+    if (a[0] == b[0]) { return a[1] > b[1]; }
+    return a[0] < b[0];
+}
+
+int minGroups(std::vector<std::vector<int>>& intervals) {
+    std::sort(intervals.begin(), intervals.end(), minGroupsCompare);
+    int ans = 1;
+    int end = intervals[0][1];
+    std::priority_queue <int, std::vector<int>, std::greater<int> > candidates;
+    for (int i = 1; i < intervals.size(); i++) {
+        if (end > intervals[i][0]) {
+            if (!candidates.empty() and candidates.top() < intervals[i][0])
+                candidates.pop();
+            else
+                ans++;
+            candidates.push(end);
+        }
+        end = intervals[i][1];
+    }
+    return ans;
+}
+
+//Longest Increasing Subsequence II
+int lengthOfLIS(std::vector<int>& nums, int k) {
+
+}

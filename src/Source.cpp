@@ -962,8 +962,20 @@ int main()
     //std::cout << maxProfitIV(3, prices) << std::endl;
 
     //1137. N-th Tribonacci Number
-    std::cout << tribonacci(4) << std::endl;
+    //std::cout << tribonacci(4) << std::endl;
 
+    //Weekly Contest 310
+    //Most Frequent Even Element
+    //std::vector<int> nums({ 29,47,21,41,13,37,25,7 });
+    //std::cout << mostFrequentEven(nums) << std::endl;
 
+    //Optimal Partition of String
+    //std::cout << partitionString("abacaba") << std::endl; // expected 4
+
+    //Divide Intervals Into Minimum Number of Groups
+    //std::vector<std::vector<int>> intervals({{5, 10}, {6, 8}, {1, 5}, {2, 3}, {1, 10}} );
+    std::vector<std::vector<int>> intervals({{351436, 933571}, {667214, 975379}, {782454, 919174}, {231661, 764081}, {848495, 902497}, {332817, 520328}, {740795, 762394}, {665739, 726786}, {546865, 686588}, {360501, 846864}} );
+    std::cout << minGroups(intervals) << std::endl; // expected 4
+    
     return 0;
 }

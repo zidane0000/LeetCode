@@ -73,6 +73,15 @@ Record the Problem-solving process
 - [1137]. N-th Tribonacci Number
 	- 初解 runtime beats:100.00% memory beats:20.99%
 
+<details><summary> <b>Weekly Contest 310</b> </summary>
+
+ - Rank : 11699 / 26793
+ - [x] 2404. Most Frequent Even Element
+ - [x] 2405. Optimal Partition of String
+ - [x] 2406. Divide Intervals Into Minimum Number of Groups
+ - [ ] 2407. Longest Increasing Subsequence II
+</details>
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
