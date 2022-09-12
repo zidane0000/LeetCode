@@ -5482,20 +5482,20 @@ int hammingWeight(uint32_t n) {
 
 //198. House Robber
 //初解 runtime beats:100.00% memory beats:95.05%
-int rob(std::vector<int>& nums) {
-    int size = nums.size();
-    if (size == 0)
-        return 0;
-    else if (size == 1)
-        return nums[0];
-    else if (size > 3)
-        nums[2] += nums[0];
-
-    for (int i = 3; i < size; i++)
-        nums[i] += std::max(nums[i - 2], nums[i - 3]);
-
-    return std::max(nums[size - 1], nums[size - 2]);
-}
+//int rob(std::vector<int>& nums) {
+//    int size = nums.size();
+//    if (size == 0)
+//        return 0;
+//    else if (size == 1)
+//        return nums[0];
+//    else if (size > 3)
+//        nums[2] += nums[0];
+//
+//    for (int i = 3; i < size; i++)
+//        nums[i] += std::max(nums[i - 2], nums[i - 3]);
+//
+//    return std::max(nums[size - 1], nums[size - 2]);
+//}
 
 //199. Binary Tree Right Side View
 //初解 runtime beats:80.47% memory beats:11.44%
@@ -8670,3 +8670,80 @@ int maxPerformance(int n, std::vector<int>& speed, std::vector<int>& efficiency,
 
     return ans % static_cast<int>(1e9 + 7); // 回傳 modulo 1e9 + 7
 }
+
+//198. House Robber
+//初解 runtime beats:100.00% memory beats:77.67%
+int rob(std::vector<int>& nums) {
+    int size = nums.size();
+    if (size < 3)
+        return *std::max_element(nums.begin(), nums.end());
+
+    nums[2] += nums[0];
+    for (int i = 3; i < size; i++)
+        nums[i] = nums[i] + std::max(nums[i - 2], nums[i - 3]);
+    return *std::max_element(nums.begin(), nums.end());
+}
+
+//213. House Robber II
+//初解 runtime beats:100.00% memory beats:20.36%
+int rob2(std::vector<int>& nums) {
+    int size = nums.size();
+    if (size < 3)
+        return *std::max_element(nums.begin(), nums.end());
+
+    // 因為最後一間與第一間相鄰，所以考慮拿掉第一間以及最後一間的最大解
+    std::vector<int> nums_no_top = nums;
+    nums_no_top.pop_back();
+    nums.erase(nums.begin());
+
+    return std::max(rob(nums_no_top), rob(nums));
+}
+
+//740. Delete and Earn
+//初解 runtime beats:82.61% memory beats:51.55%
+int deleteAndEarn(std::vector<int>& nums) {
+    // 先將 nums 轉換到 1 ~ 10000 之間的 dp，接下來就如 House Robber 一樣
+    const int max_value = 10000;
+    std::vector<int> dp(max_value, 0); // 1 <= nums[i] <= 1e4
+    for (int i : nums)
+        dp[i - 1] += i;
+
+    dp[2] += dp[0];
+    for (int i = 3; i < max_value; i++)
+        dp[i] += std::max(dp[i - 2], dp[i - 3]);
+
+    return *max_element(dp.begin(), dp.end());
+}
+
+//948. Bag of Tokens
+//初解 runtime beats:72.03% memory beats:27.39%
+int bagOfTokensScore(std::vector<int>& tokens, int power) {
+    std::sort(tokens.begin(), tokens.end());
+    if (tokens.size() == 0 or power < tokens[0])
+        return 0;
+
+    int score = 0;
+    bool keepGo = true;
+    std::deque<int> dq(tokens.begin(), tokens.end());
+    while (!dq.empty() && keepGo) {
+        if (power >= dq.front()) {
+            power -= dq.front();
+            dq.pop_front();
+            score++;
+        }
+        else {
+            // power not enough for tokens
+            if (dq.size() <= 1) {
+                keepGo = false;
+            }
+            else {
+                score--;
+                power += dq.back();
+                dq.pop_back();
+            }
+        }
+    }
+
+    return score;
+}
+

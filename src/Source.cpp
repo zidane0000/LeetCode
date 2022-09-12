@@ -985,10 +985,21 @@ int main()
     //std::cout << minCostClimbingStairs(cost) << std::endl;
 
     //1383. Maximum Performance of a Team
-    std::vector<int> speed({ 2,10,3,1,5,8 });
-    std::vector<int> efficiency({ 5,4,3,9,7,2 });
-    std::cout << maxPerformance(6, speed, efficiency, 3) << std::endl;
+    //std::vector<int> speed({ 2,10,3,1,5,8 });
+    //std::vector<int> efficiency({ 5,4,3,9,7,2 });
+    //std::cout << maxPerformance(6, speed, efficiency, 3) << std::endl;
 
-    
+    //198. House Robber
+    //std::vector<int> nums({ 2,7,9,3,1 });
+    //std::cout << rob(nums) << std::endl;
+
+    //213. House Robber II
+    //std::vector<int> nums({1,2,3,1 });
+    //std::cout << rob2(nums) << std::endl;
+
+    //948. Bag of Tokens
+    std::vector<int> tokens({100, 200});
+    std::cout << bagOfTokensScore(tokens, 150) << std::endl;
+
     return 0;
 }

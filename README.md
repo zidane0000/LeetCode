@@ -91,6 +91,17 @@ Record the Problem-solving process
 - [1383]. Maximum Performance of a Team
 	- 網解 runtime beats:23.24% memory beats:56.16% [參考網址](https://youtu.be/Y7UTvogADH0)
 
+### Dynamic Program Day 3
+- [198]. House Robber
+	- 初解 runtime beats:100.00% memory beats:77.67%
+- [213]. House Robber II
+	- 初解 runtime beats:100.00% memory beats:20.36%
+- [740]. Delete and Earn
+	- 初解 runtime beats:82.61% memory beats:51.55%
+
+- [948]. Bag of Tokens
+	- 初解 runtime beats:72.03% memory beats:27.39%
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
