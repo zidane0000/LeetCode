@@ -1945,25 +1945,25 @@ int maxSubArray(std::vector<int>& nums) {
 
 //55. Jump Game
 //初解 runtime beats:81.88% memory beats:37.69%
-bool canJump(std::vector<int>& nums) {
-    int cur = 0;        //當前走到底幾位
-    int maxNext = 0;    //最大的下一個
-    int s = nums.size();
-    for (int i = 0; i < s - 1; i++) {
-        maxNext = std::max(maxNext, nums[i] + i);
-        //nums[i]+i可以知道跳到第幾步 i=要跳的步數 nums[i]指的是這次能跳的步數
-        if (i == cur) {//因為是用nums.length-1 所以這邊要先++ 
-            cur = maxNext;
-            if (cur >= s - 1)
-                return true;
-        }
-    }
-
-    if (cur < s - 1)
-        return false;
-    else
-        return true;
-}
+//bool canJump(std::vector<int>& nums) {
+//    int cur = 0;        //當前走到底幾位
+//    int maxNext = 0;    //最大的下一個
+//    int s = nums.size();
+//    for (int i = 0; i < s - 1; i++) {
+//        maxNext = std::max(maxNext, nums[i] + i);
+//        //nums[i]+i可以知道跳到第幾步 i=要跳的步數 nums[i]指的是這次能跳的步數
+//        if (i == cur) {//因為是用nums.length-1 所以這邊要先++ 
+//            cur = maxNext;
+//            if (cur >= s - 1)
+//                return true;
+//        }
+//    }
+//
+//    if (cur < s - 1)
+//        return false;
+//    else
+//        return true;
+//}
 
 //56. Merge Intervals
 //初解 runtime beats:65.74% memory beats:61.10%
@@ -7801,6 +7801,36 @@ int divide(int dividend, int divisor) {
     return sign * quotient;
 }
 
+//https://www.youtube.com/watch?v=6kFp_s_UtPE
+//網解 runtime beats:10.53% memory beats:76.31%
+int divide_2(int dividend, int divisor) {
+    // long long int for abs(INT_MIN)
+    long long int dividendLL = dividend;
+    long long int divisorLL = divisor;
+
+    long long int d = abs(dividendLL);
+    long long int dv = abs(divisorLL);
+    long long int ans = 0;
+
+    long long int tmp_dv, multiple;
+    while (d >= dv) {
+        tmp_dv = dv;
+        multiple = 1;
+        while (d >= tmp_dv) {
+            d -= tmp_dv;
+            ans += multiple;
+            // double tmp divisor
+            tmp_dv += tmp_dv;
+            multiple += multiple;
+        }
+    }
+
+    ans = ((dividend >= 0) ^ (divisor >= 0)) ? -ans : ans;
+    ans = ans > INT_MIN ? ans : INT_MIN;
+    ans = ans > INT_MAX ? INT_MAX : ans;
+    return ans;
+}
+
 // 543. Diameter of Binary Tree
 //初解 runtime beats:58.77% memory beats:93.14%
 int getDeepest(int* ans, TreeNode* node) {
@@ -8747,3 +8777,57 @@ int bagOfTokensScore(std::vector<int>& tokens, int power) {
     return score;
 }
 
+//393. UTF-8 Validation
+//初解 runtime beats:72.82% memory beats:76.31%
+bool validUtf8(std::vector<int>& data) {
+    int NumOfBytes = 0;
+    for (int& i : data) {
+        if (NumOfBytes == 0) {
+            //CountBytes
+            if ((i >> 3) == 0b11110) { NumOfBytes = 3; }       // 4 bytes
+            else if ((i >> 4) == 0b1110) { NumOfBytes = 2; }   // 3 bytes
+            else if ((i >> 5) == 0b110) { NumOfBytes = 1; }    // 2 bytes
+            else if ((i >> 7) == 0) { NumOfBytes = 0; }        // 1 bytes
+            else return false;
+        }
+        else {
+            if ((i >> 6) == 0b10) { NumOfBytes -= 1; }
+            else return false;
+        }
+    }
+    return NumOfBytes == 0;
+}
+
+//55. Jump Game
+//初解 runtime beats:64.09% memory beats:18.18%
+bool canJump(std::vector<int>& nums) {
+    const int size = nums.size();
+    std::vector<bool> isJump(size, false);
+    isJump[0] = true;
+
+    for (int i = 0; i < size - 1; i++) {
+        if (isJump[i]) {
+            int fillNum = nums[i] > (size - 1 - i) ? (size - 1 - i) : nums[i];
+            std::fill(isJump.begin() + 1 + i, isJump.begin() + 1 + i + fillNum, true);
+        }
+    }
+    return isJump[size - 1];
+}
+
+//45. Jump Game II
+//初解 runtime beats:27.53% memory beats:27.57%
+int jump(std::vector<int>& nums) {
+    const int size = nums.size();
+    std::vector<int> isJump(size, INT_MAX);
+    isJump[0] = 0;
+
+    for (int i = 0; i < size - 1; i++) {
+        if (isJump[i] != INT_MAX) {
+            int fillNum = nums[i] > (size - 1 - i) ? (size - 1 - i) : nums[i];
+            for (int j = i + 1; j < i + 1 + fillNum; j++) {
+                isJump[j] = std::min(isJump[j], isJump[i] + 1);
+            }
+        }
+    }
+    return isJump[size - 1];
+}

@@ -998,8 +998,20 @@ int main()
     //std::cout << rob2(nums) << std::endl;
 
     //948. Bag of Tokens
-    std::vector<int> tokens({100, 200});
-    std::cout << bagOfTokensScore(tokens, 150) << std::endl;
+    //std::vector<int> tokens({100, 200});
+    //std::cout << bagOfTokensScore(tokens, 150) << std::endl;
+
+    //393. UTF-8 Validation
+    //std::vector<int> data({ 235,140,4 });
+    //std::cout << validUtf8(data) << std::endl;
+
+    //55. Jump Game
+    //std::vector<int> nums({ 2,4,1,1,4 });
+    //std::cout << canJump(nums) << std::endl;
+
+    //45. Jump Game II
+    std::vector<int> nums({ 2,3,1,1,4 });
+    std::cout << jump(nums) << std::endl;
 
     return 0;
 }

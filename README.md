@@ -14,6 +14,7 @@ Record the Problem-solving process
 	- 初解 runtime beats:77.18% memory beats:64.52%
 - [29]. Divide Two Integers
 	- 網解 runtime beats:100.00% memory beats:29.23% [參考網址](https://medium.com/@ChYuan/leetcode-29-divide-two-integers-%E5%BF%83%E5%BE%97-medium-91e5fccb29fa)
+	- 網解 runtime beats:10.53% memory beats:76.31% [參考網址](https://www.youtube.com/watch?v=6kFp_s_UtPE)
 - [543]. Diameter of Binary Tree
 	- 初解 runtime beats:58.77% memory beats:93.14%
 - [347]. Top K Frequent Elements
@@ -101,6 +102,15 @@ Record the Problem-solving process
 
 - [948]. Bag of Tokens
 	- 初解 runtime beats:72.03% memory beats:27.39%
+
+- [393]. UTF-8 Validation
+	- 初解 runtime beats:72.82% memory beats:76.31%
+
+### Dynamic Program Day 4
+- [55]. Jump Game
+	- 初解 runtime beats:64.09% memory beats:18.18%
+- [45]. Jump Game II
+	- 初解 runtime beats:27.53% memory beats:27.57%
 
 ## 2020
 - [1]. Two Sum
