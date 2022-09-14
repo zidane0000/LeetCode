@@ -112,6 +112,9 @@ Record the Problem-solving process
 - [45]. Jump Game II
 	- 初解 runtime beats:27.53% memory beats:27.57%
 
+- [1457]. Pseudo-Palindromic Paths in a Binary Tree
+	- 初解 runtime beats:11.59% memory beats:21.48%
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%

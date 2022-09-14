@@ -8831,3 +8831,35 @@ int jump(std::vector<int>& nums) {
     }
     return isJump[size - 1];
 }
+
+//1457. Pseudo-Palindromic Paths in a Binary Tree
+//初解 runtime beats:11.59% memory beats:21.48%
+void pseudoPalindromicPaths_DFS(TreeNode* node, std::set<int>& candidates, int& ans) {
+    // 與 candidates 配對，配對成功即消除
+    if (candidates.count(node->val))
+        candidates.erase(node->val);
+    else
+        candidates.insert(node->val);
+
+    if (!node->left and !node->right and (candidates.size() <= 1)) {        
+        // 是最後一個節點，且候選人小於等於1(等於1可以放中間)，代表偽回文
+        ans++;
+    }
+    else {
+        if (node->left) pseudoPalindromicPaths_DFS(node->left, candidates, ans);
+        if (node->right) pseudoPalindromicPaths_DFS(node->right, candidates, ans);
+    }
+
+    // 在最後節點，如果沒有自己的值代表已經配對，所以要補回去
+    if (candidates.count(node->val))
+        candidates.erase(node->val);
+    else
+        candidates.insert(node->val);
+}
+
+int pseudoPalindromicPaths(TreeNode* root) {
+    std::set<int> candidates;
+    int ans = 0;
+    pseudoPalindromicPaths_DFS(root, candidates, ans);
+    return ans;
+}

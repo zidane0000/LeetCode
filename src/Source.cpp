@@ -1010,8 +1010,12 @@ int main()
     //std::cout << canJump(nums) << std::endl;
 
     //45. Jump Game II
-    std::vector<int> nums({ 2,3,1,1,4 });
-    std::cout << jump(nums) << std::endl;
+    //std::vector<int> nums({ 2,3,1,1,4 });
+    //std::cout << jump(nums) << std::endl;
+
+    //1457. Pseudo-Palindromic Paths in a Binary Tree
+    TreeNode* root = toTree({ 2,3,1,3,1,null,1 });
+    std::cout << pseudoPalindromicPaths(root)<< std::endl;
 
     return 0;
 }
