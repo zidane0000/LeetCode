@@ -1927,21 +1927,21 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& st
 
 //53. Maximum Subarray
 //初解 runtime beats:46.64% memory beats:70.04%
-int maxSubArray(std::vector<int>& nums) {
-    if (nums.size() == 0)
-        return INT_MIN;
-
-    int max_Sub = INT_MIN;
-    int Sub = 0;
-    for (auto num : nums) {
-        Sub += num;
-        max_Sub = max_Sub > Sub ? max_Sub : Sub;
-        if (Sub < 0)
-            Sub = 0;
-    }
-
-    return max_Sub;
-}
+//int maxSubArray(std::vector<int>& nums) {
+//    if (nums.size() == 0)
+//        return INT_MIN;
+//
+//    int max_Sub = INT_MIN;
+//    int Sub = 0;
+//    for (auto num : nums) {
+//        Sub += num;
+//        max_Sub = max_Sub > Sub ? max_Sub : Sub;
+//        if (Sub < 0)
+//            Sub = 0;
+//    }
+//
+//    return max_Sub;
+//}
 
 //55. Jump Game
 //初解 runtime beats:81.88% memory beats:37.69%
@@ -8857,9 +8857,62 @@ void pseudoPalindromicPaths_DFS(TreeNode* node, std::set<int>& candidates, int& 
         candidates.insert(node->val);
 }
 
+//int pseudoPalindromicPaths(TreeNode* root) {
+//    std::set<int> candidates;
+//    int ans = 0;
+//    pseudoPalindromicPaths_DFS(root, candidates, ans);
+//    return ans;
+//}
+
+//二解 runtime beats:34.77% memory beats:50.95%
 int pseudoPalindromicPaths(TreeNode* root) {
-    std::set<int> candidates;
+    // 形成回文即數值兩兩成對
+    // 利用值介於1-9 間的特性，將 1 - 9 存在 1到9位 bit，即可節省記憶體
     int ans = 0;
-    pseudoPalindromicPaths_DFS(root, candidates, ans);
+    std::stack<std::pair<TreeNode*, int>> candidates({ {root, 0} });
+
+    while (!candidates.empty()) {
+        TreeNode* node = candidates.top().first;
+        int value = candidates.top().second;
+        candidates.pop();
+        value = value ^ (1 << node->val);
+        if (!node->left and !node->right and !(value & (value - 1))) ans += 1;
+        if (node->right) candidates.push({ node->right, value });
+        if (node->left) candidates.push({ node->left, value });
+    }
+
     return ans;
+}
+
+//53. Maximum Subarray
+//初解 runtime beats:05.04% memory beats:90.50%
+int maxSubArray(std::vector<int>& nums) {
+    int size = nums.size();
+    int ans = nums[0];
+    for (int i = 1; i < size; i++) {
+        nums[i] = std::max(nums[i - 1], 0) + nums[i];
+        ans = std::max(ans, nums[i]);
+    }
+    return ans;
+}
+
+//918. Maximum Sum Circular Subarray
+//https://leetcode.com/problems/maximum-sum-circular-subarray/discuss/178422/One-Pass
+//網解 runtime beats:23.39% memory beats:33.15%
+int maxSubarraySumCircular(std::vector<int>& A) {
+    /*
+    因為題目為環形，所以分兩種可能，第一種是與53題一樣，第二種是首尾兩個數組相加違最大子數組
+    在第二種情況下，可以反視因為要相加首尾兩端的子數組，代表中間有一段不要的，而這個不要的是最小子數組
+    因此可將第二種情況視為將vector乘以-1後找到最大子數組(即找到最小子數組)
+    不過此情況有例外，就是當vector都是小於等於0，在此情況下答案依第一種為主
+    */
+    int sum = 0, mn = INT_MAX, mx = INT_MIN, curMax = 0, curMin = 0;
+    for (int num : A) {
+        curMin = std::min(curMin + num, num);
+        mn = std::min(mn, curMin);
+        curMax = std::max(curMax + num, num);
+        mx = std::max(mx, curMax);
+        sum += num;
+    }
+    return (sum - mn == 0) ? mx : std::max(mx, sum - mn);
 }

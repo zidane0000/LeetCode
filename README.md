@@ -114,6 +114,13 @@ Record the Problem-solving process
 
 - [1457]. Pseudo-Palindromic Paths in a Binary Tree
 	- 初解 runtime beats:11.59% memory beats:21.48%
+	- 二解 runtime beats:34.77% memory beats:50.95%
+
+### Dynamic Program Day 5
+- [53]. Maximum Subarray
+	- 初解 runtime beats:05.04% memory beats:90.50%
+- [918]. Maximum Sum Circular Subarray
+	- 網解 runtime beats:23.39% memory beats:33.15% [參考網址](https://leetcode.com/problems/maximum-sum-circular-subarray/discuss/178422/One-Pass)
 
 ## 2020
 - [1]. Two Sum

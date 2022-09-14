@@ -1014,8 +1014,12 @@ int main()
     //std::cout << jump(nums) << std::endl;
 
     //1457. Pseudo-Palindromic Paths in a Binary Tree
-    TreeNode* root = toTree({ 2,3,1,3,1,null,1 });
-    std::cout << pseudoPalindromicPaths(root)<< std::endl;
+    //TreeNode* root = toTree({ 2,3,1,3,1,null,1 });
+    //std::cout << pseudoPalindromicPaths(root)<< std::endl;     
+
+    //918. Maximum Sum Circular Subarray
+    std::vector<int> nums({ -1,3,-3,9,-6,8,-5,-5,-6,10 });
+    cout << maxSubarraySumCircular(nums) << endl;
 
     return 0;
 }
