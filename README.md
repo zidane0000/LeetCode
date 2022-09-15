@@ -122,6 +122,15 @@ Record the Problem-solving process
 - [918]. Maximum Sum Circular Subarray
 	- 網解 runtime beats:23.39% memory beats:33.15% [參考網址](https://leetcode.com/problems/maximum-sum-circular-subarray/discuss/178422/One-Pass)
 
+- [2007]. Find Original Array From Doubled Array
+	- 初解 runtime beats:89.77% memory beats:87.90%
+
+### Dynamic Program Day 6
+- [152]. Maximum Product Subarray
+	- 初解 runtime beats:46.93% memory beats:71.04%
+- [1567]. Maximum Length of Subarray With Positive Product
+	- 待完成
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%

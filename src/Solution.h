@@ -8916,3 +8916,78 @@ int maxSubarraySumCircular(std::vector<int>& A) {
     }
     return (sum - mn == 0) ? mx : std::max(mx, sum - mn);
 }
+
+//2007. Find Original Array From Doubled Array
+//秆 runtime beats:89.77% memory beats:87.90%
+std::vector<int> findOriginalArray(std::vector<int>& changed) {
+    if (changed.size() % 2)
+        return {};
+    std::sort(changed.begin(), changed.end());
+    bool need_record = true;
+    std::unordered_map<int, int> hashmap;
+    std::vector<int> ans;
+    for (int i : changed) {
+        need_record = true;
+        auto double_i = hashmap.find(i * 2);
+        if (double_i != hashmap.end()) {
+            need_record = false;
+            double_i->second -= 1;
+            ans.push_back(i);
+            if (double_i->second == 0)
+                hashmap.erase(double_i);
+        }
+
+        auto half_i = hashmap.end();
+        if (need_record and (i % 2 == 0)) {
+            half_i = hashmap.find(i / 2);
+            if (half_i != hashmap.end()) {
+                need_record = false;
+                half_i->second -= 1;
+                ans.push_back(i / 2);
+                if (half_i->second == 0) {
+                    hashmap.erase(half_i);
+                }
+            }
+        }
+
+        if (need_record)
+            hashmap[i] += 1;
+    }
+
+    if (hashmap.size())
+        return {};
+    else
+        return ans;
+}
+
+//152. Maximum Product Subarray
+//秆 runtime beats:46.93% memory beats:71.04%
+int maxProduct(std::vector<int>& nums) {
+    int ans = nums[0], min = 0, a, b, c;
+    /*
+     num[i] 穦纗程σ秖穦Τ璽计ノ min 纗 num[i-1] 程
+    ┮ num[i] 穦琌计(num[i], num[i]*num[i-1], num[i] * min)程
+    τ min 穦琌计(num[i], num[i]*num[i-1], num[i] * min)程
+    */
+    for (int i = 1; i < nums.size(); i++) {
+        if (nums[i - 1] || min) { // previous / min not zero
+            a = nums[i] * nums[i - 1];
+            b = nums[i];
+            c = nums[i] * min;
+            min = a < b ? a : b;
+            min = min < c ? min : c;
+            nums[i] = a > b ? a : b;
+            nums[i] = nums[i] > c ? nums[i] : c;
+        }
+        ans = std::max(ans, nums[i]);
+    }
+    return ans;
+}
+
+//1567. Maximum Length of Subarray With Positive Product
+int getMaxLen(std::vector<int>& nums) {
+    int ans = 0, sign = nums[0];
+
+
+    return ans;
+}

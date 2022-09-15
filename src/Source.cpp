@@ -1018,8 +1018,18 @@ int main()
     //std::cout << pseudoPalindromicPaths(root)<< std::endl;     
 
     //918. Maximum Sum Circular Subarray
-    std::vector<int> nums({ -1,3,-3,9,-6,8,-5,-5,-6,10 });
-    cout << maxSubarraySumCircular(nums) << endl;
+    //std::vector<int> nums({ -1,3,-3,9,-6,8,-5,-5,-6,10 });
+    //cout << maxSubarraySumCircular(nums) << endl;
+
+    //2007. Find Original Array From Doubled Array
+    //std::vector<int> changed({2,1,2,4,2,4});
+    //std::vector<int> ans = findOriginalArray(changed);
+    //for (int i : ans)
+    //    cout << i << endl;
+
+    //152. Maximum Product Subarray
+    std::vector<int> nums({ -2,-1,0,1,-1,3,-2 });
+    cout << maxProduct(nums) << endl;
 
     return 0;
 }
