@@ -129,7 +129,11 @@ Record the Problem-solving process
 - [152]. Maximum Product Subarray
 	- 初解 runtime beats:46.93% memory beats:71.04%
 - [1567]. Maximum Length of Subarray With Positive Product
-	- 待完成
+	- 初解 runtime beats:11.23% memory beats:75.53%
+
+- [1770]. Maximum Score from Performing Multiplication Operations
+	- 網解 runtime beats:06.19% memory beats:64.78% [參考網址](https://youtu.be/8sMdqZ8z1l0)
+
 
 ## 2020
 - [1]. Two Sum

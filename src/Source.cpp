@@ -1028,8 +1028,18 @@ int main()
     //    cout << i << endl;
 
     //152. Maximum Product Subarray
-    std::vector<int> nums({ -2,-1,0,1,-1,3,-2 });
-    cout << maxProduct(nums) << endl;
+    //std::vector<int> nums({ -2,-1,0,1,-1,3,-2 });
+    //cout << maxProduct(nums) << endl;
+
+    //1567. Maximum Length of Subarray With Positive Product
+    //std::vector<int> nums({ 1,2,3,5,-6,4,0,10 });
+    //std::vector<int> nums({ 5,-20,-20,-39,-5,0,0,0,36,-32,0,-7,-10,-7,21,20,-12,-34,26,2 });
+    //cout << getMaxLen(nums) << endl;
+
+    //1770. Maximum Score from Performing Multiplication Operations
+    std::vector<int> nums({ -5,-3,-3,-2,7,1 });
+    std::vector<int> multipliers({ -10,-5,3,4,6 });
+    cout << maximumScore(nums, multipliers) << endl;
 
     return 0;
 }

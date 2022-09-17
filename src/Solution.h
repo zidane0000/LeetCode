@@ -8985,9 +8985,54 @@ int maxProduct(std::vector<int>& nums) {
 }
 
 //1567. Maximum Length of Subarray With Positive Product
+//ªì¸Ñ runtime beats:11.23% memory beats:75.53%
 int getMaxLen(std::vector<int>& nums) {
-    int ans = 0, sign = nums[0];
+    int max_len = 0;
+    // len is record highest len no matter sign, len_first_negative record the first time sign changed to negative, so when nums[i] is positive, the max length is len - len_first_negative
+    int len = 0, len_first_negative = 0;
+    bool sign = true;  // product is positive or negative, and like nums[i-1] (last condition)
 
+    for (int num : nums) {
+        if (num) { // not zero
+            sign = !(sign ^ (num > 0));
+            len++;
+            if (sign)
+                max_len = std::max(max_len, len);
+            else if (!sign and (num > 0))
+                max_len = std::max(max_len, len - len_first_negative);
+            else  if (!sign and (len_first_negative == 0) and (num < 0))
+                len_first_negative = len;
+        }
+        else {
+            len = 0;
+            len_first_negative = 0;
+            sign = true;
+        }
+    }
 
-    return ans;
+    return max_len;
+}
+
+//1770. Maximum Score from Performing Multiplication Operations
+//https://youtu.be/8sMdqZ8z1l0
+//ºô¸Ñ runtime beats:06.19% memory beats:64.78%
+int maximumScore(std::vector<int>& nums, std::vector<int>& multipliers) {
+    // Top - Down
+    const int m = multipliers.size();
+    const int n = nums.size();
+    std::vector<std::vector<int>> cache(m, std::vector<int>(m, INT_MIN));
+    std::function<int(int, int)> dp = [&](int i, int j) { // i is left posi in nums, j is right posi in nums, k is position in multipliers
+        const int k = n - (j - i + 1);
+        if (k == m) return 0;
+        int& ans = cache[i][k];
+        if (ans != INT_MIN) return ans;
+        return ans = std::max(dp(i + 1, j) + multipliers[k] * nums[i],
+            dp(i, j - 1) + multipliers[k] * nums[j]);
+    };
+    return dp(0, n - 1);
+}
+
+//336. Palindrome Pairs
+std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
+
 }
