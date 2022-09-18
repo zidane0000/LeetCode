@@ -1699,46 +1699,46 @@ int firstMissingPositive_2(std::vector<int>& nums) {
 
 //42. Trapping Rain Water
 //初解 runtime beats:62.06% memory beats:64.38%
-int trap(std::vector<int>& height) {
-    if (height.size() < 3) {
-        return 0;
-    }
-    
-    int s = height.size();
-    int posi = 0;
-    int mid_count = 0, total_area = 0;
-    //從左到右
-    for (int i = 1; i < s; i++) {
-        if (height[posi] <= height[i]) {
-            total_area += ((i - posi - 1) * (height[posi] < height[i] ? height[posi] : height[i])) - mid_count;
-            mid_count = 0;
-            posi = i;
-        }
-        else {
-            mid_count = mid_count + height[i];
-        }
-    }
-
-    if(mid_count == 0)
-        return total_area;
-
-    //從右到左
-    int p_plus = posi;
-    posi = s - 1;
-    mid_count = 0;
-    for (int i = s - 2; i > p_plus - 1; i--) {
-        if (height[posi] <= height[i]) {
-            total_area += ((posi - i - 1) * (height[posi] < height[i] ? height[posi] : height[i])) - mid_count;
-            mid_count = 0;
-            posi = i;
-        }
-        else {
-            mid_count = mid_count + height[i];
-        }
-    }
-
-    return total_area;
-}
+//int trap(std::vector<int>& height) {
+//    if (height.size() < 3) {
+//        return 0;
+//    }
+//    
+//    int s = height.size();
+//    int posi = 0;
+//    int mid_count = 0, total_area = 0;
+//    //從左到右
+//    for (int i = 1; i < s; i++) {
+//        if (height[posi] <= height[i]) {
+//            total_area += ((i - posi - 1) * (height[posi] < height[i] ? height[posi] : height[i])) - mid_count;
+//            mid_count = 0;
+//            posi = i;
+//        }
+//        else {
+//            mid_count = mid_count + height[i];
+//        }
+//    }
+//
+//    if(mid_count == 0)
+//        return total_area;
+//
+//    //從右到左
+//    int p_plus = posi;
+//    posi = s - 1;
+//    mid_count = 0;
+//    for (int i = s - 2; i > p_plus - 1; i--) {
+//        if (height[posi] <= height[i]) {
+//            total_area += ((posi - i - 1) * (height[posi] < height[i] ? height[posi] : height[i])) - mid_count;
+//            mid_count = 0;
+//            posi = i;
+//        }
+//        else {
+//            mid_count = mid_count + height[i];
+//        }
+//    }
+//
+//    return total_area;
+//}
 
 //int trap_2(std::vector<int>& height) {
 //    if (height.size() < 3) {
@@ -9033,6 +9033,54 @@ int maximumScore(std::vector<int>& nums, std::vector<int>& multipliers) {
 }
 
 //336. Palindrome Pairs
+//https://www.cnblogs.com/grandyang/p/5272039.html
+//網解 runtime beats:91.66% memory beats:61.25%
 std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
+    std::function<bool(std::string&, int, int)> is_palindrome = [&](std::string& s, int i, int j) {
+        while (i < j) {
+            if (s[i] != s[j]) return false;
+            i++;j--;
+        }
+        return true;
+    };
 
+    std::vector<std::vector<int>> ans;
+    std::unordered_map<std::string, int> hash_map;  // map candidates to words position
+    std::set<int> s;    // record known words length
+    int size = words.size();
+
+    for (int i = 0; i < size; ++i) { // Why ++i is often better than i++ (pre-increment vs. post-increment) -> https://betterprogramming.pub/stop-using-i-in-your-loops-1f906520d548
+        hash_map[words[i]] = i;
+        s.insert(words[i].size());
+    }
+
+    for (int i = 0; i < size; ++i) {
+        // only consider same or shorter length as words[i]
+        std::string rv_i(words[i].rbegin(), words[i].rend());
+        if (hash_map.count(rv_i) and hash_map[rv_i] != i)
+            ans.push_back({ i, hash_map[rv_i] }); // if there word[i] reverse word[j] exists. means word[j] reverse is word[i], so no need append {j, i}
+
+        int len = words[i].size();
+        auto a = s.find(len);
+        // if words[i] minus existing word length from begin or end is palindrome, append {i, map[words[i].substr(begin or end)]}
+        for (auto it = s.begin(); it != a; ++it) {            
+            int d = *it;    // existing word length
+            if (is_palindrome(rv_i, 0, len - d - 1) && hash_map.count(rv_i.substr(len - d)))    // words[i]
+                ans.push_back({ i, hash_map[rv_i.substr(len - d)] });
+            if (is_palindrome(rv_i, d, len - 1) && hash_map.count(rv_i.substr(0, d)))
+                ans.push_back({ hash_map[rv_i.substr(0, d)], i });
+        }
+    }
+    return ans;
+}
+
+//42. Trapping Rain Water
+//網解 runtime beats:06.19% memory beats:64.78%
+int trap(std::vector<int>& height) {
+    int left, right;
+    int ans = 0;
+
+
+
+    return ans;
 }

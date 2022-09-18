@@ -1037,9 +1037,19 @@ int main()
     //cout << getMaxLen(nums) << endl;
 
     //1770. Maximum Score from Performing Multiplication Operations
-    std::vector<int> nums({ -5,-3,-3,-2,7,1 });
-    std::vector<int> multipliers({ -10,-5,3,4,6 });
-    cout << maximumScore(nums, multipliers) << endl;
+    //std::vector<int> nums({ -5,-3,-3,-2,7,1 });
+    //std::vector<int> multipliers({ -10,-5,3,4,6 });
+    //cout << maximumScore(nums, multipliers) << endl;
+
+    //336. Palindrome Pairs
+    std::vector<std::string> words({ "abcd","dcba","lls","s","sssll" });
+    std::vector<std::vector<int>> ans = palindromePairs(words);
+    for (auto a : ans)
+        cout << "[" << a[0] << "," << a[1] << "]" << endl;
+
+    //42. Trapping Rain Water
+    //std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
+    //cout << trap(height) << endl;
 
     return 0;
 }
