@@ -1042,14 +1042,18 @@ int main()
     //cout << maximumScore(nums, multipliers) << endl;
 
     //336. Palindrome Pairs
-    std::vector<std::string> words({ "abcd","dcba","lls","s","sssll" });
-    std::vector<std::vector<int>> ans = palindromePairs(words);
-    for (auto a : ans)
-        cout << "[" << a[0] << "," << a[1] << "]" << endl;
+    //std::vector<std::string> words({ "abcd","dcba","lls","s","sssll" });
+    //std::vector<std::vector<int>> ans = palindromePairs(words);
+    //for (auto a : ans)
+    //    cout << "[" << a[0] << "," << a[1] << "]" << endl;
 
     //42. Trapping Rain Water
-    //std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
-    //cout << trap(height) << endl;
+    std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
+    cout << trap(height) << endl;
+
+    //609. Find Duplicate File in System
+    //std::vector<std::string> paths({ "root/a 1.txt(abcd) 2.txt(efsfgh)","root/c 3.txt(abdfcd)","root/c/d 4.txt(efggdfh)" });
+    //std::vector<std::vector<std::string>> ans = findDuplicate(paths);
 
     return 0;
 }

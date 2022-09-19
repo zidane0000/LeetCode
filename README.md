@@ -133,10 +133,12 @@ Record the Problem-solving process
 
 - [1770]. Maximum Score from Performing Multiplication Operations
 	- 網解 runtime beats:06.19% memory beats:64.78% [參考網址](https://youtu.be/8sMdqZ8z1l0)
-
 - [336]. Palindrome Pairs
-	- 網解 runtime beats:91.66% memory beats:61.25%  [參考網址](https://www.cnblogs.com/grandyang/p/5272039.html)
-
+	- 網解 runtime beats:91.66% memory beats:61.25% [參考網址](https://www.cnblogs.com/grandyang/p/5272039.html)
+- [42]. Trapping Rain Water
+	- 網解 runtime beats:39.49% memory beats:36.03% [參考網址](https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-42-trapping-rain-water/)
+- [609]. Find Duplicate File in System
+	- 初解 runtime beats:89.69% memory beats:13.74%
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%

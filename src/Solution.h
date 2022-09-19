@@ -9036,6 +9036,7 @@ int maximumScore(std::vector<int>& nums, std::vector<int>& multipliers) {
 //https://www.cnblogs.com/grandyang/p/5272039.html
 //網解 runtime beats:91.66% memory beats:61.25%
 std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
+    // 1. use lamba function to check if 
     std::function<bool(std::string&, int, int)> is_palindrome = [&](std::string& s, int i, int j) {
         while (i < j) {
             if (s[i] != s[j]) return false;
@@ -9043,7 +9044,12 @@ std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
         }
         return true;
     };
-
+    /*
+    將已知的word在map中記錄位置，在set中記錄長度
+    重新遍歷words，將每個word反轉找尋是否存在，若存在則新增答案(只需新增一次，因為遍歷到另外一個時會新增前後順序顛倒的答案)
+    對每個word檢查，如果將減去已知長度(set中)的文字檢查是否回文，若為回文，則找尋word剩餘文字是否存在map中
+    此時有兩種可能，一種是已知長度的文字放在前，新增(已知長度文字, word)，或者是已知長度文字放在後
+    */
     std::vector<std::vector<int>> ans;
     std::unordered_map<std::string, int> hash_map;  // map candidates to words position
     std::set<int> s;    // record known words length
@@ -9075,12 +9081,63 @@ std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
 }
 
 //42. Trapping Rain Water
-//網解 runtime beats:06.19% memory beats:64.78%
+//https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-42-trapping-rain-water/
+//網解 runtime beats:39.49% memory beats:36.03%
 int trap(std::vector<int>& height) {
-    int left, right;
+    /*
+    height 有 n 個，計算在 height[i] 能儲存的水量
+    即須先計算出，在 height[i] 時，最高的左邊以及右邊，則儲存水量為 min(左,右) - height[i]
+    */
+    int size = height.size();
+    std::vector<int> left(size);    // record the highest left in height[0~i]
+    std::vector<int> right(size);   // record the highest right in height[i~size-1]
+    for (int i = 0; i < size; i++) {
+        left[i] = i ? std::max(left[i - 1], height[i]) : height[i];
+        right[size - 1 - i] = i ? std::max(height[size - 1 - i], right[size - i]) : height[size - 1 - i];
+    }
+
     int ans = 0;
+    for (int i = 0; i < size; ++i)
+        ans += std::min(left[i], right[i]) - height[i];
 
+    return ans;
+}
 
+//609. Find Duplicate File in System
+//初解 runtime beats:89.69% memory beats:13.74%
+std::vector<std::vector<std::string>> findDuplicate(std::vector<std::string>& paths) {
+    std::vector<std::vector<std::string>> ans;
+    std::unordered_map<std::string, int> m;
+    
+    int left, right, space;
+    std::string directory, file, content, remain;
+    for (auto& path : paths) {
+        while (path != "") {
+            left = path.find('(');
+            space = path.find(' ');
+            right = path.find(')');
+            if (left == std::string::npos or right == std::string::npos)
+                path = "";
+            else {
+                directory = path.substr(0, space);
+                file = path.substr(space + 1, left - space - 1);
+                content = path.substr(left + 1, right - left - 1);
+                remain = path.substr(right + 1);
+                path = directory + remain;
+                if (m.count(content))
+                    ans[m[content]].push_back(directory + "/" + file);
+                else {
+                    ans.push_back({ directory + "/" + file });
+                    m[content] = ans.size() - 1;
+                }
+            }
+        }
+    }
+
+    ans.erase(std::remove_if(ans.begin(), ans.end(), [](const std::vector<std::string>& x) {
+        return x.size() < 2; // put your condition here
+        }), ans.end());
+    
 
     return ans;
 }
