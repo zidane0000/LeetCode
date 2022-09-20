@@ -1,4 +1,5 @@
 #include "Solution.h"
+//#include "Solution_2020.h"
 
 #define null -1
 
@@ -1048,12 +1049,21 @@ int main()
     //    cout << "[" << a[0] << "," << a[1] << "]" << endl;
 
     //42. Trapping Rain Water
-    std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
-    cout << trap(height) << endl;
+    //std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
+    //cout << trap(height) << endl;
 
     //609. Find Duplicate File in System
     //std::vector<std::string> paths({ "root/a 1.txt(abcd) 2.txt(efsfgh)","root/c 3.txt(abdfcd)","root/c/d 4.txt(efggdfh)" });
     //std::vector<std::vector<std::string>> ans = findDuplicate(paths);
+
+    //718. Maximum Length of Repeated Subarray
+    //std::vector<int> nums1({ 1,2,3,2,1 });
+    //std::vector<int> nums2({ 3,2,1,4,7 });
+    //cout << findLength(nums1, nums2) << endl;
+
+    //121. Best Time to Buy and Sell Stock
+    std::vector<int> prices({ 3,2,1,9,3,4,7 });
+    cout << maxProfit(prices) << endl;
 
     return 0;
 }

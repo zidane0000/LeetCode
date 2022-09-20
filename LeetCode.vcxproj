@@ -141,8 +141,10 @@
     <ClCompile Include="src\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\class.h" />
     <ClInclude Include="src\resource.h" />
     <ClInclude Include="src\Solution.h" />
+    <ClInclude Include="src\Solution_2020.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

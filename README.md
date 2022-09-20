@@ -139,6 +139,17 @@ Record the Problem-solving process
 	- 網解 runtime beats:39.49% memory beats:36.03% [參考網址](https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-42-trapping-rain-water/)
 - [609]. Find Duplicate File in System
 	- 初解 runtime beats:89.69% memory beats:13.74%
+
+### Dynamic Program Day 7
+- [1014]. Best Sightseeing Pair
+	- 初解 runtime beats:54.28%  memory beats:26.07%
+- [121]. Best Time to Buy and Sell Stock
+	- 初解 runtime beats:67.44%  memory beats:89.07%
+- [122]. Best Time to Buy and Sell Stock II
+	- 初解 runtime beats:87.52%  memory beats:89.98%
+
+
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
