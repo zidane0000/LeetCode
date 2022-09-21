@@ -1062,7 +1062,16 @@ int main()
     //cout << findLength(nums1, nums2) << endl;
 
     //121. Best Time to Buy and Sell Stock
-    std::vector<int> prices({ 3,2,1,9,3,4,7 });
+    //std::vector<int> prices({ 3,2,1,9,3,4,7 });
+    //cout << maxProfit(prices) << endl;
+
+    //985. Sum of Even Numbers After Queries
+    //std::vector<int> nums({ 1,2,3,4 });
+    //std::vector<std::vector<int>> queries({ {1,0},{-3,1},{-4,0},{2,3} });
+    //std::vector<int> ans = sumEvenAfterQueries(nums, queries);
+
+    //309. Best Time to Buy and Sell Stock with Cooldown
+    std::vector<int> prices({ 1,3,9,1,3,8 });
     cout << maxProfit(prices) << endl;
 
     return 0;

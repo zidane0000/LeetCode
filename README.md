@@ -147,7 +147,16 @@ Record the Problem-solving process
 	- 初解 runtime beats:67.44%  memory beats:89.07%
 - [122]. Best Time to Buy and Sell Stock II
 	- 初解 runtime beats:87.52%  memory beats:89.98%
+	- 網解 runtime beats:42.67%  memory beats:30.01%
 
+- [985]. Sum of Even Numbers After Queries
+	- 初解 runtime beats:89.09%  memory beats:66.47%
+
+### Dynamic Program Day 8
+- [309]. Best Time to Buy and Sell Stock with Cooldown
+	- 初解 runtime beats:100.00%  memory beats:91.92%
+- [714]. Best Time to Buy and Sell Stock with Transaction Fee
+	- 初解 runtime beats:60.92%  memory beats:91.61%
 
 
 ## 2020

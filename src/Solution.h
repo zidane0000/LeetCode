@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <sstream>          //stringstream
 #include <bitset>
+#include <numeric>
 
 #include "class.h"
 
@@ -1577,11 +1578,73 @@ int maxScoreSightseeingPair(std::vector<int>& values) {
 
 //122. Best Time to Buy and Sell Stock II
 //初解 runtime beats:87.52%  memory beats:89.98%
+//int maxProfit(std::vector<int>& prices) {
+//    // 因為只要 p[i-1] < p[i] 即構成 profit 增加，所以就算 profit[i+1] > profit[i]，也可先計算 p[i] - p[i-1] 的 profit
+//    int size = prices.size(), profit = 0;
+//    for (int i = 1; i < size; i++)
+//        if (prices[i - 1] < prices[i])
+//            profit = profit + prices[i] - prices[i - 1];
+//    return profit;
+//}
+
+//網解 runtime beats:42.67%  memory beats:30.01%
+//int maxProfit(std::vector<int>& prices) {
+//    /*
+//    * 儲存最大利潤、最大結餘(第一次可能購買，所以設為最小極值)
+//    * 結餘 = max(結餘, 利潤 - 價格)
+//    * 利潤 = max(利潤, 結餘 + 價格) // 結餘已經計算股價成本，此時加上價格即可得到利潤
+//    */
+//    int profit = 0, balance = INT_MIN;
+//    for (int& price : prices) {
+//        balance = std::max(balance, profit - price);
+//        profit = std::max(profit, balance + price);
+//    }
+//    return profit;
+//}
+
+//985. Sum of Even Numbers After Queries
+//初解 runtime beats:89.09%  memory beats:66.47%
+std::vector<int> sumEvenAfterQueries(std::vector<int>& nums, std::vector<std::vector<int>>& queries) {
+    std::vector<int> ans;
+    int even_sum = 0;
+    even_sum = std::accumulate(begin(nums), end(nums), 0, [](int s, int a) { return s + (!(a % 2) ? a : 0); });
+
+    for (auto& query : queries) {
+        if (!(nums[query[1]] % 2)) even_sum -= nums[query[1]];
+        nums[query[1]] = nums[query[1]] + query[0];
+        if (!(nums[query[1]] % 2)) even_sum += nums[query[1]];
+        ans.push_back(even_sum);
+    }
+    return ans;
+}
+
+//309. Best Time to Buy and Sell Stock with Cooldown
+//初解 runtime beats:100.00%  memory beats:91.92%
 int maxProfit(std::vector<int>& prices) {
-    // 因為只要 p[i-1] < p[i] 即構成 profit 增加，所以就算 profit[i+1] > profit[i]，也可先計算 p[i] - p[i-1] 的 profit
-    int size = prices.size(), profit = 0;
-    for (int i = 1; i < size; i++)
-        if (prices[i - 1] < prices[i])
-            profit = profit + prices[i] - prices[i - 1];
+    /*
+    * 分別記錄結餘、上次結餘、利潤、上次利潤
+    * 先計算結餘(是否購買)，因為結餘會影響到利潤(是否賣出)
+    * 因為要 cooldown，所以這次結餘會是 max(上次結餘, 上次利潤 - 這次價格)，表示賣出
+    * 而這次利潤是 max(上次利潤, 上次結餘 + 這次價格)，表示買入
+    */
+    int balance = INT_MIN, pre_balance = 0, profit = 0, pre_profit = 0;
+    for (int& price : prices) {
+        pre_balance = balance;
+        balance = std::max(pre_profit - price, pre_balance);
+        pre_profit = profit;
+        profit = std::max(pre_balance + price, pre_profit); // 因為結餘會先計算花費的股價，所以此時加上現有股價為利潤
+    }
+    return profit;
+}
+
+//714. Best Time to Buy and Sell Stock with Transaction Fee
+//初解 runtime beats:60.92%  memory beats:91.61%
+int maxProfit(std::vector<int>& prices, int fee) {
+    // 與 121. 題一樣，不過在計算 profit 時多減去 foo
+    int balance = INT_MIN, profit = 0;
+    for (int& price : prices) {
+        balance = std::max(balance, profit - price);
+        profit = std::max(profit, balance + price - fee);
+    }
     return profit;
 }
