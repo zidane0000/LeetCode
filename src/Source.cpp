@@ -1071,8 +1071,20 @@ int main()
     //std::vector<int> ans = sumEvenAfterQueries(nums, queries);
 
     //309. Best Time to Buy and Sell Stock with Cooldown
-    std::vector<int> prices({ 1,3,9,1,3,8 });
-    cout << maxProfit(prices) << endl;
+    //std::vector<int> prices({ 1,3,9,1,3,8 });
+    //cout << maxProfit(prices) << endl;
+
+    //557. Reverse Words in a String III
+    //std::string s = "Let's take LeetCode contest";
+    //cout << reverseWords(s) << endl;
+
+    //139. Word Break
+    //std::vector<std::string> wordDict({ "a", "abc", "b", "cd" });
+    //cout << wordBreak("abcd",wordDict) << endl;
+
+    //42. Trapping Rain Water
+    std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
+    cout << trap(height) << endl;
 
     return 0;
 }

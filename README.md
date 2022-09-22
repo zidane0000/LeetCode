@@ -158,6 +158,16 @@ Record the Problem-solving process
 - [714]. Best Time to Buy and Sell Stock with Transaction Fee
 	- 初解 runtime beats:60.92%  memory beats:91.61%
 
+- [557]. Reverse Words in a String III
+	- 初解 runtime beats:05.03%  memory beats:05.00%
+	- 網解 runtime beats:19.79%  memory beats:75.20%
+
+### Dynamic Program Day 9
+- [139]. Word Break
+	- 網解 runtime beats:79.54%  memory beats:95.29% [參考網址](https://www.youtube.com/watch?v=Sx9NNgInc3A)
+- [42]. Trapping Rain Water
+	- 初解 runtime beats:74.45%  memory beats:10.88% (Dynamic Programming)
+	- 網解 runtime beats:83.53%  memory beats:81.93% (Two Pointer)
 
 ## 2020
 - [1]. Two Sum

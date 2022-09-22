@@ -1475,25 +1475,25 @@ std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
 //42. Trapping Rain Water
 //https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-42-trapping-rain-water/
 //網解 runtime beats:39.49% memory beats:36.03%
-int trap(std::vector<int>& height) {
-    /*
-    height 有 n 個，計算在 height[i] 能儲存的水量
-    即須先計算出，在 height[i] 時，最高的左邊以及右邊，則儲存水量為 min(左,右) - height[i]
-    */
-    int size = height.size();
-    std::vector<int> left(size);    // record the highest left in height[0~i]
-    std::vector<int> right(size);   // record the highest right in height[i~size-1]
-    for (int i = 0; i < size; i++) {
-        left[i] = i ? std::max(left[i - 1], height[i]) : height[i];
-        right[size - 1 - i] = i ? std::max(height[size - 1 - i], right[size - i]) : height[size - 1 - i];
-    }
-
-    int ans = 0;
-    for (int i = 0; i < size; ++i)
-        ans += std::min(left[i], right[i]) - height[i];
-
-    return ans;
-}
+//int trap(std::vector<int>& height) {
+//    /*
+//    height 有 n 個，計算在 height[i] 能儲存的水量
+//    即須先計算出，在 height[i] 時，最高的左邊以及右邊，則儲存水量為 min(左,右) - height[i]
+//    */
+//    int size = height.size();
+//    std::vector<int> left(size);    // record the highest left in height[0~i]
+//    std::vector<int> right(size);   // record the highest right in height[i~size-1]
+//    for (int i = 0; i < size; i++) {
+//        left[i] = i ? std::max(left[i - 1], height[i]) : height[i];
+//        right[size - 1 - i] = i ? std::max(height[size - 1 - i], right[size - i]) : height[size - 1 - i];
+//    }
+//
+//    int ans = 0;
+//    for (int i = 0; i < size; ++i)
+//        ans += std::min(left[i], right[i]) - height[i];
+//
+//    return ans;
+//}
 
 //609. Find Duplicate File in System
 //初解 runtime beats:89.69% memory beats:13.74%
@@ -1647,4 +1647,110 @@ int maxProfit(std::vector<int>& prices, int fee) {
         profit = std::max(profit, balance + price - fee);
     }
     return profit;
+}
+
+//557. Reverse Words in a String III
+//初解 runtime beats:05.03%  memory beats:05.00%
+std::string reverseWords(std::string& s) {
+    int size = s.size();
+    int i = s.find(' ');;
+
+    while (i < size and i != -1) {
+        for (int j = 0; j < i / 2; j++)
+            std::swap(s[j], s[i - j - 1]);            
+        s = s.substr(i + 1) + s.substr(0, i) + " ";
+        size = size - i - 1;
+        i = s.find(' ');
+    }
+    i = size;
+    for (int j = 0; j < i / 2; j++)
+        std::swap(s[j], s[i - j - 1]);
+    s = s.substr(i) + s.substr(0, i);
+    return s;
+}
+
+//網解 runtime beats:19.79%  memory beats:75.20%
+//std::string reverseWords(std::string s) {
+//    for (int i = 0; i < s.length(); i++) {
+//        if (s[i] != ' ') {   // when i is a non-space
+//            int j = i;
+//            for (; j < s.length() && s[j] != ' '; j++) {} // move j to the next space
+//            reverse(s.begin() + i, s.begin() + j);
+//            i = j - 1;
+//        }
+//    }
+//    return s;
+//}
+
+//139. Word Break
+//https://www.youtube.com/watch?v=Sx9NNgInc3A
+//網解 runtime beats:79.54%  memory beats:95.29%
+bool wordBreak(std::string s, std::vector<std::string>& wordDict) {
+    /*
+    * s 切分為前 i 位與後 size - i 位
+    * dp[i] 紀錄再後 size - i 位是否存在於 wordDict 中
+    */
+    int size = s.size();
+    std::vector<bool> dp(size + 1, false); // In dp[i], seperate s to front(i) and back(size - i) all in dict, then retur true    
+    dp[size] = true; // default out of s is true
+
+    // Time complexity : O(n * m)
+    for (int i = size - 1; i >= 0; i--) {
+        for(std::string& word : wordDict){
+            if (!dp[i] and word == s.substr(i, word.size())) { // if dp[i] is true then don't need to check
+                dp[i] = true and dp[i + word.size()];
+            }
+        }
+    }
+
+    return dp[0];
+}
+
+//42. Trapping Rain Water
+//初解 runtime beats:74.45%  memory beats:10.88%
+//int trap(std::vector<int>& h) {
+//    /*
+//    * left[i] 記錄從左邊到第i位最高的點，right[i]紀錄從右邊到第i為最高的點
+//    * 則累積雨量為 min(left[i], right[i]) - h[i]
+//    * Time Complexity: O(n)
+//    * Space Complexity: O(n)
+//    */
+//    int size = h.size();
+//    std::vector<int> l(size, 0), r(size, 0);
+//
+//    for (int i = 0; i < size; i++) {
+//        l[i] = i ? std::max(h[i], l[i - 1]) : h[i];
+//        r[size -1 -i] = i ? std::max(h[size - 1 - i], r[size - i]) : h[size - 1];
+//    }
+//
+//    int ans = 0;
+//    for (int i = 0; i < size; i++)
+//        ans = ans + std::max(std::min(l[i], r[i]) - h[i], 0);
+//    return ans;
+//}
+
+//網解 runtime beats:83.53%  memory beats:81.93%
+int trap(std::vector<int>& h) {
+    /*
+    * Use Two Pointer
+    * l record left posi, max_l reocord 0 ~ left max value
+    * r record right posi, max_r reocord right ~ end max value
+    * Time Complexity: O(n)
+    * Space Complexity: O(1)
+    */
+    const int size = h.size();
+    int ans = 0;
+    int l = 0, r = size - 1, max_l = h[0], max_r = h[size - 1];
+
+    while (l < r) {
+        if (max_l < max_r) {
+            ans += max_l - h[l];
+            max_l = std::max(max_l, h[++l]);
+        }
+        else {
+            ans += max_r - h[r];
+            max_r = std::max(max_r, h[--r]);
+        }
+    }
+    return ans;
 }
