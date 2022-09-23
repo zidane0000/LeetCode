@@ -1754,3 +1754,21 @@ int trap(std::vector<int>& h) {
     }
     return ans;
 }
+
+//1680. Concatenation of Consecutive Binary Numbers
+//https://zxi.mytechroad.com/blog/bit/leetcode-1680-concatenation-of-consecutive-binary-numbers/
+//網解 runtime beats:84.24%  memory beats:82.61%
+int concatenatedBinary(int n) {
+    /*
+    * 當 (i & (i - 1)) == 0 時，長度加一，例如：100(4) & 11(3) 時，字串長度從原本 2("11") 變成 3("100")
+    * 主要是 ((ans << len) % kMod + i) % kMod
+    * 猜測是因為轉換過程導致須先位移長度，然後重新根據 kmod 計算數字，加上 i 之後再算一次
+    */
+    constexpr int kMod = 1e9 + 7;
+    long ans = 0;
+    for (int i = 1, len = 0; i <= n; ++i) {
+        if ((i & (i - 1)) == 0) ++len;
+        ans = ((ans << len) % kMod + i) % kMod;
+    }
+    return ans;
+}

@@ -169,6 +169,9 @@ Record the Problem-solving process
 	- 初解 runtime beats:74.45%  memory beats:10.88% (Dynamic Programming)
 	- 網解 runtime beats:83.53%  memory beats:81.93% (Two Pointer)
 
+- [1680]. Concatenation of Consecutive Binary Numbers
+	- 網解 runtime beats:84.24%  memory beats:82.61% [參考網址](https://zxi.mytechroad.com/blog/bit/leetcode-1680-concatenation-of-consecutive-binary-numbers/)
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%

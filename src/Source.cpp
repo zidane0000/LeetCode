@@ -1083,8 +1083,10 @@ int main()
     //cout << wordBreak("abcd",wordDict) << endl;
 
     //42. Trapping Rain Water
-    std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
-    cout << trap(height) << endl;
+    //std::vector<int> height({ 0,1,0,2,1,0,1,3,2,1,2,1 });
+    //cout << trap(height) << endl;
 
+    //1680. Concatenation of Consecutive Binary Numbers
+    cout << concatenatedBinary(12) << endl;
     return 0;
 }
