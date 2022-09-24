@@ -1761,14 +1761,67 @@ int trap(std::vector<int>& h) {
 int concatenatedBinary(int n) {
     /*
     * 當 (i & (i - 1)) == 0 時，長度加一，例如：100(4) & 11(3) 時，字串長度從原本 2("11") 變成 3("100")
-    * 主要是 ((ans << len) % kMod + i) % kMod
-    * 猜測是因為轉換過程導致須先位移長度，然後重新根據 kmod 計算數字，加上 i 之後再算一次
+    * 題目要求 modulo(%) 10^9 + 7
+    * 左移(<<)的用意是因為題目字串是往後加，例如： n = 3 -> 1 + 2 + 3 = "1" + "10" + "11" = "11011"
+    * 如果將此 binary string 轉成 decimal number，最前面的"1"已經被左移4(2來自於"10"，2來自於"11")
+    * 餘數的部分是希望 ans 中都已經取餘數，所以在 ans 左移的過程中超過 mod，要先算一次 mod，加上之後再算一次
     */
-    constexpr int kMod = 1e9 + 7;
+    constexpr int kMod = 1e9 + 7; // constexpre : https://tjsw.medium.com/%E6%BD%AE-c-constexpr-ac1bb2bdc5e2
     long ans = 0;
     for (int i = 1, len = 0; i <= n; ++i) {
         if ((i & (i - 1)) == 0) ++len;
         ans = ((ans << len) % kMod + i) % kMod;
     }
+    return ans;
+}
+
+//113. Path Sum II
+//初解 runtime beats:39.73%  memory beats:39.09%
+//void pathSum2_DFS(TreeNode* node, int& targetSum, std::vector<std::vector<int>>& ans, int sum, std::vector<int> cadndiate) {
+//    if (!node) return;
+//    sum = sum + node->val;
+//    cadndiate.push_back(node->val);
+//    if (!node->left and !node->right)
+//        if (sum == targetSum)
+//            return ans.push_back(cadndiate);
+//    if (node->left)
+//        pathSum2_DFS(node->left, targetSum, ans, sum, cadndiate);
+//    if (node->right)
+//        pathSum2_DFS(node->right, targetSum, ans, sum, cadndiate);
+//};
+//
+//std::vector<std::vector<int>> pathSum(TreeNode* root, int& targetSum) {
+//    //DFS
+//    std::vector<std::vector<int>> ans;
+//    pathSum2_DFS(root, targetSum, ans, 0, {});
+//    return ans;
+//}
+
+//二解 runtime beats:44.02%  memory beats:42.16%
+std::vector<std::vector<int>> pathSum(TreeNode* root, int& targetSum) {
+    //BFS
+    if (!root) return {};
+    std::vector<std::vector<int>> ans;
+    std::queue<std::tuple<TreeNode*, int, std::vector<int>>> line({ {root, 0, {}} });
+
+    while (!line.empty()) {
+        TreeNode* node;
+        int sum;
+        std::vector<int> candidate;
+        std::tie(node, sum, candidate) = line.front();
+        line.pop();
+        sum += node->val;
+        candidate.push_back(node->val);
+
+        if (!node->left and !node->right)
+            if (sum == targetSum)
+                ans.push_back(candidate);
+
+        if (node->left)
+            line.push({ node->left, sum,candidate });
+        if (node->right)
+            line.push({ node->right, sum,candidate });
+    }
+
     return ans;
 }

@@ -171,6 +171,9 @@ Record the Problem-solving process
 
 - [1680]. Concatenation of Consecutive Binary Numbers
 	- 網解 runtime beats:84.24%  memory beats:82.61% [參考網址](https://zxi.mytechroad.com/blog/bit/leetcode-1680-concatenation-of-consecutive-binary-numbers/)
+- [113]. Path Sum II
+	- 初解 runtime beats:39.73%  memory beats:39.09%
+	- 二解 runtime beats:44.02%  memory beats:42.16%
 
 ## 2020
 - [1]. Two Sum
