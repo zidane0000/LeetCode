@@ -1825,3 +1825,179 @@ std::vector<std::vector<int>> pathSum(TreeNode* root, int& targetSum) {
 
     return ans;
 }
+
+//622. Design Circular Queue
+//初解 runtime beats:05.11%  memory beats:11.06%
+class MyCircularQueue {
+private:
+    std::list<int> circular_queue;
+    int size = 0;
+    int max_size = 0;
+public:
+    MyCircularQueue(int k) {
+        max_size = k;
+    }
+
+    bool enQueue(int value) {
+        if (size < max_size) {
+            circular_queue.push_back(value);
+            size++;
+            return true;
+        }
+        return false;
+    }
+
+    bool deQueue() {
+        if (size <= 0) return false;
+        circular_queue.pop_front();
+        size--;
+        return true;
+    }
+
+    int Front() {
+        if (size <= 0) return -1;
+        return circular_queue.front();
+    }
+
+    int Rear() {
+        if (size <= 0) return -1;
+        return circular_queue.back();
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    bool isFull() {
+        return size == max_size;
+    }
+};
+
+//https://leetcode.com/problems/design-circular-queue/discuss/153529/Straightforward-Implementation-in-C++-20ms
+//網解 runtime beats:67.96%  memory beats:82.50%
+//class MyCircularQueue {
+//private:
+//    std::vector<int> data;
+//    int head;
+//    int tail;
+//    // empty is the mark when the queue is empty
+//    // to differentiate from queue is full
+//    // because in both conditions (tail == head) stands
+//    bool empty;
+//public:
+//    // Initialize your data structure here. Set the size of the queue to be k.
+//    MyCircularQueue(int k) {
+//        data.resize(k);
+//        head = 0;
+//        tail = 0;
+//        empty = true;
+//    }
+//
+//    // Insert an element into the circular queue. Return true if the operation is successful.
+//    bool enQueue(int value) {
+//        if (isFull()) return false;        
+//        if (head == tail && empty) empty = false;// update the reset value when first enqueue happens
+//        data[tail] = value;
+//        tail = (tail + 1) % data.size();
+//        return true;
+//    }
+//
+//    // Delete an element from the circular queue. Return true if the operation is successful.
+//    bool deQueue() {
+//        if (isEmpty()) return false;
+//        head = (head + 1) % data.size();
+//        if (head == tail && !empty) empty = true;
+//        return true;
+//    }
+//
+//    int Front() {
+//        if (isEmpty()) return -1;
+//        return data[head];
+//    }
+//
+//    int Rear() {
+//        if (isEmpty()) return -1;
+//        return data[(tail + data.size() - 1) % data.size()];
+//    }
+//
+//    bool isEmpty() {
+//        if (tail == head && empty) return true;
+//        return false;
+//    }
+//
+//    bool isFull() {
+//        if (tail == head && !empty) return true; // And with not reset
+//        return false;
+//    }
+//};
+
+//Weekly Contest 312
+//Sort the People
+std::vector<std::string> sortPeople(std::vector<std::string>& names, std::vector<int>& heights) {
+    int size = heights.size();
+    for (int i = 0; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (heights[i] < heights[j]) {
+                std::swap(heights[i], heights[j]);
+                std::swap(names[i], names[j]);
+            }
+        }
+    }
+    return names;
+}
+
+//Longest Subarray With Maximum Bitwise AND
+int longestSubarray(std::vector<int>& nums) {
+    int size = nums.size();
+    std::vector<int> dp(size, 0);
+    int ans = 0;
+    int max_num = INT_MIN;
+
+    for (int i = 0; i < size; i++) {
+        if (max_num < nums[i]) {
+            max_num = nums[i];
+            dp[i] = 1;
+            ans = 1;
+        }
+        else if (max_num == nums[i]) {
+            dp[i] = dp[i - 1] + 1;
+        }
+        ans = std::max(ans, dp[i]);
+    }
+
+    return ans;
+}
+
+//Find All Good Indices
+std::vector<int> goodIndices(std::vector<int>& nums, int k) {
+    // 在 nums[i]，前K位為不增加的序列，後K位為不減少的序列
+    std::vector<int> good_indices;
+    int size = nums.size();
+    std::queue<int> front;  // 儲存前k位所有發生 not non-increasing 的位置
+    std::queue<int> back;   // 儲存後k位所有發生 not non-decreasing 的位置
+
+    if ((k * 2) < size) {
+        for (int i = 1; i < k; i++) {
+            if (nums[k - i - 1] < nums[k - i]) front.push(k - i);
+            if (nums[k + i] > nums[k + i + 1]) back.push(k + i);
+        }
+    }
+
+    for (int i = k; i < size - k; i++) {
+        if (k > 1) {
+            if (nums[i - 2] < nums[i - 1]) front.push(i - 1);
+            if (nums[i + k - 1] > nums[i + k]) back.push(i + k - 1);
+        }
+
+        while (!front.empty() and (i - front.front() >= k)) front.pop();
+        while (!back.empty() and (back.front() <= i)) back.pop();
+
+        if (front.empty() and back.empty()) good_indices.push_back(i);
+    }
+    return good_indices;
+}
+
+//2421. Number of Good Paths
+int numberOfGoodPaths(std::vector<int>& vals, std::vector < std::vector<int >>& edges) {
+
+}

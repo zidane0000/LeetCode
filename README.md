@@ -174,6 +174,19 @@ Record the Problem-solving process
 - [113]. Path Sum II
 	- 初解 runtime beats:39.73%  memory beats:39.09%
 	- 二解 runtime beats:44.02%  memory beats:42.16%
+- [622]. Design Circular Queue
+	- 初解 runtime beats:05.11%  memory beats:11.06%
+	- 網解 runtime beats:67.96%  memory beats:82.50% [參考網址](https://leetcode.com/problems/design-circular-queue/discuss/153529/Straightforward-Implementation-in-C++-20ms)
+
+<details><summary> <b>Weekly Contest 312</b> </summary>
+
+ - Rank : 5939 / 18336
+ - [x] 2418. Most Frequent Even Element
+ - [x] 2419. Optimal Partition of String
+ - [ ] 2420. Divide Intervals Into Minimum Number of Groups
+ - [ ] 2421. Longest Increasing Subsequence II
+</details>
+
 
 ## 2020
 - [1]. Two Sum

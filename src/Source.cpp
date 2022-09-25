@@ -1090,9 +1090,19 @@ int main()
     //cout << concatenatedBinary(12) << endl;
 
     //113. Path Sum II
-    TreeNode* root = toTree({ 5,4,8,11,null,13,4,7,2,null,null,5,1 });
-    int targetSum = 22;
-    std::vector<std::vector<int>> ans = pathSum(root, targetSum);
+    //TreeNode* root = toTree({ 5,4,8,11,null,13,4,7,2,null,null,5,1 });
+    //int targetSum = 22;
+    //std::vector<std::vector<int>> ans = pathSum(root, targetSum);
+
+    //Longest Subarray With Maximum Bitwise AND
+    //std::vector<int> nums({ 96317,96317,96317,96317,96317,96317,96317,96317,96317,279979 });
+    //cout << longestSubarray(nums) << endl;
+
+    //Find All Good Indices
+    //std::vector<int> nums({ 87,20,17,9,3,32,47,59,84,97 });
+    //std::vector<int> nums({ 600893, 574876, 721681, 967255, 165135, 675265, 231773, 201242, 11638, 6145, 355, 81, 75, 34, 23, 21, 17, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2644, 637527, 862482, 995085, 997146, 999484, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000 });
+    std::vector<int> nums({ 253747, 459932, 263592, 354832, 60715, 408350, 959296 });
+    std::vector<int> ans = goodIndices(nums, 2);
 
     return 0;
 }
