@@ -1999,5 +1999,30 @@ std::vector<int> goodIndices(std::vector<int>& nums, int k) {
 
 //2421. Number of Good Paths
 int numberOfGoodPaths(std::vector<int>& vals, std::vector < std::vector<int >>& edges) {
+    return -1;
+}
 
+
+//990. Satisfiability of Equality Equations
+//初解 runtime beats:89.91%  memory beats:98.15%
+int union_find(std::vector<int>& vec, int posi) {
+    return vec[posi] == -1 || vec[posi] == posi ? posi : union_find(vec, vec[posi]);
+}
+
+bool equationsPossible(std::vector<std::string>& equations) {
+    /*
+    * 皆為 lowercase letter，所以會是 0-25，對應 vec 中的位置
+    * vec 紀錄條件，若 a==b，則 vec[union_find(a)] = union_find(b)，若 b 為 -1 就會回傳 b
+    * 接下來若 a==c，則會修改 a 對應的父節點 b，將 b 設為 c
+    */
+    std::sort(equations.begin(), equations.end(), [](std::string& a, std::string& b) { return a[1] == '=' and b[1] == '!'; });
+    std::vector<int> vec(26, -1); // 0->a, 26->z, record the root of alphabet, default wth none(-1)
+    for (auto& e : equations) {
+        if (e[1] == '=')
+            vec[union_find(vec, e[0] - 'a')] = union_find(vec, e[3] - 'a');
+        if (e[1] == '!')
+            if (union_find(vec, e[0] - 'a') == union_find(vec, e[3] - 'a'))
+                return false;
+    }
+    return true;
 }

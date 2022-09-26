@@ -187,6 +187,9 @@ Record the Problem-solving process
  - [ ] 2421. Longest Increasing Subsequence II
 </details>
 
+- [990]. Satisfiability of Equality Equations
+	- 初解 runtime beats:89.91%  memory beats:98.15%
+
 
 ## 2020
 - [1]. Two Sum

@@ -1101,8 +1101,15 @@ int main()
     //Find All Good Indices
     //std::vector<int> nums({ 87,20,17,9,3,32,47,59,84,97 });
     //std::vector<int> nums({ 600893, 574876, 721681, 967255, 165135, 675265, 231773, 201242, 11638, 6145, 355, 81, 75, 34, 23, 21, 17, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2644, 637527, 862482, 995085, 997146, 999484, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000 });
-    std::vector<int> nums({ 253747, 459932, 263592, 354832, 60715, 408350, 959296 });
-    std::vector<int> ans = goodIndices(nums, 2);
+    //std::vector<int> nums({ 253747, 459932, 263592, 354832, 60715, 408350, 959296 });
+    //std::vector<int> ans = goodIndices(nums, 2);
+
+    //990. Satisfiability of Equality Equations
+    //std::vector<std::string>equations({ "a!=b","b==c","c==a", "d!=a", "g==q", "g==p" });
+    //std::vector<std::string>equations({ "b!=f", "c!=e", "f==f", "d==f", "b==f", "a==f" });
+    //std::vector<std::string>equations({ "n!=p", "i!=b", "d!=e", "m!=y", "v==e", "m==y", "x==x", "w==r", "t==l", "r!=i", "p!=b", "f==p", "y==x" });    
+    std::vector<std::string>equations({ "a==b", "a==c", "b==c", "a!=e" });
+    cout << equationsPossible(equations) << endl;
 
     return 0;
 }
