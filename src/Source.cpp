@@ -1108,8 +1108,15 @@ int main()
     //std::vector<std::string>equations({ "a!=b","b==c","c==a", "d!=a", "g==q", "g==p" });
     //std::vector<std::string>equations({ "b!=f", "c!=e", "f==f", "d==f", "b==f", "a==f" });
     //std::vector<std::string>equations({ "n!=p", "i!=b", "d!=e", "m!=y", "v==e", "m==y", "x==x", "w==r", "t==l", "r!=i", "p!=b", "f==p", "y==x" });    
-    std::vector<std::string>equations({ "a==b", "a==c", "b==c", "a!=e" });
-    cout << equationsPossible(equations) << endl;
+    //std::vector<std::string>equations({ "a==b", "a==c", "b==c", "a!=e" });
+    //cout << equationsPossible(equations) << endl;
+
+    //838. Push Dominoes
+    //std::string dominoes = "..R.....LR..";
+    //cout << pushDominoes(dominoes) << endl;
+
+    //91. Decode Ways
+    cout << numDecodings("10") << endl;
 
     return 0;
 }

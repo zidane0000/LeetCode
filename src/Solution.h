@@ -2026,3 +2026,132 @@ bool equationsPossible(std::vector<std::string>& equations) {
     }
     return true;
 }
+
+//838. Push Dominoes
+//初解 runtime beats:12.83%  memory beats:42.63%
+std::string pushDominoes(std::string& dominoes) {
+    // 計算在 i 時，最靠近的 L 與 R 距離，當 i == '.' 時，則根據最小 L/R 距離做變化
+    const int size = dominoes.size();
+    std::vector<int> right(size, 0);
+    std::vector<int> left(size, 0);
+
+    for (int i = 0; i < size; i++) {
+        if (dominoes[i] == 'R') right[i] = 1;
+        else right[i] = i and right[i - 1] and dominoes[i] != 'L' ? right[i - 1] + 1 : right[i];
+
+        if (dominoes[size - 1 - i] == 'L') left[size - 1 - i] = 1;
+        else left[size - 1 - i] = i and left[size - i] and dominoes[size - 1 - i] != 'R' ? left[size - i] + 1 : left[size - 1 - i];
+    }
+
+    for (int i = 0; i < size; i++) {
+        left[i] = left[i] == 0 ? INT_MAX : left[i]; 
+        right[i] = right[i] == 0 ? INT_MAX : right[i];
+        if (dominoes[i] == '.') {
+            if (left[i] > right[i]) dominoes[i] = 'R';
+            if (left[i] < right[i]) dominoes[i] = 'L';
+        }
+    }
+
+    return dominoes;
+}
+
+//https://youtu.be/evUFsOb_iLY
+//網解 runtime beats:07.97%%  memory beats:33.28%
+//std::string pushDominoes(std::string& dominoes) {
+//    /*
+//    * 以 queue 儲存特殊情況(L and R)
+//    * 接著處理 queue 直到空，這邊要確定方向，若由左至右，在判斷時也要先左在右
+//    * 以L為例，當L時，要判斷L位置是否大於0，判斷L前一位是否為'.'
+//    * 此時若遇到R，就需多判斷 R+2 是否為 L，如果是L就抵銷(多pop一次) 
+//    */
+//    const int size = dominoes.size();
+//    std::queue<std::pair<int, char>> q;
+//    int i;
+//    char c;
+//    for (i = 0; i < size; i++)
+//        if (dominoes[i] != '.') q.push({ i, dominoes[i] });
+//
+//    while (!q.empty()) {
+//        i = q.front().first; c = q.front().second; q.pop();
+//        if (c == 'L' and i > 0 and dominoes[i - 1] == '.') {
+//            q.push({ i - 1, 'L' });
+//            dominoes[i - 1] = 'L';
+//        }
+//        else if (c == 'R') {
+//            if (i + 1 < size and dominoes[i + 1] == '.') {
+//                if (i + 2 < size and dominoes[i + 2] == 'L')
+//                    q.pop();
+//                else {
+//                    q.push({ i + 1, 'R' });
+//                    dominoes[i + 1] = 'R';
+//                }
+//            }
+//        }
+//    }
+//
+//    return dominoes;
+//}
+
+//413. Arithmetic Slices
+//初解 runtime beats:68.37%  memory beats:49.56%
+int numberOfArithmeticSlices(std::vector<int>& nums) {
+    const int size = nums.size();
+    if (size < 3) return 0;
+    int ans = 0;
+    std::vector<int> dp(size, 0);   // 紀錄在第i位時為連續幾
+    for (int i = 2; i < size; i++) {
+        if ((nums[i] - nums[i - 1]) == (nums[i - 1] - nums[i - 2])) {
+            dp[i] = dp[i - 1] + 1;
+            ans += dp[i];
+        }
+    }
+    return ans;
+}
+
+//91. Decode Ways
+//https://youtu.be/OjEHST4SXfE
+//網解 runtime beats:29.19%  memory beats:25.93%
+//int ways(std::unordered_map<int, int>& dp, std::string& s, int l, int r) {
+//    if (dp.count(l)) return dp[l];
+//    if (s[l] == '0') return 0;
+//    if (l >= r) return 1;
+//
+//    int way = ways(dp, s, l + 1, r);
+//    if ((s[l] == '1') or (s[l] == '2' and s[l+1] < '7'))
+//        way += ways(dp, s, l + 2, r);
+//    dp[l] = way;
+//    return way;
+//}
+//
+//
+//int numDecodings(std::string s) {
+//    /*
+//    * 將 s 拆分，若 s = "102213" -> "02213" + "2213"，此時 "02213" 為 0，因為沒辦法解析以0開頭的s
+//    * "2213" -> "213" + "13" -> "213"("13" + "3") + "13" -> 此時 "13" 還可以拆分為 "3" + ""(空)
+//    * 當 s 長度小於 2 時，代表只有一種可能解，此時開始回傳
+//    * 最後在 map 中紀錄出現過的 s，避免重複計算
+//    */
+//    std::unordered_map<int, int> dp;
+//    return ways(dp, s, 0, s.length() - 1);
+//}
+
+//網解 runtime beats:63.16%  memory beats:93.17%
+int numDecodings(std::string s) {
+    if (s.empty() || s[0] == '0') return 0;
+    if (s.length() == 1) return 1;
+
+    std::function<bool(char&, char&)> isValid = [&](char& c1, char& c2) {return (c1 == '1') or (c1 == '2' and c2 < '7'); };
+
+    const int n = s.length();
+    int w1 = 1;
+    int w2 = 1;
+    for (int i = 1; i < n; ++i) {
+        int w = 0;
+        if ((s[i] == '0') && !isValid(s[i - 1], s[i])) return 0;
+        if (s[i] != '0') w = w1;
+        if (isValid(s[i - 1], s[i])) w += w2;
+        w2 = w1;
+        w1 = w;
+    }
+    return w1;
+}

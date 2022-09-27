@@ -189,6 +189,16 @@ Record the Problem-solving process
 
 - [990]. Satisfiability of Equality Equations
 	- 初解 runtime beats:89.91%  memory beats:98.15%
+- [838]. Push Dominoes
+	- 初解 runtime beats:12.83%  memory beats:42.63%
+	- 網解 runtime beats:07.97%%  memory beats:33.28% [參考網址](https://youtu.be/evUFsOb_iLY)
+
+### Dynamic Program Day 10
+- [413]. Arithmetic Slices
+	- 初解 runtime beats:68.37%  memory beats:49.56%
+- [91]. Decode Ways
+	- 網解 runtime beats:29.19%  memory beats:25.93% [參考網址](https://youtu.be/OjEHST4SXfE)
+	- 網解 runtime beats:63.16%  memory beats:93.17% [參考網址](https://youtu.be/OjEHST4SXfE)
 
 
 ## 2020
