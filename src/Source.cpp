@@ -1116,7 +1116,10 @@ int main()
     //cout << pushDominoes(dominoes) << endl;
 
     //91. Decode Ways
-    cout << numDecodings("10") << endl;
+    //cout << numDecodings("10") << endl;
+
+    //19. Remove Nth Node From End of List
+    ListNode* r = removeNthFromEnd(toList({1}), 1);
 
     return 0;
 }

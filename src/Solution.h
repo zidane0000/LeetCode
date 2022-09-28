@@ -2155,3 +2155,42 @@ int numDecodings(std::string s) {
     }
     return w1;
 }
+
+//19. Remove Nth Node From End of List
+//初解 runtime beats:62.15%  memory beats:32.26%
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    std::unordered_map<int, ListNode*> m;
+    int i = 0;
+    ListNode* node = head;
+    while (node) {
+        m[i] = node;
+        node = node->next;
+        i++;
+    }
+
+    node = m[i - n]; // remove node
+    if (node == head) {
+        head = head->next;
+    }
+    else {
+        ListNode* pre = m[i - n - 1]; // previous node
+        pre->next = node->next;
+    }
+
+    return head;
+}
+
+//https://leetcode.com/problems/remove-nth-node-from-end-of-list/discuss/1164542/JS-Python-Java-C++-or-Easy-Two-Pointer-Solution-w-Explanation
+//網解 runtime beats:78.73%  memory beats:75.00%
+//ListNode* removeNthFromEnd(ListNode* head, int n) {
+//    /*
+//    * 以 Fast, Slow 紀錄，Fast會先跑n位，如果當Fast為nullptr時，代表head是我們要刪除的目標，所以回傳head->next
+//    * 接下來同時推進 Fast 和 Slow，當 Fast 的下一位為空時，會發現 Slow 停在我們要刪除的目標的前一位，即 Previous，此時將Slow->next= slow->next->next就完成刪除
+//    */
+//    ListNode* fast = head, * slow = head;
+//    for (int i = 0; i < n; i++) fast = fast->next;
+//    if (!fast) return head->next;
+//    while (fast->next) fast = fast->next, slow = slow->next;
+//    slow->next = slow->next->next;
+//    return head;
+//}
