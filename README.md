@@ -203,6 +203,15 @@ Record the Problem-solving process
 - [19]. Remove Nth Node From End of List
 	- 初解 runtime beats:62.15%  memory beats:32.26%
 	- 網解 runtime beats:78.73%  memory beats:75.00% [參考網址](https://leetcode.com/problems/remove-nth-node-from-end-of-list/discuss/1164542/JS-Python-Java-C++-or-Easy-Two-Pointer-Solution-w-Explanation)
+- [658]. Find K Closest Elements
+	- 初解 runtime beats:11.60%  memory beats:37.52%
+	- 二解 runtime beats:58.97%  memory beats:86.01%
+
+### Dynamic Program Day 10
+- [264]. Ugly Number II
+	- 網解 runtime beats:74.47%  memory beats:66.75% [參考網址](https://leetcode.com/problems/ugly-number-ii/discuss/69364/My-16ms-C++-DP-solution-with-short-explanation)
+- [96]. Unique Binary Search Trees
+	- 初解 runtime beats:37.60%  memory beats:12.02%
 
 
 ## 2020

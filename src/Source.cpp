@@ -1119,7 +1119,20 @@ int main()
     //cout << numDecodings("10") << endl;
 
     //19. Remove Nth Node From End of List
-    ListNode* r = removeNthFromEnd(toList({1}), 1);
+    //ListNode* r = removeNthFromEnd(toList({1}), 1);
 
+    //658. Find K Closest Elements
+    //std::vector<int> arr({ -2, -1, 1, 2, 4, 4, 5 });
+    //std::vector<int> arr({ 0, 0, 0, 1, 3, 5, 6, 7, 8, 8 });
+    //std::vector<int> arr({ 1,2,3,4,5 });
+    //std::vector<int> arr({ 1,1,1,10,10,10 });
+    //std::vector<int> ans = findClosestElements(arr, 6, 3);
+
+    //264. Ugly Number II
+    //cout << nthUglyNumber(10) << endl;
+
+    //96. Unique Binary Search Trees
+    cout << numTrees(10) << endl;
+    
     return 0;
 }

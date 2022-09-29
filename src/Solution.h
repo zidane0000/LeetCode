@@ -2194,3 +2194,97 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 //    slow->next = slow->next->next;
 //    return head;
 //}
+
+//658. Find K Closest Elements
+//初解 runtime beats:11.60%  memory beats:37.52%
+//std::vector<int> findClosestElements(std::vector<int>& arr, int k, int x) {
+//    /*
+//    * 利用 Priority_queue，將誤差作為Priority，所以當PQ的size超過K，就POP最高Priority的人(即誤差最多的人)
+//    */
+//    int front_diff = x - arr.front();
+//    int back_diff = x - arr.back();
+//    if (front_diff < 0) return std::vector<int>(arr.begin(), arr.begin() + k);
+//    if (back_diff > 0) return std::vector<int>(arr.end() - k, arr.end());
+//
+//    std::priority_queue<std::pair<int,int>> pq;
+//    for(int i : arr){
+//        pq.push({abs(i - x), i});
+//        if(pq.size() > k)
+//            pq.pop();
+//    }
+//    
+//    std::vector<int> ans;
+//    while(!pq.empty()){
+//        ans.push_back(pq.top().second);
+//        pq.pop();
+//    }
+//    std::sort(ans.begin(), ans.end());
+//    return ans;
+//}
+
+//二解 runtime beats:58.97%  memory beats:86.01%
+std::vector<int> findClosestElements(std::vector<int>& arr, int k, int x) {
+    /*
+    * 先檢查 x 是否大於或小於 arr 的頭或尾，若符合則回傳前k或後k位
+    * 在檢查 arr 的 size 是否等於 k，若等於則回傳 arr
+    * 接著先計算前 k 位絕對誤差合
+    * 接下來尋找最小絕對誤差合(i~i+k的合)發生的位置 i ，並記錄絕對誤差合
+    */
+    int front_diff = x - arr.front();
+    int back_diff = x - arr.back();
+    if (front_diff < 0) return std::vector<int>(arr.begin(), arr.begin() + k);
+    if (back_diff > 0) return std::vector<int>(arr.end() - k, arr.end());
+
+    int size = arr.size();
+    if (size == k) return arr;
+
+    int i, sum = 0;
+    for (i = 0; i < k; i++) sum += abs(arr[i] - x);
+
+    int posi = 0, posi_sum = sum;
+    for (i = k; i < size; i++) {
+        sum = sum - abs(x - arr[i - k]) + abs(x - arr[i]);
+        if (sum < posi_sum) { posi_sum = sum; posi = i - k + 1; }
+    }
+    return std::vector<int>(arr.begin() + posi, arr.begin() + posi + k);
+}
+
+//264. Ugly Number II
+//https://leetcode.com/problems/ugly-number-ii/discuss/69364/My-16ms-C++-DP-solution-with-short-explanation
+//網解 runtime beats:74.47%  memory beats:66.75%
+int nthUglyNumber(int n) {
+    /*
+    * 只包含質因子2、3和5的數稱作醜數(Ugly Number)，通常視1為第一個醜數
+    * 因為絕大多數都不是醜數，所以下一個醜數是尚未儲存的所有已知數字乘以 2,3,5 中最小者
+    */
+    std::vector<int> dp(n + 1);
+    dp[0] = 1;
+    int t2 = 0, t3 = 0, t5 = 0; //pointers for 2, 3, 5
+    for (int i = 1; i < n; i++) {
+        dp[i] = std::min(dp[t2] * 2, std::min(dp[t3] * 3, dp[t5] * 5));
+        if (dp[i] == (dp[t2] * 2)) t2++;
+        if (dp[i] == (dp[t3] * 3)) t3++;
+        if (dp[i] == (dp[t5] * 5)) t5++;
+    }
+    return dp[n-1];
+}
+
+//96. Unique Binary Search Trees
+//初解 runtime beats:37.60%  memory beats:12.02%
+int numTrees(int n) {
+    /*
+    * https://en.wikipedia.org/wiki/Catalan_number
+    *                      (2n)!        (n+1)(n+2)(n+3) ... (2n)
+    * Catalan Number = ------------- = --------------------------
+    *                    (n+1)!(n)!            (n+1)! 
+    * ------------------------------------------------------------
+    * 遞迴關係是 C(0)=1; C(n+1)= (2(2n+1)/n + 2) * C(n)
+    * https://leetcode.com/problems/unique-binary-search-trees/discuss/1565543/C++Python-5-Easy-Solutions-w-Explanation-or-Optimization-from-Brute-Force-to-DP-to-Catalan-O(N)
+    * 詳細解紹所有解法，從Brute Force -> DP -> Catalan Number
+    */
+    std::vector<long long int> dp(n + 1, 1);
+    for (int i = 0; i < n; i++) {
+        dp[i + 1] = 2 * (2 * i + 1) * dp[i] / (i + 2);
+    }
+    return dp[n];
+}
