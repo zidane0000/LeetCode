@@ -2288,3 +2288,55 @@ int numTrees(int n) {
     }
     return dp[n];
 }
+
+//218. The Skyline Problem
+//https://zxi.mytechroad.com/blog/tree/leetcode-218-the-skyline-problem/
+//網解 runtime beats:71.60%  memory beats:77.75%
+std::vector<std::vector<int>> getSkyline(std::vector<std::vector<int>>& buildings) {
+    /*
+    * 利用每個可能答案為每棟建築物的邊界作為依據，分為建築物的起始點(左邊)以及結束點(右邊)
+    * 在起始點的情況下，如果起始點高於紀錄最高高度，則代表沒有建築物遮擋到該起始點，是答案
+    * 在結束點的情況下，如果結束點是最高高度，則第二高高點為該點答案
+    * 這邊須注意在相同位置的情況下，要先在意起始點，所以視起始點的高度為正，結束點的高度為負並排序
+    */
+    typedef std::pair<int, int> Event; // Store start point with positive (x, h), end point with negative (y,-h)
+    std::vector<Event> event_vec;
+    for (const auto& b : buildings) {
+        event_vec.emplace_back(b[0], b[2]);
+        event_vec.emplace_back(b[1], -b[2]);
+    }
+
+    // Sort events by x, if x is same, sort by height to avoid special case
+    // Ex : When two buildings are overlap in boundary, need check start point in second building before end point in first building
+    std::sort(event_vec.begin(), event_vec.end(), [](const Event& e1, const Event& e2) {
+        if (e1.first == e2.first) return e1.second > e2.second;
+        return e1.first < e2.first;
+    });
+
+    std::vector<std::vector<int>> ans;
+    std::multiset<int> buildings_height;
+    std::function<int()> maxHeight = [&]() {
+        if (buildings_height.empty()) return 0;
+        return *buildings_height.rbegin();
+    };
+
+    /*
+    * Process all the events, if is entering (height is positive), check h is biggest in history, if so, means it is answer because no building higher than this one.
+    * if not entering, first erase the height in history, and check if h in history is second height(means now h > history h), h is ans.
+    */ 
+    for (const auto& e : event_vec) {
+        int x = e.first;
+        bool entering = e.second > 0;
+        int h = abs(e.second);
+        if (entering) {
+            if (h > maxHeight()) ans.push_back({ x, h });
+            buildings_height.insert(h);
+        }
+        else {
+            buildings_height.erase(buildings_height.equal_range(h).first);
+            if (h > maxHeight()) ans.push_back({ x, maxHeight() });
+        }
+    }
+    return ans;
+}
+
