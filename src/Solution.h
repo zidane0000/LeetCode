@@ -2137,6 +2137,16 @@ int numberOfArithmeticSlices(std::vector<int>& nums) {
 
 //網解 runtime beats:63.16%  memory beats:93.17%
 int numDecodings(std::string s) {
+    /*
+    * dp[i] 紀錄第 i 位存在幾種解碼方式，預設dp[-1]有一個空，而空的解碼方式只有一種
+    * 因此第 i 位有四種可能，分別為
+    * 1. s[i]=0 且 s[i-1],s[i] 不在 0-26(a-z) 間，此時代表無解，回傳0
+    * 2. s[i]!=0，而第i位解碼方式是第i-1位的解碼方式，因為這時候只看s[i]，而非s[i-1],s[i]，所以可能變化就只有一種，即dp[i] = dp[i-1]
+    * 3. s[i-1],s[i] 在 0-26(a-z) 間，同上，一次看s[i-1],s[i]也只有一種可能變化，所以dp[i] = dp[i-2]
+    * 4. s[i]!=0 且 s[i-1],s[i] 在 0-26(a-z) 間，這時候dp[i]就會是2.跟3.的加總，即dp[i]=dp[i-1]+dp[i-2]
+    * 為了減少空間，觀察上述會發現只需要知道前一位以及前兩位的解碼方式
+    * 並且從第1位開始解碼，因為第零位只有一種解碼方式，而我們預設在第零位前有一個空，即dp[-1]=dp[0]=1，計算dp[1]
+    */
     if (s.empty() || s[0] == '0') return 0;
     if (s.length() == 1) return 1;
 
@@ -2340,3 +2350,78 @@ std::vector<std::vector<int>> getSkyline(std::vector<std::vector<int>>& building
     return ans;
 }
 
+//Number of Common Factors
+int commonFactors(int a, int b) {
+    if (a > b) {
+        int tmp = a;
+        a = b;
+        b = tmp;
+    }
+    int ans = 1; //1
+    int max = 1000;
+    for (int i = 2; i <= max; i++) {
+        if (i > a) i = max + 1;
+        if (a % i == 0 and b % i == 0)
+            ans += 1;
+    }
+    return ans;
+}
+
+//Maximum Sum of an Hourglass
+int maxSum(std::vector<std::vector<int>>& grid) {
+    int m = grid.size();
+    int n = grid[0].size();
+    int max = INT_MIN;
+    for (int i = 0; i < m - 2; i++) {
+        for (int j = 0; j < n - 2; j++) {
+            grid[i][j] = grid[i][j] + grid[i][j + 1] + grid[i][j + 2] + grid[i + 1][j + 1] + grid[i + 2][j] + grid[i + 2][j + 1] + grid[i + 2][j + 2];
+            max = std::max(max, grid[i][j]);
+        }
+    }
+    return max;
+}
+
+//Minimize XOR
+int minimizeXor(int num1, int num2) {
+    // set bit 指在二進位中，有多少位為 1，1100有2，0000有0
+    std::bitset<32> bs1(num1);
+    std::bitset<32> bs2(num2);
+    int bs_diff = bs2.count() - bs1.count();
+    int base = 1;
+    int ans = num1;
+
+    if (bs_diff > 0) { // 在num1基礎上補1
+        while (bs_diff) {
+            if ((num1 & base) == 0) {
+                bs_diff--;
+                ans += base;
+            }
+            base *= 2;
+        }
+    }
+    else if (bs_diff < 0) { // 刪除num1最小bs_diff位1
+        while (bs_diff) {
+            if (num1 & base) {
+                bs_diff++;
+                ans -= base;
+            }
+            base *= 2;
+        }
+    }
+    return ans;
+}
+
+//Maximum Deletions on a String
+int deleteString(std::string s) {
+    int ans = 1;
+    int compare_len = 1;
+    while ((s != "") or ((compare_len * 2) > s.size())) {
+        if (s.substr(0, compare_len) == s.substr(compare_len, compare_len)) {
+            s = s.substr(compare_len);
+            compare_len = 0;
+            ans++;
+        }
+        compare_len++;
+    }
+    return ans;
+}

@@ -1132,7 +1132,18 @@ int main()
     //cout << nthUglyNumber(10) << endl;
 
     //96. Unique Binary Search Trees
-    cout << numTrees(10) << endl;
+    //cout << numTrees(10) << endl;
+
+
+    //Maximum Sum of an Hourglass
+    //std::vector < std::vector<int>> grid({ {1,2,3} ,{4,5,6},{7,8,9} });
+    //cout << maxSum(grid) << endl;
+
+    //Minimize XOR
+    //cout << minimizeXor(79, 74) << endl;
+
+    //Maximum Deletions on a String
+    cout << deleteString("aaabaab") << endl;
     
     return 0;
 }

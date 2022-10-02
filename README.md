@@ -216,6 +216,15 @@ Record the Problem-solving process
 - [218]. The Skyline Problem
 	- 網解 runtime beats:71.60%  memory beats:77.75% [參考網址](https://zxi.mytechroad.com/blog/tree/leetcode-218-the-skyline-problem/)
 
+<details><summary> <b>Weekly Contest 313</b> </summary>
+
+ - Rank : 5656 / 17432
+ - [x] 2422. Number of Common Factors
+ - [x] 2423. Maximum Sum of an Hourglass
+ - [x] 2424. Minimize XOR
+ - [ ] 2425. Maximum Deletions on a String
+</details>
+
 
 ## 2020
 - [1]. Two Sum
