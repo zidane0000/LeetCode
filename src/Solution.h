@@ -2425,3 +2425,46 @@ int deleteString(std::string s) {
     }
     return ans;
 }
+
+//1155. Number of Dice Rolls With Target Sum
+//https://youtu.be/J9s7402s5FA
+//網解 runtime beats:30.80%  memory beats:63.22%
+int numRollsToTarget(int n, int k, int target) {
+    /*
+    * Time complexity : O(n*k*t)
+    * Space comlexity : O(n*t)
+    * 計算有i個骰子時總合為t的可能
+    * 所以當有兩顆骰子，總合為5時，假如骰子有1-3，所以我們假設第二顆骰子為1時，第一顆骰子必續為4，而第一顆骰子為4的可能是0
+    * 第二顆骰子為2時，第一顆骰子為3，可能性是1，以此類推
+    */
+    constexpr int kMod = 1e9 + 7;
+    std::vector<std::vector<int>> dp(n + 1, std::vector<int>(target + 1, 0)); // 記錄在n個骰子時，總和是t有幾種可能
+    dp[0][0] = 1; // 預設0個骰子要達到0有一種可能
+    for (int i = 1; i <= n; i++)            // i個骰子
+        for (int j = i; j <= target; j++) { // 總和為j的可能
+            if (j > (k * i)) continue;      // 若總和超過骰子數i*最大面k，代表不可能發生
+            for (int d = 1; d <= k; d++)    // 所以要加總i-1個骰子總合為j-d的可能
+                if (d <= j)
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j - d]) % kMod;
+        }
+    return dp[n][target];
+}
+
+//1578. Minimum Time to Make Rope Colorful
+//網解 runtime beats:56.65%  memory beats:84.72%
+int minCost(std::string colors, std::vector<int>& neededTime) {
+    const int n = colors.size();    
+    int ans = 0;
+    for (int i = 1; i < n; i++) {
+        if (colors[i] == colors[i - 1]) {
+            // 兩個一樣的氣球，選時間花費少的，並且如果當前氣球花費時間少，則將當前花費時間改為前一位，以利下一位若是相同氣球時比較
+            if (neededTime[i] > neededTime[i - 1])
+                ans += neededTime[i - 1];
+            else {
+                ans += neededTime[i];
+                neededTime[i] = neededTime[i - 1];
+            }
+        }
+    }
+    return ans;
+}

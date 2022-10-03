@@ -219,12 +219,16 @@ Record the Problem-solving process
 <details><summary> <b>Weekly Contest 313</b> </summary>
 
  - Rank : 5656 / 17432
- - [x] 2422. Number of Common Factors
- - [x] 2423. Maximum Sum of an Hourglass
- - [x] 2424. Minimize XOR
- - [ ] 2425. Maximum Deletions on a String
+ - [x] 2427. Number of Common Factors
+ - [x] 2428. Maximum Sum of an Hourglass
+ - [x] 2429. Minimize XOR
+ - [ ] 2430. Maximum Deletions on a String
 </details>
 
+- [1155]. Number of Dice Rolls With Target Sum
+	- 網解 runtime beats:30.80%  memory beats:63.22% [參考網址](https://youtu.be/J9s7402s5FA)
+- [1578]. Minimum Time to Make Rope Colorful
+	- 網解 runtime beats:56.65%  memory beats:84.72%
 
 ## 2020
 - [1]. Two Sum

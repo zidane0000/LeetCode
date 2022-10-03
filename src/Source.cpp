@@ -1143,7 +1143,10 @@ int main()
     //cout << minimizeXor(79, 74) << endl;
 
     //Maximum Deletions on a String
-    cout << deleteString("aaabaab") << endl;
+    //cout << deleteString("aaabaab") << endl;
+
+    //1155. Number of Dice Rolls With Target Sum
+    cout << numRollsToTarget(30, 30, 500) << endl;
     
     return 0;
 }
