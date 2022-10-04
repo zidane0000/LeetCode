@@ -1146,7 +1146,22 @@ int main()
     //cout << deleteString("aaabaab") << endl;
 
     //1155. Number of Dice Rolls With Target Sum
-    cout << numRollsToTarget(30, 30, 500) << endl;
+    //cout << numRollsToTarget(30, 30, 500) << endl;
+
+    //118. Pascal's Triangle
+    //std::vector<std::vector<int>> ans = generate(5);
+
+    //119. Pascal's Triangle II
+    //std::vector<int> ans = getRow(5);
+
+    //120. Triangle
+    //std::vector<std::vector<int>> triangle({ {1},{2,3},{4,5,6},{7,8,9,10} });
+    //cout << minimumTotal(triangle) << endl;
+
+    //1314. Matrix Block Sum
+    std::vector<std::vector<int>> mat({ {67, 64, 78}, {99, 98, 38}, {82, 46, 46}, {6, 52, 55}, {55, 99, 45} });
+    //std::vector<std::vector<int>> mat({ { 1,2,3 }, {1,2,3},{1,2,3} });
+    std::vector<std::vector<int>> ans = matrixBlockSum(mat, 3);
     
     return 0;
 }

@@ -207,7 +207,7 @@ Record the Problem-solving process
 	- 初解 runtime beats:11.60%  memory beats:37.52%
 	- 二解 runtime beats:58.97%  memory beats:86.01%
 
-### Dynamic Program Day 10
+### Dynamic Program Day 11
 - [264]. Ugly Number II
 	- 網解 runtime beats:74.47%  memory beats:66.75% [參考網址](https://leetcode.com/problems/ugly-number-ii/discuss/69364/My-16ms-C++-DP-solution-with-short-explanation)
 - [96]. Unique Binary Search Trees
@@ -231,6 +231,19 @@ Record the Problem-solving process
 	- 初解 runtime beats:56.65%  memory beats:84.72%
 - [112]. Path Sum
 	- 初解 runtime beats:77.40%  memory beats:38.76%
+
+### Dynamic Program Day 12
+- [118]. Pascal's Triangle
+	- 初解 runtime beats:46.97%  memory beats:90.45%
+- [119]. Pascal's Triangle II
+	- 初解 runtime beats:100.00%  memory beats:99.26%
+
+### Dynamic Program Day 13
+- [931]. Minimum Falling Path Sum
+	- 初解 runtime beats:30.09%  memory beats:95.79%
+- [120]. Triangle
+	- 初解 runtime beats:84.35%  memory beats:79.01%
+
 
 ## 2020
 - [1]. Two Sum

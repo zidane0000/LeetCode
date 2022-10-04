@@ -2485,3 +2485,149 @@ bool hasPathSum(TreeNode* root, int targetSum) {
     hasPathSum_BFS(ans, root, targetSum);
     return ans;
 }
+
+//118. Pascal's Triangle
+//初解 runtime beats:46.97%  memory beats:90.45%
+std::vector<std::vector<int>> generate(int numRows) {
+    /*
+    * 先令第一行，接著for loop產生每一行
+    * 而每一行從第一位開始到最後第二位是上一行prev的同一位置以及前一個位置的和
+    */
+    std::vector<std::vector<int>> ans({ {1} });
+
+    for (int i = 1; i < numRows; i++) {
+        std::vector<int> now(i+1, 1);
+        std::vector<int>& prev = ans.back();
+        for (int j = 1; j < i; j++)
+            now[j] = prev[j - 1] + prev[j];
+        ans.push_back(now);
+    }
+    return ans;
+}
+
+//119. Pascal's Triangle II
+//初解 runtime beats:100.00%  memory beats:99.26%
+std::vector<int> getRow(int rowIndex) {
+    /*
+    * 第n行會有n個值，所以初始化vec大小為n，預設值為1
+    * 當n > 2時，從第一位到最後第二位會變化，不過這時候如果從頭開始，會覆蓋掉下一位需要的值
+    * 所以從後開始
+    */
+    const int n = rowIndex + 1;
+    std::vector<int> ans(n, 1);
+    int i = 3;
+    while (n > 2 and i <= n) {
+        for (int j = i - 2; j >= 1; j--)
+            ans[j] = ans[j - 1] + ans[j];
+        i++;
+    }
+    return ans;
+}
+
+//931. Minimum Falling Path Sum
+//初解 runtime beats:30.09%  memory beats:95.79%
+int minFallingPathSum(std::vector<std::vector<int>>& matrix) {
+    /*
+    * 遍例所有位置
+    * 在不是第一行時，若位置為第一個，則當前位置加min(上,右上)
+    * 若位置是最後一個，則當前位置加min(左上,上)
+    * 否則就是當前位置加min(左上,上,右上)
+    * 在最後一行時，計算完該位置最小和後要與答案比較最小值
+    */
+    int ans = INT_MAX;
+    const int n = matrix.size();
+    for (int i = 0; i < n; i++) {
+        if (i > 0) {
+            for (int j = 0; j < n; j++) {
+                if (j == 0)
+                    matrix[i][j] = matrix[i][j] + std::min(matrix[i - 1][j], matrix[i - 1][j + 1]);
+                else if (j == (n - 1))
+                    matrix[i][j] = matrix[i][j] + std::min(matrix[i - 1][j - 1], matrix[i - 1][j]);
+                else
+                    matrix[i][j] = matrix[i][j] + std::min(std::min(matrix[i - 1][j - 1], matrix[i - 1][j]), matrix[i - 1][j + 1]);
+
+                if (i == (n - 1))
+                    ans = std::min(ans, matrix[i][j]);
+            }
+        }
+    }
+        
+    return ans;
+}
+
+//120. Triangle
+//初解 runtime beats:84.35%  memory beats:79.01%
+int minimumTotal(std::vector<std::vector<int>>& triangle) {
+    /*
+    * 雖然是三角形，不過若靠左對齊，則最小路徑就如931題相似，只是沒有右上
+    * 遍例所有位置
+    * 在不是第一行時，若位置為第一個，則當前位置加min(上)
+    * 若位置是最後一個，則當前位置加min(左上)
+    * 否則就是當前位置加min(左上,上)
+    * 在最後一行時，計算完該位置最小和後要與答案比較最小值
+    */
+    int ans = INT_MAX;
+    const int rows = triangle.size();
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j <= i; j++) {
+            if (i > 0) {
+                if (j == 0)
+                    triangle[i][j] = triangle[i][j] + triangle[i - 1][j];
+                else if (j == i)
+                    triangle[i][j] = triangle[i][j] + triangle[i - 1][j - 1];
+                else
+                    triangle[i][j] = triangle[i][j] + std::min(triangle[i - 1][j - 1], triangle[i - 1][j]);
+            }
+
+            if (i == (rows - 1))
+                ans = std::min(ans, triangle[i][j]);
+        }
+    return ans;
+}
+
+//1314. Matrix Block Sum
+//初解 runtime beats:22.63% memory beats:72.73%
+std::vector<std::vector<int>> matrixBlockSum(std::vector<std::vector<int>>& mat, int k) {
+    /*
+    * ans記錄在(i,j)點的block sum，所以(i+1,j)只需要減去(i,j)的最左行，加上(i+1,j)的最右行即可
+    * 同理，
+    */
+    const int m = mat.size();
+    const int n = mat[0].size();
+    std::vector<std::vector<int>> ans(m, std::vector<int>(n, 0));
+
+    int r, c;
+    for (r = 0; r <= k; r++)
+        for (c = 0; c <= k; c++)
+            if(r < m and c < n)
+                ans[0][0] += mat[r][c];
+
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++) {
+            if (i != 0 or j != 0) {
+                if (i == 0) {
+                    ans[i][j] = ans[i][j - 1];
+                    r = i - k >= 0 ? i - k : 0;
+                    for (r; r <= i + k; r++) {
+                        if (j - 1 - k >= 0)ans[i][j] -= mat[r][j - 1 - k];
+                        if (j + k < n)ans[i][j] += mat[r][j + k];
+                    }
+                }
+                else {
+                    ans[i][j] = ans[i-1][j];
+                    c = j - k >= 0 ? j - k : 0;
+                    for (c; c <= j + k; c++) {
+                        if (c < n) {
+                            if (i - 1 - k >= 0)
+                                ans[i][j] -= mat[i - 1 - k][c];
+                            if (i + k < m)
+                                ans[i][j] += mat[i + k][c];
+                        }
+                    }
+                }
+            }           
+        }
+    return ans;
+}
+
+//304. Range Sum Query 2D - Immutable
