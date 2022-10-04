@@ -2451,7 +2451,7 @@ int numRollsToTarget(int n, int k, int target) {
 }
 
 //1578. Minimum Time to Make Rope Colorful
-//網解 runtime beats:56.65%  memory beats:84.72%
+//初解 runtime beats:56.65%  memory beats:84.72%
 int minCost(std::string colors, std::vector<int>& neededTime) {
     const int n = colors.size();    
     int ans = 0;
@@ -2466,5 +2466,22 @@ int minCost(std::string colors, std::vector<int>& neededTime) {
             }
         }
     }
+    return ans;
+}
+
+//112. Path Sum
+//初解 runtime beats:77.40%  memory beats:38.76%
+void hasPathSum_BFS(bool& ans, TreeNode* node, int target) {
+    if (!node or ans) return;
+    if (!node->left and !node->right and node->val == target) ans = true;
+    else {
+        hasPathSum_BFS(ans, node->left, target - node->val);
+        hasPathSum_BFS(ans, node->right, target - node->val);
+    }
+}
+
+bool hasPathSum(TreeNode* root, int targetSum) {
+    bool ans = false;
+    hasPathSum_BFS(ans, root, targetSum);
     return ans;
 }

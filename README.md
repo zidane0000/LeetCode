@@ -228,7 +228,9 @@ Record the Problem-solving process
 - [1155]. Number of Dice Rolls With Target Sum
 	- 網解 runtime beats:30.80%  memory beats:63.22% [參考網址](https://youtu.be/J9s7402s5FA)
 - [1578]. Minimum Time to Make Rope Colorful
-	- 網解 runtime beats:56.65%  memory beats:84.72%
+	- 初解 runtime beats:56.65%  memory beats:84.72%
+- [112]. Path Sum
+	- 初解 runtime beats:77.40%  memory beats:38.76%
 
 ## 2020
 - [1]. Two Sum
