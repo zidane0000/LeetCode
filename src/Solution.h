@@ -2631,3 +2631,65 @@ std::vector<std::vector<int>> matrixBlockSum(std::vector<std::vector<int>>& mat,
 }
 
 //304. Range Sum Query 2D - Immutable
+//初解 runtime beats:29.29% memory beats:54.43%
+class NumMatrix {
+    /*
+    * 記錄從(0,0) 到 (i,j) 的 sum，所以若要計算(i1, j1)(i2,j2)的面積
+    * 就是sum(i2,j2) - sum(i1-1, j2) - sum(i2, j1-1) + sum(i1-1, j1-1)
+    * 求的四邊形可透過最大四邊形減去上面四邊形和左邊四邊形加上多被減一次的最小四邊形得到答案
+    */
+private:
+    std::vector<std::vector<int>> matrix_sum; //代表從(0,0) 到 (i,j) 的 sum
+public:    
+    NumMatrix(std::vector<std::vector<int>>& matrix) {
+        matrix_sum.clear();
+        const int m = matrix.size();
+        const int n = matrix[0].size();
+        matrix_sum.resize(m + 1, std::vector<int>(n + 1, 0));
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                matrix_sum[i + 1][j + 1] = matrix_sum[i][j + 1] + matrix_sum[i + 1][j] - matrix_sum[i][j] + matrix[i][j];
+    }
+
+    int sumRegion(int row1, int col1, int row2, int col2) {
+        // matrix 對應到 matrix_sum 都需要左移1，下移1
+        return matrix_sum[row2 + 1][col2 + 1] - matrix_sum[row2 + 1][col1] - matrix_sum[row1][col2 + 1] + matrix_sum[row1][col1];
+    }
+};
+
+//623. Add One Row to Tree
+//初解 runtime beats:29.29% memory beats:54.43%
+void addOneRow_dfs(TreeNode* node, int& val, int depth) {
+    if (!node or depth < 2) return;
+    if (depth == 2) { // when node is father
+        TreeNode* newleft = new TreeNode(val);
+        if (node->left) newleft->left = node->left;
+        node->left = newleft;
+        TreeNode* newRight = new TreeNode(val);
+        if (node->right) newRight->right = node->right;
+        node->right = newRight;
+    }
+    else {
+        addOneRow_dfs(node->left, val, depth - 1);
+        addOneRow_dfs(node->right, val, depth - 1);
+    }
+}
+
+TreeNode* addOneRow(TreeNode* root, int& val, int depth) {    
+    /*
+    * 使用DFS，當找到父節點(即其子節點須變化)時，判斷父節點是否有左右
+    * 若有，新建立的左右就指向父節點的左右
+    * 最後以新建立的左右取代舊有父節點的左右
+    */
+    if (depth <= 1) {
+        TreeNode* newNode = new TreeNode(val);
+        newNode->left = root;
+        return newNode;
+    }
+    else {
+        addOneRow_dfs(root, val, depth);
+        return root;
+    }
+}
+
+

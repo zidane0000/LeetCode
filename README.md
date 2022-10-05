@@ -244,6 +244,14 @@ Record the Problem-solving process
 - [120]. Triangle
 	- 初解 runtime beats:84.35%  memory beats:79.01%
 
+### Dynamic Program Day 14
+- [1314]. Matrix Block Sum
+	- 初解 runtime beats:22.63% memory beats:72.73%
+- [304]. Range Sum Query 2D - Immutable
+	- 初解 runtime beats:29.29% memory beats:54.43%
+
+- [623]. Add One Row to Tree
+	- 初解 runtime beats:29.29% memory beats:54.43%
 
 ## 2020
 - [1]. Two Sum

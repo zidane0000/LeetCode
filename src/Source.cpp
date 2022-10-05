@@ -1159,9 +1159,16 @@ int main()
     //cout << minimumTotal(triangle) << endl;
 
     //1314. Matrix Block Sum
-    std::vector<std::vector<int>> mat({ {67, 64, 78}, {99, 98, 38}, {82, 46, 46}, {6, 52, 55}, {55, 99, 45} });
+    //std::vector<std::vector<int>> mat({ {67, 64, 78}, {99, 98, 38}, {82, 46, 46}, {6, 52, 55}, {55, 99, 45} });
     //std::vector<std::vector<int>> mat({ { 1,2,3 }, {1,2,3},{1,2,3} });
-    std::vector<std::vector<int>> ans = matrixBlockSum(mat, 3);
+    //std::vector<std::vector<int>> ans = matrixBlockSum(mat, 3);
+
+    //304. Range Sum Query 2D - Immutable
+    std::vector<std::vector<int>> matrix({{3, 0, 1, 4, 2}, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}});
+    NumMatrix nummatrix(matrix);
+    cout << nummatrix.sumRegion(2, 1, 4, 3) << endl;
+    cout << nummatrix.sumRegion(1, 1, 2, 2) << endl;
+    cout << nummatrix.sumRegion(1, 2, 2, 4) << endl;
     
     return 0;
 }
