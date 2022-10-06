@@ -2692,4 +2692,28 @@ TreeNode* addOneRow(TreeNode* root, int& val, int depth) {
     }
 }
 
+//981. Time Based Key - Value Store
+//https://www.cnblogs.com/grandyang/p/14195356.html
+//網解 runtime beats:27.65% memory beats:19.24%
+class TimeMap {
+    /*
+    * 利用 hash_map 快速對應到儲存(timestamp, value)的map
+    * 在 map 中以 upper_bound 找尋到一定比 timestamp 大的指標，並回傳指標的前一位
+    * 此時若 map 中有 timestamp 存在，則前一位一定是 map[timestamp]，若不存在，則是比 timestamp 小的對應值
+    * 所以此時只需要判斷指標是否為 map 的開頭，因為如果是開頭，代表沒有人比 timestamp 小於或等於，就回傳空
+    */
+private:
+    std::unordered_map< std::string, std::map<int, std::string>> hashmap; // store key -> timestamp, value
+public:
+    TimeMap() {
+    }
 
+    void set(std::string key, std::string value, int timestamp) {
+        hashmap[key].insert({ timestamp, value });
+    }
+
+    std::string get(std::string key, int timestamp) {
+        auto it = hashmap[key].upper_bound(timestamp);
+        return it == hashmap[key].begin() ? "" : prev(it)->second;
+    }
+};

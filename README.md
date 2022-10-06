@@ -252,6 +252,8 @@ Record the Problem-solving process
 
 - [623]. Add One Row to Tree
 	- 初解 runtime beats:29.29% memory beats:54.43%
+- [981]. Time Based Key - Value Store
+	- 網解 runtime beats:27.65% memory beats:19.24% [參考網址](https://www.cnblogs.com/grandyang/p/14195356.html)
 
 ## 2020
 - [1]. Two Sum
