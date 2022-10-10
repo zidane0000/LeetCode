@@ -254,6 +254,16 @@ Record the Problem-solving process
 	- 初解 runtime beats:29.29% memory beats:54.43%
 - [981]. Time Based Key - Value Store
 	- 網解 runtime beats:27.65% memory beats:19.24% [參考網址](https://www.cnblogs.com/grandyang/p/14195356.html)
+- [729]. My Calendar I
+	- 網解 runtime beats:62.34% memory beats:31.30% [參考網址](https://leetcode.com/problems/my-calendar-i/discuss/109475/JavaC%2B%2B-Clean-Code-with-Explanation)
+- [732]. My Calendar III
+	- 網解 runtime beats:27.65% memory beats:19.24% [參考網址](https://zxi.mytechroad.com/blog/geometry/732-my-calendar-iii/)
+- [16]. 3Sum Closest
+	- 初解 runtime beats:92.81% memory beats:19.24%
+- [653]. Two Sum IV - Input is a BST
+	- 初解 runtime beats:77.58% memory beats:37.86%
+- [1328]. Break a Palindrome
+	- 網解 runtime beats:51.67% memory beats:95.35% [參考網址](https://leetcode.com/problems/break-a-palindrome/discuss/489774/JavaC++Python-Easy-and-Concise)
 
 ## 2020
 - [1]. Two Sum

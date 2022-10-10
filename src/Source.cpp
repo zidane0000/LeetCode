@@ -1171,13 +1171,22 @@ int main()
     //cout << nummatrix.sumRegion(1, 2, 2, 4) << endl;
 
     //981. Time Based Key - Value Store
-    TimeMap timeMap;
-    timeMap.set("foo", "bar", 1);  // store the key "foo" and value "bar" along with timestamp = 1.
-    cout << timeMap.get("foo", 1) << endl;         // return "bar"
-    cout << timeMap.get("foo", 3) << endl;         // return "bar", since there is no value corresponding to foo at timestamp 3 and timestamp 2, then the only value is at timestamp 1 is "bar".
-    timeMap.set("foo", "bar2", 4); // store the key "foo" and value "bar2" along with timestamp = 4.
-    cout << timeMap.get("foo", 4) << endl;         // return "bar2"
-    cout << timeMap.get("foo", 5) << endl;         // return "bar2"
+    //TimeMap timeMap;
+    //timeMap.set("foo", "bar", 1);  // store the key "foo" and value "bar" along with timestamp = 1.
+    //cout << timeMap.get("foo", 1) << endl;         // return "bar"
+    //cout << timeMap.get("foo", 3) << endl;         // return "bar", since there is no value corresponding to foo at timestamp 3 and timestamp 2, then the only value is at timestamp 1 is "bar".
+    //timeMap.set("foo", "bar2", 4); // store the key "foo" and value "bar2" along with timestamp = 4.
+    //cout << timeMap.get("foo", 4) << endl;         // return "bar2"
+    //cout << timeMap.get("foo", 5) << endl;         // return "bar2"
+
+    //732. My Calendar III
+    MyCalendarThree myCalendarThree;
+    myCalendarThree.book(10, 20); // return 1, The first event can be booked and is disjoint, so the maximum k-booking is a 1-booking.
+    myCalendarThree.book(50, 60); // return 1, The second event can be booked and is disjoint, so the maximum k-booking is a 1-booking.
+    myCalendarThree.book(10, 40); // return 2, The third event [10, 40) intersects the first event, and the maximum k-booking is a 2-booking.
+    myCalendarThree.book(5, 15); // return 3, The remaining events cause the maximum K-booking to be only a 3-booking.
+    myCalendarThree.book(5, 10); // return 3
+    myCalendarThree.book(25, 55); // return 3
     
     return 0;
 }

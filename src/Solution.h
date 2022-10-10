@@ -2717,3 +2717,119 @@ public:
         return it == hashmap[key].begin() ? "" : prev(it)->second;
     }
 };
+
+//729. My Calendar I
+//https://leetcode.com/problems/my-calendar-i/discuss/109475/JavaC%2B%2B-Clean-Code-with-Explanation
+//網解 runtime beats:62.34% memory beats:31.30%
+class MyCalendar {
+    /*
+    * 透過set儲存事件，並先排列start在排列end，所以在搜尋lower bound(一樣或大於)時
+    * 如果找到一個不為最後一位的事件，其開始小於本次事件的結束時，代表本次事件中有一個事件發生
+    * 如果找到一個不為第一位的事件，其前一位事件的結束大於本次事件的開始時，代表本次事件的開始在一個事件發生
+    */
+    std::set<std::pair<int, int>> books;
+public:
+    bool book(int s, int e) {
+        auto next = books.lower_bound({ s, e }); // first element with key not go before k (i.e., either it is equivalent or goes after).
+        if (next != books.end() && next->first < e) return false; // a existing book started within the new book (next)
+        if (next != books.begin() && s < (--next)->second) return false; // new book started within a existing book (prev)
+        books.insert({ s, e });
+        return true;
+    }
+};
+
+//732. My Calendar III
+//https://zxi.mytechroad.com/blog/geometry/732-my-calendar-iii/
+//網解 runtime beats:27.65% memory beats:19.24%
+class MyCalendarThree {
+public:
+    MyCalendarThree() {
+        counts_[INT_MIN] = 0;
+        counts_[INT_MAX] = 0;
+        max_count_ = 0;
+    }
+
+    int book(int start, int end) {
+        auto floor = std::prev(counts_.upper_bound(start));     // floor->first < start
+        auto ceiling = counts_.lower_bound(end);                // ceiling->first >= end
+        for (auto curr = floor, next = curr; curr != ceiling; curr = next) {
+            ++next;
+            if (next->first > end) counts_[end] = curr->second;
+            if (curr->first <= start && next->first > start) max_count_ = std::max(max_count_, counts_[start] = curr->second + 1);
+            else max_count_ = std::max(max_count_, ++curr->second);
+        }
+        return max_count_;
+    }
+private:
+    std::map<int, int> counts_;
+    int max_count_;
+};
+
+//16. 3Sum Closest
+//初解 runtime beats:92.81% memory beats:19.24%
+int threeSumClosest(std::vector<int>& nums, int target) {
+    /*
+    * 先將 nums 升冪排序，並尋找與target誤差最小的答案
+    * 從nums的第一位(最小)開始，將第二個數當作第二位(第二小)，最後一個數當作第三位(最大)
+    * 三者相加後，如果等於target就回傳，如果大於target代表第三位要往前(-)，如果小於target代表第二位要往後(+)
+    * 每次位移時檢查與target的差異，最後回傳與target差異最小值
+    */
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    int diff = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        int low = i + 1;
+        int high = n - 1;
+        while (low < high) {
+            int sum = nums[i] + nums[low] + nums[high];
+            if (sum == target)
+                return target;
+            else if (sum < target)
+                low++;
+            else
+                high--;
+            if (abs(diff) > abs(target - sum))
+                diff = target - sum;
+        }
+    }
+    return target - diff;
+}
+
+//653. Two Sum IV - Input is a BST
+//初解 runtime beats:77.58% memory beats:37.86%
+bool findTarget(TreeNode* root, int k) {
+    std::set<int> exist;
+    std::queue<TreeNode*> q({ root });
+
+    while (!q.empty()) {
+        TreeNode* node = q.front();
+        q.pop();
+        if (node->left) q.push(node->left);
+        if (node->right) q.push(node->right);
+        if (exist.count(k - node->val)) return true;
+        exist.insert(node->val);
+    }
+
+    return false;
+}
+
+//1328. Break a Palindrome
+//https://leetcode.com/problems/break-a-palindrome/discuss/489774/JavaC++Python-Easy-and-Concise
+//網解 runtime beats:51.67% memory beats:95.35%
+std::string breakPalindrome(std::string S) {
+    /*
+    * Check half of the string, replace a non 'a' character to 'a'.
+    * If only one character, return empty string. Otherwise repalce the last character to 'b'
+    * Time Complexity : O(N), Space Complexity : O(N)
+    */
+    int n = S.size();
+    for (int i = 0; i < n / 2; ++i) {
+        if (S[i] != 'a') {
+            S[i] = 'a';
+            return S;
+        }
+    }
+    // All of S is a, so replace the last char of S to 'b'
+    S[n - 1] = 'b';    
+    return n < 2 ? "" : S;
+}
