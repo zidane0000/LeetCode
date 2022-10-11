@@ -264,6 +264,8 @@ Record the Problem-solving process
 	- 初解 runtime beats:77.58% memory beats:37.86%
 - [1328]. Break a Palindrome
 	- 網解 runtime beats:51.67% memory beats:95.35% [參考網址](https://leetcode.com/problems/break-a-palindrome/discuss/489774/JavaC++Python-Easy-and-Concise)
+- [334]. Increasing Triplet Subsequence
+	- 網解 runtime beats:90.14% memory beats:24.04% [參考網址](https://leetcode.com/problems/increasing-triplet-subsequence/discuss/78993/Clean-and-short-with-comments-C++)
 
 ## 2020
 - [1]. Two Sum

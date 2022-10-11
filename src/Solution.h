@@ -2833,3 +2833,35 @@ std::string breakPalindrome(std::string S) {
     S[n - 1] = 'b';    
     return n < 2 ? "" : S;
 }
+
+//334. Increasing Triplet Subsequence
+//https://leetcode.com/problems/increasing-triplet-subsequence/discuss/78993/Clean-and-short-with-comments-C++
+//網解 runtime beats:90.14% memory beats:24.04%
+bool increasingTriplet(std::vector<int>& nums) {
+    /*
+    * 首先 i 是當前最小值，若當前大於 i，代表有可能是 j or k
+    * 而如果當前也大於 j，則令 j = 當前，此時 i < j
+    * 最後若當前滿足並非最小值，也非第二最小值時，回傳true
+    * ---------------------
+    * 假設有i和j兩數，預設為INT_MAX，i和j分別代表在increasingTriplet的第一位以及第二位
+    * 此時將num視為k(第三位)，k遇到i,j有三種情況
+    * Case 1 是k < i & k < j => 代表 k 應該是 i (此時不用更新j，原因是)
+    * Case 2 是k > i & k < j => 代表 k 應該是 j
+    * Case 3 是k > i & k > j => 代表找到答案
+    * 
+    * ----------- i ---------- j -------------
+    *      ↑           ↑             ↑
+    *     Case 1       Case 2        Case 3
+    * 
+    */
+    int i = INT_MAX, j = INT_MAX;
+    for (int& num : nums) {
+        if (num <= i)
+            i = num;           // i is min seen so far (it's a candidate for 1st element)
+        else if (num <= j)     // here when num > i, i.e. num might be either j or k
+            j = num;           // num is better than the current j, store it
+        else                   // here when we have/had c1 < c2 already and x > c2
+            return true;       // the increasing subsequence of 3 elements exists
+    }
+    return false;
+}
