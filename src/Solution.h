@@ -2865,3 +2865,24 @@ bool increasingTriplet(std::vector<int>& nums) {
     }
     return false;
 }
+
+//976. Largest Perimeter Triangle
+//ªì¸Ñ runtime beats:48.11% memory beats:22.88%
+int largestPerimeter(std::vector<int>& nums) {
+    sort(nums.rbegin(), nums.rend()); // decreasing
+    int a = INT_MIN, b = INT_MIN;
+    for (int& num : nums) {
+        if (num > a)
+            a = num;
+        else if (num > b)
+            b = num;
+        else
+            if (a + b > num and a + num > b and b + num > a)
+                return std::max(a, std::max(b, num));
+            else {
+                a = b;
+                b = num;
+            }
+    }
+    return 0;
+}

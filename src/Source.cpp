@@ -1189,8 +1189,12 @@ int main()
     //myCalendarThree.book(25, 55); // return 3
 
     //334. Increasing Triplet Subsequence
+    //std::vector<int> nums({ 1,5,0,7 });
+    //cout << increasingTriplet(nums) << endl;  // true
+
+    //976. Largest Perimeter Triangle
     std::vector<int> nums({ 1,5,0,7 });
-    cout << increasingTriplet(nums) << endl;  // true
+    cout << largestPerimeter(nums) << endl;
     
     return 0;
 }
