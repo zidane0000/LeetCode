@@ -2886,3 +2886,21 @@ int largestPerimeter(std::vector<int>& nums) {
     }
     return 0;
 }
+
+//237. Delete Node in a Linked List
+//ªì¸Ñ runtime beats:70.83% memory beats:37.95%
+void deleteNode(ListNode* node) {
+    ListNode* now = node;
+    while (now->next->next) {
+        now->val = now->next->val;
+        now = now->next;
+    }
+    now->val = now->next->val;
+    now->next = NULL;
+}
+
+//https://leetcode.com/problems/delete-node-in-a-linked-list/discuss/65455/1-3-lines-C++JavaPythonCCJavaScriptRuby
+//ºô¸Ñ runtime beats:25.52% memory beats:73.12%
+//void deleteNode(ListNode* node) {
+//    node = node->next;
+//}

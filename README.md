@@ -268,6 +268,9 @@ Record the Problem-solving process
 	- 網解 runtime beats:90.14% memory beats:24.04% [參考網址](https://leetcode.com/problems/increasing-triplet-subsequence/discuss/78993/Clean-and-short-with-comments-C++)
 - [976]. Largest Perimeter Triangle
 	- 初解 runtime beats:48.11% memory beats:22.88%
+- [237]. Delete Node in a Linked List
+	- 初解 runtime beats:70.83% memory beats:37.95%
+	- 網解 runtime beats:25.52% memory beats:73.12% [參考網址](https://leetcode.com/problems/delete-node-in-a-linked-list/discuss/65455/1-3-lines-C++JavaPythonCCJavaScriptRuby)
 
 ## 2020
 - [1]. Two Sum
