@@ -1193,8 +1193,11 @@ int main()
     //cout << increasingTriplet(nums) << endl;  // true
 
     //976. Largest Perimeter Triangle
-    std::vector<int> nums({ 1,5,0,7 });
-    cout << largestPerimeter(nums) << endl;
+    //std::vector<int> nums({ 1,5,0,7 });
+    //cout << largestPerimeter(nums) << endl;
+
+    //2095. Delete the Middle Node of a Linked List
+    ListNode* node = deleteMiddle(toList({2,1}));
     
     return 0;
 }

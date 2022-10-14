@@ -2904,3 +2904,19 @@ void deleteNode(ListNode* node) {
 //void deleteNode(ListNode* node) {
 //    node = node->next;
 //}
+
+//2095. Delete the Middle Node of a Linked List
+//ªì¸Ñ runtime beats:74.81% memory beats:20.46%
+ListNode* deleteMiddle(ListNode* head) {
+    std::unordered_map<int, ListNode*> hashmap;
+    ListNode* now = head;
+    int posi = 0;
+    while (now) {
+        hashmap.emplace(posi, now);
+        posi++;
+        now = now->next;
+    }
+    now = hashmap[posi / 2 - 1];
+    now->next = now->next->next;
+    return head;
+}
