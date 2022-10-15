@@ -273,6 +273,15 @@ Record the Problem-solving process
 	- 網解 runtime beats:25.52% memory beats:73.12% [參考網址](https://leetcode.com/problems/delete-node-in-a-linked-list/discuss/65455/1-3-lines-C++JavaPythonCCJavaScriptRuby)
 - [2095]. Delete the Middle Node of a Linked List
 	- 初解 runtime beats:74.81% memory beats:20.46%
+	- 二解 runtime beats:81.56% memory beats:20.46%
+	- 網解 runtime beats:99.59% memory beats:88.09% [參考網址](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/discuss/1612140/One-Pass-Slow-and-Fast)
+
+### Dynamic Program Day 15
+- [62]. Unique Paths
+	- 初解 runtime beats:100.00% memory beats:28.64%
+- [63]. Unique Paths II
+	- 初解 runtime beats:71.74% memory beats:98.66%
+
 
 ## 2020
 - [1]. Two Sum

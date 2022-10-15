@@ -2908,6 +2908,7 @@ void deleteNode(ListNode* node) {
 //2095. Delete the Middle Node of a Linked List
 //初解 runtime beats:74.81% memory beats:20.46%
 ListNode* deleteMiddle(ListNode* head) {
+    if (!head->next) return nullptr;
     std::unordered_map<int, ListNode*> hashmap;
     ListNode* now = head;
     int posi = 0;
@@ -2919,4 +2920,96 @@ ListNode* deleteMiddle(ListNode* head) {
     now = hashmap[posi / 2 - 1];
     now->next = now->next->next;
     return head;
+}
+
+//二解 runtime beats:81.56% memory beats:20.46%
+//ListNode* deleteMiddle(ListNode* head) {
+//    if (!head->next) return nullptr;
+//    ListNode* fast = head;
+//    ListNode* slow = head;
+//    ListNode* slow_prev = nullptr;
+//    while (fast and fast->next) {
+//        fast = fast->next->next;    // 2 step
+//        slow_prev = slow;
+//        slow = slow->next;          // 1 step
+//    }
+//
+//    if(slow_prev) slow_prev->next = slow_prev->next->next;
+//    return head;
+//}
+
+//https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/discuss/1612140/One-Pass-Slow-and-Fast
+//網解 runtime beats:99.59% memory beats:88.09%
+//ListNode* deleteMiddle(ListNode* head) {
+//    if (head->next == nullptr)
+//        return nullptr;
+//    auto slow = head, fast = head->next->next;
+//    while (fast != nullptr && fast->next != nullptr) {
+//        fast = fast->next->next;
+//        slow = slow->next;
+//    }
+//    slow->next = slow->next->next;
+//    return head;
+//}
+
+//62. Unique Paths
+//初解 runtime beats:100.00% memory beats:28.64%
+int uniquePaths(int m, int n) {
+    /*
+    * 因為只能往下或往右，所以在i=0以及j=0時都只有一條路線，而dp[1][1] = (左邊)dp[1][0] + (上邊)dp[0][1]
+    * 推導出 dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    */ 
+    std::vector<std::vector<int>> dp(m, std::vector<int>(n, 1));
+    for (int i = 1; i < m; i++)
+        for (int j = 1; j < n; j++)
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+    return dp[m - 1][n - 1];
+}
+
+//63. Unique Paths II
+//初解 runtime beats:71.74% memory beats:98.66%
+int uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid) {
+    /*
+    * 與62題一樣，不過要先確認原值是否為1(障礙)，若為障礙則為0
+    */
+    const int m = obstacleGrid.size();
+    const int n = obstacleGrid[0].size();
+    for(int i = 0; i < m;i++)
+        for (int j = 0; j < n; j++) {
+            if (obstacleGrid[i][j]) obstacleGrid[i][j] = 0;
+            else {
+                if (i == 0 && j == 0) obstacleGrid[i][j] = 1;
+                else if (i == 0) obstacleGrid[i][j] = obstacleGrid[i][j - 1];
+                else if (j == 0) obstacleGrid[i][j] = obstacleGrid[i - 1][j];
+                else obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1];
+            }
+        }
+    return obstacleGrid[m - 1][n - 1];
+}
+
+//1531. String Compression II
+//https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-1531-string-compression-ii/
+//網解 runtime beats:74.81% memory beats:20.46%
+int getLengthOfOptimalCompression(std::string s, int k) {
+    const int n = s.length();
+    std::vector<std::vector<int>> cache(n, std::vector<int>(k + 1, -1));    // cache[i][j] 代表解碼s[i:]且刪除j個char的最小長度
+    std::function<int(int, int)> dp = [&](int i, int k) -> int {
+        if (k < 0) return n;        // 可刪除數小於0，是非法狀態，回傳不可能的答案，即n
+        if (i + k >= n) return 0;   // 代表剩餘長度都可以被刪除，回傳0
+        int& ans = cache[i][k];
+        if (ans != -1) return ans;  // 代表非預設
+        ans = dp(i + 1, k - 1);     // Delete i
+        int len = 0;
+        int same = 0;
+        int diff = 0;
+        for (int j = i; j < n && diff <= k; ++j) {
+            if (s[j] == s[i] && ++same) {
+                if (same <= 2 || same == 10 || same == 100) ++len;
+            }                
+            else ++diff;
+            ans = std::min(ans, len + dp(j + 1, k - diff));
+        }
+        return ans;
+    };
+    return dp(0, k);
 }
