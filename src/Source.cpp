@@ -1197,7 +1197,11 @@ int main()
     //cout << largestPerimeter(nums) << endl;
 
     //2095. Delete the Middle Node of a Linked List
-    ListNode* node = deleteMiddle(toList({2,1}));
+    //ListNode* node = deleteMiddle(toList({2,1}));
     
+    //1335. Minimum Difficulty of a Job Schedule
+    std::vector<int> jobDifficulty({ 11, 111, 22, 222, 33, 333, 44, 444 });
+    cout << minDifficulty(jobDifficulty, 6) << endl;
+
     return 0;
 }

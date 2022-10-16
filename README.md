@@ -282,6 +282,14 @@ Record the Problem-solving process
 - [63]. Unique Paths II
 	- 初解 runtime beats:71.74% memory beats:98.66%
 
+<details><summary> <b>Weekly Contest 315</b> </summary>
+
+ - Rank : 10644 / 23449
+ - [x] 2441. Number of Common Factors
+ - [x] 2442. Maximum Sum of an Hourglass
+ - [x] 2443. Minimize XOR
+ - [ ] 2444. Maximum Deletions on a String
+</details>
 
 ## 2020
 - [1]. Two Sum

@@ -1,21 +1,4 @@
 #pragma once
-#include <iostream>
-#include <climits>
-#include <vector>
-#include <map>
-#include <string>
-#include <algorithm>
-#include <math.h>
-#include <stack>
-#include <set>
-#include <unordered_set>
-#include <queue>
-#include <functional>
-#include <unordered_map>
-#include <sstream>          //stringstream
-#include <bitset>
-#include <numeric>
-
 #include "class.h"
 
 // 6. Zigzag Conversion
@@ -3013,3 +2996,97 @@ int getLengthOfOptimalCompression(std::string s, int k) {
     };
     return dp(0, k);
 }
+
+//Weekly Contest 315
+int findMaxK(std::vector<int>& nums) {
+    std::sort(nums.begin(), nums.end());
+    int l = 0, r = nums.size() - 1;
+    while (l < r) {
+        if (nums[l] + nums[r] == 0)
+            return nums[r];
+        else if (nums[l] + nums[r] > 0)
+            r--;
+        else
+            l++;
+    }
+    return -1;
+}
+
+int countDistinctIntegers(std::vector<int>& nums) {
+    std::set<int> distinct;
+    std::string s;
+    for (int num : nums) {
+        distinct.insert(num);
+        s = std::to_string(num);
+        std::reverse(s.begin(), s.end());
+        distinct.insert(std::stoi(s));
+    }
+    return distinct.size();
+}
+
+bool sumOfNumberAndReverse(int num) {
+    if (num == 0) return true;
+    int half = num / 2;
+    std::string half_reverse;
+    while (half < num) {
+        half_reverse = std::to_string(half);
+        std::reverse(half_reverse.begin(), half_reverse.end());
+        if (half + stoi(half_reverse) == num) return true;
+        else half++;
+    }
+    return false;
+}
+
+long long countSubarrays(std::vector<int>& nums, int minK, int maxK) {
+    long long ans = 0, n = 0;
+
+    auto l = std::find(nums.begin(), nums.end(), minK), r = std::find(nums.begin(), nums.end(), maxK);
+    while (l != nums.end() and r != nums.end()) {
+
+        if (*std::max_element(l, r) == maxK and *std::min_element(l, r) == minK)
+            n++;
+    }
+
+    return ans;
+}
+
+//1335. Minimum Difficulty of a Job Schedule
+//https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-1335-minimum-difficulty-of-a-job-schedule/
+//網解 runtime beats:37.58% memory beats:44.90%
+int minDifficulty(std::vector<int>& jobs, int d) {
+    /*
+    * 天數與工作都以 1-based 表示，即從1開始排序，所以dp需要append 1
+    * dp[i][k] 代表安排前i個工作於k天內的最小難度
+    */
+    const int n = jobs.size();
+    if (d > n) return -1;
+    std::vector<std::vector<int>> dp(n + 1, std::vector<int>(d + 1, 1e9));  // 預設無窮大
+
+    dp[0][0] = 0;   //前0個工作於0天內完成，預設為0
+    for (int i = 1; i <= n; ++i)
+        for (int j = i - 1, max_diffculty = 0; j >= 0; --j) {
+            max_diffculty = std::max(max_diffculty, jobs[j]);
+            for (int k = 1; k <= std::min(i, d); ++k)
+                dp[i][k] = std::min(dp[i][k], dp[j][k - 1] + max_diffculty);
+        }
+    return dp[n][d];
+}
+
+//https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/discuss/490316/JavaC++Python3-DP-O(nd)-Solution
+//網解 runtime beats:37.58% memory beats:44.90%
+//int minDifficulty(vector<int>& A, int D) {
+//    int n = A.size(), inf = 1e9, maxd;
+//    if (n < D) return -1;
+//    vector<int> dp(n + 1, 1e9);
+//    dp[n] = 0;
+//    for (int d = 1; d <= D; ++d) {
+//        for (int i = 0; i <= n - d; ++i) {
+//            maxd = 0, dp[i] = inf;
+//            for (int j = i; j <= n - d; ++j) {
+//                maxd = max(maxd, A[j]);
+//                dp[i] = min(dp[i], maxd + dp[j + 1]);
+//            }
+//        }
+//    }
+//    return dp[0];
+//}

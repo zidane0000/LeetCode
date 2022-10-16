@@ -1,5 +1,21 @@
 #pragma once
+#include <iostream>
+#include <climits>
 #include <vector>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <math.h>
+#include <stack>
+#include <set>
+#include <unordered_set>
+#include <queue>
+#include <functional>
+#include <unordered_map>
+#include <sstream>          //stringstream
+#include <bitset>
+#include <vector>
+#include <numeric>
 
 struct TreeNode {
     int val;
