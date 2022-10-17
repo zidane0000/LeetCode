@@ -291,6 +291,17 @@ Record the Problem-solving process
  - [ ] 2444. Maximum Deletions on a String
 </details>
 
+- [1832]. Check if the Sentence Is Pangram
+	- 初解 runtime beats:54.16% memory beats:94.60%
+	- 二解 runtime beats:80.43% memory beats:06.60%
+
+### Dynamic Program Day 16
+- [64]. Minimum Path Sum
+	- 初解 runtime beats:14.94% memory beats:31.40%
+	- 二解 runtime beats:68.60% memory beats:80.55%
+- [221]. Maximal Square
+	- 初解 runtime beats:62.38% memory beats:57.14%
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%

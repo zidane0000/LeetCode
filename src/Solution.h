@@ -3090,3 +3090,102 @@ int minDifficulty(std::vector<int>& jobs, int d) {
 //    }
 //    return dp[0];
 //}
+
+//1832. Check if the Sentence Is Pangram
+//初解 runtime beats:54.16% memory beats:94.60%
+bool checkIfPangram(std::string s) {
+    // 直接搜尋'a'-'z'
+    char c = 'a';
+    for (c = 'a'; c <= 'z'; c++) {
+        if (s.find(c) == std::string::npos)
+            return false;
+    }
+    return true;
+}
+
+//二解 runtime beats:80.43% memory beats:06.60%
+//bool checkIfPangram(std::string s) {
+//    // 利用 set 紀錄發生過的字母
+//    std::set<char> alphabet(s.begin(), s.end());
+//    return alphabet.size() == 26;
+//}
+
+//64. Minimum Path Sum
+//初解 runtime beats:14.94% memory beats:31.40%
+int minPathSum(std::vector<std::vector<int>>& grid) {
+    //top - down -> Time Limit Exceeded
+    const int m = grid.size();
+    const int n = grid[0].size();
+    const int inf = INT_MAX / 2;
+    std::vector<std::vector<int>> cache(m, std::vector<int>(n, inf));
+    std::function<int(int, int)> dp = [&](int x, int y) {
+        if (x < 0 || y < 0) return inf;
+        if (x == 0 and y == 0) return grid[x][y];
+        if (x == 0) return grid[x][y] + dp(x, y - 1);
+        if (y == 0) return grid[x][y] + dp(x - 1, y);
+        int& ans = cache[x][y];
+        if (ans != inf) return ans;
+        ans = grid[x][y] + std::min(dp(x - 1, y), dp(x, y - 1));
+        return ans;
+    };
+    return dp(m - 1, n - 1);
+}
+
+//二解 runtime beats:68.60% memory beats:80.55%
+//int minPathSum(std::vector<std::vector<int>>& grid) {
+//    const int m = grid.size();
+//    const int n = grid[0].size();
+//    for(int i =0;i<m;i++)
+//        for (int j = 0; j < n; j++) {
+//            if (i == 0 && j == 0) grid[i][j] = grid[i][j];
+//            if (i == 0) grid[i][j] += grid[i][j - 1];
+//            if (j == 0) grid[i][j] += grid[i - 1][j];
+//            grid[i][j] = grid[i][j] + std::min(grid[i][j - 1],grid[i - 1][j]);
+//        }
+//
+//    return grid[m - 1][n - 1];
+//}
+
+//221. Maximal Square
+//初解 runtime beats:62.38% memory beats:57.14%
+int maximalSquare(std::vector<std::vector<char>>& matrix) {
+    /*
+    * 在 x = 0 以及 y = 0 時，不可能生成往左上變成一個正方形，所以只判斷是否為1
+    * 當 x > 0 以及 y > 0 時，在matrix[x][y] = 1時，若matrix[x-1][y-1] != 0，代表左上存在一正方形，而我們希望matrix[x-1][y-1]儲存該正方形的大小
+    * 因此 matrix[x][y] = min(matrix[x-1][y],matrix[x][y-1],matrix[x-1][y-1])，會需要判斷左邊以及上邊的原因是可能左邊以及上邊並非正方形，而是0或者更小的正方形
+    * 利用一個dp儲存matrix以防正方形超過char能儲存的大小(0~128)
+    */
+    const int m = matrix.size();
+    const int n = matrix[0].size();
+    int ans = 0;
+    std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++) {
+            dp[i][j] = matrix[i][j] - '0';
+            if(i > 0 and j > 0 and dp[i][j] == 1 and dp[i - 1][j] != 0 and dp[i][j - 1] != 0 and dp[i - 1][j - 1] != 0)
+                dp[i][j] = std::min(dp[i - 1][j], std::min(dp[i][j - 1], dp[i - 1][j - 1])) + 1;
+            ans = std::max(ans, (int)std::pow(dp[i][j], 2));
+        }
+    return ans;
+}
+
+//https://leetcode.com/problems/maximal-square/discuss/61803/C++-space-optimized-DP
+//網解 runtime beats:92.73% memory beats:75.37%
+int maximalSquare(std::vector<std::vector<char>>& matrix) {
+    /*
+    * 
+    */
+    if (matrix.empty()) return 0;
+    int m = matrix.size(), n = matrix[0].size(), sz = 0, pre;
+    std::vector<int> cur(n, 0);
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            int temp = cur[j];
+            if (!i || !j || matrix[i][j] == '0') cur[j] = matrix[i][j] - '0';
+            else cur[j] = std::min(pre, std::min(cur[j], cur[j - 1])) + 1;
+            sz = std::max(cur[j], sz);
+            pre = temp;
+        }
+    }
+    return sz * sz;
+}
