@@ -3171,21 +3171,36 @@ int maximalSquare(std::vector<std::vector<char>>& matrix) {
 
 //https://leetcode.com/problems/maximal-square/discuss/61803/C++-space-optimized-DP
 //ºô¸Ñ runtime beats:92.73% memory beats:75.37%
-int maximalSquare(std::vector<std::vector<char>>& matrix) {
-    /*
-    * 
-    */
-    if (matrix.empty()) return 0;
-    int m = matrix.size(), n = matrix[0].size(), sz = 0, pre;
-    std::vector<int> cur(n, 0);
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            int temp = cur[j];
-            if (!i || !j || matrix[i][j] == '0') cur[j] = matrix[i][j] - '0';
-            else cur[j] = std::min(pre, std::min(cur[j], cur[j - 1])) + 1;
-            sz = std::max(cur[j], sz);
-            pre = temp;
+//int maximalSquare(std::vector<std::vector<char>>& matrix) {
+//    if (matrix.empty()) return 0;
+//    int m = matrix.size(), n = matrix[0].size(), sz = 0, pre;
+//    std::vector<int> cur(n, 0);
+//    for (int i = 0; i < m; i++) {
+//        for (int j = 0; j < n; j++) {
+//            int temp = cur[j];
+//            if (!i || !j || matrix[i][j] == '0') cur[j] = matrix[i][j] - '0';
+//            else cur[j] = std::min(pre, std::min(cur[j], cur[j - 1])) + 1;
+//            sz = std::max(cur[j], sz);
+//            pre = temp;
+//        }
+//    }
+//    return sz * sz;
+//}
+
+//38. Count and Say
+//ªì¸Ñ runtime beats:86.10% memory beats:77.40%
+std::string countAndSay(int n) {
+    if (n == 1) return "1";
+    std::string say = countAndSay(n - 1), ans = "";
+    int count = 1;
+    int size = say.size();
+    for (int i = 0; i < size; i++) {
+        if (i < size - 1 && say[i] == say[i + 1])
+            count++;
+        else {
+            ans += std::to_string(count) + say[i];
+            count = 1;
         }
     }
-    return sz * sz;
+    return ans;
 }

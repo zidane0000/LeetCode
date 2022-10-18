@@ -302,6 +302,9 @@ Record the Problem-solving process
 - [221]. Maximal Square
 	- 初解 runtime beats:62.38% memory beats:57.14%
 
+- [38]. Count and Say
+	- 初解 runtime beats:86.10% memory beats:77.40%
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%
