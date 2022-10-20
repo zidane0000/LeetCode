@@ -3259,3 +3259,60 @@ std::string intToRoman(int num) {
 
     return roman;
 }
+
+//5. Longest Palindromic Substring
+//初解 runtime beats:43.89% memory beats:39.14%
+std::string longestPalindrome(std::string s) {
+    /*
+    * dp[i][j] = s[i] == s[j] && dp[i+1][j-1] => 字串頭尾比較然後字串中間存在dp中
+    * 因為 dp[i][j] 依賴 dp[i+1][j-1]
+    * 所以 i 要從高到低，j 從低到高，且i < j
+    * 兩層迴圈，外層為end(低到高，0 -> n)，內層為start(高到低，且小於end，end-1 -> 0)
+    * 需判斷start跟end是否差1，若差一代表start+1會超過end-1，此時不用看dp
+    */
+    const int n = s.size();
+    std::vector<std::vector<bool>>dp(n, std::vector<bool>(n, false));
+
+    for (int i = 0; i < n; i++) dp[i][i] = true;
+    int longest_palindrome_start = 0, longest_palindrome_len = 1;
+
+    for (int end = 0; end < n; end++)
+        for (int start = end - 1; start > -1; start--) {            
+            if (s[start] == s[end]) {
+                if ((end - start == 1) or dp[start + 1][end - 1]) {
+                    dp[start][end] = true;
+                    if (longest_palindrome_len < (end - start + 1)) {
+                        longest_palindrome_start = start;
+                        longest_palindrome_len = end - start + 1;
+                    }
+                }
+            }
+        }
+    return s.substr(longest_palindrome_start, longest_palindrome_len);
+}
+
+//516. Longest Palindromic Subsequence
+//https://leetcode.com/problems/longest-palindromic-subsequence/discuss/1468396/C++Python-2-solutions:-Top-down-DP-Bottom-up-DP-O(N)-Space-Clean-and-Concise
+//網解 runtime beats:63.52% memory beats:61.18%
+int longestPalindromeSubseq(std::string s) {
+    /*
+    * 1) Top down DP
+    * if s[i] == s[j]: dp[i][j] = dp[i+1][j-1] + 2
+    * elif dp[i][j] = max(dp[i+1][j], dp[i][j-1])   // 如果有一個不連續的，會變成忽略該不連續的最大值
+    */
+    const int n = s.size();
+    std::vector<std::vector<int>>dp(n, std::vector<int>(n, 0));
+    int longest_palindrome_len = 1;
+    for (int end = 0; end < n; end++) {
+        dp[end][end] = 1;
+        for (int start = end - 1; start > -1; start--) {
+            if (s[start] == s[end])
+                dp[start][end] = dp[start + 1][end - 1] + 2;
+            else
+                dp[start][end] = std::max(dp[start][end - 1], dp[start + 1][end]);
+            longest_palindrome_len = std::max(longest_palindrome_len, dp[start][end]);
+        }
+    }
+        
+    return longest_palindrome_len;
+}

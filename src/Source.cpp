@@ -1208,8 +1208,15 @@ int main()
     //cout << maximalSquare(matrix) << endl;
 
     //692. Top K Frequent Words
-    std::vector<std::string>words({ "i","love","leetcode","i","love","coding" });
-    std::vector<std::string> ans = topKFrequent(words, 2);
+    //std::vector<std::string>words({ "i","love","leetcode","i","love","coding" });
+    //std::vector<std::string> ans = topKFrequent(words, 2);
+
+    //5. Longest Palindromic Substring
+    //cout << longestPalindrome("babad") << endl;
+    //cout << longestPalindrome("cbbd") << endl;
+
+    //516. Longest Palindromic Subsequence
+    cout << longestPalindromeSubseq("bbbdb") << endl;
 
     return 0;
 }

@@ -309,6 +309,11 @@ Record the Problem-solving process
 - [12]. Integer to Roman
 	- 初解 runtime beats:88.47% memory beats:77.21%
 
+### Dynamic Program Day 16
+- [5]. Longest Palindromic Substring
+	- 初解 runtime beats:31.14% memory beats:13.10%
+- [516]. Longest Palindromic Subsequence
+	- 網解 runtime beats:63.52% memory beats:61.18% [參考網址](https://leetcode.com/problems/longest-palindromic-subsequence/discuss/1468396/C++Python-2-solutions:-Top-down-DP-Bottom-up-DP-O(N)-Space-Clean-and-Concise)
 
 ## 2020
 - [1]. Two Sum
