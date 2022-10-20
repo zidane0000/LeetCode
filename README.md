@@ -304,6 +304,11 @@ Record the Problem-solving process
 
 - [38]. Count and Say
 	- 初解 runtime beats:86.10% memory beats:77.40%
+- [692]. Top K Frequent Words
+	- 初解 runtime beats:45.47% memory beats:39.56%
+- [12]. Integer to Roman
+	- 初解 runtime beats:88.47% memory beats:77.21%
+
 
 ## 2020
 - [1]. Two Sum

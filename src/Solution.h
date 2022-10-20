@@ -3190,6 +3190,9 @@ int maximalSquare(std::vector<std::vector<char>>& matrix) {
 //38. Count and Say
 //初解 runtime beats:86.10% memory beats:77.40%
 std::string countAndSay(int n) {
+    /*
+    * 利用遞迴取得countAndSay(n-1)，並重新解讀
+    */
     if (n == 1) return "1";
     std::string say = countAndSay(n - 1), ans = "";
     int count = 1;
@@ -3203,4 +3206,56 @@ std::string countAndSay(int n) {
         }
     }
     return ans;
+}
+
+//692. Top K Frequent Words
+//初解 runtime beats:45.47% memory beats:39.56%
+std::vector<std::string> topKFrequent(std::vector<std::string>& words, int k) {
+    // 先利用 hashmap 計次數，然後將 hashmap 存入 priority queue 中排序，最後從 priority queue 中選出前 k 個為答案
+    std::unordered_map<std::string, int> hashmap;
+    for (auto word : words)
+        hashmap[word]++;
+
+    struct compare {
+        bool operator()(std::pair<int, std::string> a, std::pair<int, std::string> b) {
+            if (a.first == b.first)
+                return a.second > b.second;
+            return a.first < b.first;
+        }
+    };
+
+    std::priority_queue<std::pair<int, std::string>, std::vector<std::pair<int, std::string>>, compare> queue;
+    for (auto itr : hashmap)
+        queue.push({ itr.second,itr.first });
+
+    std::vector<std::string> ans;
+    while (ans.size() < k) {
+        ans.push_back(queue.top().second);
+        queue.pop();
+    }
+    return ans;
+}
+
+//12. Integer to Roman
+//初解 runtime beats:88.47% memory beats:77.21%
+std::string intToRoman(int num) {
+    std::string roman = "";
+
+    while (num) {
+        if (num >= 1000) { roman += "M"; num -= 1000; }
+        else if (num >= 900) { roman += "CM"; num -= 900; }
+        else if (num >= 500) { roman += "D";  num -= 500; }
+        else if (num >= 400) { roman += "CD"; num -= 900; }
+        else if (num >= 100) { roman += "C";  num -= 100; }
+        else if (num >= 90) {  roman += "XC"; num -= 90;  }
+        else if (num >= 50) {  roman += "L";  num -= 50;  }
+        else if (num >= 40) {  roman += "XL"; num -= 40;  }
+        else if (num >= 10) {  roman += "X";  num -= 10;  }
+        else if (num >= 9) {   roman += "IX"; num -= 9;   }
+        else if (num >= 5) {   roman += "V";  num -= 5;   }
+        else if (num >= 4) {   roman += "IV"; num -= 4;   }
+        else { roman += "I"; num--; }
+    }
+
+    return roman;
 }
