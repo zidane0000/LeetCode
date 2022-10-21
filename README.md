@@ -315,6 +315,9 @@ Record the Problem-solving process
 - [516]. Longest Palindromic Subsequence
 	- 網解 runtime beats:63.52% memory beats:61.18% [參考網址](https://leetcode.com/problems/longest-palindromic-subsequence/discuss/1468396/C++Python-2-solutions:-Top-down-DP-Bottom-up-DP-O(N)-Space-Clean-and-Concise)
 
+- [219]. Contains Duplicate II
+	- 初解 runtime beats:29.71% memory beats:80.91%
+
 ## 2020
 - [1]. Two Sum
 	- 初解 runtime beats:12.97% memory beats:89.01%

@@ -3316,3 +3316,19 @@ int longestPalindromeSubseq(std::string s) {
         
     return longest_palindrome_len;
 }
+
+//219. Contains Duplicate II
+//初解 runtime beats:29.71% memory beats:80.91%
+bool containsNearbyDuplicate(std::vector<int>& nums, int k) {
+    /*
+    * 以 hashmap 紀錄在 num 發生最近的位置
+    * 當位置存在時，比較是否距離小於k，若小於回傳true
+    */
+    std::unordered_map<int, int> hashmap;
+    const int n = nums.size();
+    for (int i = 0; i < n; i++) {
+        if (hashmap.count(nums[i]) and (k >= abs(hashmap[nums[i]] - i))) return true;
+        hashmap[nums[i]] = i;
+    }
+    return false;
+}
