@@ -1216,7 +1216,10 @@ int main()
     //cout << longestPalindrome("cbbd") << endl;
 
     //516. Longest Palindromic Subsequence
-    cout << longestPalindromeSubseq("bbbdb") << endl;
+    //cout << longestPalindromeSubseq("bbbdb") << endl;
+
+    //76. Minimum Window Substring
+    cout << minWindow("saabcdafsz", "sz") << endl;
 
     return 0;
 }

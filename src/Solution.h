@@ -3332,3 +3332,38 @@ bool containsNearbyDuplicate(std::vector<int>& nums, int k) {
     }
     return false;
 }
+
+//76. Minimum Window Substring
+//https://zxi.mytechroad.com/blog/two-pointers/leetcode-76-minimum-window-substring/
+//網解 runtime beats:99.73% memory beats:94.27%
+std::string minWindow(std::string s, std::string t) {
+    /*
+    * 1) 紀錄在 t 中每個字元發生的次數
+    * 2) 將 i當作初始位置(0)，start代表切割起始，len代表切割長度，j 當作 s 的位置，left 當作 t 的長度
+         如果 --freq[s[j] 大於等於 0，代表在 t 中有一個字元被滿足，--left，小於 0 代表這個字源沒有出現在 t 或者重複出現在 t，而這個小於會幫助步驟4去縮短切割長度
+    * 3) 當 t 完全被滿足(left==0)時，代表此時 i~j 滿足全部的 t，設len = j - i + 1，start = i
+    * 4) 此時從 i 往後，如果++freq[s[i]] 等於 1，表示過去曾發生的都不夠抵銷(步驟2小於0)，所以t的長度會增加(++left)，而離開迴圈，繼續步驟2
+    * 5) 最後確認切割長度是否為不可能(INT_MAX)，如果是就回傳空，否則就回傳從start開始的len個字
+    */
+    const int s_n = s.size();
+    const int t_n = t.size();
+    if (s_n < t_n) return "";
+
+    std::vector<int> freq(128);
+    for (char c : t) freq[c]++;
+
+    int start = 0;
+    int len = INT_MAX;
+    for (int i = 0, j = 0, left = t_n; j < s_n; ++j) {
+        if (--freq[s[j]] >= 0) --left;
+        while (left == 0) {
+            if (j - i + 1 < len) {
+                len = j - i + 1;
+                start = i;
+            }
+            if (++freq[s[i++]] == 1) ++left;
+        }
+    }
+
+    return len == INT_MAX ? "" : s.substr(start, len);
+}

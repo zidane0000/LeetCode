@@ -317,6 +317,8 @@ Record the Problem-solving process
 
 - [219]. Contains Duplicate II
 	- 初解 runtime beats:29.71% memory beats:80.91%
+- [76]. Minimum Window Substring
+	- 網解 runtime beats:99.73% memory beats:94.27% [參考網址](https://zxi.mytechroad.com/blog/two-pointers/leetcode-76-minimum-window-substring/
 
 ## 2020
 - [1]. Two Sum
