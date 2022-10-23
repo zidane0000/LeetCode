@@ -3429,3 +3429,21 @@ int subarrayGCD(std::vector<int>& nums, int k) {
 //long long makeSimilar(vector<int>& nums, vector<int>& target) {
 //
 //}
+
+//645. Set Mismatch
+//ªì¸Ñ runtime beats:88.91% memory beats:44.96%
+std::vector<int> findErrorNums(std::vector<int>& nums) {
+    const int n = nums.size();
+    std::vector<int> freq(n);
+
+    int loss = INT_MAX, duplicate = INT_MAX;
+    for (int num : nums) {
+        freq[num - 1]++;
+        if (freq[num - 1] == 2) duplicate = num;
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (freq[i] == 0) return { duplicate, i + 1 };
+    }
+    return {};
+}
