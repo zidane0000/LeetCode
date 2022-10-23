@@ -3367,3 +3367,65 @@ std::string minWindow(std::string s, std::string t) {
 
     return len == INT_MAX ? "" : s.substr(start, len);
 }
+
+//Determine if Two Events Have Conflict
+bool haveConflict(std::vector<std::string>& event1, std::vector<std::string>& event2) {
+    int event1_start = std::stoi(event1[0].substr(0, 2)) * 100 + stoi(event1[0].substr(3));
+    int event1_end = stoi(event1[1].substr(0, 2)) * 100 + stoi(event1[1].substr(3));
+    int event2_start = stoi(event2[0].substr(0, 2)) * 100 + stoi(event2[0].substr(3));
+    int event2_end = stoi(event2[1].substr(0, 2)) * 100 + stoi(event2[1].substr(3));
+
+    if (event1_start <= event2_start and event2_start <= event1_end) return true;
+    if (event2_start <= event1_start and event1_start <= event2_end) return true;
+    return false;
+}
+
+//Number of Subarrays With GCD Equal to K
+int subarrayGCD(std::vector<int>& nums, int k) {
+    const int n = nums.size();
+
+    std::function<int(int, int)> gcd = [&](int n, int m) {
+        if (n == 0 or m == 0) return 0;
+        if (n % m == 0)
+            return m;
+        return gcd(m, n % m);
+    };
+
+    std::vector<std::vector<int>> dp(n, std::vector<int>(n, 0));
+    int ans = 0;
+    for (int end = 0; end < n; end++) {
+        if (nums[end] % k == 0) {
+            dp[end][end] = nums[end] / k;
+            for (int start = end - 1; start > -1; start--) {
+                dp[start][end] = gcd(dp[start + 1][end], dp[start][end - 1]);
+                if (dp[start][end] == 1) ans++;
+            }
+            if (dp[end][end] == 1) ans++;
+        }
+    }
+    return ans;
+}
+
+//Minimum Cost to Make Array Equal
+//long long minCost(std::vector<int>& nums, std::vector<int>& cost) {
+//    const int n = nums.size();
+//    std::vector<int> cache(n);
+//
+//    std::function<long long(int, int)> dp = [&](int posi, int base) {   //現在位置，基準值
+//        if (posi < 0 or posi >= n) return 0;
+//        int ans = cache[posi];
+//        if (ans != 0) return ans;
+//
+//        //int prev = dp(posi - 1, base);
+//        //int same_base = prev + (nums[posi] - base) * cost[posi];
+//        //int change_base = prev + posi * (base - nums[posi]);
+//        //if()
+//        //dp[posi] = std::min(, prev +);
+//    };
+//    return dp(n, 0);
+//}
+
+//Minimum Number of Operations to Make Arrays Similar
+//long long makeSimilar(vector<int>& nums, vector<int>& target) {
+//
+//}

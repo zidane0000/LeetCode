@@ -1219,7 +1219,14 @@ int main()
     //cout << longestPalindromeSubseq("bbbdb") << endl;
 
     //76. Minimum Window Substring
-    cout << minWindow("saabcdafsz", "sz") << endl;
+    //cout << minWindow("saabcdafsz", "sz") << endl;
+
+    //std::vector<std::string> event1({"04:00","05:00"});
+    //std::vector<std::string> event2({"03:00","04:00"});
+    //cout << haveConflict(event1, event2) << endl;
+
+    std::vector<int> nums({ 9,3,1,2,6,3 });
+    cout << subarrayGCD(nums, 3) << endl;
 
     return 0;
 }
