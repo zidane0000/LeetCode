@@ -1225,8 +1225,12 @@ int main()
     //std::vector<std::string> event2({"03:00","04:00"});
     //cout << haveConflict(event1, event2) << endl;
 
-    std::vector<int> nums({ 9,3,1,2,6,3 });
-    cout << subarrayGCD(nums, 3) << endl;
+    //std::vector<int> nums({ 9,3,1,2,6,3 });
+    //cout << subarrayGCD(nums, 3) << endl;
+
+    //1239. Maximum Length of a Concatenated String with Unique Characters
+    std::vector<std::string> arr({ "a", "abc", "d", "de", "def" });
+    cout << maxLength(arr) << endl;
 
     return 0;
 }

@@ -3433,6 +3433,7 @@ int subarrayGCD(std::vector<int>& nums, int k) {
 //645. Set Mismatch
 //初解 runtime beats:88.91% memory beats:44.96%
 std::vector<int> findErrorNums(std::vector<int>& nums) {
+    // 紀錄每個數字發生的頻率(freq)，然後檢查freq中重複的以及沒有出現的作為答案
     const int n = nums.size();
     std::vector<int> freq(n);
 
@@ -3446,4 +3447,54 @@ std::vector<int> findErrorNums(std::vector<int>& nums) {
         if (freq[i] == 0) return { duplicate, i + 1 };
     }
     return {};
+}
+
+//二解 runtime beats:87.08% memory beats:86.49%
+//std::vector<int> findErrorNums(std::vector<int>& nums) {
+//    /*
+//    * 因為題目為 1~n 的數，其中有一數字出錯變成另一個數字，所以會有遺失的數字(loss)以及重複的數字(duplicate)
+//    * 將數字串排序後，loss從1開始，如果num == loss，loss++，duplicate => nums[i-1] == nums[i]
+//    */
+//    const int n = nums.size();
+//    sort(nums.begin(), nums.end());
+//    int loss = 1, duplicate = INT_MAX;
+//
+//    for (int i = 0; i < n; ++i) {
+//        if (nums[i] == loss) ++loss;
+//        if (i > 0 and nums[i - 1] == nums[i]) duplicate = nums[i];
+//        if (duplicate != INT_MAX and loss < nums[i]) return { duplicate, loss };
+//    }
+//    return { duplicate, loss };
+//}
+
+//1239. Maximum Length of a Concatenated String with Unique Characters
+//初解 runtime beats:81.96% memory beats:86.03%
+int maxLength(std::vector<std::string>& arr) {
+    /*
+    * 遍歷所有可能，利用arr長度小於17的特性，以int(32-bit)每個bit代表使用過的arr位置
+    * 利用a-z(總共26)的特性，以int(32-bit)每個bit代表出現過的字母，若&(and)結果大於0表示該字母出現過，返回0
+    */
+    const int n = arr.size();
+    int maxlen = 0;
+    std::function<int(int, int, std::string, int)> recursive = [&](int i, int used, std::string s, int checker) {
+        if (i < 0 or i >= n) return 0;
+        used = used | (1 << i);
+    
+        // Assuming string can have characters a-z(26), each bit present char exist or not
+        for (char c : arr[i]) {
+            if ((checker & (1 << (c - 'a'))) > 0) return 0;
+            checker = checker | (1 << (c - 'a'));
+        }
+
+        s += arr[i];
+        int ans = s.size();
+        for (i; i < n; i++)
+            ans = std::max(ans, recursive(i, used, s, checker));
+        maxlen = std::max(maxlen, ans);
+        return ans;
+    };
+
+    for(int i = 0; i < n; i++)
+        recursive(i, 0, "", 0);
+    return maxlen;
 }
