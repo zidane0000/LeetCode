@@ -3498,3 +3498,12 @@ int maxLength(std::vector<std::string>& arr) {
         recursive(i, 0, "", 0);
     return maxlen;
 }
+
+// 1662. Check If Two String Arrays are Equivalent
+//ªì¸Ñ runtime beats:83.89% memory beats:27.47%
+bool arrayStringsAreEqual(std::vector<std::string>& word1, std::vector<std::string>& word2) {
+    std::string s1 = "", s2 = "";
+    for (std::string word : word1) s1 += word;
+    for (std::string word : word2) s2 += word;
+    return s1 == s2;
+}

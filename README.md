@@ -333,6 +333,9 @@ Record the Problem-solving process
 	- 初解 runtime beats:88.91% memory beats:44.96%
 - [1239]. Maximum Length of a Concatenated String with Unique Characters
 	- 初解 runtime beats:81.96% memory beats:86.03%
+- [1662]. Check If Two String Arrays are Equivalent
+	- 初解 runtime beats:83.89% memory beats:27.47%
+
 
 ## 2020
 - [1]. Two Sum
