@@ -29,7 +29,7 @@ Record the Problem-solving process
 	- 初解 runtime beats:05.57% memory beats:05.03%
 	- 網解 runtime beats:51.58% memory beats:76.91% [參考網址](https://www.cnblogs.com/grandyang/p/6007336.html)
 - [560]. Subarray Sum Equals K
-	- 初解 runtime beats:51.58% memory beats:76.91%
+	- 網解 runtime beats:83.97% memory beats:09.70% [參考網址](https://youtu.be/mKXIH9GnhgU)
 - [1448]. Count Good Nodes in Binary Tree
 	- 初解 runtime beats:09.50% memory beats:91.25%
 - [54]. Spiral Matrix
@@ -335,6 +335,10 @@ Record the Problem-solving process
 	- 初解 runtime beats:81.96% memory beats:86.03%
 - [1662]. Check If Two String Arrays are Equivalent
 	- 初解 runtime beats:83.89% memory beats:27.47%
+- [523]. Continuous Subarray Sum
+	- 網解 runtime beats:38.63% memory beats:92.04% [參考網址](https://leetcode.com/problems/continuous-subarray-sum/discuss/679929/C++-Code-With-Comments)
+- [835]. Image Overlap
+	- 網解 runtime beats:78.47% memory beats:38.19% [參考網址](https://leetcode.com/problems/image-overlap/discuss/130623/C++JavaPython-Straight-Forward)
 
 
 ## 2020

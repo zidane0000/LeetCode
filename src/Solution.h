@@ -464,20 +464,25 @@ int pathSum3(TreeNode* root, int sum) {
 }
 
 //560. Subarray Sum Equals K
-//初解 runtime beats:51.58% memory beats:76.91%
-int RecursiveSubarraySum(std::vector<int>& nums, int& k, int posi, int sum) {
-    if (posi >= nums.size()) { 
-        return sum == k; 
-    }
-    int c = RecursiveSubarraySum(nums, k, posi + 1, sum);
-    int d = RecursiveSubarraySum(nums, k, posi + 1, sum + nums[posi]);
-    return c + d;
-}
-
+//https://youtu.be/mKXIH9GnhgU
+//網解 runtime beats:83.97% memory beats:09.70%
 int subarraySum(std::vector<int>& nums, int k) {
-    // Given an array of integers numsand an integer k, return the total number of subarrays whose sum equals to k.
-    // A subarray is a contiguous non - empty sequence of elements within an array.
-    return RecursiveSubarraySum(nums, k, 0, 0);
+    /*
+    * Keep tracking the prefix sums and their counts.
+    * s -> count: how many arrays nums[0:j] (j < i) that has sum of s
+    * cur_sum = sum(nums[0:i])
+    * check how many arrays nums[0:j] (j < i) that has sum (cur_sum – k)
+    * then there are the same number of arrays nums[j+1: i] that have sum k.
+    */
+    std::unordered_map<int, int> counts{ {0,1} };
+    int cur_sum = 0;
+    int ans = 0;
+    for (const int num : nums) {
+        cur_sum += num;
+        ans += counts[cur_sum - k];
+        ++counts[cur_sum];
+    }
+    return ans;
 }
 
 //1448. Count Good Nodes in Binary Tree
@@ -3499,11 +3504,79 @@ int maxLength(std::vector<std::string>& arr) {
     return maxlen;
 }
 
-// 1662. Check If Two String Arrays are Equivalent
+//1662. Check If Two String Arrays are Equivalent
 //初解 runtime beats:83.89% memory beats:27.47%
 bool arrayStringsAreEqual(std::vector<std::string>& word1, std::vector<std::string>& word2) {
     std::string s1 = "", s2 = "";
     for (std::string word : word1) s1 += word;
     for (std::string word : word2) s2 += word;
     return s1 == s2;
+}
+
+//523. Continuous Subarray Sum
+//https://leetcode.com/problems/continuous-subarray-sum/discuss/679929/C++-Code-With-Comments
+//網解 runtime beats:38.63% memory beats:92.04%
+bool checkSubarraySum(std::vector<int>& nums, int k) {
+    /*
+    * 考慮 nums 以及 k 中任何可能，比如 k 為負數、正數以及零， nums 長度小於2
+    * 
+    * 解題思路：假設 runningSum 代表 nums[0] + ... + nums[i]，假如發現有同樣餘數時，則回傳true，舉例如下
+    * current = runningSum % k => m*k + modk
+    * previous = runningSum % k => n*k + modk
+    * 所以 current - previos = m*k + modk - (n*k + modk) = (m - n)*k => 所以是k的倍數
+    */
+
+    if (nums.size() < 2) return false;
+    std::unordered_map<int, int> mp({ {0,-1} }); //hashmap 儲存餘數以及對應座標
+    /*
+    * Why to insert <0,-1> for the hashmap, <0,-1> can allow it to return true when the runningSum%k=0
+    * for example [1,2,3] is input and k=6, then the remainders are [ 1,3,0] i.e runningSum = runningSum%k
+    * now 1+2+3=6 which is actually a multiple of 6 and hence 0 should be stored in the hashmap
+    * 
+    * ok - but why -1?
+    * -1 is good for storing for 0 because - it will remove the case where we consider only the first element which alone may be a multiple as 0-(-1) is not greater than 1
+    * In addition, it also avoids the first element of the array is the multiple of k, since 0-(-1)=1 is not greater than 1.
+    */
+    int runningSum = 0;
+    for (int i = 0; i < nums.size(); i++) {
+        runningSum += nums[i];
+        if (k != 0) runningSum = runningSum % k;
+
+        //check if the runningsum already exists in the hashmap
+        if (mp.find(runningSum) != mp.end()) { //if it exists, then the current location minus the previous location must be greater than1
+            if (i - mp[runningSum] > 1)
+                return true;
+        }
+        else { //otherwise if the current runningSum doesn't exist in the hashmap, then store it as it maybe used later on
+            mp[runningSum] = i;
+        }
+    }
+    return false;
+}
+
+//835. Image Overlap
+//https://leetcode.com/problems/image-overlap/discuss/130623/C++JavaPython-Straight-Forward
+//網解 runtime beats:78.47% memory beats:38.19%
+int largestOverlap(std::vector<std::vector<int>>& A, std::vector<std::vector<int>>& B) {
+    /*
+    * 暴力解：2N 個垂直可能位移，2N 個水平可能位移以及 N^ 2次計算覆蓋面積
+    * 最優解：紀錄所有在 A 與 B 數值為1的位置，並且枚舉所有 A 中為 1 的值變化到 B 中為1的值的方向
+    * 1. 如果要記錄 A 中值為 1 的可以用 (x,y)，不過為了節省記憶體，將其合併為一個值紀錄
+         N 最大為 30，若 bias 為 30 => 409 = 13 * 30 + 19 = 14 * 30 - 11. 所以 409 可以代表 (13,19) 或 (14,11)，所有 bias 為 100 時才夠大
+    * 2. 枚舉所有 A 中為 1 的值變化到 B 中為1的值的方向，而方向以座標相減記錄在 hashmap 中
+    * 3. 因此 hashmap 中會記錄所有方向的總和，而總和最高的代表該方向是最多 A 中的 1 經過方向變化後對應 B，因此即為答案
+    */
+    std::vector<int> LA, LB;
+    int N = A.size();
+    std::unordered_map<int, int> count;
+    for (int i = 0; i < N * N; ++i) {
+        if (A[i / N][i % N] == 1)
+            LA.push_back(i / N * 100 + i % N);
+        if (B[i / N][i % N] == 1)
+            LB.push_back(i / N * 100 + i % N);
+    }
+    for (int i : LA) for (int j : LB) count[i - j]++;
+    int res = 0;
+    for (auto it : count) res = std::max(res, it.second);
+    return res;
 }

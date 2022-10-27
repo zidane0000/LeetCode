@@ -1229,8 +1229,12 @@ int main()
     //cout << subarrayGCD(nums, 3) << endl;
 
     //1239. Maximum Length of a Concatenated String with Unique Characters
-    std::vector<std::string> arr({ "a", "abc", "d", "de", "def" });
-    cout << maxLength(arr) << endl;
+    //std::vector<std::string> arr({ "a", "abc", "d", "de", "def" });
+    //cout << maxLength(arr) << endl;
+
+    //523. Continuous Subarray Sum
+    std::vector<int>nums({ 1,2,12 });
+    cout << checkSubarraySum(nums, 6) << endl;
 
     return 0;
 }
