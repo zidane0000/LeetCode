@@ -1233,8 +1233,12 @@ int main()
     //cout << maxLength(arr) << endl;
 
     //523. Continuous Subarray Sum
-    std::vector<int>nums({ 1,2,12 });
-    cout << checkSubarraySum(nums, 6) << endl;
+    //std::vector<int>nums({ 1,2,12 });
+    //cout << checkSubarraySum(nums, 6) << endl;
+
+    //49. Group Anagrams
+    std::vector<std::string> strs({"a","b","c","a"});
+    auto ans = groupAnagrams(strs);
 
     return 0;
 }

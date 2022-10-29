@@ -339,6 +339,10 @@ Record the Problem-solving process
 	- 網解 runtime beats:38.63% memory beats:92.04% [參考網址](https://leetcode.com/problems/continuous-subarray-sum/discuss/679929/C++-Code-With-Comments)
 - [835]. Image Overlap
 	- 網解 runtime beats:78.47% memory beats:38.19% [參考網址](https://leetcode.com/problems/image-overlap/discuss/130623/C++JavaPython-Straight-Forward)
+- [49]. Group Anagrams
+	- 初解 runtime beats:99.47% memory beats:95.42%
+- [2136]. Earliest Possible Day of Full Bloom
+	- 網解 runtime beats:70.88% memory beats:69.88% [參考網址](https://leetcode.com/problems/earliest-possible-day-of-full-bloom/discuss/1676833/C++-Largest-Growing-Time-First-with-Illustrations)
 
 
 ## 2020

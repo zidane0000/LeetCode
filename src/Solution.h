@@ -3580,3 +3580,45 @@ int largestOverlap(std::vector<std::vector<int>>& A, std::vector<std::vector<int
     for (auto it : count) res = std::max(res, it.second);
     return res;
 }
+
+//49. Group Anagrams
+//初解 runtime beats:99.47% memory beats:95.42%
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
+    // 重新排序 str 後儲存在 hashmap 中，並對應到擁有相同字母數的字串
+    std::vector<std::vector<std::string>> ans;
+    std::unordered_map<std::string, int> hashmap;
+
+    for (std::string str : strs) {
+        std::string copy = str;
+        sort(copy.begin(), copy.end());
+        if (hashmap.count(copy)) {
+            ans[hashmap[copy]].push_back(str);
+        }
+        else {
+            ans.push_back({ str });
+            hashmap[copy] = ans.size() - 1;
+        }
+    }
+    return ans;
+}
+
+//2136. Earliest Possible Day of Full Bloom
+//https://leetcode.com/problems/earliest-possible-day-of-full-bloom/discuss/1676833/C++-Largest-Growing-Time-First-with-Illustrations
+//網解 runtime beats:70.88% memory beats:69.88%
+int earliestFullBloom(std::vector<int>& plantTime, std::vector<int>& growTime) {
+    int n = plantTime.size();
+    // growTime larger first
+    std::vector<std::pair<int, int>> times(n);
+    for (int i = 0; i < n; i++) {
+        times[i].first = -growTime[i];
+        times[i].second = plantTime[i];
+    }
+    sort(times.begin(), times.end());
+    int tot = 0;
+    int cur = 0;
+    for (int i = 0; i < n; i++) {
+        tot = std::max(tot, cur + times[i].second - times[i].first);
+        cur += times[i].second;
+    }
+    return tot;
+}
