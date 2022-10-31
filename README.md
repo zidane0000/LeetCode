@@ -343,6 +343,11 @@ Record the Problem-solving process
 	- 初解 runtime beats:99.47% memory beats:95.42%
 - [2136]. Earliest Possible Day of Full Bloom
 	- 網解 runtime beats:70.88% memory beats:69.88% [參考網址](https://leetcode.com/problems/earliest-possible-day-of-full-bloom/discuss/1676833/C++-Largest-Growing-Time-First-with-Illustrations)
+- [1293]. Shortest Path in a Grid with Obstacles Elimination
+	- 網解 runtime beats:96.05% memory beats:94.66% [參考網址](https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/discuss/453880/C++-0ms-BFS-track-remaining-k-and-take-a-shortcut)
+- [766]. Toeplitz Matrix
+	- 初解 runtime beats:76.90% memory beats:63.25%
+
 
 
 ## 2020
