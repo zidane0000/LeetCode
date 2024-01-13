@@ -1237,8 +1237,11 @@ int main()
     //cout << checkSubarraySum(nums, 6) << endl;
 
     //49. Group Anagrams
-    std::vector<std::string> strs({"a","b","c","a"});
-    auto ans = groupAnagrams(strs);
+    //std::vector<std::string> strs({"a","b","c","a"});
+    //auto ans = groupAnagrams(strs);
+
+    //1071. Greatest Common Divisor of Strings
+    //auto ans = gcdOfStrings("ABCABC", "ABC");
 
     return 0;
 }

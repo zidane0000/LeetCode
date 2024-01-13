@@ -3,6 +3,17 @@ Record the Problem-solving process
 
 [Code Link](https://github.com/zidane0000/LeetCode/blob/master/src/Solution.h)
 
+## 2024
+- [1768]. Merge Strings Alternately
+	- 初解 runtime beats:06.54% memory beats:09.06%
+- [1071]. Greatest Common Divisor of Strings
+	- 初解 runtime beats:18.68% memory beats:05.08%
+	- 網解 runtime beats:100.00% memory beats:85.53% [參考網址](https://leetcode.com/problems/greatest-common-divisor-of-strings/discuss/307242/C%2B%2B-3-lines)
+- [1431]. Kids With the Greatest Number of Candies
+	- 初解 runtime beats:100.00% memory beats:13.79%
+- [605]. Can Place Flowers
+	- 初解 runtime beats:80.38% memory beats:65.79% 
+
 ## 2022
 - [6]. Zigzag Conversion
 	- 初解 runtime beats:44.06% memory beats:49.42%

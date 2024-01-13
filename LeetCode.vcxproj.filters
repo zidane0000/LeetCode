@@ -18,13 +18,16 @@
     <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solution.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Solution_2020.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Solution_2022.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
