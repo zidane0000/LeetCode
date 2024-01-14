@@ -84,3 +84,97 @@ bool canPlaceFlowers(std::vector<int>& flowerbed, int n) {
     }
     return false;
 }
+
+//345. Reverse Vowels of a String
+//ªì¸Ñ runtime beats:100.00% memory beats:63.74%
+std::string reverseVowels(std::string s) {
+    auto isVowels = [](char c) { return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U'; };
+    int front = 0, end = s.size() - 1;
+    while (front < end) {
+        while (front < end && !isVowels(s[front])) {
+            front++;
+        }
+
+        while (end > front && !isVowels(s[end])) {
+            end--;
+        }
+
+        std::swap(s[front], s[end]);
+        front++;
+        end--;
+    }
+
+    return s;
+}
+
+//Weekly Contest 380
+//3009.Count Elements With Maximum Frequency
+int maxFrequencyElements(std::vector<int>& nums) {
+    std::vector<int> count(*std::max_element(nums.begin(), nums.end()) + 1, 0);
+    for (int num : nums) {
+        count[num]++;
+    }
+
+    int ans = 0;
+    int max_count = *std::max_element(count.begin(), count.end());
+    for (int c : count) {
+        if (c == max_count) {
+            ans += c;
+        }
+    }
+    return ans;
+}
+
+//3010. Find Beautiful Indices in the Given Array I
+std::vector<int> beautifulIndices(std::string s, std::string a, std::string b, int k) {
+    std::vector<int> ans;
+
+    auto candidates = [](std::string str, std::string target) {
+        std::vector<int> candidates;
+        size_t pos = str.find(target);
+        while (pos != std::string::npos) {
+            candidates.push_back(pos);
+            pos = str.find(target, pos + 1);
+        }
+        return candidates;
+    };
+
+    auto candidates_a = candidates(s, a);
+    auto candidates_b = candidates(s, b);
+
+    for (int candidate_a : candidates_a) {
+        for (int candidate_b : candidates_b) {
+            if (std::abs(candidate_a - candidate_b) <= k) {
+                ans.push_back(candidate_a);
+                break;
+            }
+        }
+    }
+
+    return ans;
+}
+
+//3011. Maximum Number That Sum of the Prices Is Less Than or Equal to K
+long long findMaximumNumber(long long k, int x) {
+    auto countPrice = [](long long n, int x) {
+        int count = 0;
+        if (x != 1) n >>= (x - 1);
+        while (n) {
+            count += n & 1;
+            n >>= x;
+        }
+        return count;
+    };
+
+    long long pricesSum = 0;
+    for (int i = 0; ; i++) {
+        int price = countPrice(i, x);
+        if (price == 0) {
+            i <<= x-1;
+        }
+        pricesSum += price;
+        if (pricesSum > k) {
+            return i - 1;
+        }
+    }
+}
