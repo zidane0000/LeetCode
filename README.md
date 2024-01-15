@@ -18,11 +18,14 @@ Record the Problem-solving process
 <details><summary> <b>Weekly Contest 380</b> </summary>
 
  - Rank : 5510 / 21106
- - [x] 3009.Count Elements With Maximum Frequency
- - [x] 3010. Find Beautiful Indices in the Given Array I
- - [ ] 3011. Maximum Number That Sum of the Prices Is Less Than or Equal to K
- - [ ] 3012
+ - [x] 3005.Count Elements With Maximum Frequency
+ - [x] 3006. Find Beautiful Indices in the Given Array I
+ - [ ] 3007. Maximum Number That Sum of the Prices Is Less Than or Equal to K
+ - [ ] 3008. Find Beautiful Indices in the Given Array II
 </details>
+- [151]. Reverse Words in a String
+    - 初解 runtime beats:13.66% memory beats:11.66%
+	- 二解 runtime beats:15.61% memory beats:10.49%
 
 ## 2022
 - [6]. Zigzag Conversion

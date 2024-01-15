@@ -108,7 +108,7 @@ std::string reverseVowels(std::string s) {
 }
 
 //Weekly Contest 380
-//3009.Count Elements With Maximum Frequency
+//3005.Count Elements With Maximum Frequency
 int maxFrequencyElements(std::vector<int>& nums) {
     std::vector<int> count(*std::max_element(nums.begin(), nums.end()) + 1, 0);
     for (int num : nums) {
@@ -125,7 +125,7 @@ int maxFrequencyElements(std::vector<int>& nums) {
     return ans;
 }
 
-//3010. Find Beautiful Indices in the Given Array I
+//3006. Find Beautiful Indices in the Given Array I
 std::vector<int> beautifulIndices(std::string s, std::string a, std::string b, int k) {
     std::vector<int> ans;
 
@@ -154,7 +154,7 @@ std::vector<int> beautifulIndices(std::string s, std::string a, std::string b, i
     return ans;
 }
 
-//3011. Maximum Number That Sum of the Prices Is Less Than or Equal to K
+//3007. Maximum Number That Sum of the Prices Is Less Than or Equal to K
 long long findMaximumNumber(long long k, int x) {
     auto countPrice = [](long long n, int x) {
         int count = 0;
@@ -177,4 +177,36 @@ long long findMaximumNumber(long long k, int x) {
             return i - 1;
         }
     }
+}
+
+//151. Reverse Words in a String
+//ªì¸Ñ runtime beats:13.66% memory beats:11.66%
+//std::string reverseWords(std::string s) {
+//    std::vector<std::string> splits;
+//    std::stringstream ss(s);
+//    std::string ans;
+//    while (getline(ss, ans, ' ')) {
+//        if(ans != "") splits.push_back(ans);
+//    }
+//
+//    ans = "";
+//    for (auto split : splits) {
+//        ans = split + " " + ans;
+//    }
+//    return ans.substr(0, ans.size() - 1);
+//}
+
+//¤G¸Ñ runtime beats:15.61% memory beats:10.49%
+std::string reverseWords(std::string s) {
+    s = s + " "; // because end is find first white space behind the front, so if s = " blue", first = 2 and end will be -1, to prevent this, we can add white space first
+    int front = s.find_first_not_of(" ");
+    int end = s.find_first_of(" ", front + 1);
+    std::string ans = "";
+    while (s.size() > 0 && front != std::string::npos && end != std::string::npos) {
+        ans = s.substr(front, end - front) + " " + ans;
+        s = s.substr(end, s.size() - end);
+        front = s.find_first_not_of(" ");
+        end = s.find_first_of(" ", front + 1);
+    }
+    return ans.substr(0, ans.size()-1);
 }

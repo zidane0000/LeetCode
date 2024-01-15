@@ -1246,11 +1246,14 @@ int main()
     //345. Reverse Vowels of a String
     //auto ans = reverseVowels("leetcode");
 
-    //100165. Find Beautiful Indices in the Given Array I
+    //Find Beautiful Indices in the Given Array I
     //std::vector<int> nums = { 1,1,1,2,2,2 };
     //auto ans = maxFrequencyElements(nums);
 
-    //100160. Maximum Number That Sum of the Prices Is Less Than or Equal to K
-    auto ans = findMaximumNumber(3278539330613, 5);
+    //Maximum Number That Sum of the Prices Is Less Than or Equal to K
+    //auto ans = findMaximumNumber(3278539330613, 5);
+
+    //151. Reverse Words in a String
+    auto ans = reverseWords("the sky is blue");
     return 0;
 }
