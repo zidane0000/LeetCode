@@ -210,3 +210,53 @@ std::string reverseWords(std::string s) {
     }
     return ans.substr(0, ans.size()-1);
 }
+
+//443. String Compression
+//初解 runtime beats:39.33% memory beats:05.75%
+//int compress(std::vector<char>& chars) {
+//    int posi = 0;
+//    std::string s;
+//    for (int i = 0; i < chars.size(); i++) {
+//        if (posi != i) {
+//            if (chars[i] != chars[posi]) {
+//                s = (i - posi) == 1 ? s + chars[posi] : s + chars[posi] + std::to_string(i - posi);
+//                posi = i;
+//            }
+//        }
+//    }
+//    s = (chars.size() - posi) == 1 ? s + chars[posi] : s + chars[posi] + std::to_string(chars.size() - posi);
+//    chars.clear();
+//    std::copy(s.begin(), s.end(), std::back_inserter(chars));
+//    return s.size();
+//}
+
+//參考網址：https://leetcode.com/problems/string-compression/discuss/222499/Simple-C%2B%2B-Solution
+//網解 runtime beats:84.46% memory beats:47.33%
+int compress(std::vector<char>& chars) {
+    int size = chars.size();
+    if (size < 2) return size;
+
+    int left = 0, right = 0;
+
+    while (right < size) {
+        chars[left] = chars[right];
+        int count = 0;
+        while (right < size && chars[left] == chars[right]) {
+            count++;
+            right++;
+        }
+
+        if (count == 1) {
+            left++;
+        }
+        else {
+            std::string cnt = std::to_string(count);
+            for (auto digit : cnt) {
+                chars[++left] = digit;
+            }
+            left++;
+        }
+    }
+
+    return left;
+}

@@ -12,9 +12,10 @@ Record the Problem-solving process
 - [1431]. Kids With the Greatest Number of Candies
 	- 初解 runtime beats:100.00% memory beats:13.79%
 - [605]. Can Place Flowers
-	- 初解 runtime beats:80.38% memory beats:65.79% 
+	- 初解 runtime beats:80.38% memory beats:65.79%
 - [345]. Reverse Vowels of a String
 	- 初解 runtime beats:100.00% memory beats:63.74%
+
 <details><summary> <b>Weekly Contest 380</b> </summary>
 
  - Rank : 5510 / 21106
@@ -23,9 +24,14 @@ Record the Problem-solving process
  - [ ] 3007. Maximum Number That Sum of the Prices Is Less Than or Equal to K
  - [ ] 3008. Find Beautiful Indices in the Given Array II
 </details>
+
 - [151]. Reverse Words in a String
     - 初解 runtime beats:13.66% memory beats:11.66%
 	- 二解 runtime beats:15.61% memory beats:10.49%
+- [443]. String Compression
+    - 初解 runtime beats:39.33% memory beats:05.75%
+	- 網解 runtime beats:84.46% memory beats:47.33% [參考網址](https://leetcode.com/problems/string-compression/discuss/222499/Simple-C%2B%2B-Solution)
+
 
 ## 2022
 - [6]. Zigzag Conversion

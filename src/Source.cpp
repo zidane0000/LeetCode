@@ -1254,6 +1254,10 @@ int main()
     //auto ans = findMaximumNumber(3278539330613, 5);
 
     //151. Reverse Words in a String
-    auto ans = reverseWords("the sky is blue");
+    //auto ans = reverseWords("the sky is blue");
+
+    //443. String Compression
+    std::vector<char> chars = { 'a','a','b','b','b','b','a','a' };
+    auto ans = compress(chars);
     return 0;
 }
