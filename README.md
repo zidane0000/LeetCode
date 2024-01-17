@@ -31,6 +31,10 @@ Record the Problem-solving process
 - [443]. String Compression
     - 初解 runtime beats:39.33% memory beats:05.75%
 	- 網解 runtime beats:84.46% memory beats:47.33% [參考網址](https://leetcode.com/problems/string-compression/discuss/222499/Simple-C%2B%2B-Solution)
+- [392]. Is Subsequence
+    - 初解 runtime beats:100.00% memory beats:44.95%
+- [1679]. Max Number of K-Sum Pairs
+    - 初解 runtime beats:15.72% memory beats:05.09%
 
 
 ## 2022

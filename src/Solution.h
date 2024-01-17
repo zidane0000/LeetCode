@@ -260,3 +260,36 @@ int compress(std::vector<char>& chars) {
 
     return left;
 }
+
+//392. Is Subsequence
+//ªì¸Ñ runtime beats:100.00% memory beats:44.95%
+bool isSubsequence(std::string s, std::string t) {
+    if (s.size() > t.size()) return false;
+    if (s == "") return true;
+    int posi = 0;
+    for (char c : t) {
+        if (c == s[posi]) {
+            posi++;
+            if (posi == s.size()) return true;
+        }
+    }
+    return false;
+}
+
+//1679. Max Number of K-Sum Pairs
+//ªì¸Ñ runtime beats:15.72% memory beats:05.09%
+int maxOperations(std::vector<int>& nums, int k) {
+    // A map store the num, and find the diff between num and k exist in map
+    int ans = 0;
+    std::map<int, int> find;
+    for (int num : nums) {
+        if (find[k - num] > 0) {
+            find[k - num]--;
+            ans++;
+        }
+        else {
+            find[num]++;
+        }
+    }
+    return ans;
+}
