@@ -35,6 +35,10 @@ Record the Problem-solving process
     - 初解 runtime beats:100.00% memory beats:44.95%
 - [1679]. Max Number of K-Sum Pairs
     - 初解 runtime beats:15.72% memory beats:05.09%
+- [643]. Maximum Average Subarray I
+    - 初解 runtime beats:96.19% memory beats:14.74%
+- [1456]. Maximum Number of Vowels in a Substring of Given Length
+    - 初解 runtime beats:97.37% memory beats:05.10%
 
 
 ## 2022

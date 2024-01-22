@@ -293,3 +293,33 @@ int maxOperations(std::vector<int>& nums, int k) {
     }
     return ans;
 }
+
+//643. Maximum Average Subarray I
+//ªì¸Ñ runtime beats:96.19% memory beats:14.74%
+double findMaxAverage(std::vector<int>& nums, int k) {
+    int ans = std::accumulate(nums.begin(), nums.begin() + k, 0), sum = ans;
+    for (int i = k; i < nums.size(); i++) {
+        sum = sum - nums[i - k] + nums[i];
+        ans = ans > sum ? ans : sum;
+    }
+    return (double)ans / k;
+}
+
+//1456. Maximum Number of Vowels in a Substring of Given Length
+//ªì¸Ñ runtime beats:97.37% memory beats:05.10%
+int maxVowels(std::string s, int k) {
+    auto isVowel = [](char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    };
+
+    int maxVowelsCount = std::count_if(s.begin(), s.begin() + k, isVowel), currentVowelsCount = maxVowelsCount;
+    for (int i = k; i < s.size(); i++) {
+        currentVowelsCount = currentVowelsCount - isVowel(s[i - k]) + isVowel(s[i]);
+        maxVowelsCount = maxVowelsCount > currentVowelsCount ? maxVowelsCount : currentVowelsCount;
+    }
+
+    return maxVowelsCount;
+}
+
+//1004. Max Consecutive Ones III
+//ªì¸Ñ runtime beats:97.37% memory beats:05.10%
