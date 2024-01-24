@@ -39,6 +39,12 @@ Record the Problem-solving process
     - 初解 runtime beats:96.19% memory beats:14.74%
 - [1456]. Maximum Number of Vowels in a Substring of Given Length
     - 初解 runtime beats:97.37% memory beats:05.10%
+- [1004]. Max Consecutive Ones III
+    - 網解 runtime beats:84.38% memory beats:05.86% [參考網址](https://leetcode.com/problems/max-consecutive-ones-iii/discuss/247564/JavaC%2B%2BPython-Sliding-Window)
+- [1732]. Find the Highest Altitude
+    - 初解 runtime beats:100.00% memory beats:05.34%
+- [724]. Find Pivot Index
+    - 初解 runtime beats:91.45% memory beats:06.20%
 
 
 ## 2022

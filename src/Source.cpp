@@ -1261,7 +1261,12 @@ int main()
     //auto ans = compress(chars);
 
     //1679. Max Number of K-Sum Pairs
-    std::vector<int> nums{ 3,1,3,4,3 };
-    int ans = maxOperations(nums, 6);
+    //std::vector<int> nums{ 3,1,3,4,3 };
+    //int ans = maxOperations(nums, 6);
+
+    //1004. Max Consecutive Ones III
+    std::vector<int> nums{ 0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1 };
+    int i = longestOnes(nums, 3);
+
     return 0;
 }

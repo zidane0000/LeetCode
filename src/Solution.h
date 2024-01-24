@@ -322,4 +322,44 @@ int maxVowels(std::string s, int k) {
 }
 
 //1004. Max Consecutive Ones III
-//初解 runtime beats:97.37% memory beats:05.10%
+//參考網址：https://leetcode.com/problems/max-consecutive-ones-iii/discuss/247564/JavaC%2B%2BPython-Sliding-Window
+//網解 runtime beats:84.38% memory beats:05.86%
+int longestOnes(std::vector<int>& A, int K) {
+    /*
+    * 從程式碼可以看到，j不斷向右移動。這裡的K可以認為是剩餘的可行翻轉次數，反映了目前的範圍（即從i到j）。
+    * 當 K < 0 時，它不是可行解；當 K >= 0 時，它是可行解。
+    * 如果目前範圍是還不是可行的解決方案或優於當前「記憶」幀（即K<0判斷），i 將嘗試跟進 j 並且 j-i（幀大小）保持不變，保持當前最大大小不變。
+    * 每當當前範圍（即仍然 i 到 j）的翻轉計數 K 大於或等於 0 時，就意味著可以擴展我們的框架。（i 保持不變，因為它不會進入 K < 0 ，並且當 K >= 0 時 j 保持移動）
+    * 最終當 j 到達末端時，「記憶體」框架將自動（當然是設計的）為我們提供整個陣列的最大範圍。    
+    */
+    int i = 0, j;
+    for (j = 0; j < A.size(); ++j) {
+        if (A[j] == 0) K--;
+        if (K < 0 && A[i++] == 0) K++;
+    }
+    return j - i;
+}
+
+//1732. Find the Highest Altitude
+//初解 runtime beats:100.00% memory beats:05.34%
+int largestAltitude(std::vector<int>& gain) {
+    int ans = gain[0] > 0 ? gain[0] : 0;
+    for (int i = 1; i < gain.size(); i++) {
+        gain[i] = gain[i] + gain[i - 1];
+        ans = ans > gain[i] ? ans : gain[i];
+    }
+    return ans;
+}
+
+//724. Find Pivot Index
+//初解 runtime beats:91.45% memory beats:06.20%
+int pivotIndex(std::vector<int>& nums) {
+    int left = 0, right = std::accumulate(nums.begin() + 1, nums.end(), 0);
+    if (left == right) return 0;
+    for (int i = 1; i < nums.size(); i++) {
+        left += nums[i - 1];
+        right -= nums[i];
+        if (left == right) return i;
+    }
+    return -1;
+}
