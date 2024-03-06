@@ -45,6 +45,11 @@ Record the Problem-solving process
     - 初解 runtime beats:100.00% memory beats:05.34%
 - [724]. Find Pivot Index
     - 初解 runtime beats:91.45% memory beats:06.20%
+- [1493]. Longest Subarray of 1's After Deleting One Element
+    - 初解 runtime beats:22.21% memory beats:33.96%
+    - 二解 runtime beats:92.80% memory beats:33.96%
+- [2215]. Find the Difference of Two Arrays
+    - 初解 runtime beats:85.68% memory beats:60.37%
 
 
 ## 2022

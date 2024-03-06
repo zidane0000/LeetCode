@@ -363,3 +363,67 @@ int pivotIndex(std::vector<int>& nums) {
     }
     return -1;
 }
+
+//1493. Longest Subarray of 1's After Deleting One Element
+//初解 runtime beats:22.21% memory beats:33.96%
+int longestSubarray(std::vector<int>& nums) {
+    nums.push_back(0);
+    int ans = 0, previousSubarray = -1, currentSubarray = -1, firstZeroPosition = -1;
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums[i] == 0) {
+            if (firstZeroPosition == -1) {
+                firstZeroPosition = i;
+                previousSubarray = i;
+            }
+            else {
+                currentSubarray = i - firstZeroPosition - 1;
+                ans = ans > previousSubarray + currentSubarray ? ans : previousSubarray + currentSubarray;
+                firstZeroPosition = i;
+                previousSubarray = currentSubarray;
+            }
+        }
+    }
+
+    if (currentSubarray == -1) ans = nums.size() - 2;
+    return ans;
+}
+
+//二解 runtime beats:92.80% memory beats:33.96%
+int longestSubarray(std::vector<int>& nums) {
+    int ans = 0, previousSubarray = -1, currentSubarray = -1, firstZeroPosition = -1;
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums[i] == 0) {
+            if (firstZeroPosition == -1) {
+                firstZeroPosition = i;
+                previousSubarray = i;
+            }
+            else {
+                currentSubarray = i - firstZeroPosition - 1;
+                ans = ans > previousSubarray + currentSubarray ? ans : previousSubarray + currentSubarray;
+                firstZeroPosition = i;
+                previousSubarray = currentSubarray;
+            }
+        }
+    }
+
+    if (nums.back() == 1) {
+        currentSubarray = nums.size() - firstZeroPosition - 1;
+        ans = ans > previousSubarray + currentSubarray ? ans : previousSubarray + currentSubarray;
+    }
+
+    if (previousSubarray == -1 && currentSubarray == -1) ans = nums.size() - 2;
+    return ans;
+}
+
+//2215. Find the Difference of Two Arrays
+//初解 runtime beats:85.68% memory beats:60.37%
+std::vector<std::vector<int>> findDifference(std::vector<int>& nums1, std::vector<int>& nums2) {
+    std::vector<std::vector<int>> ans({ {},{} });
+    std::set<int> set1(nums1.begin(), nums1.end());
+    std::set<int> set2(nums2.begin(), nums2.end());
+    for (int num : set1)
+        if (set2.find(num) == set2.end()) ans[0].push_back(num);
+    for (int num : set2)
+        if (set1.find(num) == set1.end()) ans[1].push_back(num);
+    return ans;
+}
