@@ -50,6 +50,11 @@ Record the Problem-solving process
     - 二解 runtime beats:92.80% memory beats:33.96%
 - [2215]. Find the Difference of Two Arrays
     - 初解 runtime beats:85.68% memory beats:60.37%
+- [1207]. Unique Number of Occurrences
+    - 初解 runtime beats:100.00% memory beats:06.20%
+    - 二解 runtime beats:35.19% memory beats:12.59%
+- [1657]. Determine if Two Strings Are Close
+    - 網解 runtime beats:86.69% memory beats:09.68% [參考網址](https://leetcode.com/problems/determine-if-two-strings-are-close/discuss/935920/C%2B%2B-Short-and-Simple-oror-O(-N-)-solution)
 
 
 ## 2022

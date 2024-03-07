@@ -366,27 +366,27 @@ int pivotIndex(std::vector<int>& nums) {
 
 //1493. Longest Subarray of 1's After Deleting One Element
 //初解 runtime beats:22.21% memory beats:33.96%
-int longestSubarray(std::vector<int>& nums) {
-    nums.push_back(0);
-    int ans = 0, previousSubarray = -1, currentSubarray = -1, firstZeroPosition = -1;
-    for (int i = 0; i < nums.size(); i++) {
-        if (nums[i] == 0) {
-            if (firstZeroPosition == -1) {
-                firstZeroPosition = i;
-                previousSubarray = i;
-            }
-            else {
-                currentSubarray = i - firstZeroPosition - 1;
-                ans = ans > previousSubarray + currentSubarray ? ans : previousSubarray + currentSubarray;
-                firstZeroPosition = i;
-                previousSubarray = currentSubarray;
-            }
-        }
-    }
-
-    if (currentSubarray == -1) ans = nums.size() - 2;
-    return ans;
-}
+//int longestSubarray(std::vector<int>& nums) {
+//    nums.push_back(0);
+//    int ans = 0, previousSubarray = -1, currentSubarray = -1, firstZeroPosition = -1;
+//    for (int i = 0; i < nums.size(); i++) {
+//        if (nums[i] == 0) {
+//            if (firstZeroPosition == -1) {
+//                firstZeroPosition = i;
+//                previousSubarray = i;
+//            }
+//            else {
+//                currentSubarray = i - firstZeroPosition - 1;
+//                ans = ans > previousSubarray + currentSubarray ? ans : previousSubarray + currentSubarray;
+//                firstZeroPosition = i;
+//                previousSubarray = currentSubarray;
+//            }
+//        }
+//    }
+//
+//    if (currentSubarray == -1) ans = nums.size() - 2;
+//    return ans;
+//}
 
 //二解 runtime beats:92.80% memory beats:33.96%
 int longestSubarray(std::vector<int>& nums) {
@@ -426,4 +426,66 @@ std::vector<std::vector<int>> findDifference(std::vector<int>& nums1, std::vecto
     for (int num : set2)
         if (set1.find(num) == set1.end()) ans[1].push_back(num);
     return ans;
+}
+
+//1207. Unique Number of Occurrences
+//初解 runtime beats:100.00% memory beats:06.20%
+//bool uniqueOccurrences(std::vector<int>& arr) {
+//    std::unordered_map<int, int> occurrences;
+//    for (auto i : arr) {
+//        occurrences[i]++;
+//    }
+//
+//    std::unordered_map<int, int> isUnique;
+//    for (auto occurrence : occurrences) {
+//        if (isUnique[occurrence.second] > 0) return false;
+//        isUnique[occurrence.second]++;
+//    }
+//
+//    return true;
+//}
+
+//二解 runtime beats:35.19% memory beats:12.59%
+bool uniqueOccurrences(std::vector<int>& arr) {
+    int size = arr.size();
+    if (size < 2) return false;
+
+    std::sort(arr.begin(), arr.end());
+    std::set<int> occurr;
+    int count = 1;
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i - 1] != arr[i]) {
+            if (occurr.find(count) != occurr.end()) return false;
+            occurr.insert(count);
+            count = 1;
+        }
+        else {
+            count++;
+        }
+    }
+
+    if (occurr.find(count) != occurr.end()) return false;
+    return true;
+}
+
+//1657. Determine if Two Strings Are Close
+//https://leetcode.com/problems/determine-if-two-strings-are-close/discuss/935920/C%2B%2B-Short-and-Simple-oror-O(-N-)-solution
+//網解 runtime beats:86.69% memory beats:09.68%
+bool closeStrings(std::string word1, std::string word2) {
+    //All the unique char which there in String1 need's to there as well In string2
+    std::vector<char>unique1(26,0), unique2(26,0);
+    //Frequency of Char need's to be same there both of string as we can do Transform every occurrence of one existing character into another existing character
+    std::vector<int> freq1(26, 0), freq2(26, 0);
+    for (char c : word1) {
+        freq1[c - 'a']++;
+        unique1[c - 'a'] = 1;
+    }
+    for (char c : word2) {
+        freq2[c - 'a']++;
+        unique2[c - 'a'] = 1;
+    }
+    std::sort(begin(freq1), end(freq1));
+    std::sort(begin(freq2), end(freq2));
+    return freq1 == freq2 && unique1 == unique2;
 }
