@@ -2,7 +2,7 @@
 #include "class.h"
 
 // 6. Zigzag Conversion
-//初解 runtime beats:44.06% memory beats:49.42%
+//First solution runtime beats:44.06% memory beats:49.42%
 std::string convert(std::string s, int numRows) {
     if (numRows == 1)
         return s;
@@ -23,7 +23,7 @@ std::string convert(std::string s, int numRows) {
 }
 
 // 7. Reverse Integer
-//初解 runtime beats:100.00% memory beats:76.02%
+//First solution runtime beats:100.00% memory beats:76.02%
 int reverse(int x) {
     if (INT_MIN >= x or INT_MAX <= x)
         return 0;
@@ -46,7 +46,7 @@ int reverse(int x) {
 }
 
 // 8. String to Integer (atoi)
-//初解 runtime beats:82.99% memory beats:12.81%
+//First solution runtime beats:82.99% memory beats:12.81%
 int myAtoi(std::string s) {
     int posi = 0;
     int len = s.length();
@@ -106,7 +106,7 @@ int myAtoi(std::string s) {
 }
 
 // 13. Roman to Integer
-//初解 runtime beats:77.18% memory beats:64.52%
+//First solution runtime beats:77.18% memory beats:64.52%
 int romanToInt(std::string s) {
     /*
     Symbol       Value
@@ -160,7 +160,7 @@ int romanToInt(std::string s) {
 
 // 29. Divide Two Integers
 //https://medium.com/@ChYuan/leetcode-29-divide-two-integers-%E5%BF%83%E5%BE%97-medium-91e5fccb29fa
-//網解 runtime beats:100.00% memory beats:29.23%
+//Network solution runtime beats:100.00% memory beats:29.23%
 int divide(int dividend, int divisor) {
     //  divide two integers without using multiplication, division, and mod operator
     if (divisor == 1) return dividend;
@@ -194,7 +194,7 @@ int divide(int dividend, int divisor) {
 }
 
 //https://www.youtube.com/watch?v=6kFp_s_UtPE
-//網解 runtime beats:10.53% memory beats:76.31%
+//Network solution runtime beats:10.53% memory beats:76.31%
 int divide_2(int dividend, int divisor) {
     // long long int for abs(INT_MIN)
     long long int dividendLL = dividend;
@@ -224,7 +224,7 @@ int divide_2(int dividend, int divisor) {
 }
 
 // 543. Diameter of Binary Tree
-//初解 runtime beats:58.77% memory beats:93.14%
+//First solution runtime beats:58.77% memory beats:93.14%
 int getDeepest(int* ans, TreeNode* node) {
     int left_deepest = 0, right_deepest = 0;
     if (node->left) { left_deepest = getDeepest(ans, node->left) + 1; }
@@ -242,7 +242,7 @@ int diameterOfBinaryTree(TreeNode* root) {
 }
 
 // 347. Top K Frequent Elements
-//初解 runtime beats:05.22% memory beats:99.98%
+//First solution runtime beats:05.22% memory beats:99.98%
 //std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
 //    std::vector<int> ans;
 //    std::vector<int> count;
@@ -278,7 +278,7 @@ int diameterOfBinaryTree(TreeNode* root) {
 //}
 
 //https://www.youtube.com/watch?v=YPTqKIgVk-k
-//網解 runtime beats:86.35% memory beats:06.25%
+//Network solution runtime beats:86.35% memory beats:06.25%
 std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
     // bucket sort
     std::unordered_map<int, int> count;
@@ -300,7 +300,7 @@ std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
 }
 
 //378. Kth Smallest Element in a Sorted Matrix
-//初解 runtime beats:11.05% memory beats:05.69%
+//First solution runtime beats:11.05% memory beats:05.69%
 int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
     int n = matrix[0].size();
 
@@ -316,7 +316,7 @@ int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
 }
 
 //https://yoyoman822.pixnet.net/blog/post/65621230
-//網解 runtime beats:48.20% memory beats:92.86%
+//Network solution runtime beats:48.20% memory beats:92.86%
 //int m, n;
 //int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
 //    m = matrix.size(), n = matrix[0].size(); // For general, the matrix need not be a square
@@ -342,7 +342,7 @@ int kthSmallest(std::vector<std::vector<int>>& matrix, int k) {
 //}
 
 //394. Decode String
-//初解 runtime beats:100.00% memory beats:56.76%
+//First solution runtime beats:100.00% memory beats:56.76%
 std::string decodeString(std::string s) {
     int squareBracketsCount = 0;
 
@@ -411,7 +411,7 @@ std::string decodeString(std::string s) {
 }
 
 //437. Path Sum III
-//初解 runtime beats:05.57% memory beats:05.03%
+//First solution runtime beats:05.57% memory beats:05.03%
 //void RecrsivePathSum(TreeNode* node, int& targetSum, int& ans, std::queue<long long> candidates, std::queue<long long> new_candidates) {
 //    if (!node) return;
 //    int node_val = node->val;
@@ -451,7 +451,7 @@ std::string decodeString(std::string s) {
 //}
 
 //https://www.cnblogs.com/grandyang/p/6007336.html
-//網解 runtime beats:51.58% memory beats:76.91%
+//Network solution runtime beats:51.58% memory beats:76.91%
 int sumUp(TreeNode* node, long long pre, int& sum) {
     if (!node) return 0;
     long long cur = pre + node->val;
@@ -465,7 +465,7 @@ int pathSum3(TreeNode* root, int sum) {
 
 //560. Subarray Sum Equals K
 //https://youtu.be/mKXIH9GnhgU
-//網解 runtime beats:83.97% memory beats:09.70%
+//Network solution runtime beats:83.97% memory beats:09.70%
 int subarraySum(std::vector<int>& nums, int k) {
     /*
     * Keep tracking the prefix sums and their counts.
@@ -486,7 +486,7 @@ int subarraySum(std::vector<int>& nums, int k) {
 }
 
 //1448. Count Good Nodes in Binary Tree
-//初解 runtime beats:09.50% memory beats:91.25%
+//First solution runtime beats:09.50% memory beats:91.25%
 void goodNodesDFS(TreeNode* node, int max, int& goods) {
     if (!node) return;
     if (node->val >= max) {
@@ -505,7 +505,7 @@ int goodNodes(TreeNode* root) {
 }
 
 //54. Spiral Matrix
-//初解 runtime beats:28.19% memory beats:29.77%
+//First solution runtime beats:28.19% memory beats:29.77%
 void getLine(std::vector<std::vector<int>>& matrix, std::vector<int>& ans, bool head) {
     if (head) {
         for (std::vector<std::vector<int>>::reverse_iterator i = matrix.rbegin(); i != matrix.rend(); ++i) {
@@ -551,7 +551,7 @@ std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix) {
 
 //739. Daily Temperatures
 //https://leetcode.com/problems/daily-temperatures/discuss/384123/100-Speed-and-100-Space-C++
-//網解 runtime beats:27.47% memory beats:71.67%
+//Network solution runtime beats:27.47% memory beats:71.67%
 std::vector<int> dailyTemperatures(std::vector<int>& T) {
     if (T.empty()) { return {}; }
 
@@ -590,7 +590,7 @@ std::vector<int> dailyTemperatures(std::vector<int>& T) {
 }
 
 //637. Average of Levels in Binary Tree
-//初解 runtime beats:65.95% memory beats:72.83%
+//First solution runtime beats:65.95% memory beats:72.83%
 std::vector<double> averageOfLevels(TreeNode* root) {
     std::vector<double> ans({0.0});
 
@@ -631,7 +631,7 @@ std::vector<double> averageOfLevels(TreeNode* root) {
 
 //967. Numbers With Same Consecutive Differences
 //https://haren-lin-1.gitbook.io/leetcode-training/backtracking/967.-numbers-with-same-consecutive-differences
-//網解 runtime beats:100.00% memory beats:90.47%
+//Network solution runtime beats:100.00% memory beats:90.47%
 std::vector<int> numsSameConsecDiff(int n, int k) {
     // 1. Maintain a queue for BFS traversal
     std::deque<int> que;
@@ -656,7 +656,7 @@ std::vector<int> numsSameConsecDiff(int n, int k) {
 
 //Weekly Contest 309
 //2399. Check Distances Between Same Letters
-//初解 runtime beats:100.00% memory beats:50.00%
+//First solution runtime beats:100.00% memory beats:50.00%
 bool checkDistances(std::string s, std::vector<int>& distance) {
     int distance_record[26] = { -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 };
     int posi = -1;
@@ -677,7 +677,7 @@ bool checkDistances(std::string s, std::vector<int>& distance) {
 
 //2400. Number of Ways to Reach a Position After Exactly k Steps
 //https://leetcode.com/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/discuss/2527267/Top-Down-+-Bottom-Up-DP
-//網解 runtime beats:50.00% memory beats:50.00%
+//Network solution runtime beats:50.00% memory beats:50.00%
 //int numberOfWaysDFS(int d, int k, int dp[][1001], int& mod) {
 //    if (d >= k)
 //        return d == k;
@@ -693,7 +693,7 @@ bool checkDistances(std::string s, std::vector<int>& distance) {
 //}
 
 //2401. Longest Nice Subarray
-//初解 runtime beats:33.33% memory beats:100.00%
+//First solution runtime beats:33.33% memory beats:100.00%
 int longestNiceSubarray(std::vector<int>& nums) {
     if (nums.size() == 1)
         return 1;
@@ -724,13 +724,13 @@ int longestNiceSubarray(std::vector<int>& nums) {
 }
 
 //2402. Meeting Rooms III
-//初解 runtime beats:50.00% memory beats:50.00%
+//First solution runtime beats:50.00% memory beats:50.00%
 int mostBooked(int n, std::vector<std::vector<int>>& meetings) {
     return 0;
 }
 
 //987. Vertical Order Traversal of a Binary Tree
-//初解 runtime beats:39.72% memory beats:63.58%
+//First solution runtime beats:39.72% memory beats:63.58%
 void verticalTraversalDFS(TreeNode* node, int row, int col, int& col_offset, 
     std::vector<std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>>>& tmp) {
     if (!node)
@@ -782,7 +782,7 @@ std::vector<std::vector<int>> verticalTraversal(TreeNode* root) {
 }
 
 //429. N-ary Tree Level Order Traversal
-//初解 runtime beats:38.04% memory beats:86.69%
+//First solution runtime beats:38.04% memory beats:86.69%
 std::vector<std::vector<int>> levelOrder(Node* root) {
     if (!root) { return {}; }
     std::vector<std::vector<int>> ans({ {} });
@@ -813,7 +813,7 @@ std::vector<std::vector<int>> levelOrder(Node* root) {
 }
 
 //814. Binary Tree Pruning
-//初解 runtime beats:100.00% memory beats:99.74%
+//First solution runtime beats:100.00% memory beats:99.74%
 TreeNode* pruneTree(TreeNode* root) {
     if (!root)
         return root;
@@ -837,7 +837,7 @@ TreeNode* pruneTree(TreeNode* root) {
 }
 
 //606. Construct String from Binary Tree
-//初解 runtime beats:55.39% memory beats:96.64%
+//First solution runtime beats:55.39% memory beats:96.64%
 void tree2strDFS(TreeNode* node, std::string& ans) {
     if (!node)
         return;
@@ -867,7 +867,7 @@ std::string tree2str(TreeNode* root) {
 }
 
 //94. Binary Tree Inorder Traversal
-//初解 runtime beats:100.00% memory beats:75.10%
+//First solution runtime beats:100.00% memory beats:75.10%
 void inorderTraversalTreeNode(TreeNode* node, std::vector<int>& ans) {
     if (!node)
         return;
@@ -885,7 +885,7 @@ std::vector<int> inorderTraversal(TreeNode* root) {
 
 //1996. The Number of Weak Characters in the Game
 //https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/discuss/1445186/EASY-C++-solution-with-great-explanation-and-comments-(nlogn)-sorting
-//網解 runtime beats:08.23% memory beats:91.78%
+//Network solution runtime beats:08.23% memory beats:91.78%
 static bool comp(std::vector<int>& a, std::vector<int>& b){
     if (a[0] == b[0]) { return a[1] > b[1]; }
     return a[0] < b[0];
@@ -907,7 +907,7 @@ int numberOfWeakCharacters(std::vector<std::vector<int>>& properties)
 
 //188. Best Time to Buy and Sell Stock IV
 //https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-188-best-time-to-buy-and-sell-stock-iv/
-//網解 runtime beats:83.97% memory beats:98.77%
+//Network solution runtime beats:83.97% memory beats:98.77%
 int maxProfitIV(int k, std::vector<int>& prices) {
     const int n = prices.size();
     std::vector<int> balance(k + 1, INT_MIN);   // balance[i][j] : = max balance by making at to up j buys in first i days. (Most hold a share)
@@ -921,7 +921,7 @@ int maxProfitIV(int k, std::vector<int>& prices) {
 }
 
 //509. Fibonacci Number
-//初解 runtime beats:07.99% memory beats:96.11%
+//First solution runtime beats:07.99% memory beats:96.11%
 int fib(int n) {
     if (n <= 1)
         return n;
@@ -929,7 +929,7 @@ int fib(int n) {
 }
 
 //1137. N-th Tribonacci Number
-//初解 runtime beats:100.00% memory beats:20.99%
+//First solution runtime beats:100.00% memory beats:20.99%
 int tribonacci_recursive(int n, std::vector<int>& dp) {
     if (dp[n] != INT_MIN)
         return dp[n];
@@ -1020,7 +1020,7 @@ int lengthOfLIS(std::vector<int>& nums, int k) {
 }
 
 //70. Climbing Stairs
-//初解 runtime beats:100.00% memory beats:16.06%
+//First solution runtime beats:100.00% memory beats:16.06%
 int climbStarisRecursive(int n, std::vector<int>& dp) {
     if (dp[n] != INT_MIN)
         return dp[n];
@@ -1038,7 +1038,7 @@ int climbStairs(int n) {
 }
 
 //746. Min Cost Climbing Stairs
-//初解 runtime beats:55.42% memory beats:96.77%
+//First solution runtime beats:55.42% memory beats:96.77%
 int minCostClimbingStairs(std::vector<int>& cost) {
     int size = cost.size();
     if (size == 2)
@@ -1049,7 +1049,7 @@ int minCostClimbingStairs(std::vector<int>& cost) {
 
 //1383. Maximum Performance of a Team
 //https://youtu.be/Y7UTvogADH0
-//網解 runtime beats:23.24% memory beats:56.16%
+//Network solution runtime beats:23.24% memory beats:56.16%
 int maxPerformance(int n, std::vector<int>& speed, std::vector<int>& efficiency, int k) {
     /*
     解題思路：
@@ -1082,7 +1082,7 @@ int maxPerformance(int n, std::vector<int>& speed, std::vector<int>& efficiency,
 }
 
 //198. House Robber
-//初解 runtime beats:100.00% memory beats:77.67%
+//First solution runtime beats:100.00% memory beats:77.67%
 int rob(std::vector<int>& nums) {
     int size = nums.size();
     if (size < 3)
@@ -1095,7 +1095,7 @@ int rob(std::vector<int>& nums) {
 }
 
 //213. House Robber II
-//初解 runtime beats:100.00% memory beats:20.36%
+//First solution runtime beats:100.00% memory beats:20.36%
 int rob2(std::vector<int>& nums) {
     int size = nums.size();
     if (size < 3)
@@ -1110,7 +1110,7 @@ int rob2(std::vector<int>& nums) {
 }
 
 //740. Delete and Earn
-//初解 runtime beats:82.61% memory beats:51.55%
+//First solution runtime beats:82.61% memory beats:51.55%
 int deleteAndEarn(std::vector<int>& nums) {
     // 先將 nums 轉換到 1 ~ 10000 之間的 dp，接下來就如 House Robber 一樣
     const int max_value = 10000;
@@ -1126,7 +1126,7 @@ int deleteAndEarn(std::vector<int>& nums) {
 }
 
 //948. Bag of Tokens
-//初解 runtime beats:72.03% memory beats:27.39%
+//First solution runtime beats:72.03% memory beats:27.39%
 int bagOfTokensScore(std::vector<int>& tokens, int power) {
     std::sort(tokens.begin(), tokens.end());
     if (tokens.size() == 0 or power < tokens[0])
@@ -1158,7 +1158,7 @@ int bagOfTokensScore(std::vector<int>& tokens, int power) {
 }
 
 //393. UTF-8 Validation
-//初解 runtime beats:72.82% memory beats:76.31%
+//First solution runtime beats:72.82% memory beats:76.31%
 bool validUtf8(std::vector<int>& data) {
     int NumOfBytes = 0;
     for (int& i : data) {
@@ -1179,7 +1179,7 @@ bool validUtf8(std::vector<int>& data) {
 }
 
 //55. Jump Game
-//初解 runtime beats:64.09% memory beats:18.18%
+//First solution runtime beats:64.09% memory beats:18.18%
 bool canJump(std::vector<int>& nums) {
     const int size = nums.size();
     std::vector<bool> isJump(size, false);
@@ -1195,7 +1195,7 @@ bool canJump(std::vector<int>& nums) {
 }
 
 //45. Jump Game II
-//初解 runtime beats:27.53% memory beats:27.57%
+//First solution runtime beats:27.53% memory beats:27.57%
 int jump(std::vector<int>& nums) {
     const int size = nums.size();
     std::vector<int> isJump(size, INT_MAX);
@@ -1213,7 +1213,7 @@ int jump(std::vector<int>& nums) {
 }
 
 //1457. Pseudo-Palindromic Paths in a Binary Tree
-//初解 runtime beats:11.59% memory beats:21.48%
+//First solution runtime beats:11.59% memory beats:21.48%
 void pseudoPalindromicPaths_DFS(TreeNode* node, std::set<int>& candidates, int& ans) {
     // 與 candidates 配對，配對成功即消除
     if (candidates.count(node->val))
@@ -1244,7 +1244,7 @@ void pseudoPalindromicPaths_DFS(TreeNode* node, std::set<int>& candidates, int& 
 //    return ans;
 //}
 
-//二解 runtime beats:34.77% memory beats:50.95%
+//Second solution runtime beats:34.77% memory beats:50.95%
 int pseudoPalindromicPaths(TreeNode* root) {
     // 形成回文即數值兩兩成對
     // 利用值介於1-9 間的特性，將 1 - 9 存在 1到9位 bit，即可節省記憶體
@@ -1265,7 +1265,7 @@ int pseudoPalindromicPaths(TreeNode* root) {
 }
 
 //53. Maximum Subarray
-//初解 runtime beats:05.04% memory beats:90.50%
+//First solution runtime beats:05.04% memory beats:90.50%
 int maxSubArray(std::vector<int>& nums) {
     int size = nums.size();
     int ans = nums[0];
@@ -1278,7 +1278,7 @@ int maxSubArray(std::vector<int>& nums) {
 
 //918. Maximum Sum Circular Subarray
 //https://leetcode.com/problems/maximum-sum-circular-subarray/discuss/178422/One-Pass
-//網解 runtime beats:23.39% memory beats:33.15%
+//Network solution runtime beats:23.39% memory beats:33.15%
 int maxSubarraySumCircular(std::vector<int>& A) {
     /*
     因為題目為環形，所以分兩種可能，第一種是與53題一樣，第二種是首尾兩個數組相加違最大子數組
@@ -1298,7 +1298,7 @@ int maxSubarraySumCircular(std::vector<int>& A) {
 }
 
 //2007. Find Original Array From Doubled Array
-//初解 runtime beats:89.77% memory beats:87.90%
+//First solution runtime beats:89.77% memory beats:87.90%
 std::vector<int> findOriginalArray(std::vector<int>& changed) {
     if (changed.size() % 2)
         return {};
@@ -1341,7 +1341,7 @@ std::vector<int> findOriginalArray(std::vector<int>& changed) {
 }
 
 //152. Maximum Product Subarray
-//初解 runtime beats:46.93% memory beats:71.04%
+//First solution runtime beats:46.93% memory beats:71.04%
 int maxProduct(std::vector<int>& nums) {
     int ans = nums[0], min = 0, a, b, c;
     /*
@@ -1365,7 +1365,7 @@ int maxProduct(std::vector<int>& nums) {
 }
 
 //1567. Maximum Length of Subarray With Positive Product
-//初解 runtime beats:11.23% memory beats:75.53%
+//First solution runtime beats:11.23% memory beats:75.53%
 int getMaxLen(std::vector<int>& nums) {
     int max_len = 0;
     // len is record highest len no matter sign, len_first_negative record the first time sign changed to negative, so when nums[i] is positive, the max length is len - len_first_negative
@@ -1395,7 +1395,7 @@ int getMaxLen(std::vector<int>& nums) {
 
 //1770. Maximum Score from Performing Multiplication Operations
 //https://youtu.be/8sMdqZ8z1l0
-//網解 runtime beats:06.19% memory beats:64.78%
+//Network solution runtime beats:06.19% memory beats:64.78%
 int maximumScore(std::vector<int>& nums, std::vector<int>& multipliers) {
     // Top - Down
     const int m = multipliers.size();
@@ -1414,7 +1414,7 @@ int maximumScore(std::vector<int>& nums, std::vector<int>& multipliers) {
 
 //336. Palindrome Pairs
 //https://www.cnblogs.com/grandyang/p/5272039.html
-//網解 runtime beats:91.66% memory beats:61.25%
+//Network solution runtime beats:91.66% memory beats:61.25%
 std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
     // 1. use lamba function to check if 
     std::function<bool(std::string&, int, int)> is_palindrome = [&](std::string& s, int i, int j) {
@@ -1462,7 +1462,7 @@ std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
 
 //42. Trapping Rain Water
 //https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-42-trapping-rain-water/
-//網解 runtime beats:39.49% memory beats:36.03%
+//Network solution runtime beats:39.49% memory beats:36.03%
 //int trap(std::vector<int>& height) {
 //    /*
 //    height 有 n 個，計算在 height[i] 能儲存的水量
@@ -1484,7 +1484,7 @@ std::vector<std::vector<int>> palindromePairs(std::vector<std::string>& words) {
 //}
 
 //609. Find Duplicate File in System
-//初解 runtime beats:89.69% memory beats:13.74%
+//First solution runtime beats:89.69% memory beats:13.74%
 std::vector<std::vector<std::string>> findDuplicate(std::vector<std::string>& paths) {
     std::vector<std::vector<std::string>> ans;
     std::unordered_map<std::string, int> m;
@@ -1523,7 +1523,7 @@ std::vector<std::vector<std::string>> findDuplicate(std::vector<std::string>& pa
 }
 
 //718. Maximum Length of Repeated Subarray
-//初解 runtime beats:12.57% memory beats:59.41%
+//First solution runtime beats:12.57% memory beats:59.41%
 int findLength(std::vector<int>& nums1, std::vector<int>& nums2) {
     // DP[i][j] 為 n1[i] 與 n2[j] 往前連續多少，DP[i][j] = n1[i] == n2[j] ? 1 + dp[i-1][j-1] : 0;    
     int n1 = nums1.size(), n2 = nums2.size(), ans = INT_MIN;
@@ -1541,7 +1541,7 @@ int findLength(std::vector<int>& nums1, std::vector<int>& nums2) {
 }
 
 //1014. Best Sightseeing Pair
-//初解 runtime beats:54.28%  memory beats:26.07%
+//First solution runtime beats:54.28%  memory beats:26.07%
 int maxScoreSightseeingPair(std::vector<int>& values) {
     // 紀錄最高景點，該景點每移動一次要減一
     int size = values.size(), maxScore = values[0] - 1, maxSpot = 0;
@@ -1553,7 +1553,7 @@ int maxScoreSightseeingPair(std::vector<int>& values) {
 }
 
 //121. Best Time to Buy and Sell Stock
-//初解 runtime beats:67.44%  memory beats:89.07%
+//First solution runtime beats:67.44%  memory beats:89.07%
 //int maxProfit(std::vector<int>& prices) {
 //    // 在 prices[i-1] 儲存最小 price
 //    int size = prices.size(), maxprofit = 0;
@@ -1565,7 +1565,7 @@ int maxScoreSightseeingPair(std::vector<int>& values) {
 //}
 
 //122. Best Time to Buy and Sell Stock II
-//初解 runtime beats:87.52%  memory beats:89.98%
+//First solution runtime beats:87.52%  memory beats:89.98%
 //int maxProfit(std::vector<int>& prices) {
 //    // 因為只要 p[i-1] < p[i] 即構成 profit 增加，所以就算 profit[i+1] > profit[i]，也可先計算 p[i] - p[i-1] 的 profit
 //    int size = prices.size(), profit = 0;
@@ -1575,7 +1575,7 @@ int maxScoreSightseeingPair(std::vector<int>& values) {
 //    return profit;
 //}
 
-//網解 runtime beats:42.67%  memory beats:30.01%
+//Network solution runtime beats:42.67%  memory beats:30.01%
 //int maxProfit(std::vector<int>& prices) {
 //    /*
 //    * 儲存最大利潤、最大結餘(第一次可能購買，所以設為最小極值)
@@ -1591,7 +1591,7 @@ int maxScoreSightseeingPair(std::vector<int>& values) {
 //}
 
 //985. Sum of Even Numbers After Queries
-//初解 runtime beats:89.09%  memory beats:66.47%
+//First solution runtime beats:89.09%  memory beats:66.47%
 std::vector<int> sumEvenAfterQueries(std::vector<int>& nums, std::vector<std::vector<int>>& queries) {
     std::vector<int> ans;
     int even_sum = 0;
@@ -1607,7 +1607,7 @@ std::vector<int> sumEvenAfterQueries(std::vector<int>& nums, std::vector<std::ve
 }
 
 //309. Best Time to Buy and Sell Stock with Cooldown
-//初解 runtime beats:100.00%  memory beats:91.92%
+//First solution runtime beats:100.00%  memory beats:91.92%
 int maxProfit(std::vector<int>& prices) {
     /*
     * 分別記錄結餘、上次結餘、利潤、上次利潤
@@ -1626,7 +1626,7 @@ int maxProfit(std::vector<int>& prices) {
 }
 
 //714. Best Time to Buy and Sell Stock with Transaction Fee
-//初解 runtime beats:60.92%  memory beats:91.61%
+//First solution runtime beats:60.92%  memory beats:91.61%
 int maxProfit(std::vector<int>& prices, int fee) {
     // 與 121. 題一樣，不過在計算 profit 時多減去 foo
     int balance = INT_MIN, profit = 0;
@@ -1638,7 +1638,7 @@ int maxProfit(std::vector<int>& prices, int fee) {
 }
 
 //557. Reverse Words in a String III
-//初解 runtime beats:05.03%  memory beats:05.00%
+//First solution runtime beats:05.03%  memory beats:05.00%
 std::string reverseWords(std::string& s) {
     int size = s.size();
     int i = s.find(' ');;
@@ -1657,7 +1657,7 @@ std::string reverseWords(std::string& s) {
     return s;
 }
 
-//網解 runtime beats:19.79%  memory beats:75.20%
+//Network solution runtime beats:19.79%  memory beats:75.20%
 //std::string reverseWords(std::string s) {
 //    for (int i = 0; i < s.length(); i++) {
 //        if (s[i] != ' ') {   // when i is a non-space
@@ -1672,7 +1672,7 @@ std::string reverseWords(std::string& s) {
 
 //139. Word Break
 //https://www.youtube.com/watch?v=Sx9NNgInc3A
-//網解 runtime beats:79.54%  memory beats:95.29%
+//Network solution runtime beats:79.54%  memory beats:95.29%
 bool wordBreak(std::string s, std::vector<std::string>& wordDict) {
     /*
     * s 切分為前 i 位與後 size - i 位
@@ -1695,7 +1695,7 @@ bool wordBreak(std::string s, std::vector<std::string>& wordDict) {
 }
 
 //42. Trapping Rain Water
-//初解 runtime beats:74.45%  memory beats:10.88%
+//First solution runtime beats:74.45%  memory beats:10.88%
 //int trap(std::vector<int>& h) {
 //    /*
 //    * left[i] 記錄從左邊到第i位最高的點，right[i]紀錄從右邊到第i為最高的點
@@ -1717,7 +1717,7 @@ bool wordBreak(std::string s, std::vector<std::string>& wordDict) {
 //    return ans;
 //}
 
-//網解 runtime beats:83.53%  memory beats:81.93%
+//Network solution runtime beats:83.53%  memory beats:81.93%
 int trap(std::vector<int>& h) {
     /*
     * Use Two Pointer
@@ -1745,7 +1745,7 @@ int trap(std::vector<int>& h) {
 
 //1680. Concatenation of Consecutive Binary Numbers
 //https://zxi.mytechroad.com/blog/bit/leetcode-1680-concatenation-of-consecutive-binary-numbers/
-//網解 runtime beats:84.24%  memory beats:82.61%
+//Network solution runtime beats:84.24%  memory beats:82.61%
 int concatenatedBinary(int n) {
     /*
     * 當 (i & (i - 1)) == 0 時，長度加一，例如：100(4) & 11(3) 時，字串長度從原本 2("11") 變成 3("100")
@@ -1764,7 +1764,7 @@ int concatenatedBinary(int n) {
 }
 
 //113. Path Sum II
-//初解 runtime beats:39.73%  memory beats:39.09%
+//First solution runtime beats:39.73%  memory beats:39.09%
 //void pathSum2_DFS(TreeNode* node, int& targetSum, std::vector<std::vector<int>>& ans, int sum, std::vector<int> cadndiate) {
 //    if (!node) return;
 //    sum = sum + node->val;
@@ -1785,7 +1785,7 @@ int concatenatedBinary(int n) {
 //    return ans;
 //}
 
-//二解 runtime beats:44.02%  memory beats:42.16%
+//Second solution runtime beats:44.02%  memory beats:42.16%
 std::vector<std::vector<int>> pathSum(TreeNode* root, int& targetSum) {
     //BFS
     if (!root) return {};
@@ -1815,7 +1815,7 @@ std::vector<std::vector<int>> pathSum(TreeNode* root, int& targetSum) {
 }
 
 //622. Design Circular Queue
-//初解 runtime beats:05.11%  memory beats:11.06%
+//First solution runtime beats:05.11%  memory beats:11.06%
 class MyCircularQueue {
 private:
     std::list<int> circular_queue;
@@ -1862,7 +1862,7 @@ public:
 };
 
 //https://leetcode.com/problems/design-circular-queue/discuss/153529/Straightforward-Implementation-in-C++-20ms
-//網解 runtime beats:67.96%  memory beats:82.50%
+//Network solution runtime beats:67.96%  memory beats:82.50%
 //class MyCircularQueue {
 //private:
 //    std::vector<int> data;
@@ -1992,7 +1992,7 @@ int numberOfGoodPaths(std::vector<int>& vals, std::vector < std::vector<int >>& 
 
 
 //990. Satisfiability of Equality Equations
-//初解 runtime beats:89.91%  memory beats:98.15%
+//First solution runtime beats:89.91%  memory beats:98.15%
 int union_find(std::vector<int>& vec, int posi) {
     return vec[posi] == -1 || vec[posi] == posi ? posi : union_find(vec, vec[posi]);
 }
@@ -2016,7 +2016,7 @@ bool equationsPossible(std::vector<std::string>& equations) {
 }
 
 //838. Push Dominoes
-//初解 runtime beats:12.83%  memory beats:42.63%
+//First solution runtime beats:12.83%  memory beats:42.63%
 std::string pushDominoes(std::string& dominoes) {
     // 計算在 i 時，最靠近的 L 與 R 距離，當 i == '.' 時，則根據最小 L/R 距離做變化
     const int size = dominoes.size();
@@ -2044,7 +2044,7 @@ std::string pushDominoes(std::string& dominoes) {
 }
 
 //https://youtu.be/evUFsOb_iLY
-//網解 runtime beats:07.97%%  memory beats:33.28%
+//Network solution runtime beats:07.97%%  memory beats:33.28%
 //std::string pushDominoes(std::string& dominoes) {
 //    /*
 //    * 以 queue 儲存特殊情況(L and R)
@@ -2081,7 +2081,7 @@ std::string pushDominoes(std::string& dominoes) {
 //}
 
 //413. Arithmetic Slices
-//初解 runtime beats:68.37%  memory beats:49.56%
+//First solution runtime beats:68.37%  memory beats:49.56%
 int numberOfArithmeticSlices(std::vector<int>& nums) {
     const int size = nums.size();
     if (size < 3) return 0;
@@ -2098,7 +2098,7 @@ int numberOfArithmeticSlices(std::vector<int>& nums) {
 
 //91. Decode Ways
 //https://youtu.be/OjEHST4SXfE
-//網解 runtime beats:29.19%  memory beats:25.93%
+//Network solution runtime beats:29.19%  memory beats:25.93%
 //int ways(std::unordered_map<int, int>& dp, std::string& s, int l, int r) {
 //    if (dp.count(l)) return dp[l];
 //    if (s[l] == '0') return 0;
@@ -2123,7 +2123,7 @@ int numberOfArithmeticSlices(std::vector<int>& nums) {
 //    return ways(dp, s, 0, s.length() - 1);
 //}
 
-//網解 runtime beats:63.16%  memory beats:93.17%
+//Network solution runtime beats:63.16%  memory beats:93.17%
 int numDecodings(std::string s) {
     /*
     * dp[i] 紀錄第 i 位存在幾種解碼方式，預設dp[-1]有一個空，而空的解碼方式只有一種
@@ -2155,7 +2155,7 @@ int numDecodings(std::string s) {
 }
 
 //19. Remove Nth Node From End of List
-//初解 runtime beats:62.15%  memory beats:32.26%
+//First solution runtime beats:62.15%  memory beats:32.26%
 ListNode* removeNthFromEnd(ListNode* head, int n) {
     std::unordered_map<int, ListNode*> m;
     int i = 0;
@@ -2179,7 +2179,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 }
 
 //https://leetcode.com/problems/remove-nth-node-from-end-of-list/discuss/1164542/JS-Python-Java-C++-or-Easy-Two-Pointer-Solution-w-Explanation
-//網解 runtime beats:78.73%  memory beats:75.00%
+//Network solution runtime beats:78.73%  memory beats:75.00%
 //ListNode* removeNthFromEnd(ListNode* head, int n) {
 //    /*
 //    * 以 Fast, Slow 紀錄，Fast會先跑n位，如果當Fast為nullptr時，代表head是我們要刪除的目標，所以回傳head->next
@@ -2194,7 +2194,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 //}
 
 //658. Find K Closest Elements
-//初解 runtime beats:11.60%  memory beats:37.52%
+//First solution runtime beats:11.60%  memory beats:37.52%
 //std::vector<int> findClosestElements(std::vector<int>& arr, int k, int x) {
 //    /*
 //    * 利用 Priority_queue，將誤差作為Priority，所以當PQ的size超過K，就POP最高Priority的人(即誤差最多的人)
@@ -2220,7 +2220,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 //    return ans;
 //}
 
-//二解 runtime beats:58.97%  memory beats:86.01%
+//Second solution runtime beats:58.97%  memory beats:86.01%
 std::vector<int> findClosestElements(std::vector<int>& arr, int k, int x) {
     /*
     * 先檢查 x 是否大於或小於 arr 的頭或尾，若符合則回傳前k或後k位
@@ -2249,7 +2249,7 @@ std::vector<int> findClosestElements(std::vector<int>& arr, int k, int x) {
 
 //264. Ugly Number II
 //https://leetcode.com/problems/ugly-number-ii/discuss/69364/My-16ms-C++-DP-solution-with-short-explanation
-//網解 runtime beats:74.47%  memory beats:66.75%
+//Network solution runtime beats:74.47%  memory beats:66.75%
 int nthUglyNumber(int n) {
     /*
     * 只包含質因子2、3和5的數稱作醜數(Ugly Number)，通常視1為第一個醜數
@@ -2268,7 +2268,7 @@ int nthUglyNumber(int n) {
 }
 
 //96. Unique Binary Search Trees
-//初解 runtime beats:37.60%  memory beats:12.02%
+//First solution runtime beats:37.60%  memory beats:12.02%
 int numTrees(int n) {
     /*
     * https://en.wikipedia.org/wiki/Catalan_number
@@ -2289,7 +2289,7 @@ int numTrees(int n) {
 
 //218. The Skyline Problem
 //https://zxi.mytechroad.com/blog/tree/leetcode-218-the-skyline-problem/
-//網解 runtime beats:71.60%  memory beats:77.75%
+//Network solution runtime beats:71.60%  memory beats:77.75%
 std::vector<std::vector<int>> getSkyline(std::vector<std::vector<int>>& buildings) {
     /*
     * 利用每個可能答案為每棟建築物的邊界作為依據，分為建築物的起始點(左邊)以及結束點(右邊)
@@ -2416,7 +2416,7 @@ int deleteString(std::string s) {
 
 //1155. Number of Dice Rolls With Target Sum
 //https://youtu.be/J9s7402s5FA
-//網解 runtime beats:30.80%  memory beats:63.22%
+//Network solution runtime beats:30.80%  memory beats:63.22%
 int numRollsToTarget(int n, int k, int target) {
     /*
     * Time complexity : O(n*k*t)
@@ -2439,7 +2439,7 @@ int numRollsToTarget(int n, int k, int target) {
 }
 
 //1578. Minimum Time to Make Rope Colorful
-//初解 runtime beats:56.65%  memory beats:84.72%
+//First solution runtime beats:56.65%  memory beats:84.72%
 int minCost(std::string colors, std::vector<int>& neededTime) {
     const int n = colors.size();    
     int ans = 0;
@@ -2458,7 +2458,7 @@ int minCost(std::string colors, std::vector<int>& neededTime) {
 }
 
 //112. Path Sum
-//初解 runtime beats:77.40%  memory beats:38.76%
+//First solution runtime beats:77.40%  memory beats:38.76%
 void hasPathSum_BFS(bool& ans, TreeNode* node, int target) {
     if (!node or ans) return;
     if (!node->left and !node->right and node->val == target) ans = true;
@@ -2475,7 +2475,7 @@ bool hasPathSum(TreeNode* root, int targetSum) {
 }
 
 //118. Pascal's Triangle
-//初解 runtime beats:46.97%  memory beats:90.45%
+//First solution runtime beats:46.97%  memory beats:90.45%
 std::vector<std::vector<int>> generate(int numRows) {
     /*
     * 先令第一行，接著for loop產生每一行
@@ -2494,7 +2494,7 @@ std::vector<std::vector<int>> generate(int numRows) {
 }
 
 //119. Pascal's Triangle II
-//初解 runtime beats:100.00%  memory beats:99.26%
+//First solution runtime beats:100.00%  memory beats:99.26%
 std::vector<int> getRow(int rowIndex) {
     /*
     * 第n行會有n個值，所以初始化vec大小為n，預設值為1
@@ -2513,7 +2513,7 @@ std::vector<int> getRow(int rowIndex) {
 }
 
 //931. Minimum Falling Path Sum
-//初解 runtime beats:30.09%  memory beats:95.79%
+//First solution runtime beats:30.09%  memory beats:95.79%
 int minFallingPathSum(std::vector<std::vector<int>>& matrix) {
     /*
     * 遍例所有位置
@@ -2544,7 +2544,7 @@ int minFallingPathSum(std::vector<std::vector<int>>& matrix) {
 }
 
 //120. Triangle
-//初解 runtime beats:84.35%  memory beats:79.01%
+//First solution runtime beats:84.35%  memory beats:79.01%
 int minimumTotal(std::vector<std::vector<int>>& triangle) {
     /*
     * 雖然是三角形，不過若靠左對齊，則最小路徑就如931題相似，只是沒有右上
@@ -2574,7 +2574,7 @@ int minimumTotal(std::vector<std::vector<int>>& triangle) {
 }
 
 //1314. Matrix Block Sum
-//初解 runtime beats:22.63% memory beats:72.73%
+//First solution runtime beats:22.63% memory beats:72.73%
 std::vector<std::vector<int>> matrixBlockSum(std::vector<std::vector<int>>& mat, int k) {
     /*
     * ans記錄在(i,j)點的block sum，所以(i+1,j)只需要減去(i,j)的最左行，加上(i+1,j)的最右行即可
@@ -2619,7 +2619,7 @@ std::vector<std::vector<int>> matrixBlockSum(std::vector<std::vector<int>>& mat,
 }
 
 //304. Range Sum Query 2D - Immutable
-//初解 runtime beats:29.29% memory beats:54.43%
+//First solution runtime beats:29.29% memory beats:54.43%
 class NumMatrix {
     /*
     * 記錄從(0,0) 到 (i,j) 的 sum，所以若要計算(i1, j1)(i2,j2)的面積
@@ -2646,7 +2646,7 @@ public:
 };
 
 //623. Add One Row to Tree
-//初解 runtime beats:29.29% memory beats:54.43%
+//First solution runtime beats:29.29% memory beats:54.43%
 void addOneRow_dfs(TreeNode* node, int& val, int depth) {
     if (!node or depth < 2) return;
     if (depth == 2) { // when node is father
@@ -2682,7 +2682,7 @@ TreeNode* addOneRow(TreeNode* root, int& val, int depth) {
 
 //981. Time Based Key - Value Store
 //https://www.cnblogs.com/grandyang/p/14195356.html
-//網解 runtime beats:27.65% memory beats:19.24%
+//Network solution runtime beats:27.65% memory beats:19.24%
 class TimeMap {
     /*
     * 利用 hash_map 快速對應到儲存(timestamp, value)的map
@@ -2708,7 +2708,7 @@ public:
 
 //729. My Calendar I
 //https://leetcode.com/problems/my-calendar-i/discuss/109475/JavaC%2B%2B-Clean-Code-with-Explanation
-//網解 runtime beats:62.34% memory beats:31.30%
+//Network solution runtime beats:62.34% memory beats:31.30%
 class MyCalendar {
     /*
     * 透過set儲存事件，並先排列start在排列end，所以在搜尋lower bound(一樣或大於)時
@@ -2728,7 +2728,7 @@ public:
 
 //732. My Calendar III
 //https://zxi.mytechroad.com/blog/geometry/732-my-calendar-iii/
-//網解 runtime beats:27.65% memory beats:19.24%
+//Network solution runtime beats:27.65% memory beats:19.24%
 class MyCalendarThree {
 public:
     MyCalendarThree() {
@@ -2754,7 +2754,7 @@ private:
 };
 
 //16. 3Sum Closest
-//初解 runtime beats:92.81% memory beats:19.24%
+//First solution runtime beats:92.81% memory beats:19.24%
 int threeSumClosest(std::vector<int>& nums, int target) {
     /*
     * 先將 nums 升冪排序，並尋找與target誤差最小的答案
@@ -2784,7 +2784,7 @@ int threeSumClosest(std::vector<int>& nums, int target) {
 }
 
 //653. Two Sum IV - Input is a BST
-//初解 runtime beats:77.58% memory beats:37.86%
+//First solution runtime beats:77.58% memory beats:37.86%
 bool findTarget(TreeNode* root, int k) {
     std::set<int> exist;
     std::queue<TreeNode*> q({ root });
@@ -2803,7 +2803,7 @@ bool findTarget(TreeNode* root, int k) {
 
 //1328. Break a Palindrome
 //https://leetcode.com/problems/break-a-palindrome/discuss/489774/JavaC++Python-Easy-and-Concise
-//網解 runtime beats:51.67% memory beats:95.35%
+//Network solution runtime beats:51.67% memory beats:95.35%
 std::string breakPalindrome(std::string S) {
     /*
     * Check half of the string, replace a non 'a' character to 'a'.
@@ -2824,7 +2824,7 @@ std::string breakPalindrome(std::string S) {
 
 //334. Increasing Triplet Subsequence
 //https://leetcode.com/problems/increasing-triplet-subsequence/discuss/78993/Clean-and-short-with-comments-C++
-//網解 runtime beats:90.14% memory beats:24.04%
+//Network solution runtime beats:90.14% memory beats:24.04%
 bool increasingTriplet(std::vector<int>& nums) {
     /*
     * 首先 i 是當前最小值，若當前大於 i，代表有可能是 j or k
@@ -2855,7 +2855,7 @@ bool increasingTriplet(std::vector<int>& nums) {
 }
 
 //976. Largest Perimeter Triangle
-//初解 runtime beats:48.11% memory beats:22.88%
+//First solution runtime beats:48.11% memory beats:22.88%
 int largestPerimeter(std::vector<int>& nums) {
     sort(nums.rbegin(), nums.rend()); // decreasing
     int a = INT_MIN, b = INT_MIN;
@@ -2876,7 +2876,7 @@ int largestPerimeter(std::vector<int>& nums) {
 }
 
 //237. Delete Node in a Linked List
-//初解 runtime beats:70.83% memory beats:37.95%
+//First solution runtime beats:70.83% memory beats:37.95%
 void deleteNode(ListNode* node) {
     ListNode* now = node;
     while (now->next->next) {
@@ -2888,13 +2888,13 @@ void deleteNode(ListNode* node) {
 }
 
 //https://leetcode.com/problems/delete-node-in-a-linked-list/discuss/65455/1-3-lines-C++JavaPythonCCJavaScriptRuby
-//網解 runtime beats:25.52% memory beats:73.12%
+//Network solution runtime beats:25.52% memory beats:73.12%
 //void deleteNode(ListNode* node) {
 //    node = node->next;
 //}
 
 //2095. Delete the Middle Node of a Linked List
-//初解 runtime beats:74.81% memory beats:20.46%
+//First solution runtime beats:74.81% memory beats:20.46%
 ListNode* deleteMiddle(ListNode* head) {
     if (!head->next) return nullptr;
     std::unordered_map<int, ListNode*> hashmap;
@@ -2910,7 +2910,7 @@ ListNode* deleteMiddle(ListNode* head) {
     return head;
 }
 
-//二解 runtime beats:81.56% memory beats:20.46%
+//Second solution runtime beats:81.56% memory beats:20.46%
 //ListNode* deleteMiddle(ListNode* head) {
 //    if (!head->next) return nullptr;
 //    ListNode* fast = head;
@@ -2927,7 +2927,7 @@ ListNode* deleteMiddle(ListNode* head) {
 //}
 
 //https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/discuss/1612140/One-Pass-Slow-and-Fast
-//網解 runtime beats:99.59% memory beats:88.09%
+//Network solution runtime beats:99.59% memory beats:88.09%
 //ListNode* deleteMiddle(ListNode* head) {
 //    if (head->next == nullptr)
 //        return nullptr;
@@ -2941,7 +2941,7 @@ ListNode* deleteMiddle(ListNode* head) {
 //}
 
 //62. Unique Paths
-//初解 runtime beats:100.00% memory beats:28.64%
+//First solution runtime beats:100.00% memory beats:28.64%
 int uniquePaths(int m, int n) {
     /*
     * 因為只能往下或往右，所以在i=0以及j=0時都只有一條路線，而dp[1][1] = (左邊)dp[1][0] + (上邊)dp[0][1]
@@ -2955,7 +2955,7 @@ int uniquePaths(int m, int n) {
 }
 
 //63. Unique Paths II
-//初解 runtime beats:71.74% memory beats:98.66%
+//First solution runtime beats:71.74% memory beats:98.66%
 int uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid) {
     /*
     * 與62題一樣，不過要先確認原值是否為1(障礙)，若為障礙則為0
@@ -2977,7 +2977,7 @@ int uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid) {
 
 //1531. String Compression II
 //https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-1531-string-compression-ii/
-//網解 runtime beats:74.81% memory beats:20.46%
+//Network solution runtime beats:74.81% memory beats:20.46%
 int getLengthOfOptimalCompression(std::string s, int k) {
     const int n = s.length();
     std::vector<std::vector<int>> cache(n, std::vector<int>(k + 1, -1));    // cache[i][j] 代表解碼s[i:]且刪除j個char的最小長度
@@ -3057,7 +3057,7 @@ long long countSubarrays(std::vector<int>& nums, int minK, int maxK) {
 
 //1335. Minimum Difficulty of a Job Schedule
 //https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-1335-minimum-difficulty-of-a-job-schedule/
-//網解 runtime beats:37.58% memory beats:44.90%
+//Network solution runtime beats:37.58% memory beats:44.90%
 int minDifficulty(std::vector<int>& jobs, int d) {
     /*
     * 天數與工作都以 1-based 表示，即從1開始排序，所以dp需要append 1
@@ -3078,7 +3078,7 @@ int minDifficulty(std::vector<int>& jobs, int d) {
 }
 
 //https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/discuss/490316/JavaC++Python3-DP-O(nd)-Solution
-//網解 runtime beats:37.58% memory beats:44.90%
+//Network solution runtime beats:37.58% memory beats:44.90%
 //int minDifficulty(vector<int>& A, int D) {
 //    int n = A.size(), inf = 1e9, maxd;
 //    if (n < D) return -1;
@@ -3097,7 +3097,7 @@ int minDifficulty(std::vector<int>& jobs, int d) {
 //}
 
 //1832. Check if the Sentence Is Pangram
-//初解 runtime beats:54.16% memory beats:94.60%
+//First solution runtime beats:54.16% memory beats:94.60%
 bool checkIfPangram(std::string s) {
     // 直接搜尋'a'-'z'
     char c = 'a';
@@ -3108,7 +3108,7 @@ bool checkIfPangram(std::string s) {
     return true;
 }
 
-//二解 runtime beats:80.43% memory beats:06.60%
+//Second solution runtime beats:80.43% memory beats:06.60%
 //bool checkIfPangram(std::string s) {
 //    // 利用 set 紀錄發生過的字母
 //    std::set<char> alphabet(s.begin(), s.end());
@@ -3116,7 +3116,7 @@ bool checkIfPangram(std::string s) {
 //}
 
 //64. Minimum Path Sum
-//初解 runtime beats:14.94% memory beats:31.40%
+//First solution runtime beats:14.94% memory beats:31.40%
 int minPathSum(std::vector<std::vector<int>>& grid) {
     //top - down -> Time Limit Exceeded
     const int m = grid.size();
@@ -3136,7 +3136,7 @@ int minPathSum(std::vector<std::vector<int>>& grid) {
     return dp(m - 1, n - 1);
 }
 
-//二解 runtime beats:68.60% memory beats:80.55%
+//Second solution runtime beats:68.60% memory beats:80.55%
 //int minPathSum(std::vector<std::vector<int>>& grid) {
 //    const int m = grid.size();
 //    const int n = grid[0].size();
@@ -3152,7 +3152,7 @@ int minPathSum(std::vector<std::vector<int>>& grid) {
 //}
 
 //221. Maximal Square
-//初解 runtime beats:62.38% memory beats:57.14%
+//First solution runtime beats:62.38% memory beats:57.14%
 int maximalSquare(std::vector<std::vector<char>>& matrix) {
     /*
     * 在 x = 0 以及 y = 0 時，不可能生成往左上變成一個正方形，所以只判斷是否為1
@@ -3175,7 +3175,7 @@ int maximalSquare(std::vector<std::vector<char>>& matrix) {
 }
 
 //https://leetcode.com/problems/maximal-square/discuss/61803/C++-space-optimized-DP
-//網解 runtime beats:92.73% memory beats:75.37%
+//Network solution runtime beats:92.73% memory beats:75.37%
 //int maximalSquare(std::vector<std::vector<char>>& matrix) {
 //    if (matrix.empty()) return 0;
 //    int m = matrix.size(), n = matrix[0].size(), sz = 0, pre;
@@ -3193,7 +3193,7 @@ int maximalSquare(std::vector<std::vector<char>>& matrix) {
 //}
 
 //38. Count and Say
-//初解 runtime beats:86.10% memory beats:77.40%
+//First solution runtime beats:86.10% memory beats:77.40%
 std::string countAndSay(int n) {
     /*
     * 利用遞迴取得countAndSay(n-1)，並重新解讀
@@ -3214,7 +3214,7 @@ std::string countAndSay(int n) {
 }
 
 //692. Top K Frequent Words
-//初解 runtime beats:45.47% memory beats:39.56%
+//First solution runtime beats:45.47% memory beats:39.56%
 std::vector<std::string> topKFrequent(std::vector<std::string>& words, int k) {
     // 先利用 hashmap 計次數，然後將 hashmap 存入 priority queue 中排序，最後從 priority queue 中選出前 k 個為答案
     std::unordered_map<std::string, int> hashmap;
@@ -3242,7 +3242,7 @@ std::vector<std::string> topKFrequent(std::vector<std::string>& words, int k) {
 }
 
 //12. Integer to Roman
-//初解 runtime beats:88.47% memory beats:77.21%
+//First solution runtime beats:88.47% memory beats:77.21%
 std::string intToRoman(int num) {
     std::string roman = "";
 
@@ -3266,7 +3266,7 @@ std::string intToRoman(int num) {
 }
 
 //5. Longest Palindromic Substring
-//初解 runtime beats:43.89% memory beats:39.14%
+//First solution runtime beats:43.89% memory beats:39.14%
 std::string longestPalindrome(std::string s) {
     /*
     * dp[i][j] = s[i] == s[j] && dp[i+1][j-1] => 字串頭尾比較然後字串中間存在dp中
@@ -3298,7 +3298,7 @@ std::string longestPalindrome(std::string s) {
 
 //516. Longest Palindromic Subsequence
 //https://leetcode.com/problems/longest-palindromic-subsequence/discuss/1468396/C++Python-2-solutions:-Top-down-DP-Bottom-up-DP-O(N)-Space-Clean-and-Concise
-//網解 runtime beats:63.52% memory beats:61.18%
+//Network solution runtime beats:63.52% memory beats:61.18%
 int longestPalindromeSubseq(std::string s) {
     /*
     * 1) Top down DP
@@ -3323,7 +3323,7 @@ int longestPalindromeSubseq(std::string s) {
 }
 
 //219. Contains Duplicate II
-//初解 runtime beats:29.71% memory beats:80.91%
+//First solution runtime beats:29.71% memory beats:80.91%
 bool containsNearbyDuplicate(std::vector<int>& nums, int k) {
     /*
     * 以 hashmap 紀錄在 num 發生最近的位置
@@ -3340,7 +3340,7 @@ bool containsNearbyDuplicate(std::vector<int>& nums, int k) {
 
 //76. Minimum Window Substring
 //https://zxi.mytechroad.com/blog/two-pointers/leetcode-76-minimum-window-substring/
-//網解 runtime beats:99.73% memory beats:94.27%
+//Network solution runtime beats:99.73% memory beats:94.27%
 std::string minWindow(std::string s, std::string t) {
     /*
     * 1) 紀錄在 t 中每個字元發生的次數
@@ -3436,7 +3436,7 @@ int subarrayGCD(std::vector<int>& nums, int k) {
 //}
 
 //645. Set Mismatch
-//初解 runtime beats:88.91% memory beats:44.96%
+//First solution runtime beats:88.91% memory beats:44.96%
 std::vector<int> findErrorNums(std::vector<int>& nums) {
     // 紀錄每個數字發生的頻率(freq)，然後檢查freq中重複的以及沒有出現的作為答案
     const int n = nums.size();
@@ -3454,7 +3454,7 @@ std::vector<int> findErrorNums(std::vector<int>& nums) {
     return {};
 }
 
-//二解 runtime beats:87.08% memory beats:86.49%
+//Second solution runtime beats:87.08% memory beats:86.49%
 //std::vector<int> findErrorNums(std::vector<int>& nums) {
 //    /*
 //    * 因為題目為 1~n 的數，其中有一數字出錯變成另一個數字，所以會有遺失的數字(loss)以及重複的數字(duplicate)
@@ -3473,7 +3473,7 @@ std::vector<int> findErrorNums(std::vector<int>& nums) {
 //}
 
 //1239. Maximum Length of a Concatenated String with Unique Characters
-//初解 runtime beats:81.96% memory beats:86.03%
+//First solution runtime beats:81.96% memory beats:86.03%
 int maxLength(std::vector<std::string>& arr) {
     /*
     * 遍歷所有可能，利用arr長度小於17的特性，以int(32-bit)每個bit代表使用過的arr位置
@@ -3505,7 +3505,7 @@ int maxLength(std::vector<std::string>& arr) {
 }
 
 //1662. Check If Two String Arrays are Equivalent
-//初解 runtime beats:83.89% memory beats:27.47%
+//First solution runtime beats:83.89% memory beats:27.47%
 bool arrayStringsAreEqual(std::vector<std::string>& word1, std::vector<std::string>& word2) {
     std::string s1 = "", s2 = "";
     for (std::string word : word1) s1 += word;
@@ -3515,7 +3515,7 @@ bool arrayStringsAreEqual(std::vector<std::string>& word1, std::vector<std::stri
 
 //523. Continuous Subarray Sum
 //https://leetcode.com/problems/continuous-subarray-sum/discuss/679929/C++-Code-With-Comments
-//網解 runtime beats:38.63% memory beats:92.04%
+//Network solution runtime beats:38.63% memory beats:92.04%
 bool checkSubarraySum(std::vector<int>& nums, int k) {
     /*
     * 考慮 nums 以及 k 中任何可能，比如 k 為負數、正數以及零， nums 長度小於2
@@ -3556,7 +3556,7 @@ bool checkSubarraySum(std::vector<int>& nums, int k) {
 
 //835. Image Overlap
 //https://leetcode.com/problems/image-overlap/discuss/130623/C++JavaPython-Straight-Forward
-//網解 runtime beats:78.47% memory beats:38.19%
+//Network solution runtime beats:78.47% memory beats:38.19%
 int largestOverlap(std::vector<std::vector<int>>& A, std::vector<std::vector<int>>& B) {
     /*
     * 暴力解：2N 個垂直可能位移，2N 個水平可能位移以及 N^ 2次計算覆蓋面積
@@ -3582,7 +3582,7 @@ int largestOverlap(std::vector<std::vector<int>>& A, std::vector<std::vector<int
 }
 
 //49. Group Anagrams
-//初解 runtime beats:99.47% memory beats:95.42%
+//First solution runtime beats:99.47% memory beats:95.42%
 std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
     // 重新排序 str 後儲存在 hashmap 中，並對應到擁有相同字母數的字串
     std::vector<std::vector<std::string>> ans;
@@ -3604,7 +3604,7 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& st
 
 //2136. Earliest Possible Day of Full Bloom
 //https://leetcode.com/problems/earliest-possible-day-of-full-bloom/discuss/1676833/C++-Largest-Growing-Time-First-with-Illustrations
-//網解 runtime beats:70.88% memory beats:69.88%
+//Network solution runtime beats:70.88% memory beats:69.88%
 int earliestFullBloom(std::vector<int>& plantTime, std::vector<int>& growTime) {
     int n = plantTime.size();
     // growTime larger first
@@ -3625,7 +3625,7 @@ int earliestFullBloom(std::vector<int>& plantTime, std::vector<int>& growTime) {
 
 //1293. Shortest Path in a Grid with Obstacles Elimination
 //https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/discuss/453880/C++-0ms-BFS-track-remaining-k-and-take-a-shortcut
-//網解 runtime beats:96.05% memory beats:94.66%
+//Network solution runtime beats:96.05% memory beats:94.66%
 int shortestPath(std::vector<std::vector<int>>& grid, int k) {
     int rows = grid.size(), cols = grid[0].size();
     int minSteps = std::max(0, rows + cols - 2), obstacles = minSteps - 1, minStepsNextRound = minSteps;
@@ -3663,7 +3663,7 @@ int shortestPath(std::vector<std::vector<int>>& grid, int k) {
 }
 
 //766. Toeplitz Matrix
-//初解 runtime beats:76.90% memory beats:63.25%
+//First solution runtime beats:76.90% memory beats:63.25%
 bool isToeplitzMatrix(std::vector<std::vector<int>>& matrix) {
     const int m = matrix.size();
     const int n = matrix[0].size();

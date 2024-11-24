@@ -2,7 +2,7 @@
 #include "class.h"
 
 //1768. Merge Strings Alternately
-//初解 runtime beats:06.54% memory beats:09.06%
+//First solution runtime beats:06.54% memory beats:09.06%
 std::string mergeAlternately(std::string word1, std::string word2) {
     std::string ans = "";
     int posi = 0;
@@ -15,7 +15,7 @@ std::string mergeAlternately(std::string word1, std::string word2) {
 }
 
 //1071. Greatest Common Divisor of Strings
-//初解 runtime beats:18.68% memory beats:05.08%
+//First solution runtime beats:18.68% memory beats:05.08%
 //std::string gcdOfStrings(std::string str1, std::string str2) {
 //    if (str1 == str2) return str1;
 //
@@ -43,7 +43,7 @@ std::string mergeAlternately(std::string word1, std::string word2) {
 //    return "";
 //}
 
-//網解 runtime beats:100.00% memory beats:85.53%
+//Network solution runtime beats:100.00% memory beats:85.53%
 std::string gcdOfStrings(const std::string& s1, const std::string& s2)
 {
     /*
@@ -58,7 +58,7 @@ std::string gcdOfStrings(const std::string& s1, const std::string& s2)
 }
 
 //1431. Kids With the Greatest Number of Candies
-//初解 runtime beats:100.00% memory beats:13.79%
+//First solution runtime beats:100.00% memory beats:13.79%
 std::vector<bool> kidsWithCandies(std::vector<int>& candies, int extraCandies) {
     std::vector<bool> ans(candies.size());
     auto greatestCandies = std::max_element(candies.begin(), candies.end());
@@ -69,7 +69,7 @@ std::vector<bool> kidsWithCandies(std::vector<int>& candies, int extraCandies) {
 }
 
 //605. Can Place Flowers
-//初解 runtime beats:80.38% memory beats:65.79% 
+//First solution runtime beats:80.38% memory beats:65.79% 
 bool canPlaceFlowers(std::vector<int>& flowerbed, int n) {
     if (n == 0) return true;
     for (int i = 0; i < flowerbed.size(); i++) {
@@ -86,7 +86,7 @@ bool canPlaceFlowers(std::vector<int>& flowerbed, int n) {
 }
 
 //345. Reverse Vowels of a String
-//初解 runtime beats:100.00% memory beats:63.74%
+//First solution runtime beats:100.00% memory beats:63.74%
 std::string reverseVowels(std::string s) {
     auto isVowels = [](char c) { return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U'; };
     int front = 0, end = s.size() - 1;
@@ -180,7 +180,7 @@ long long findMaximumNumber(long long k, int x) {
 }
 
 //151. Reverse Words in a String
-//初解 runtime beats:13.66% memory beats:11.66%
+//First solution runtime beats:13.66% memory beats:11.66%
 //std::string reverseWords(std::string s) {
 //    std::vector<std::string> splits;
 //    std::stringstream ss(s);
@@ -196,7 +196,7 @@ long long findMaximumNumber(long long k, int x) {
 //    return ans.substr(0, ans.size() - 1);
 //}
 
-//二解 runtime beats:15.61% memory beats:10.49%
+//Second solution runtime beats:15.61% memory beats:10.49%
 std::string reverseWords(std::string s) {
     s = s + " "; // because end is find first white space behind the front, so if s = " blue", first = 2 and end will be -1, to prevent this, we can add white space first
     int front = s.find_first_not_of(" ");
@@ -212,7 +212,7 @@ std::string reverseWords(std::string s) {
 }
 
 //443. String Compression
-//初解 runtime beats:39.33% memory beats:05.75%
+//First solution runtime beats:39.33% memory beats:05.75%
 //int compress(std::vector<char>& chars) {
 //    int posi = 0;
 //    std::string s;
@@ -231,7 +231,7 @@ std::string reverseWords(std::string s) {
 //}
 
 //參考網址：https://leetcode.com/problems/string-compression/discuss/222499/Simple-C%2B%2B-Solution
-//網解 runtime beats:84.46% memory beats:47.33%
+//Network solution runtime beats:84.46% memory beats:47.33%
 int compress(std::vector<char>& chars) {
     int size = chars.size();
     if (size < 2) return size;
@@ -262,7 +262,7 @@ int compress(std::vector<char>& chars) {
 }
 
 //392. Is Subsequence
-//初解 runtime beats:100.00% memory beats:44.95%
+//First solution runtime beats:100.00% memory beats:44.95%
 bool isSubsequence(std::string s, std::string t) {
     if (s.size() > t.size()) return false;
     if (s == "") return true;
@@ -277,7 +277,7 @@ bool isSubsequence(std::string s, std::string t) {
 }
 
 //1679. Max Number of K-Sum Pairs
-//初解 runtime beats:15.72% memory beats:05.09%
+//First solution runtime beats:15.72% memory beats:05.09%
 int maxOperations(std::vector<int>& nums, int k) {
     // A map store the num, and find the diff between num and k exist in map
     int ans = 0;
@@ -295,7 +295,7 @@ int maxOperations(std::vector<int>& nums, int k) {
 }
 
 //643. Maximum Average Subarray I
-//初解 runtime beats:96.19% memory beats:14.74%
+//First solution runtime beats:96.19% memory beats:14.74%
 double findMaxAverage(std::vector<int>& nums, int k) {
     int ans = std::accumulate(nums.begin(), nums.begin() + k, 0), sum = ans;
     for (int i = k; i < nums.size(); i++) {
@@ -306,7 +306,7 @@ double findMaxAverage(std::vector<int>& nums, int k) {
 }
 
 //1456. Maximum Number of Vowels in a Substring of Given Length
-//初解 runtime beats:97.37% memory beats:05.10%
+//First solution runtime beats:97.37% memory beats:05.10%
 int maxVowels(std::string s, int k) {
     auto isVowel = [](char c) {
         return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
@@ -323,7 +323,7 @@ int maxVowels(std::string s, int k) {
 
 //1004. Max Consecutive Ones III
 //參考網址：https://leetcode.com/problems/max-consecutive-ones-iii/discuss/247564/JavaC%2B%2BPython-Sliding-Window
-//網解 runtime beats:84.38% memory beats:05.86%
+//Network solution runtime beats:84.38% memory beats:05.86%
 int longestOnes(std::vector<int>& A, int K) {
     /*
     * 從程式碼可以看到，j不斷向右移動。這裡的K可以認為是剩餘的可行翻轉次數，反映了目前的範圍（即從i到j）。
@@ -341,7 +341,7 @@ int longestOnes(std::vector<int>& A, int K) {
 }
 
 //1732. Find the Highest Altitude
-//初解 runtime beats:100.00% memory beats:05.34%
+//First solution runtime beats:100.00% memory beats:05.34%
 int largestAltitude(std::vector<int>& gain) {
     int ans = gain[0] > 0 ? gain[0] : 0;
     for (int i = 1; i < gain.size(); i++) {
@@ -352,7 +352,7 @@ int largestAltitude(std::vector<int>& gain) {
 }
 
 //724. Find Pivot Index
-//初解 runtime beats:91.45% memory beats:06.20%
+//First solution runtime beats:91.45% memory beats:06.20%
 int pivotIndex(std::vector<int>& nums) {
     int left = 0, right = std::accumulate(nums.begin() + 1, nums.end(), 0);
     if (left == right) return 0;
@@ -365,7 +365,7 @@ int pivotIndex(std::vector<int>& nums) {
 }
 
 //1493. Longest Subarray of 1's After Deleting One Element
-//初解 runtime beats:22.21% memory beats:33.96%
+//First solution runtime beats:22.21% memory beats:33.96%
 //int longestSubarray(std::vector<int>& nums) {
 //    nums.push_back(0);
 //    int ans = 0, previousSubarray = -1, currentSubarray = -1, firstZeroPosition = -1;
@@ -388,7 +388,7 @@ int pivotIndex(std::vector<int>& nums) {
 //    return ans;
 //}
 
-//二解 runtime beats:92.80% memory beats:33.96%
+//Second solution runtime beats:92.80% memory beats:33.96%
 int longestSubarray(std::vector<int>& nums) {
     int ans = 0, previousSubarray = -1, currentSubarray = -1, firstZeroPosition = -1;
     for (int i = 0; i < nums.size(); i++) {
@@ -416,7 +416,7 @@ int longestSubarray(std::vector<int>& nums) {
 }
 
 //2215. Find the Difference of Two Arrays
-//初解 runtime beats:85.68% memory beats:60.37%
+//First solution runtime beats:85.68% memory beats:60.37%
 std::vector<std::vector<int>> findDifference(std::vector<int>& nums1, std::vector<int>& nums2) {
     std::vector<std::vector<int>> ans({ {},{} });
     std::set<int> set1(nums1.begin(), nums1.end());
@@ -429,7 +429,7 @@ std::vector<std::vector<int>> findDifference(std::vector<int>& nums1, std::vecto
 }
 
 //1207. Unique Number of Occurrences
-//初解 runtime beats:100.00% memory beats:06.20%
+//First solution runtime beats:100.00% memory beats:06.20%
 //bool uniqueOccurrences(std::vector<int>& arr) {
 //    std::unordered_map<int, int> occurrences;
 //    for (auto i : arr) {
@@ -445,7 +445,7 @@ std::vector<std::vector<int>> findDifference(std::vector<int>& nums1, std::vecto
 //    return true;
 //}
 
-//二解 runtime beats:35.19% memory beats:12.59%
+//Second solution runtime beats:35.19% memory beats:12.59%
 bool uniqueOccurrences(std::vector<int>& arr) {
     int size = arr.size();
     if (size < 2) return false;
@@ -471,7 +471,7 @@ bool uniqueOccurrences(std::vector<int>& arr) {
 
 //1657. Determine if Two Strings Are Close
 //https://leetcode.com/problems/determine-if-two-strings-are-close/discuss/935920/C%2B%2B-Short-and-Simple-oror-O(-N-)-solution
-//網解 runtime beats:86.69% memory beats:09.68%
+//Network solution runtime beats:86.69% memory beats:09.68%
 bool closeStrings(std::string word1, std::string word2) {
     //All the unique char which there in String1 need's to there as well In string2
     std::vector<char>unique1(26,0), unique2(26,0);

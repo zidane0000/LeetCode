@@ -2,7 +2,7 @@
 #include "class.h"
 
 //1. Two Sum
-//初解 runtime beats:12.97% memory beats:89.01%
+//First solution runtime beats:12.97% memory beats:89.01%
 std::vector<int> twoSum(std::vector<int>& nums, int target) {
     int a, b;
     std::vector<int> ans;
@@ -20,7 +20,7 @@ std::vector<int> twoSum(std::vector<int>& nums, int target) {
     return ans;
 }
 
-//二解 runtime beats:55.88% memory beats:42.01%
+//Second solution runtime beats:55.88% memory beats:42.01%
 std::vector<int> twoSum_2(std::vector<int>& nums, int target) {
     std::map<int, int> a;
     std::map<int, int>::iterator a_itr;
@@ -36,7 +36,7 @@ std::vector<int> twoSum_2(std::vector<int>& nums, int target) {
     return std::vector<int>();
 }
 
-//三解 runtime beats:55.88% memory beats:42.01%
+//Third solution runtime beats:55.88% memory beats:42.01%
 std::vector<int> twoSum_3(std::vector<int>& nums, int target) {
     std::map<int, int> a;
     for (int i = 0; i < nums.size(); i++) {
@@ -51,7 +51,7 @@ std::vector<int> twoSum_3(std::vector<int>& nums, int target) {
 }
 
 //2. Add Two Numbers
-//初解 runtime beats:06.14% memory beats:07.45%
+//First solution runtime beats:06.14% memory beats:07.45%
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     ListNode* ans = nullptr;
     ListNode* cur = nullptr;
@@ -91,7 +91,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     return ans;
 }
 
-//二解 runtime beats:06.14% memory beats:19.45%
+//Second solution runtime beats:06.14% memory beats:19.45%
 ListNode* addTwoNumbers_2(ListNode* l1, ListNode* l2) {
     ListNode* ans = nullptr;
     ListNode* cur = nullptr;
@@ -131,7 +131,7 @@ ListNode* addTwoNumbers_2(ListNode* l1, ListNode* l2) {
     return ans;
 }
 
-//三解 runtime beats:84.20% memory beats:55.78%
+//Third solution runtime beats:84.20% memory beats:55.78%
 ListNode* addTwoNumbers_3(ListNode* l1, ListNode* l2) {
     ListNode* ans = new ListNode;
     ListNode* cur = ans;
@@ -164,7 +164,7 @@ ListNode* addTwoNumbers_3(ListNode* l1, ListNode* l2) {
     return ans;
 }
 
-//網解 runtime beats:17.38% memory beats:35.43%
+//Network solution runtime beats:17.38% memory beats:35.43%
 ListNode* addTwoNumbers_network(ListNode* l1, ListNode* l2) {
     ListNode* walk_1 = l1;
     ListNode* walk_2 = l2;
@@ -201,7 +201,7 @@ ListNode* addTwoNumbers_network(ListNode* l1, ListNode* l2) {
 }
 
 //3. Longest Substring Without Repeating Characters 
-//初解 runtime beats:98.72% memory beats:83.53%
+//First solution runtime beats:98.72% memory beats:83.53%
 int lengthOfLongestSubstring(std::string s) {
     int max_len = 0;
     int len = 0;
@@ -225,7 +225,7 @@ int lengthOfLongestSubstring(std::string s) {
 }
 
 //4. Median of Two Sorted Arrays
-//初解 runtime beats:89.56% memory beats:17.58%
+//First solution runtime beats:89.56% memory beats:17.58%
 double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) {
     auto tar_posi = (nums1.size() + nums2.size()) / 2 + 1;    //多塞一個
     auto tar_posi_tmp = tar_posi;
@@ -259,7 +259,7 @@ double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) 
         return ((double)(*tmp[tar_posi - 2]) + (double)(*tmp[tar_posi - 1])) / 2;
 }
 
-//二解 runtime beats:09.40% memory beats:31.19%
+//Second solution runtime beats:09.40% memory beats:31.19%
 double findMedianSortedArrays_2(std::vector<int>& nums1, std::vector<int>& nums2) {
     auto tar_posi = ((float)nums1.size() + nums2.size()) / 2;
     short tmp_size = tar_posi + 1;                       //多塞一個
@@ -292,7 +292,7 @@ double findMedianSortedArrays_2(std::vector<int>& nums1, std::vector<int>& nums2
         return ((double)(tmp[tar_posi - 1]) + (double)(tmp[tar_posi])) / 2;
 }
 
-//網解 runtime beats:95.44% memory beats:89.75%
+//Network solution runtime beats:95.44% memory beats:89.75%
 double findMedianSortedArrays_network(std::vector<int>& nums1, std::vector<int>& nums2) {
     int n1 = nums1.size(), n2 = nums2.size(), total = n1 + n2;
     if (n1 > n2) return findMedianSortedArrays(nums2, nums1);
@@ -318,7 +318,7 @@ double findMedianSortedArrays_network(std::vector<int>& nums1, std::vector<int>&
 
 //5. Longest Palindromic Substring
 //參考網址：https://www.cnblogs.com/grandyang/p/4464476.html
-//網解 runtime beats:90.65% memory beats:61.59%
+//Network solution runtime beats:90.65% memory beats:61.59%
 //Manacher's Algorithm
 std::string longestPalindrome_network(std::string s) {
     std::string t = "&#";
@@ -345,7 +345,7 @@ std::string longestPalindrome_network(std::string s) {
 }
 
 //9. Palindrome Number
-//初解 runtime beats:92.39% memory beats:63.63%
+//First solution runtime beats:92.39% memory beats:63.63%
 bool isPalindrome(int x) {
     std::string x_s = std::to_string(x);
 
@@ -356,7 +356,7 @@ bool isPalindrome(int x) {
     return true;
 }
 
-//二解 runtime beats:92.39% memory beats:63.63%
+//Second solution runtime beats:92.39% memory beats:63.63%
 bool isPalindrome_2(int x) {
     if (x < 0) return false;
     std::string x_s = std::to_string(x);
@@ -370,7 +370,7 @@ bool isPalindrome_2(int x) {
 
 //10. Regular Expression Matching
 //https://knightzone.studio/2018/09/30/3644/leetcode%EF%BC%9A10-regular-expression-matching/
-//網解 runtime beats:58.66% memory beats:42.67%
+//Network solution runtime beats:58.66% memory beats:42.67%
 bool isMatch(std::string s, std::string p) {
     std::vector<std::vector<bool>> dp(s.length() + 1, std::vector<bool>(p.length() + 1, false));
 
@@ -401,7 +401,7 @@ bool isMatch(std::string s, std::string p) {
 }
 
 //11. Container With Most Water
-//初解 runtime beats:90.66% memory beats:41.36%
+//First solution runtime beats:90.66% memory beats:41.36%
 int maxArea(std::vector<int>& height) {
     if (height.size() == 2) {
         return height[0] < height[1] ? height[0] : height[1];
@@ -422,7 +422,7 @@ int maxArea(std::vector<int>& height) {
     return max_area;
 }
 
-//二解 runtime beats:16.97% memory beats:87.56%
+//Second solution runtime beats:16.97% memory beats:87.56%
 int maxArea_2(std::vector<int>& height) {
     if (height.size() == 2) {
         return height[0] < height[1] ? height[0] : height[1];
@@ -444,7 +444,7 @@ int maxArea_2(std::vector<int>& height) {
 }
 
 //14. Longest Common Prefix
-//初解 runtime beats:74.28% memory beats:62.31%
+//First solution runtime beats:74.28% memory beats:62.31%
 std::string longestCommonPrefix(std::vector<std::string>& strs) {
     int strs_size = strs.size();
     if (strs_size == 0)
@@ -462,7 +462,7 @@ std::string longestCommonPrefix(std::vector<std::string>& strs) {
 }
 
 //15. 3Sum
-//網解 runtime beats:35.80% memory beats:99.73%
+//Network solution runtime beats:35.80% memory beats:99.73%
 std::vector<std::vector<int>> threeSum_network(std::vector<int>& nums) {
     sort(nums.begin(), nums.end());
     int n = nums.size();
@@ -502,7 +502,7 @@ std::vector<std::vector<int>> threeSum_network(std::vector<int>& nums) {
     return ans;
 }
 
-//網解 runtime beats:90.94% memory beats:75.02%
+//Network solution runtime beats:90.94% memory beats:75.02%
 std::vector<std::vector<int>> threeSum_network_2(std::vector<int>& nums) {
     std::vector<std::vector<int>> res;
     int n = nums.size();
@@ -533,7 +533,7 @@ std::vector<std::vector<int>> threeSum_network_2(std::vector<int>& nums) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4481576.html
-//網解 runtime beats:93.07% memory beats:78.92%
+//Network solution runtime beats:93.07% memory beats:78.92%
 std::vector<std::vector<int>> threeSum_network_3(std::vector<int>& nums) {
     std::vector<std::vector<int>> res;
     sort(nums.begin(), nums.end());
@@ -557,7 +557,7 @@ std::vector<std::vector<int>> threeSum_network_3(std::vector<int>& nums) {
 }
 
 //16. 3Sum Closest
-//初解 runtime beats:8.01% memory beats:89.32%
+//First solution runtime beats:8.01% memory beats:89.32%
 int threeSumClosest(std::vector<int>& nums, int target) {
     sort(nums.begin(), nums.end());
     int size = nums.size();
@@ -578,7 +578,7 @@ int threeSumClosest(std::vector<int>& nums, int target) {
     return target - ans;
 }
 
-//網解 runtime beats:93.31% memory beats:19.81%
+//Network solution runtime beats:93.31% memory beats:19.81%
 int threeSumClosest_network(std::vector<int>& nums, int target) {
     int n = nums.size();
     sort(nums.begin(), nums.end());
@@ -602,7 +602,7 @@ int threeSumClosest_network(std::vector<int>& nums, int target) {
 }
 
 //17. Letter Combinations of a Phone Number
-//初解 runtime beats:100.00% memory beats:81.11%
+//First solution runtime beats:100.00% memory beats:81.11%
 std::vector<std::string> letterCombinations(std::string digits) {
     //'a':97 , '2':50
     std::vector<std::string> ans;
@@ -644,7 +644,7 @@ std::vector<std::string> letterCombinations(std::string digits) {
 }
 
 //19. Remove Nth Node From End of List
-//初解 runtime beats:80.29% memory beats:05.19%
+//First solution runtime beats:80.29% memory beats:05.19%
 ListNode* removeNthFromEnd(ListNode* head, int n) {
     if ((n == 1) && (head->next == NULL))
         return NULL;
@@ -663,7 +663,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
     return head;
 }
 
-//二解 runtime beats:21.49% memory beats:90.55%
+//Second solution runtime beats:21.49% memory beats:90.55%
 ListNode* removeNthFromEnd_2(ListNode* head, int n) {
     if ((n == 1) && (head->next == NULL))
         return NULL;
@@ -696,7 +696,7 @@ ListNode* removeNthFromEnd_2(ListNode* head, int n) {
 }
 
 //20. Valid Parentheses
-//初解 runtime beats:30.31% memory beats:51.04%
+//First solution runtime beats:30.31% memory beats:51.04%
 bool isValid(std::string s) {
     std::vector<char> s_splt;
 
@@ -740,7 +740,7 @@ bool isValid(std::string s) {
         return true;
 }
 
-//網解 runtime beats:30.31% memory beats:95.93%
+//Network solution runtime beats:30.31% memory beats:95.93%
 bool isValid_network(std::string s)
 {
     bool val = false;
@@ -779,7 +779,7 @@ bool isValid_network(std::string s)
 }
 
 //21. Merge Two Sorted Lists
-//初解 runtime beats:29.53% memory beats:76.65%
+//First solution runtime beats:29.53% memory beats:76.65%
 ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
     if (l1 == NULL && l2 == NULL)
         return NULL;
@@ -827,7 +827,7 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
     return m;
 }
 
-//二解 runtime beats:29.53% memory beats:94.64%
+//Second solution runtime beats:29.53% memory beats:94.64%
 ListNode* mergeTwoLists_2(ListNode* l1, ListNode* l2) {
     if (l1 == NULL && l2 == NULL)
         return NULL;
@@ -861,7 +861,7 @@ ListNode* mergeTwoLists_2(ListNode* l1, ListNode* l2) {
 }
 
 //22. Generate Parentheses
-//初解 runtime beats:07.94% memory beats:88.57%
+//First solution runtime beats:07.94% memory beats:88.57%
 void ParenthesisChange(std::map<std::string, int>& m, std::string s) {
     for (int i = 0; i < s.length(); i++) {
         if (s[i] == ')') {
@@ -905,7 +905,7 @@ std::vector<std::string> generateParenthesis(int n) {
     return ans;
 }
 
-//網解 runtime beats:49.63% memory beats:26.09%
+//Network solution runtime beats:49.63% memory beats:26.09%
 void dfs(std::vector<std::string>& res, std::string s, int left, int right) {
     if (left == 0 && right == 0) {
         res.push_back(s);
@@ -921,7 +921,7 @@ std::vector<std::string> generateParenthesis_network(int n) {
     return res;
 }
 
-//網解 runtime beats:87.16% memory beats:98.54%
+//Network solution runtime beats:87.16% memory beats:98.54%
 std::vector<std::string> generateParenthesis_network_2(int n) {
     std::string p = "";
     for (int i = 0; i < n; i++) p += '(';
@@ -955,7 +955,7 @@ std::vector<std::string> generateParenthesis_network_2(int n) {
 }
 
 //23. Merge k Sorted Lists
-//初解 runtime beats:23.65% memory beats:74.41%
+//First solution runtime beats:23.65% memory beats:74.41%
 ListNode* mergeKLists(std::vector<ListNode*>& lists) {
     if (lists.size() == 0)
         return NULL;
@@ -971,7 +971,7 @@ ListNode* mergeKLists(std::vector<ListNode*>& lists) {
     return m;
 }
 
-//網解 runtime beats:75.68% memory beats:44.58%
+//Network solution runtime beats:75.68% memory beats:44.58%
 ListNode* merge(ListNode* l, ListNode* r) {
     ListNode* dummy = new ListNode(0);
     ListNode* head = dummy;
@@ -1011,7 +1011,7 @@ ListNode* mergeKLists_network(std::vector<ListNode*>& lists) {
 }
 
 //24. Swap Nodes in Pairs
-//初解 runtime beats:100.00% memory beats:73.69%
+//First solution runtime beats:100.00% memory beats:73.69%
 ListNode* swapPairs(ListNode* head) {
     if (head == NULL)
         return NULL;
@@ -1040,7 +1040,7 @@ ListNode* swapPairs(ListNode* head) {
     return new_head;
 }
 
-//二解 runtime beats:54.37% memory beats:61.37%
+//Second solution runtime beats:54.37% memory beats:61.37%
 ListNode* swapPairs_2(ListNode* head) {
     if (head == NULL)
         return NULL;
@@ -1070,7 +1070,7 @@ ListNode* swapPairs_2(ListNode* head) {
 }
 
 //25. Reverse Nodes in k-Group
-//初解 runtime beats:16.58% memory beats:12.35%
+//First solution runtime beats:16.58% memory beats:12.35%
 ListNode* reverseKGroup(ListNode* head, int k) {
     if (head == NULL)
         return NULL;
@@ -1124,7 +1124,7 @@ ListNode* reverseKGroup(ListNode* head, int k) {
     return new_head;
 }
 
-//網解 runtime beats:76.96% memory beats:97.95%
+//Network solution runtime beats:76.96% memory beats:97.95%
 ListNode* reverseList(ListNode* head, int k)
 {
     ListNode* pre = NULL;
@@ -1161,7 +1161,7 @@ ListNode* reverseKGroup_network(ListNode* head, int k) {
 
 //31. Next Permutation
 //題目意思：給一個數字，請給下一個比該數字大但最接近的數字，且兩數字使用之數字一樣，例如給'123'，最接近'123'且用'1','2','3'組成的數字為'132'
-//初解 runtime beats:58.26% memory beats:82.06%
+//First solution runtime beats:58.26% memory beats:82.06%
 void nextPermutation(std::vector<int>& nums) {
 
     int nums_size = nums.size();
@@ -1195,13 +1195,13 @@ void nextPermutation(std::vector<int>& nums) {
     }
 }
 
-//網解 runtime beats:92.81% memory beats:50.25%
+//Network solution runtime beats:92.81% memory beats:50.25%
 void nextPermutation_network(std::vector<int>& nums) {
     std::next_permutation(nums.begin(), nums.end());
 }
 
 //32. Longest Valid Parentheses
-//網解 runtime beats:87.24% memory beats:79.15%
+//Network solution runtime beats:87.24% memory beats:79.15%
 int longestValidParentheses_network(std::string s) {
     int res = 0, start = 0, n = s.size();
     std::stack<int> st;
@@ -1218,7 +1218,7 @@ int longestValidParentheses_network(std::string s) {
     return res;
 }
 
-//初解 runtime beats:08.75% memory beats:53.26%
+//First solution runtime beats:08.75% memory beats:53.26%
 int longestValidParentheses(std::string s) {
     int res = 0, start = 0, n = s.size();
     std::vector<int> st;
@@ -1236,7 +1236,7 @@ int longestValidParentheses(std::string s) {
 }
 
 //33. Search in Rotated Sorted Array
-//初解 runtime beats:65.96% memory beats:75.43%
+//First solution runtime beats:65.96% memory beats:75.43%
 int search(std::vector<int>& nums, int target) {
     int nums_size = nums.size();
     for (int i = 0; i < nums_size; i++) {
@@ -1246,7 +1246,7 @@ int search(std::vector<int>& nums, int target) {
     return -1;
 }
 
-//二解 runtime beats:65.96% memory beats:66.92%
+//Second solution runtime beats:65.96% memory beats:66.92%
 int search_2(std::vector<int>& nums, int target) {
     int i = 0;
     std::vector<int>::iterator nums_itr = nums.begin();
@@ -1260,7 +1260,7 @@ int search_2(std::vector<int>& nums, int target) {
     return -1;
 }
 
-//三解 runtime beats:65.96% memory beats:51.38%
+//Third solution runtime beats:65.96% memory beats:51.38%
 int search_3(std::vector<int>& nums, int target) {
     int nums_size = nums.size();
     int i = 0;
@@ -1281,7 +1281,7 @@ int search_3(std::vector<int>& nums, int target) {
     return -1;
 }
 
-//網解 runtime beats:96.62% memory beats:97.67%
+//Network solution runtime beats:96.62% memory beats:97.67%
 int search_network(std::vector<int>& nums, int target) {
     int pivotindex;
     int low, high, mid;
@@ -1333,7 +1333,7 @@ int search_network(std::vector<int>& nums, int target) {
 }
 
 //34. Find First and Last Position of Element in Sorted Array
-//初解 runtime beats:58.74% memory beats:55.39%
+//First solution runtime beats:58.74% memory beats:55.39%
 std::vector<int> searchRange(std::vector<int>& nums, int target) {
     int nums_size = nums.size();
     if (nums_size == 0)
@@ -1363,7 +1363,7 @@ std::vector<int> searchRange(std::vector<int>& nums, int target) {
     return { left,right };
 }
 
-//二解 runtime beats:15.07% memory beats:56.99%
+//Second solution runtime beats:15.07% memory beats:56.99%
 std::vector<int> searchRange_2(std::vector<int>& nums, int target) {
     std::vector<int>::iterator itr = nums.begin();
     int i = 0;
@@ -1385,7 +1385,7 @@ std::vector<int> searchRange_2(std::vector<int>& nums, int target) {
     return { -1,-1 };
 }
 
-//網解 runtime beats:58.74% memory beats:83.68%
+//Network solution runtime beats:58.74% memory beats:83.68%
 std::vector<int> searchRange_network(std::vector<int>& nums, int target) {
     std::vector<int> res(2, -1);
     int start_ = 0, end_ = nums.size() - 1;
@@ -1411,7 +1411,7 @@ std::vector<int> searchRange_network(std::vector<int>& nums, int target) {
 }
 
 //35. Search Insert Position
-//初解 runtime beats:58.18% memory beats:31.13%
+//First solution runtime beats:58.18% memory beats:31.13%
 int searchInsert(std::vector<int>& nums, int target) {
     int s = nums.size();
     for (int i = 0; i < s; i++) {
@@ -1424,7 +1424,7 @@ int searchInsert(std::vector<int>& nums, int target) {
 }
 
 //36. Valid Sudoku
-//初解 runtime beats:05.22% memory beats:05.02%
+//First solution runtime beats:05.22% memory beats:05.02%
 bool isValidSudoku(std::vector<std::vector<char>>& board) {
     //9x9
     for (int i = 0; i < 9; i++) {
@@ -1469,7 +1469,7 @@ bool isValidSudoku(std::vector<std::vector<char>>& board) {
     return true;
 }
 
-//二解 runtime beats:26.30% memory beats:19.15%
+//Second solution runtime beats:26.30% memory beats:19.15%
 bool isValidSudoku_2(std::vector<std::vector<char>>& board) {
     //9x9
     int i, j;
@@ -1518,7 +1518,7 @@ bool isValidSudoku_2(std::vector<std::vector<char>>& board) {
     return true;
 }
 
-//網解 runtime beats:46.20% memory beats:91.75%
+//Network solution runtime beats:46.20% memory beats:91.75%
 bool isValidSudoku_network(std::vector<std::vector<char>>& a) {
     bool row[10][10];
     bool col[10][10];
@@ -1554,7 +1554,7 @@ bool isValidSudoku_network(std::vector<std::vector<char>>& a) {
 }
 
 //39. Combination Sum
-//初解 runtime beats:98.93% memory beats:79.43%
+//First solution runtime beats:98.93% memory beats:79.43%
 void combinationSum_helper(std::vector<std::vector<int>>& ans, std::vector<int>& sub_ans, std::vector<int>& candidates, int start, int end, int target) {
     if (target < 0)
         return;
@@ -1577,7 +1577,7 @@ std::vector<std::vector<int>> combinationSum(std::vector<int>& candidates, int t
 }
 
 //40. Combination Sum II
-//初解 runtime beats:27.36% memory beats:70.38%
+//First solution runtime beats:27.36% memory beats:70.38%
 void combinationSum2_helper(std::set<std::vector<int>>& ans, std::vector<int>& sub_ans, std::vector<int>& candidates, int start, int end, int target) {
     if (target < 0)
         return;
@@ -1602,7 +1602,7 @@ std::vector<std::vector<int>> combinationSum2(std::vector<int>& candidates, int 
     return { ans.begin(), ans.end() };
 }
 
-//網解 runtime beats:100.00% memory beats:70.73%
+//Network solution runtime beats:100.00% memory beats:70.73%
 void findcomb(std::vector<int>& candidates, std::vector<std::vector<int>>& result, std::vector<int>& com, int start, int target)
 {
     if (target == 0) {
@@ -1632,7 +1632,7 @@ std::vector<std::vector<int>> combinationSum2_network(std::vector<int>& candidat
 }
 
 //41. First Missing Positive
-//初解 runtime beats:07.31% memory beats:87.72%
+//First solution runtime beats:07.31% memory beats:87.72%
 int firstMissingPositive(std::vector<int>& nums) {
     int s = nums.size();
     if (s == 0)
@@ -1651,7 +1651,7 @@ int firstMissingPositive(std::vector<int>& nums) {
     return smallest;
 }
 
-//二解 runtime beats:84.53% memory beats:86.24%
+//Second solution runtime beats:84.53% memory beats:86.24%
 int firstMissingPositive_2(std::vector<int>& nums) {
     int s = nums.size();
     if (s == 0)
@@ -1677,7 +1677,7 @@ int firstMissingPositive_2(std::vector<int>& nums) {
 }
 
 //42. Trapping Rain Water
-//初解 runtime beats:62.06% memory beats:64.38%
+//First solution runtime beats:62.06% memory beats:64.38%
 //int trap(std::vector<int>& height) {
 //    if (height.size() < 3) {
 //        return 0;
@@ -1753,7 +1753,7 @@ int firstMissingPositive_2(std::vector<int>& nums) {
 //    return total_area;
 //}
 
-//網解 runtime beats:62.06% memory beats:92.89%
+//Network solution runtime beats:62.06% memory beats:92.89%
 int trap_network(std::vector<int>& arr) {
     int n = arr.size();
     if (n <= 2)
@@ -1791,7 +1791,7 @@ int trap_network(std::vector<int>& arr) {
 }
 
 //45. Jump Game II
-//網解 runtime beats:52.28% memory beats:70.17%
+//Network solution runtime beats:52.28% memory beats:70.17%
 int jump_network(std::vector<int>& nums) {
     int count = 0;//計步器
     int cur = 0;//當前走到底幾位
@@ -1808,7 +1808,7 @@ int jump_network(std::vector<int>& nums) {
 }
 
 //46. Permutations
-//初解 runtime beats:37.58% memory beats:46.35%
+//First solution runtime beats:37.58% memory beats:46.35%
 void DFS(std::vector<std::vector<int>>& ans, std::vector<int>& part, std::vector<int>& rest)
 {
     int rest_size = rest.size();
@@ -1840,7 +1840,7 @@ std::vector<std::vector<int>> permute(std::vector<int>& nums) {
 }
 
 //48. Rotate Image
-//初解 runtime beats:64.33% memory beats:49.52%
+//First solution runtime beats:64.33% memory beats:49.52%
 void rotate(std::vector<std::vector<int>>& matrix) {
     int  s = matrix.size();
     if (s < 1)
@@ -1867,7 +1867,7 @@ void rotate(std::vector<std::vector<int>>& matrix) {
     }
 }
 
-//網解 runtime beats:100.00% memory beats:92.23%
+//Network solution runtime beats:100.00% memory beats:92.23%
 void rotate_network(std::vector<std::vector<int>>& matrix) {
     int n = matrix.size();
     reverse(matrix.begin(), matrix.end());
@@ -1877,7 +1877,7 @@ void rotate_network(std::vector<std::vector<int>>& matrix) {
 }
 
 //49. Group Anagrams
-//初解 runtime beats:41.91% memory beats:82.06%
+//First solution runtime beats:41.91% memory beats:82.06%
 std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
     int s = strs.size();
     if (s < 1)
@@ -1905,7 +1905,7 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& st
 }
 
 //53. Maximum Subarray
-//初解 runtime beats:46.64% memory beats:70.04%
+//First solution runtime beats:46.64% memory beats:70.04%
 //int maxSubArray(std::vector<int>& nums) {
 //    if (nums.size() == 0)
 //        return INT_MIN;
@@ -1923,7 +1923,7 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& st
 //}
 
 //55. Jump Game
-//初解 runtime beats:81.88% memory beats:37.69%
+//First solution runtime beats:81.88% memory beats:37.69%
 //bool canJump(std::vector<int>& nums) {
 //    int cur = 0;        //當前走到底幾位
 //    int maxNext = 0;    //最大的下一個
@@ -1945,7 +1945,7 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& st
 //}
 
 //56. Merge Intervals
-//初解 runtime beats:65.74% memory beats:61.10%
+//First solution runtime beats:65.74% memory beats:61.10%
 std::vector<std::vector<int>> merge(std::vector<std::vector<int>>& intervals) {
     int s = intervals.size();
     if (s < 2)
@@ -1967,7 +1967,7 @@ std::vector<std::vector<int>> merge(std::vector<std::vector<int>>& intervals) {
     return ans;
 }
 
-//網解 runtime beats:74.07% memory beats:76.75%
+//Network solution runtime beats:74.07% memory beats:76.75%
 std::vector<std::vector<int>> merge_network(std::vector<std::vector<int>>& in) {
     std::vector<std::vector<int>>a;
     for (int i = 0; i < in.size(); i++)
@@ -2022,7 +2022,7 @@ std::vector<std::vector<int>> merge_network(std::vector<std::vector<int>>& in) {
 }
 
 //57. Insert Interval
-//初解 runtime beats:05.29% memory beats:52.84%
+//First solution runtime beats:05.29% memory beats:52.84%
 std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& newInterval) {
     intervals.push_back(newInterval);
     int s = intervals.size();
@@ -2046,7 +2046,7 @@ std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, s
 }
 
 //60. Permutation Sequence
-//初解 runtime beats:05.04% memory beats:32.76%
+//First solution runtime beats:05.04% memory beats:32.76%
 std::string DFS(std::vector<int>& parts, std::vector<int>& rest, int& k)
 {
     int rest_size = rest.size();
@@ -2109,7 +2109,7 @@ std::string getPermutation(int n, int k) {
     return DFS(parts, rest, k);
 }
 
-//二解 runtime beats:30.03% memory beats:05.04%
+//Second solution runtime beats:30.03% memory beats:05.04%
 std::string getPermutation_2(int n, int k) {
     std::vector<int> parts;
     std::vector<int> rests;
@@ -2157,7 +2157,7 @@ std::string getPermutation_2(int n, int k) {
     return str;
 }
 
-//網解 runtime beats:100.00% memory beats:12.73%
+//Network solution runtime beats:100.00% memory beats:12.73%
 void helper(std::string& ans, std::vector<int>& nums, std::vector<int> fact, int n, int k)
 {
     if (n == 1) {
@@ -2193,7 +2193,7 @@ std::string getPermutation_network(int n, int k)
 }
 
 //62. Unique Paths
-//初解 runtime beats:18.41% memory beats:97.66%
+//First solution runtime beats:18.41% memory beats:97.66%
 int uniquePaths(int m, int n) {
     if (m == 1 || n == 1)
         return 1;
@@ -2211,7 +2211,7 @@ int uniquePaths(int m, int n) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4353555.html
-//網解 runtime beats:100.00% memory beats:75.88%
+//Network solution runtime beats:100.00% memory beats:75.88%
 int uniquePaths_netwrok(int m, int n) {
     std::vector<int> dp(n, 1);
     for (int i = 1; i < m; ++i) {
@@ -2222,7 +2222,7 @@ int uniquePaths_netwrok(int m, int n) {
     return dp[n - 1];
 }
 
-//網解 runtime beats:100.00% memory beats:99.40%
+//Network solution runtime beats:100.00% memory beats:99.40%
 int uniquePaths_netwrok_2(int m, int n) {
     double num = 1, denom = 1;
     double tmp;
@@ -2239,7 +2239,7 @@ int uniquePaths_netwrok_2(int m, int n) {
 
 //63. Unique Paths II
 //https://www.cnblogs.com/grandyang/p/4353680.html
-//網解 runtime beats:97.01% memory beats:34.45%
+//Network solution runtime beats:97.01% memory beats:34.45%
 int uniquePathsWithObstacles_network(std::vector<std::vector<int>>& obstacleGrid) {
     if (obstacleGrid.empty() || obstacleGrid[0].empty() || obstacleGrid[0][0] == 1)
         return 0;
@@ -2256,7 +2256,7 @@ int uniquePathsWithObstacles_network(std::vector<std::vector<int>>& obstacleGrid
     return dp[m][n];
 }
 
-//網解 runtime beats:43.85% memory beats:78.91%
+//Network solution runtime beats:43.85% memory beats:78.91%
 int uniquePathsWithObstacles_network_2(std::vector<std::vector<int>>& obstacleGrid) {
     if (obstacleGrid.empty() || obstacleGrid[0].empty() || obstacleGrid[0][0] == 1) return 0;
     int m = obstacleGrid.size(), n = obstacleGrid[0].size();
@@ -2272,7 +2272,7 @@ int uniquePathsWithObstacles_network_2(std::vector<std::vector<int>>& obstacleGr
 }
 
 //64. Minimum Path Sum
-//初解 runtime beats:08.58% memory beats:94.01%
+//First solution runtime beats:08.58% memory beats:94.01%
 int minPathSum(std::vector<std::vector<int>>& grid) {
     int layer1_size = grid.size();
     if (layer1_size == 0)
@@ -2298,7 +2298,7 @@ int minPathSum(std::vector<std::vector<int>>& grid) {
 }
 
 //67. Add Binary
-//初解 runtime beats:92.85% memory beats:05.03%
+//First solution runtime beats:92.85% memory beats:05.03%
 std::string addBinary(std::string a, std::string b) {
     int a_size = a.size();
     int b_size = b.size();
@@ -2347,7 +2347,7 @@ std::string addBinary(std::string a, std::string b) {
     return ans;
 }
 
-//二解 runtime beats:92.85% memory beats:45.78%
+//Second solution runtime beats:92.85% memory beats:45.78%
 std::string addBinary_2(std::string a, std::string b) {
     int a_size = a.size();
     int b_size = b.size();
@@ -2395,7 +2395,7 @@ std::string addBinary_2(std::string a, std::string b) {
 }
 
 //70. Climbing Stairs
-//初解 runtime beats:13.94% memory beats:70.44%
+//First solution runtime beats:13.94% memory beats:70.44%
 //int climbStairs(int n) {
 //    std::vector<int> stairs{ 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
 //    for (int i = 11; i < n; i++) {
@@ -2404,7 +2404,7 @@ std::string addBinary_2(std::string a, std::string b) {
 //    return stairs[n];
 //}
 
-//二解 runtime beats:100.00% memory beats:80.69%
+//Second solution runtime beats:100.00% memory beats:80.69%
 //int climbStairs_2(int n) {
 //    if (n < 4)
 //        return n;
@@ -2422,7 +2422,7 @@ std::string addBinary_2(std::string a, std::string b) {
 //}
 
 //73. Set Matrix Zeroes
-//初解 runtime beats:30.94% memory beats:56.66%
+//First solution runtime beats:30.94% memory beats:56.66%
 void setZeroes(std::vector<std::vector<int>>& matrix) {
     int cols_size = matrix.size();
     if (cols_size < 1)
@@ -2453,7 +2453,7 @@ void setZeroes(std::vector<std::vector<int>>& matrix) {
 }
 
 //74. Search a 2D Matrix
-//初解 runtime beats:80.89% memory beats:49.57%
+//First solution runtime beats:80.89% memory beats:49.57%
 bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
     int rows = matrix.size();
     if (rows == 0)
@@ -2489,7 +2489,7 @@ bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
 }
 
 //75. Sort Colors
-//初解 runtime beats:100.00% memory beats:17.43%
+//First solution runtime beats:100.00% memory beats:17.43%
 void sortColors(std::vector<int>& nums) {
     for (int i = 0; i < nums.size(); i++) {
         for (int j = i + 1; j < nums.size(); j++) {
@@ -2501,7 +2501,7 @@ void sortColors(std::vector<int>& nums) {
 }
 
 //76. Minimum Window Substring
-//網解 runtime beats:91.42% memory beats:61.38%
+//Network solution runtime beats:91.42% memory beats:61.38%
 std::string minWindow_network(std::string s, std::string t) {
     std::vector<int> letterCnt(128, 0);
     int left = 0, cnt = 0, minLeft = -1, minLen = INT_MAX;
@@ -2525,7 +2525,7 @@ std::string minWindow_network(std::string s, std::string t) {
 }
 
 //77. Combinations
-//初解 runtime beats:20.54% memory beats:26.08%
+//First solution runtime beats:20.54% memory beats:26.08%
 void DFS(std::vector<std::vector<int>>& ans, std::vector<int>& a, std::vector<int> b, int depth, int depth_max) {
     while (b.size() > 0) {
         a.push_back(b[0]);
@@ -2561,7 +2561,7 @@ std::vector<std::vector<int>> combine(int n, int k) {
     return ans;
 }
 
-//網解 runtime beats:92.87% memory beats:88.06%
+//Network solution runtime beats:92.87% memory beats:88.06%
 void combine(int begin, int n, int k, std::vector<std::vector<int>>& ans, std::vector<int>& temp) {
     if (k == 0) {
         ans.push_back(temp);
@@ -2583,7 +2583,7 @@ std::vector<std::vector<int>> combine_network(int n, int k) {
 }
 
 //78. Subsets
-//初解 runtime beats:66.40% memory beats:44.33%
+//First solution runtime beats:66.40% memory beats:44.33%
 void Subsets(int begin, int k, std::vector<std::vector<int>>& ans, std::vector<int> sets, std::vector<int>& temp) {
     ans.push_back(temp);
     for (int i = begin; i < k; i++) {
@@ -2602,7 +2602,7 @@ std::vector<std::vector<int>> subsets(std::vector<int>& nums) {
     return ans;
 }
 
-//網解 runtime beats:100.00% memory beats:68.55%
+//Network solution runtime beats:100.00% memory beats:68.55%
 std::vector<std::vector<int>> subsets_network(std::vector<int>& nums) {
     const int n = nums.size();
     std::vector<std::vector<int>> results;
@@ -2619,7 +2619,7 @@ std::vector<std::vector<int>> subsets_network(std::vector<int>& nums) {
 }
 
 //79. Word Search
-//初解 runtime beats:05.02% memory beats:05.43%
+//First solution runtime beats:05.02% memory beats:05.43%
 bool exist(std::vector<std::vector<char>>& board, int rows, int cols, std::vector<std::vector<bool>> bool_board, int i, int j, int word_posi, std::string word) {
     if (word_posi == word.size())
         return true;
@@ -2689,7 +2689,7 @@ bool exist(std::vector<std::vector<char>>& board, std::string word) {
     return false;
 }
 
-//網解 runtime beats:97.90% memory beats:78.72%
+//Network solution runtime beats:97.90% memory beats:78.72%
 bool exist(std::vector<std::vector<char>>& board, int i, int j, std::string& word, int mindex) {
     if (mindex == word.size())
         return true;
@@ -2716,7 +2716,7 @@ bool exist_network(std::vector<std::vector<char>>& board, std::string word) {
 }
 
 //80. Remove Duplicates from Sorted Array II
-//初解 runtime beats:99.21% memory beats:78.99%
+//First solution runtime beats:99.21% memory beats:78.99%
 int removeDuplicates(std::vector<int>& nums) {
     for (int i = 1; i < nums.size(); i++) {
         if (nums[i - 1] == nums[i]) {
@@ -2731,7 +2731,7 @@ int removeDuplicates(std::vector<int>& nums) {
 }
 
 //81. Search in Rotated Sorted Array II
-//初解 runtime beats:96.60% memory beats:72.85%
+//First solution runtime beats:96.60% memory beats:72.85%
 bool searchII(std::vector<int>& nums, int target) {
     int nums_size = nums.size();
     for (int i = 0; i < nums_size; i++) {
@@ -2742,7 +2742,7 @@ bool searchII(std::vector<int>& nums, int target) {
 }
 
 //82. Remove Duplicates from Sorted List II
-//網解 runtime beats:99.35% memory beats:78.46%
+//Network solution runtime beats:99.35% memory beats:78.46%
 ListNode* deleteDuplicates_network(ListNode* head) {
     if (head == nullptr)
         return head;
@@ -2762,7 +2762,7 @@ ListNode* deleteDuplicates_network(ListNode* head) {
 
 //84. Largest Rectangle in Histogram
 //https://www.cnblogs.com/boring09/p/4231906.html
-//網解 runtime beats:64.06% memory beats:72.64%
+//Network solution runtime beats:64.06% memory beats:72.64%
 int largestRectangleArea_network(std::vector<int>& height) {
     height.push_back(0);
     std::stack<int> st;
@@ -2788,7 +2788,7 @@ int largestRectangleArea_network(std::vector<int>& height) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4322653.html
-//網解 runtime beats:87.52% memory beats:94.84%
+//Network solution runtime beats:87.52% memory beats:94.84%
 int largestRectangleArea_network_2(std::vector<int>& heights) {
     int res = 0;
     std::stack<int> st;
@@ -2810,7 +2810,7 @@ int largestRectangleArea_network_2(std::vector<int>& heights) {
 //}
 
 //86. Partition List
-//初解 runtime beats:100.00% memory beats:61.95%
+//First solution runtime beats:100.00% memory beats:61.95%
 ListNode* partition(ListNode* head, int x) {
     if ((head == nullptr) || (head->next == nullptr))
         return head;
@@ -2840,7 +2840,7 @@ ListNode* partition(ListNode* head, int x) {
 }
 
 //90. Subsets II
-//初解 runtime beats:06.48% memory beats:05.08%
+//First solution runtime beats:06.48% memory beats:05.08%
 void subsetsWithDup(int begin, int k, std::vector<std::vector<int>>& ans, std::vector<int> sets, std::vector<int>& temp) {
     for (auto an : ans)
         if (std::equal(an.begin(), an.end(), temp.begin(), temp.end()))
@@ -2861,7 +2861,7 @@ std::vector< std::vector<int>> subsetsWithDup(std::vector<int>& nums) {
     return ans;
 }
 
-//網解 runtime beats:100.00% memory beats:100.00%
+//Network solution runtime beats:100.00% memory beats:100.00%
 void backtrack(std::vector<std::vector<int>>& res, std::vector<int>& nums, int i, int n, std::vector<int>& tmp) {
     if (i == nums.size()) return;
 
@@ -2888,7 +2888,7 @@ std::vector<std::vector<int>> subsetsWithDup_network(std::vector<int>& nums) {
 }
 
 //92. Reverse Linked List II
-//初解 runtime beats:57.90% memory beats:29.00%
+//First solution runtime beats:57.90% memory beats:29.00%
 ListNode* reverseBetween(ListNode* head, int m, int n) {
     if (m == n)
         return head;
@@ -2917,7 +2917,7 @@ ListNode* reverseBetween(ListNode* head, int m, int n) {
     return list[0];
 }
 
-//網解 runtime beats:100.00% memory beats:34.02%
+//Network solution runtime beats:100.00% memory beats:34.02%
 ListNode* reverseBetween_network(ListNode* head, int m, int n) {
     if (head == nullptr or (n - m) == 0)
         return head;
@@ -2964,7 +2964,7 @@ void traversalTree(std::vector<int>& ans, TreeNode* root, int& posi) {
     }
 }
 
-//初解 runtime beats:100.00% memory beats:10.03%
+//First solution runtime beats:100.00% memory beats:10.03%
 //std::vector<int> inorderTraversal(TreeNode* root) {
 //    std::vector<int> ans;
 //    int posi = 0;
@@ -2977,7 +2977,7 @@ void traversalTree(std::vector<int>& ans, TreeNode* root, int& posi) {
 //}
 
 //95. Unique Binary Search Trees II
-//網解 runtime beats:92.68% memory beats:87.69%
+//Network solution runtime beats:92.68% memory beats:87.69%
 std::vector<TreeNode*> helper(int start, int end, std::vector<std::vector<std::vector<TreeNode*>>>& memo) {
     if (start > end) return { nullptr };
     if (!memo[start - 1][end - 1].empty()) return memo[start - 1][end - 1];
@@ -3004,7 +3004,7 @@ std::vector<TreeNode*> generateTrees_network(int n) {
 
 //96. Unique Binary Search Trees
 //https://medium.com/@bill800227/leetcode-96-unique-binary-search-trees-abce6e62a7a0
-//網解 runtime beats:100.00% memory beats:45.28%
+//Network solution runtime beats:100.00% memory beats:45.28%
 int numTrees_network(int n) {
     //Time complexity: O(n^2) space complexity: O(n)
     if (n == 0) return 1;
@@ -3021,7 +3021,7 @@ int numTrees_network(int n) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4299608.html
-//網解 runtime beats:100.00% memory beats:60.29%
+//Network solution runtime beats:100.00% memory beats:60.29%
 int numTrees_network_2(int n) {
     //Catalan Number
     //https://en.wikipedia.org/wiki/Catalan_number
@@ -3037,7 +3037,7 @@ int numTrees_network_2(int n) {
 }
 
 //97. Interleaving String
-//網解 runtime beats:84.84% memory beats:15.95%
+//Network solution runtime beats:84.84% memory beats:15.95%
 //https://medium.com/@bill800227/leetcode-97-interleaving-string-18b1202fb0ea
 bool isInterleave_DFS(std::string s1, int p1, std::string s2, int p2, std::string s3, int p3, std::unordered_set<int>& memo) {
     int key = p1 * s3.size() + p2;
@@ -3068,7 +3068,7 @@ bool isInterleave_network(std::string s1, std::string s2, std::string s3) {
     return isInterleave_DFS(s1, 0, s2, 0, s3, 0, memo);
 }
 
-//網解 runtime beats:100.00% memory beats:93.75%
+//Network solution runtime beats:100.00% memory beats:93.75%
 bool isInterleave_network_2(std::string s1, std::string s2, std::string s3) {
     int m = s1.length(), n = s2.length(), l = s3.length();
     if (m > n) return isInterleave_network_2(s2, s1, s3);
@@ -3087,7 +3087,7 @@ bool isInterleave_network_2(std::string s1, std::string s2, std::string s3) {
 
 //98. Validate Binary Search Tree
 //https://www.cnblogs.com/grandyang/p/4298435.html
-//網解 runtime beats:66.61% memory beats:51.39%
+//Network solution runtime beats:66.61% memory beats:51.39%
 void inorder(TreeNode* root, std::vector<int>& vals) {
     if (!root) return;
     //中序遍歷
@@ -3107,7 +3107,7 @@ bool isValidBST(TreeNode* root) {
 }
 
 //100. Same Tree
-//初解 runtime beats:100.00% memory beats:63.73%
+//First solution runtime beats:100.00% memory beats:63.73%
 bool isSameTree_DFS(TreeNode* p, TreeNode* q) {
     if (!p && !q)
         return true;
@@ -3129,7 +3129,7 @@ bool isSameTree(TreeNode* p, TreeNode* q) {
 }
 
 //101. Symmetric Tree
-//初解 runtime beats:67.13% memory beats:66.67%
+//First solution runtime beats:67.13% memory beats:66.67%
 bool isSymmetric_DFS(TreeNode* L, TreeNode* R) {
     if (!L && !R)
         return true;
@@ -3153,7 +3153,7 @@ bool isSymmetric(TreeNode* root) {
 }
 
 //102. Binary Tree Level Order Traversal
-//初解 runtime beats:54.91% memory beats:15.87%
+//First solution runtime beats:54.91% memory beats:15.87%
 void Traverse_Tree_DFS(std::vector<std::vector<int>>& ans, TreeNode* node, int level) {
     if (!node)
         return;
@@ -3172,7 +3172,7 @@ std::vector<std::vector<int>> levelOrder(TreeNode* root) {
     return ans;
 }
 
-//二解 runtime beats:91.33% memory beats:94.76%
+//Second solution runtime beats:91.33% memory beats:94.76%
 std::vector<std::vector<int>> levelOrder_2(TreeNode* root) {
     if (!root)
         return {};
@@ -3206,7 +3206,7 @@ std::vector<std::vector<int>> levelOrder_2(TreeNode* root) {
 }
 
 //103. Binary Tree Zigzag Level Order Traversal
-//初解 runtime beats:100.00% memory beats:98.34%
+//First solution runtime beats:100.00% memory beats:98.34%
 std::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {
     if (!root)
         return {};
@@ -3247,7 +3247,7 @@ std::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root) {
 }
 
 //104. Maximum Depth of Binary Tree
-//初解 runtime beats:77.93% memory beats:08.59%
+//First solution runtime beats:77.93% memory beats:08.59%
 int Traverse_Tree_DFS(TreeNode* node, int level) {
     if (!node)
         return level;
@@ -3262,7 +3262,7 @@ int maxDepth(TreeNode* root) {
     return Traverse_Tree_DFS(root, 0);
 }
 
-//二解 runtime beats:48.35% memory beats:49.87%
+//Second solution runtime beats:48.35% memory beats:49.87%
 int maxDepth_2(TreeNode* root) {
     if (!root)
         return 0;
@@ -3297,7 +3297,7 @@ int maxDepth_2(TreeNode* root) {
 
 //105. Construct Binary Tree from Preorder and Inorder Traversal
 //https://medium.com/@ChYuan/leetcode-no-105-construct-binary-tree-from-preorder-and-inorder-traversal-%E5%BF%83%E5%BE%97-medium-12dd4fcfa654
-//網解 runtime beats:84.37% memory beats:91.49%
+//Network solution runtime beats:84.37% memory beats:91.49%
 TreeNode* build(std::vector<int>& preorder, std::vector<int>& inorder, int& in, int& pre, int stop) {
     if (pre >= preorder.size()) return NULL;
     if (inorder[in] == stop) {
@@ -3316,7 +3316,7 @@ TreeNode* buildTree_network(std::vector<int> preorder, std::vector<int> inorder)
     return build(preorder, inorder, in, pre, INT_MIN);
 }
 
-//網解 runtime beats:74.95% memory beats:99.55%
+//Network solution runtime beats:74.95% memory beats:99.55%
 TreeNode* buildTree_network_2(std::vector<int>& preorder, std::vector<int>& inorder) {
     if (!preorder.size()) return NULL;
     int i(0), p(0);
@@ -3338,7 +3338,7 @@ TreeNode* buildTree_network_2(std::vector<int>& preorder, std::vector<int>& inor
 }
 
 //107. Binary Tree Level Order Traversal II
-//初解 runtime beats:33.88% memory beats:99.38%
+//First solution runtime beats:33.88% memory beats:99.38%
 std::vector<std::vector<int>> levelOrderBottom(TreeNode* root) {
     if (!root)
         return {};
@@ -3371,7 +3371,7 @@ std::vector<std::vector<int>> levelOrderBottom(TreeNode* root) {
     return ans;
 }
 
-//網解 runtime beats:100.00% memory beats:96.51%
+//Network solution runtime beats:100.00% memory beats:96.51%
 std::vector<std::vector<int>> levelOrderBottom_network(TreeNode* root)
 {
     std::vector<std::vector<int>>ans;
@@ -3410,7 +3410,7 @@ std::vector<std::vector<int>> levelOrderBottom_network(TreeNode* root)
 }
 
 //108. Convert Sorted Array to Binary Search Tree
-//初解 runtime beats:62.98% memory beats:88.00%
+//First solution runtime beats:62.98% memory beats:88.00%
 TreeNode* ArrayToBST_DFS(std::vector<int>& nums, int start, int end) {
     if ((start == end))
         return NULL;
@@ -3429,7 +3429,7 @@ TreeNode* sortedArrayToBST(std::vector<int>& nums) {
     return  ArrayToBST_DFS(nums, 0, size);
 }
 
-//網解 runtime beats:84.55% memory beats:99.52%
+//Network solution runtime beats:84.55% memory beats:99.52%
 void build(TreeNode* root, int start, int end, std::vector<int>& nums, bool l) {
     if (start > end) return;
     TreeNode* a = new TreeNode(nums[(start + end) / 2]);
@@ -3449,7 +3449,7 @@ TreeNode* sortedArrayToBST_network(std::vector<int>& nums) {
 }
 
 //109. Convert Sorted List to Binary Search Tree
-//初解 runtime beats:18.07% memory beats:24.86%
+//First solution runtime beats:18.07% memory beats:24.86%
 TreeNode* sortedListToBST(ListNode* head) {
     if (!head)
         return NULL;
@@ -3463,7 +3463,7 @@ TreeNode* sortedListToBST(ListNode* head) {
 }
 
 //110. Balanced Binary Tree
-//初解 runtime beats:88.34% memory beats:25.29%
+//First solution runtime beats:88.34% memory beats:25.29%
 bool isBalanced(TreeNode* root) {
     if (!root)
         return true;
@@ -3474,7 +3474,7 @@ bool isBalanced(TreeNode* root) {
         return isBalanced(root->left) && isBalanced(root->right);
 }
 
-//網解 runtime beats:88.34% memory beats:99.20%
+//Network solution runtime beats:88.34% memory beats:99.20%
 int height(TreeNode* root) {
     if (root == NULL)
         return 0;
@@ -3497,7 +3497,7 @@ bool isBalanced_network(TreeNode* root) {
 }
 
 //111. Minimum Depth of Binary Tree
-//初解 runtime beats:73.34% memory beats:05.33%
+//First solution runtime beats:73.34% memory beats:05.33%
 int minDepth(TreeNode* root) {
     if (root == NULL)
         return 0;
@@ -3513,7 +3513,7 @@ int minDepth(TreeNode* root) {
         return 1;
 }
 
-//網解 runtime beats:23.11% memory beats:98.73%
+//Network solution runtime beats:23.11% memory beats:98.73%
 int solve(TreeNode* root)
 {
     if (root == NULL)
@@ -3537,7 +3537,7 @@ int minDepth_network(TreeNode* root) {
 }
 
 //112. Path Sum
-//初解 runtime beats:15.45% memory beats:82.93%
+//First solution runtime beats:15.45% memory beats:82.93%
 bool hasPathSum(TreeNode* root, int sum) {
     if (!root)
         return false;
@@ -3549,7 +3549,7 @@ bool hasPathSum(TreeNode* root, int sum) {
 }
 
 //113. Path Sum II
-//初解 runtime beats:53.67% memory beats:28.84%
+//First solution runtime beats:53.67% memory beats:28.84%
 void ToPathSum(std::vector<std::vector<int>>& ans, std::vector<int> sub_ans, TreeNode* root, int sum) {
     if (!root)
         return;
@@ -3570,7 +3570,7 @@ std::vector<std::vector<int>> pathSum(TreeNode* root, int sum) {
     return ans;
 }
 
-//網解 runtime beats:96.78% memory beats:89.30%
+//Network solution runtime beats:96.78% memory beats:89.30%
 void dfs(TreeNode* node, int sum, std::vector<std::vector<int>>& res, std::vector<int>& tmp) {
     if (!node) return;
     tmp.push_back(node->val);
@@ -3594,7 +3594,7 @@ std::vector<std::vector<int>> pathSum_network(TreeNode* root, int sum) {
 }
 
 //114. Flatten Binary Tree to Linked List
-//初解 runtime beats:96.98% memory beats:43.80%
+//First solution runtime beats:96.98% memory beats:43.80%
 void flatten(TreeNode* root) {
     if (!root)
         return;
@@ -3623,7 +3623,7 @@ void flatten(TreeNode* root) {
     }
 }
 
-//網解 runtime beats:24.31% memory beats:99.79%
+//Network solution runtime beats:24.31% memory beats:99.79%
 TreeNode* flattenInternal(TreeNode* node)
 {
     if (node == nullptr)
@@ -3649,7 +3649,7 @@ void flatten_network(TreeNode* root) {
 }
 
 //115. Distinct Subsequences
-//初解 runtime beats:11.13% memory beats:05.26%
+//First solution runtime beats:11.13% memory beats:05.26%
 int numDistinct_DP(std::map<int, int>& DP, std::string s, std::string t, int offset) {
     int t_size = t.size();
     int s_size = s.size();
@@ -3688,7 +3688,7 @@ int numDistinct(std::string s, std::string t) {
     return numDistinct_DP(DP, s, t, offset);
 }
 
-//網解 runtime beats:77.45% memory beats:98.54%
+//Network solution runtime beats:77.45% memory beats:98.54%
 int numDistinct_network(std::string s, std::string t) {
     int m = t.length(), n = s.length();
     std::vector<long long> cur(m + 1, 0L);
@@ -3720,7 +3720,7 @@ int numDistinct_network(std::string s, std::string t) {
 //        : val(_val), left(_left), right(_right), next(_next) {}
 //};
 
-//初解 runtime beats:52.14% memory beats:16.94%
+//First solution runtime beats:52.14% memory beats:16.94%
 //Node* connect(Node* root) {
 //    if (!root)
 //        return root;
@@ -3762,7 +3762,7 @@ int numDistinct_network(std::string s, std::string t) {
 //    return root;
 //}
 //
-////網解 runtime beats:94.58% memory beats:99.90%
+////Network solution runtime beats:94.58% memory beats:99.90%
 //Node* connect_network(Node* root) {
 //    if (!root)
 //        return nullptr;
@@ -3796,7 +3796,7 @@ int numDistinct_network(std::string s, std::string t) {
 //}
 
 //118. Pascal's Triangle
-//初解 runtime beats:100.00% memory beats:45.15%
+//First solution runtime beats:100.00% memory beats:45.15%
 std::vector<std::vector<int>> generate(int numRows) {
     std::vector<std::vector<int>> ans;
 
@@ -3813,7 +3813,7 @@ std::vector<std::vector<int>> generate(int numRows) {
 }
 
 //119. Pascal's Triangle II
-//初解 runtime beats:100.00% memory beats:79.38%
+//First solution runtime beats:100.00% memory beats:79.38%
 std::vector<int> getRow(int numRows) {
     std::vector<std::vector<int>> ans;
 
@@ -3829,7 +3829,7 @@ std::vector<int> getRow(int numRows) {
     return ans[numRows];
 }
 
-//網解 runtime beats:100.00% memory beats:96.35%
+//Network solution runtime beats:100.00% memory beats:96.35%
 std::vector<int> getRow_network(int rowIndex) {
     std::vector<int> v;
     v.push_back(1);
@@ -3848,7 +3848,7 @@ std::vector<int> getRow_network(int rowIndex) {
 }
 
 //120. Triangle
-//初解 runtime beats:63.02% memory beats:74.89%
+//First solution runtime beats:63.02% memory beats:74.89%
 int minimumTotal(std::vector<std::vector<int>>& triangle) {
     int t_size = triangle.size();
     int i;
@@ -3872,7 +3872,7 @@ int minimumTotal(std::vector<std::vector<int>>& triangle) {
     return ans;
 }
 
-//網解 runtime beats:97.45% memory beats:85.05%
+//Network solution runtime beats:97.45% memory beats:85.05%
 int minimumTotal_network(std::vector<std::vector<int>>& triangle) {
     int n = triangle.size();
     std::vector<int> dp(n), tmp;
@@ -3890,7 +3890,7 @@ int minimumTotal_network(std::vector<std::vector<int>>& triangle) {
 }
 
 //121. Best Time to Buy and Sell Stock
-//初解 runtime beats:78.41% memory beats:60.88%
+//First solution runtime beats:78.41% memory beats:60.88%
 int maxProfit(std::vector<int>& prices) {
     int p_size = prices.size();
     if (p_size == 0)
@@ -3911,7 +3911,7 @@ int maxProfit(std::vector<int>& prices) {
 }
 
 //124. Binary Tree Maximum Path Sum
-//網解 runtime beats:28.29% memory beats:98.99%
+//Network solution runtime beats:28.29% memory beats:98.99%
 int solve(TreeNode* root, int& ans)
 {
     if (root == NULL) {
@@ -3934,7 +3934,7 @@ int maxPathSum_network(TreeNode* root) {
     return ans;
 }
 
-//網解 runtime beats:88.78% memory beats:77.04%
+//Network solution runtime beats:88.78% memory beats:77.04%
 int calcPathSum(TreeNode* root, int& maxSum) {
     if (root == NULL) return 0;
 
@@ -3957,7 +3957,7 @@ int maxPathSum_network_2(TreeNode* root) {
 }
 
 //128. Longest Consecutive Sequence
-//網解 runtime beats:93.09% memory beats:73.79%
+//Network solution runtime beats:93.09% memory beats:73.79%
 //https://www.cnblogs.com/grandyang/p/4276225.html
 int longestConsecutive(std::vector<int>& nums) {
     int res = 0;
@@ -3974,7 +3974,7 @@ int longestConsecutive(std::vector<int>& nums) {
 }
 
 //129. Sum Root to Leaf Numbers
-//初解 runtime beats:100.00% memory beats:74.77%
+//First solution runtime beats:100.00% memory beats:74.77%
 void sumNumbers_DFS(TreeNode* root, int past, int& ans) {
     if (!root)
         return;
@@ -3994,7 +3994,7 @@ int sumNumbers(TreeNode* root) {
 }
 
 //130. Surrounded Regions
-//初解 runtime beats:07.73% memory beats:07.44%
+//First solution runtime beats:07.73% memory beats:07.44%
 bool helper_solve(int i, int j, int x_size, int y_size,
     std::vector<std::vector<bool>>& dp_board,
     std::vector<std::vector<char>>& board,
@@ -4049,7 +4049,7 @@ void solve(std::vector<std::vector<char>>& board) {
             *c2 = 'X';
 }
 
-//網解 runtime beats:77.90% memory beats:56.75%
+//Network solution runtime beats:77.90% memory beats:56.75%
 void escape(std::vector<std::vector<char>>& board, int i, int j, int& rows, int& cols) {
     if (i < 0 || i > rows - 1 || j < 0 || j > cols - 1) return;
     if (board[i][j] == 'X' || board[i][j] == 'E') return;
@@ -4092,7 +4092,7 @@ void solve_network(std::vector<std::vector<char>>& board) {
 }
 
 //131. Palindrome Partitioning
-//網解 runtime beats:93.40% memory beats:98.36%
+//Network solution runtime beats:93.40% memory beats:98.36%
 std::vector<std::vector<std::string>> partition_network(std::string s) {
     std::vector<std::vector<std::string>> ans;
     auto isPalindrome = [&](int i, int j) {
@@ -4124,7 +4124,7 @@ std::vector<std::vector<std::string>> partition_network(std::string s) {
     return ans;
 }
 
-//初解 runtime beats:99.41% memory beats:95.49%
+//First solution runtime beats:99.41% memory beats:95.49%
 bool isPalindrome(std::string& s, int i, int j) {
     while (i < j) {
         if (s[i] == s[j]) {
@@ -4159,7 +4159,7 @@ std::vector<std::vector<std::string>> partition(std::string s) {
 
 //132. Palindrome Partitioning II
 //https://www.cnblogs.com/grandyang/p/4271456.html
-//網解 runtime beats:99.94% memory beats:94.32%
+//Network solution runtime beats:99.94% memory beats:94.32%
 int minCut_network(std::string s) {
     if (s.empty()) return 0;
     int n = s.size();
@@ -4177,7 +4177,7 @@ int minCut_network(std::string s) {
 }
 
 //https://medium.com/@bill800227/leetcode-132-palindrome-partitioning-ii-d8aac7794ebc
-//網解 runtime beats:55.57% memory beats:59.09%
+//Network solution runtime beats:55.57% memory beats:59.09%
 int minCut_network_2(std::string s) {
     int n = s.size();
     std::vector<std::vector<bool>> isPalin(n, std::vector<bool>(n, false));
@@ -4199,7 +4199,7 @@ int minCut_network_2(std::string s) {
 }
 
 //134. Gas Station
-//初解 runtime beats:18.60% memory beats:77.33%
+//First solution runtime beats:18.60% memory beats:77.33%
 int canCompleteCircuit(std::vector<int>& gas, std::vector<int>& cost) {
     int size = gas.size();
     if (size == 0)
@@ -4234,7 +4234,7 @@ int canCompleteCircuit(std::vector<int>& gas, std::vector<int>& cost) {
     return -1;
 }
 
-//網解 runtime beats:96.74% memory beats:42.44%
+//Network solution runtime beats:96.74% memory beats:42.44%
 int canCompleteCircuit_network(std::vector<int>& gas, std::vector<int>& cost) {
     int start = 0;
     int tank = 0;
@@ -4255,7 +4255,7 @@ int canCompleteCircuit_network(std::vector<int>& gas, std::vector<int>& cost) {
 }
 
 //136. Single Number
-//初解 runtime beats:05.20% memory beats:77.40%
+//First solution runtime beats:05.20% memory beats:77.40%
 int singleNumber(std::vector<int>& nums) {
     int i = 1;
     while ((nums.size() > 1) && (i < nums.size())) {
@@ -4274,7 +4274,7 @@ int singleNumber(std::vector<int>& nums) {
         return nums.front();
 }
 
-//二解 runtime beats:07.30% memory beats:83.29%
+//Second solution runtime beats:07.30% memory beats:83.29%
 int singleNumber_2(std::vector<int>& nums) {
     sort(nums.begin(), nums.end());
     int size = nums.size();
@@ -4297,7 +4297,7 @@ int singleNumber_2(std::vector<int>& nums) {
         return 0;
 }
 
-//三解 runtime beats:18.55% memory beats:07.67%
+//Third solution runtime beats:18.55% memory beats:07.67%
 int singleNumber_3(std::vector<int>& nums) {
     int size = nums.size();
     if (size == 1)
@@ -4314,7 +4314,7 @@ int singleNumber_3(std::vector<int>& nums) {
     return 0;
 }
 
-//網解 runtime beats:93.21% memory beats:83.29%
+//Network solution runtime beats:93.21% memory beats:83.29%
 int singleNumber_network(std::vector<int>& nums) {
     // use property of xor, any number xor with 0 is still itself
     // every number xor with itself will be 0
@@ -4339,7 +4339,7 @@ public:
     }
 };
 
-//初解 runtime beats:37.50% memory beats:82.21%
+//First solution runtime beats:37.50% memory beats:82.21%
 rand_Node* copyRandomList(rand_Node* head) {
     std::vector<rand_Node*> vec;
     while (head != NULL) {
@@ -4375,7 +4375,7 @@ rand_Node* copyRandomList(rand_Node* head) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4261431.html
-//網解 runtime beats:93.25% memory beats:92.49% 
+//Network solution runtime beats:93.25% memory beats:92.49% 
 rand_Node* copyRandomList_network(rand_Node* head) {
     if (!head) return nullptr;
     rand_Node* cur = head;
@@ -4402,7 +4402,7 @@ rand_Node* copyRandomList_network(rand_Node* head) {
 }
 
 //139. Word Break
-//初解 runtime beats:48.19% memory beats:37.24%
+//First solution runtime beats:48.19% memory beats:37.24%
 bool helper_wordBreak(std::string s, std::unordered_set<std::string>& un_set, std::vector<bool>& memo) {
     if (s == "")
         return true;
@@ -4424,7 +4424,7 @@ bool wordBreak(std::string s, std::vector<std::string>& wordDict) {
     return helper_wordBreak(s, un_set, memo);
 }
 
-//網解 runtime beats:78.37% memory beats:89.44%
+//Network solution runtime beats:78.37% memory beats:89.44%
 bool wordBreak_network(std::string s, std::vector<std::string>& wordDict) {
     if (wordDict.empty()) return false;
     std::vector<bool> dp(s.size() + 1, false);
@@ -4441,7 +4441,7 @@ bool wordBreak_network(std::string s, std::vector<std::string>& wordDict) {
 
 //140. Word Break II
 //https://www.cnblogs.com/grandyang/p/4576240.html
-//網解 runtime beats:49.42% memory beats:70.49%
+//Network solution runtime beats:49.42% memory beats:70.49%
 std::vector<std::string> wordBreak2_helper(std::string s, std::vector<std::string>& wordDict, std::unordered_map<std::string, std::vector<std::string>>& m) {
     if (m.count(s))
         return m[s];
@@ -4465,7 +4465,7 @@ std::vector<std::string> wordBreak2(std::string s, std::vector<std::string>& wor
     return wordBreak2_helper(s, wordDict, m);
 }
 
-//網解 runtime beats:92.62% memory beats:100.00%
+//Network solution runtime beats:92.62% memory beats:100.00%
 // check for invalid characters in s that are not in dict
 bool validateWords(std::string& s, std::vector<std::string>& wordDict) {
     std::unordered_set<char> cs;
@@ -4538,7 +4538,7 @@ std::vector<std::string> wordBreak2_network(std::string s, std::vector<std::stri
 }
 
 //141. Linked List Cycle
-//初解 runtime beats:21.57% memory beats:07.88%
+//First solution runtime beats:21.57% memory beats:07.88%
 bool hasCycle(ListNode* head) {
     std::unordered_set<ListNode*> list;
     while (head != NULL && (list.find(head) == list.end())) {
@@ -4552,7 +4552,7 @@ bool hasCycle(ListNode* head) {
         return true;
 }
 
-//網解 runtime beats:96.32% memory beats:69.53%
+//Network solution runtime beats:96.32% memory beats:69.53%
 bool hasCycle_network(ListNode* head) {
     //邏輯為temp一次走兩步，head一次走一步
     //若有cycle，當進入cycle之後，temp會以每個cycle與head距離減少1的速度接近head
@@ -4576,7 +4576,7 @@ bool hasCycle_network(ListNode* head) {
 }
 
 //142. Linked List Cycle II
-//初解 runtime beats:39.50% memory beats:18.49%
+//First solution runtime beats:39.50% memory beats:18.49%
 ListNode* detectCycle(ListNode* head) {
     std::unordered_set<ListNode*> list;
     while (head != NULL && (list.find(head) == list.end())) {
@@ -4588,7 +4588,7 @@ ListNode* detectCycle(ListNode* head) {
 }
 
 //143. Reorder List
-//初解 runtime beats:92.37% memory beats:21.52%
+//First solution runtime beats:92.37% memory beats:21.52%
 void reorderList(ListNode* head) {
     if (head == NULL || head->next == NULL || head->next->next == NULL)
         return;
@@ -4610,7 +4610,7 @@ void reorderList(ListNode* head) {
 }
 
 //144. Binary Tree Preorder Traversal
-//初解 runtime beats:100.00% memory beats:71.55%
+//First solution runtime beats:100.00% memory beats:71.55%
 void preorderTraversal(TreeNode* node, std::vector<int>& ans) {
     if (!node)
         return;
@@ -4626,7 +4626,7 @@ std::vector<int> preorderTraversal(TreeNode* root) {    //>mid->left->right
 }
 
 //145. Binary Tree Postorder Traversal
-//初解 runtime beats:100.00% memory beats:31.67%
+//First solution runtime beats:100.00% memory beats:31.67%
 void postorderTraversal(TreeNode* node, std::vector<int>& ans) {
     if (!node)
         return;
@@ -4644,7 +4644,7 @@ std::vector<int> postorderTraversal(TreeNode* root) {   //left->right->mid
 }
 
 //146. LRU Cache
-//初解 runtime beats:08.53% memory beats:45.17%
+//First solution runtime beats:08.53% memory beats:45.17%
 class LRUCache {    //最近最少使用
 public:
     LRUCache(int capacity) {
@@ -4684,7 +4684,7 @@ private:
     std::list<int> FIFO;              //FIFO
 };
 
-//網解 runtime beats:99.48% memory beats:80.69%
+//Network solution runtime beats:99.48% memory beats:80.69%
 class LRUCache_network {
 public:
     struct ListNode {
@@ -4800,7 +4800,7 @@ public:
 
 //148. Sort List
 //https://www.cnblogs.com/grandyang/p/4249905.html
-//網解 runtime beats:89.72% memory beats:88.98%
+//Network solution runtime beats:89.72% memory beats:88.98%
 void sortListTree(ListNode* start, ListNode* end) {
     if (start->next == end)
         return;
@@ -4872,7 +4872,7 @@ ListNode* sortList_network(ListNode* head) {
     return dummy->next;
 }
 
-//網解 runtime beats:97.49% memory beats:47.35%
+//Network solution runtime beats:97.49% memory beats:47.35%
 ListNode* sortList_merge(ListNode* l1, ListNode* l2) {
     if (!l1) return l2;
     if (!l2) return l1;
@@ -4903,7 +4903,7 @@ ListNode* sortList_network_2(ListNode* head) {
 }
 
 //150. Evaluate Reverse Polish Notation
-//初解 runtime beats:27.18% memory beats:42.28%
+//First solution runtime beats:27.18% memory beats:42.28%
 int evalRPN(std::vector<std::string>& tokens) {
     std::stack<int> LIFO;
 
@@ -4943,7 +4943,7 @@ int evalRPN(std::vector<std::string>& tokens) {
     return LIFO.top();
 }
 
-//網解 runtime beats:55.30% memory beats:32.52%
+//Network solution runtime beats:55.30% memory beats:32.52%
 int evalRPN_network(const std::vector<std::string>& tokens) {
     std::vector<int> s;
     for (auto token : tokens) {
@@ -4968,7 +4968,7 @@ int evalRPN_network(const std::vector<std::string>& tokens) {
 
 //152. Maximum Product Subarray
 //http://bangbingsyb.blogspot.com/2014/11/leetcode-maximum-product-subarray.html
-//網解 runtime beats:80.49% memory beats:46.85%
+//Network solution runtime beats:80.49% memory beats:46.85%
 int maxProduct_network(std::vector<int>& nums) {
     int size = nums.size();
     if (size == 1)
@@ -4985,7 +4985,7 @@ int maxProduct_network(std::vector<int>& nums) {
     return ans;
 }
 
-//網解 runtime beats:98.29% memory beats:46.85%
+//Network solution runtime beats:98.29% memory beats:46.85%
 int maxProduct_network_2(std::vector<int>& nums) {
     int r = nums[0];
     int maxi = r;
@@ -5004,7 +5004,7 @@ int maxProduct_network_2(std::vector<int>& nums) {
 }
 
 //153. Find Minimum in Rotated Sorted Array
-//初解 runtime beats:98.29% memory beats:88.67%
+//First solution runtime beats:98.29% memory beats:88.67%
 int findMin(std::vector<int>& nums) {
     int ans = INT_MAX;
     for (auto num : nums)
@@ -5013,7 +5013,7 @@ int findMin(std::vector<int>& nums) {
 }
 
 //155. Min Stack
-//初解 runtime beats:05.01% memory beats:81.19%
+//First solution runtime beats:05.01% memory beats:81.19%
 class MinStack {
 public:
     /** initialize your data structure here. */
@@ -5044,7 +5044,7 @@ private:
 };
 
 //160. Intersection of Two Linked Lists
-//初解 runtime beats:07.98% memory beats:05.34%
+//First solution runtime beats:07.98% memory beats:05.34%
 ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
     std::set<ListNode*> unique;
     while (headB != NULL) {
@@ -5063,7 +5063,7 @@ ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
 }
 
 //167. Two Sum II - Input array is sorted
-//初解 runtime beats:69.97% memory beats:06.00%
+//First solution runtime beats:69.97% memory beats:06.00%
 std::vector<int> twoSum2(std::vector<int>& numbers, int target) {
     std::unordered_map<int, int> map;
     int size = numbers.size();
@@ -5077,7 +5077,7 @@ std::vector<int> twoSum2(std::vector<int>& numbers, int target) {
     return { -1,-1 };
 }
 
-//網解 runtime beats:96.92% memory beats:68.33%
+//Network solution runtime beats:96.92% memory beats:68.33%
 std::vector<int> twoSum2_network(std::vector<int>& nums, int target) {
     int l = 0;
     int r = nums.size() - 1;
@@ -5096,7 +5096,7 @@ std::vector<int> twoSum2_network(std::vector<int>& nums, int target) {
 }
 
 //168. Excel Sheet Column Title
-//初解 runtime beats:100.00% memory beats:60.85%
+//First solution runtime beats:100.00% memory beats:60.85%
 std::string convertToTitle(int n) {
     std::string ans = "";
     int base = 26;
@@ -5109,7 +5109,7 @@ std::string convertToTitle(int n) {
     return ans;
 }
 
-//網解 runtime beats:100.00% memory beats:92.12%
+//Network solution runtime beats:100.00% memory beats:92.12%
 std::string convertToTitle_network(int n) {
     std::string str;
     char tmp;
@@ -5123,7 +5123,7 @@ std::string convertToTitle_network(int n) {
 }
 
 //169. Majority Element
-//初解 runtime beats:73.77% memory beats:27.05%
+//First solution runtime beats:73.77% memory beats:27.05%
 int majorityElement(std::vector<int>& nums) {
     std::unordered_map<int, int> majority;
 
@@ -5139,7 +5139,7 @@ int majorityElement(std::vector<int>& nums) {
     return ans.first;
 }
 
-//網解 runtime beats:97.66% memory beats:41.27%
+//Network solution runtime beats:97.66% memory beats:41.27%
 int majorityElement_network(std::vector<int>& nums) {
     int maj_elem = nums[0];
     int count = 0;
@@ -5158,7 +5158,7 @@ int majorityElement_network(std::vector<int>& nums) {
 }
 
 //171. Excel Sheet Column Number
-//初解 runtime beats:100.00% memory beats:28.89%
+//First solution runtime beats:100.00% memory beats:28.89%
 int titleToNumber(std::string s) {
     long ans = 0;
     long tmp;
@@ -5170,7 +5170,7 @@ int titleToNumber(std::string s) {
     return ans;
 }
 
-//網解 runtime beats:100.00% memory beats:67.40%
+//Network solution runtime beats:100.00% memory beats:67.40%
 int titleToNumber_network(std::string s) {
     long ans = 0;
     for (char c : s) ans = ans * 26 + c - 'A' + 1;
@@ -5178,7 +5178,7 @@ int titleToNumber_network(std::string s) {
 }
 
 //173. Binary Search Tree Iterator
-//初解 runtime beats:43.72% memory beats:05.02%
+//First solution runtime beats:43.72% memory beats:05.02%
 class BSTIterator {
 public:
     BSTIterator(TreeNode* root) {
@@ -5214,7 +5214,7 @@ private:
     std::set<int> i_set;
 };
 
-//二解 runtime beats:96.80% memory beats:05.02%
+//Second solution runtime beats:96.80% memory beats:05.02%
 class BSTIterator_2 {
 public:
     BSTIterator_2(TreeNode* root) {
@@ -5260,7 +5260,7 @@ private:
     std::set<int> i_set;
 };
 
-//網解 runtime beats:91.31% memory beats:99.00%
+//Network solution runtime beats:91.31% memory beats:99.00%
 class BSTIterator_network {
 public:
     //vector<TreeNode *> st;
@@ -5305,7 +5305,7 @@ public:
 };
 
 //179. Largest Number
-//初解 runtime beats:05.28% memory beats:77.40%
+//First solution runtime beats:05.28% memory beats:77.40%
 std::string largestNumber(std::vector<int>& nums) {
     std::string ans;
 
@@ -5326,7 +5326,7 @@ std::string largestNumber(std::vector<int>& nums) {
     return ans[0] == '0' ? "0" : ans;
 }
 
-//網解 runtime beats:43.80% memory beats:80.71%
+//Network solution runtime beats:43.80% memory beats:80.71%
 std::string largestNumber_network(std::vector<int>& nums) {
     std::string res;
     sort(nums.begin(), nums.end(), [](int a, int b) {
@@ -5338,7 +5338,7 @@ std::string largestNumber_network(std::vector<int>& nums) {
     return res[0] == '0' ? "0" : res;
 }
 
-//網解 runtime beats:99.05% memory beats:23.09%
+//Network solution runtime beats:99.05% memory beats:23.09%
 struct Comp {
     bool operator () (const std::string& a, const std::string& b) {
         int len = std::min(a.size(), b.size());
@@ -5368,7 +5368,7 @@ std::string largestNumber_network_2(std::vector<int>& nums) {
 }
 
 //187. Repeated DNA Sequences
-//網解 runtime beats:81.32% memory beats:66.99%
+//Network solution runtime beats:81.32% memory beats:66.99%
 std::vector<std::string> findRepeatedDnaSequences_network(std::string s) {
     std::unordered_set<std::string> res, st;
     for (int i = 0; i + 9 < s.size(); ++i) {
@@ -5381,7 +5381,7 @@ std::vector<std::string> findRepeatedDnaSequences_network(std::string s) {
     return std::vector<std::string>{res.begin(), res.end()};
 }
 
-//網解 runtime beats:81.32% memory beats:66.99%
+//Network solution runtime beats:81.32% memory beats:66.99%
 std::vector<std::string> findRepeatedDnaSequences_network_2(std::string s) {
     //A:0100 0001 -> 001
     //C:0100 0011 -> 011
@@ -5403,7 +5403,7 @@ std::vector<std::string> findRepeatedDnaSequences_network_2(std::string s) {
 }
 
 //189. Rotate Array
-//初解 runtime beats:08.09% memory beats:80.70%
+//First solution runtime beats:08.09% memory beats:80.70%
 void rotate(std::vector<int>& nums, int k) {
     k = k % nums.size();
     if (k == 0)
@@ -5415,7 +5415,7 @@ void rotate(std::vector<int>& nums, int k) {
     }
 }
 
-//二解 runtime beats:88.58% memory beats:33.31%
+//Second solution runtime beats:88.58% memory beats:33.31%
 void rotate_2(std::vector<int>& nums, int k) {
     k = k % nums.size();
     if (k == 0)
@@ -5427,7 +5427,7 @@ void rotate_2(std::vector<int>& nums, int k) {
 }
 
 //190. Reverse Bits
-//初解 runtime beats:69.68% memory beats:82.94%
+//First solution runtime beats:69.68% memory beats:82.94%
 uint32_t reverseBits(uint32_t n) {
     int count = 32;
     uint32_t ans = 0;
@@ -5440,7 +5440,7 @@ uint32_t reverseBits(uint32_t n) {
 }
 
 //191. Number of 1 Bits
-//初解 runtime beats:100.00% memory beats:97.21%
+//First solution runtime beats:100.00% memory beats:97.21%
 int hammingWeight(uint32_t n) {
     unsigned char ans = 0;
     while (n) {
@@ -5451,7 +5451,7 @@ int hammingWeight(uint32_t n) {
 }
 
 //198. House Robber
-//初解 runtime beats:100.00% memory beats:95.05%
+//First solution runtime beats:100.00% memory beats:95.05%
 //int rob(std::vector<int>& nums) {
 //    int size = nums.size();
 //    if (size == 0)
@@ -5468,7 +5468,7 @@ int hammingWeight(uint32_t n) {
 //}
 
 //199. Binary Tree Right Side View
-//初解 runtime beats:80.47% memory beats:11.44%
+//First solution runtime beats:80.47% memory beats:11.44%
 std::vector<int> rightSideView(TreeNode* root) {
     if (!root)
         return {};
@@ -5500,7 +5500,7 @@ std::vector<int> rightSideView(TreeNode* root) {
     return ans;
 }
 
-//二解 runtime beats:80.47% memory beats:51.17%
+//Second solution runtime beats:80.47% memory beats:51.17%
 void rightSideView_DFS(TreeNode* node, std::vector<int>& ans, int& level) {
     if (ans.size() <= level) {
         ans.push_back(node->val);
@@ -5529,7 +5529,7 @@ std::vector<int> rightSideView_2(TreeNode* root) {
 }
 
 //200. Number of Islands
-//初解 runtime beats:89.97% memory beats:71.50%
+//First solution runtime beats:89.97% memory beats:71.50%
 void numIslands_helper(std::vector<std::vector<char>>& grid, std::vector<std::vector<bool>>& DP, int i, int j) {
     if (i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size())
         return;
@@ -5570,7 +5570,7 @@ int numIslands(std::vector<std::vector<char>>& grid) {
 }
 
 //201. Bitwise AND of Numbers Range
-//初解 runtime beats:05.04% memory beats:98.73%
+//First solution runtime beats:05.04% memory beats:98.73%
 int rangeBitwiseAnd(long m, long n) {
     if (m == 0)
         return 0;
@@ -5585,7 +5585,7 @@ int rangeBitwiseAnd(long m, long n) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4431646.html
-//網解 runtime beats:67.96% memory beats:61.70%
+//Network solution runtime beats:67.96% memory beats:61.70%
 int rangeBitwiseAnd_network(int m, int n) {
     unsigned int d = INT_MAX;
     while ((m & d) != (n & d))
@@ -5594,7 +5594,7 @@ int rangeBitwiseAnd_network(int m, int n) {
 }
 
 //202. Happy Number
-//初解 runtime beats:63.86%  memory beats:33.09%
+//First solution runtime beats:63.86%  memory beats:33.09%
 bool isHappy(int n) {
     std::set<int> exist;
     exist.insert(n);
@@ -5615,7 +5615,7 @@ bool isHappy(int n) {
     return true;
 }
 
-//網解 runtime beats:100.00%  memory beats:77.58%
+//Network solution runtime beats:100.00%  memory beats:77.58%
 int isHappy_next(int n) {
     int res = 0;
     while (n > 0) {
@@ -5638,7 +5638,7 @@ bool isHappy_network(int n) {
 }
 
 //203. Remove Linked List Elements
-//初解 runtime beats:91.80%  memory beats:59.93%
+//First solution runtime beats:91.80%  memory beats:59.93%
 ListNode* removeElements(ListNode* head, int val) {
     while (head && head->val == val)
         head = head->next;
@@ -5662,7 +5662,7 @@ ListNode* removeElements(ListNode* head, int val) {
 
 //204. Count Primes
 //https://www.cnblogs.com/grandyang/p/4462810.html
-//網解 runtime beats:91.80%  memory beats:59.93%
+//Network solution runtime beats:91.80%  memory beats:59.93%
 int countPrimes_network(int n) {
     //埃拉托斯特尼篩法
     //https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
@@ -5680,7 +5680,7 @@ int countPrimes_network(int n) {
 
 //205. Isomorphic Strings
 //https://www.cnblogs.com/grandyang/p/4465779.html
-//網解 runtime beats:99.46%  memory beats:70.87%
+//Network solution runtime beats:99.46%  memory beats:70.87%
 bool isIsomorphic(std::string s, std::string t) {
     //s跟t中的各字元存在1對1映射之關係
     int m1[256] = { 0 }, m2[256] = { 0 }, n = s.size();
@@ -5696,7 +5696,7 @@ bool isIsomorphic(std::string s, std::string t) {
 }
 
 //206. Reverse Linked List
-//初解 runtime beats:96.55%  memory beats:66.14%
+//First solution runtime beats:96.55%  memory beats:66.14%
 ListNode* reverseList(ListNode* head) {
     ListNode* pre = NULL;
     ListNode* cur = head;
@@ -5712,7 +5712,7 @@ ListNode* reverseList(ListNode* head) {
 
 //207. Course Schedule
 //https://www.cnblogs.com/grandyang/p/4484571.html
-//網解 runtime beats:89.64%  memory beats:65.09%
+//Network solution runtime beats:89.64%  memory beats:65.09%
 bool canFinish(int numCourses, std::vector<std::vector<int>>& prerequisites) {
     //建立有向圖
     std::vector<std::vector<int>> graph(numCourses, std::vector<int>());
@@ -5742,7 +5742,7 @@ bool canFinish(int numCourses, std::vector<std::vector<int>>& prerequisites) {
 }
 
 //208. Implement Trie (Prefix Tree)
-//初解 runtime beats:06.47%  memory beats:96.70%
+//First solution runtime beats:06.47%  memory beats:96.70%
 class Trie {
 public:
     /** Initialize your data structure here. */
@@ -5777,7 +5777,7 @@ private:
     std::set<std::string> trie_splt_set;
 };
 
-//網解 runtime beats:99.09%  memory beats:51.04%
+//Network solution runtime beats:99.09%  memory beats:51.04%
 class Trie_network {
     struct Trienode {
         char val;
@@ -5847,7 +5847,7 @@ public:
 };
 
 //209. Minimum Size Subarray Sum
-//初解 runtime beats:05.02%  memory beats:66.44%
+//First solution runtime beats:05.02%  memory beats:66.44%
 int minSubArrayLen(int s, std::vector<int>& nums) {
     int size = nums.size();
     if (size == 0)
@@ -5874,7 +5874,7 @@ int minSubArrayLen(int s, std::vector<int>& nums) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4501934.html
-//網解 runtime beats:84.79%  memory beats:63.96%
+//Network solution runtime beats:84.79%  memory beats:63.96%
 int minSubArrayLen_network(int s, std::vector<int>& nums) {
     if (nums.empty()) return 0;
     int left = 0, right = 0, sum = 0, len = nums.size(), res = len + 1;
@@ -5891,7 +5891,7 @@ int minSubArrayLen_network(int s, std::vector<int>& nums) {
 }
 
 //210. Course Schedule II
-//初解 runtime beats:91.10%  memory beats:54.85%
+//First solution runtime beats:91.10%  memory beats:54.85%
 std::vector<int> findOrder(int numCourses, std::vector<std::vector<int>>& prerequisites) {
     std::vector<int> ans;
     //BFS
@@ -5925,7 +5925,7 @@ std::vector<int> findOrder(int numCourses, std::vector<std::vector<int>>& prereq
 }
 
 //211. Design Add and Search Words Data Structure
-//初解 runtime beats:99.80%  memory beats:77.46%
+//First solution runtime beats:99.80%  memory beats:77.46%
 class WordDictionary {
 
 private:
@@ -5995,7 +5995,7 @@ public:
 };
 
 //212. Word Search II
-//初解 runtime beats:05.00%  memory beats:99.23%
+//First solution runtime beats:05.00%  memory beats:99.23%
 std::vector<std::string> findWords(std::vector<std::vector<char>>& board, std::vector<std::string>& words) {
     std::vector<std::string> ans;
 
@@ -6011,7 +6011,7 @@ std::vector<std::string> findWords(std::vector<std::vector<char>>& board, std::v
     return ans;
 }
 
-//網解 runtime beats:99.37%  memory beats:79.11%
+//Network solution runtime beats:99.37%  memory beats:79.11%
 class findWords_netword_Solution {
 public:
     std::vector<std::string> findWords_network(std::vector<std::vector<char>>& board, std::vector<std::string>& words) {
@@ -6071,7 +6071,7 @@ private:
 
 //213.213. House Robber II
 //https://www.cnblogs.com/grandyang/p/4518674.html
-//網解 runtime beats:52.12%  memory beats:11.18%
+//Network solution runtime beats:52.12%  memory beats:11.18%
 int rob2_helper(std::vector<int>& nums, int left, int right) {
     if (right - left <= 1)
         return nums[left];
@@ -6092,14 +6092,14 @@ int rob2_network(std::vector<int>& nums) {
 }
 
 //215. Kth Largest Element in an Array
-//初解 runtime beats:68.83%  memory beats:99.06%
+//First solution runtime beats:68.83%  memory beats:99.06%
 int findKthLargest(std::vector<int>& nums, int k) {
     sort(nums.begin(), nums.end());
     return nums[nums.size() - k];
 }
 
 //216. Combination Sum III
-//初解 runtime beats:100.00%  memory beats:97.35%
+//First solution runtime beats:100.00%  memory beats:97.35%
 void combinationSum3_helper(std::vector<std::vector<int>>& ans, std::vector<int>& sub_ans, int& sum, int start, int& k, int& n) {
     if (sub_ans.size() == k && sum == n) {
         ans.push_back(sub_ans);
@@ -6124,7 +6124,7 @@ std::vector<std::vector<int>> combinationSum3(int k, int n) {
 }
 
 //217. Contains Duplicate
-//初解 runtime beats:19.48%  memory beats:93.68%
+//First solution runtime beats:19.48%  memory beats:93.68%
 bool containsDuplicate(std::vector<int>& nums) {
     if (nums.size() < 2)
         return false;
@@ -6137,7 +6137,7 @@ bool containsDuplicate(std::vector<int>& nums) {
     return false;
 }
 
-//二解 runtime beats:74.18%  memory beats:60.41%
+//Second solution runtime beats:74.18%  memory beats:60.41%
 bool containsDuplicate_2(std::vector<int>& nums) {
     if (nums.size() < 2)
         return false;
@@ -6153,7 +6153,7 @@ bool containsDuplicate_2(std::vector<int>& nums) {
 }
 
 //221. Maximal Square
-//網解 runtime beats:96.40%  memory beats:94.70%
+//Network solution runtime beats:96.40%  memory beats:94.70%
 int maximalSquare(std::vector<std::vector<char>>& matrix) {
     int result = 0;
     for (int i = 1; i < matrix.size(); i++)
@@ -6172,7 +6172,7 @@ int maximalSquare(std::vector<std::vector<char>>& matrix) {
 }
 
 //222. Count Complete Tree Nodes
-//初解 runtime beats:21.84%  memory beats:06.75%
+//First solution runtime beats:21.84%  memory beats:06.75%
 int countNodes(TreeNode* root) {
     if (!root)
         return 0;
@@ -6191,7 +6191,7 @@ int countNodes(TreeNode* root) {
     return ans;
 }
 
-//二解 runtime beats:41.45%  memory beats:65.02%
+//Second solution runtime beats:41.45%  memory beats:65.02%
 void countNodes_DFS(TreeNode* node, int& ans) {
     if (!node)
         return;
@@ -6207,7 +6207,7 @@ int countNodes_2(TreeNode* root) {
 }
 
 //226. Invert Binary Tree
-//初解 runtime beats:100.00%  memory beats:81.89%
+//First solution runtime beats:100.00%  memory beats:81.89%
 void invertTree_DFS(TreeNode* node) {
     if (!node)
         return;
@@ -6220,7 +6220,7 @@ void invertTree_DFS(TreeNode* node) {
 }
 
 //227. Basic Calculator II
-//網解 runtime beats:93.43%  memory beats:98.14%
+//Network solution runtime beats:93.43%  memory beats:98.14%
 int calculate(std::string s) {
     int temp = 0, sum = 0;
     char sign = '+';
@@ -6253,7 +6253,7 @@ int calculate(std::string s) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4601208.html
-//網解 runtime beats:52.04%  memory beats:48.44%
+//Network solution runtime beats:52.04%  memory beats:48.44%
 int calculate_network(std::string s) {
     long res = 0, num = 0, n = s.size();
     char op = '+';
@@ -6286,7 +6286,7 @@ TreeNode* invertTree(TreeNode* root) {
 }
 
 //229. Majority Element II
-//初解 runtime beats:35.40%  memory beats:38.24%
+//First solution runtime beats:35.40%  memory beats:38.24%
 std::vector<int> majorityElement2(std::vector<int>& nums) {
     std::set<int> ans;
     std::unordered_map<int, int> exist;
@@ -6301,7 +6301,7 @@ std::vector<int> majorityElement2(std::vector<int>& nums) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4606822.html
-//網解 runtime beats:35.61%  memory beats:36.90%
+//Network solution runtime beats:35.61%  memory beats:36.90%
 std::vector<int> majorityElement2_network(std::vector<int>& nums) {
     std::vector<int> res;
     int a = 0, b = 0, cnt1 = 0, cnt2 = 0, n = nums.size();
@@ -6323,7 +6323,7 @@ std::vector<int> majorityElement2_network(std::vector<int>& nums) {
 }
 
 //230. Kth Smallest Element in a BST
-//初解 runtime beats:76.14%  memory beats:80.97%
+//First solution runtime beats:76.14%  memory beats:80.97%
 void kthSmallest_helper(TreeNode* node, int& k, int& ans) {
     if (!node || k == 0)
         return;
@@ -6342,7 +6342,7 @@ int kthSmallest(TreeNode* root, int k) {
 }
 
 //231. Power of Two
-//初解 runtime beats:100.00%  memory beats:68.20%
+//First solution runtime beats:100.00%  memory beats:68.20%
 bool isPowerOfTwo(int n) {
     if (n == 1)
         return true;
@@ -6357,7 +6357,7 @@ bool isPowerOfTwo(int n) {
         return false;
 }
 
-//二解 runtime beats:100.00%  memory beats:20.26%
+//Second solution runtime beats:100.00%  memory beats:20.26%
 bool isPowerOfTwo_2(int n) {
     if (n == 0)
         return false;
@@ -6371,7 +6371,7 @@ bool isPowerOfTwo_2(int n) {
 }
 
 //232. Implement Queue using Stacks
-//初解 runtime beats:100.00%  memory beats:78.63%
+//First solution runtime beats:100.00%  memory beats:78.63%
 class MyQueue {
 private:
     std::stack<int> st;
@@ -6415,7 +6415,7 @@ public:
 };
 
 //234. Palindrome Linked List
-//初解 runtime beats:42.50%   memory beats:14.12%
+//First solution runtime beats:42.50%   memory beats:14.12%
 bool isPalindrome(ListNode* head) {
     std::vector<ListNode*> list;
     while (head) {
@@ -6430,7 +6430,7 @@ bool isPalindrome(ListNode* head) {
     return true;
 }
 
-//網解 runtime beats:88.70%  memory beats:94.21%
+//Network solution runtime beats:88.70%  memory beats:94.21%
 bool isPalindrome_network(ListNode* head) {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
@@ -6457,7 +6457,7 @@ bool isPalindrome_network(ListNode* head) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4635425.html
-//網解 runtime beats:68.16%   memory beats:48.67%
+//Network solution runtime beats:68.16%   memory beats:48.67%
 bool isPalindrome_network_2(ListNode* head) {
     if (!head || !head->next)
         return true;
@@ -6485,7 +6485,7 @@ bool isPalindrome_network_2(ListNode* head) {
 }
 
 //235. Lowest Common Ancestor of a Binary Search Tree
-//初解 runtime beats:94.34%   memory beats:05.11%
+//First solution runtime beats:94.34%   memory beats:05.11%
 TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
     if (p->val > q->val)
         return lowestCommonAncestor(root, q, p);
@@ -6500,7 +6500,7 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 
 //236. Lowest Common Ancestor of a Binary Tree
 //https://www.cnblogs.com/grandyang/p/4641968.html.
-//網解 runtime beats:43.40%   memory beats:26.75%
+//Network solution runtime beats:43.40%   memory beats:26.75%
 TreeNode* lowestCommonAncestor_network(TreeNode* root, TreeNode* p, TreeNode* q) {
     if (!root || p == root || q == root)
         return root;
@@ -6512,7 +6512,7 @@ TreeNode* lowestCommonAncestor_network(TreeNode* root, TreeNode* p, TreeNode* q)
     return left ? left : right;
 }
 
-//網解 runtime beats:89.35%   memory beats:78.78%
+//Network solution runtime beats:89.35%   memory beats:78.78%
 TreeNode* lowestCommonAncestor_network_2(TreeNode* root, TreeNode* p, TreeNode* q) {
     if (!root || p == root || q == root)
         return root;
@@ -6527,7 +6527,7 @@ TreeNode* lowestCommonAncestor_network_2(TreeNode* root, TreeNode* p, TreeNode* 
 }
 
 //238. Product of Array Except Self
-//初解 runtime beats:38.57%   memory beats:32.62%
+//First solution runtime beats:38.57%   memory beats:32.62%
 std::vector<int> productExceptSelf(std::vector<int>& nums) {
     //參考題目solution
     int size = nums.size();
@@ -6546,7 +6546,7 @@ std::vector<int> productExceptSelf(std::vector<int>& nums) {
     return nums;
 }
 
-//二解 runtime beats:85.81%  memory beats:57.38%
+//Second solution runtime beats:85.81%  memory beats:57.38%
 std::vector<int> productExceptSelf_2(std::vector<int>& nums) {
     //參考題目solution
     int size = nums.size();
@@ -6564,7 +6564,7 @@ std::vector<int> productExceptSelf_2(std::vector<int>& nums) {
 }
 
 //239. Sliding Window Maximum
-//初解 runtime beats:05.23%   memory beats:05.08%
+//First solution runtime beats:05.23%   memory beats:05.08%
 std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) {
     int size = nums.size();
     if (size < k)
@@ -6587,7 +6587,7 @@ std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) {
     return ans;
 }
 
-//網解 runtime beats:43.48%   memory beats:99.77%
+//Network solution runtime beats:43.48%   memory beats:99.77%
 std::vector<int> maxSlidingWindow_network(std::vector<int>& nums, int k) {
     if (k == 0)
         return nums;
@@ -6629,7 +6629,7 @@ std::vector<int> maxSlidingWindow_network(std::vector<int>& nums, int k) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4656517.html
-//網解 runtime beats:61.26% memory beats:69.87%
+//Network solution runtime beats:61.26% memory beats:69.87%
 std::vector<int> maxSlidingWindow_network_2(std::vector<int>& nums, int k) {
     std::vector<int> res;
     std::deque<int> q;
@@ -6646,7 +6646,7 @@ std::vector<int> maxSlidingWindow_network_2(std::vector<int>& nums, int k) {
 }
 
 //240. Search a 2D Matrix II
-//網解 runtime beats:99.02% memory beats:98.39%
+//Network solution runtime beats:99.02% memory beats:98.39%
 bool searchMatrix2_network(std::vector<std::vector<int>>& matrix, int target) {
     std::ios::sync_with_stdio(0);
     if (matrix.size() == 1 && matrix[0].size() == 0)
@@ -6669,7 +6669,7 @@ bool searchMatrix2_network(std::vector<std::vector<int>>& matrix, int target) {
     return false;
 }
 
-//初解 runtime beats:22.90% memory beats:97.06%
+//First solution runtime beats:22.90% memory beats:97.06%
 bool searchMatrix2(std::vector<std::vector<int>>& matrix, int target) {
     //從左下角往右或往上
     //從右上角往左或往下
@@ -6692,7 +6692,7 @@ bool searchMatrix2(std::vector<std::vector<int>>& matrix, int target) {
 }
 
 //242. Valid Anagram
-//初解 runtime beats:29.03% memory beats:45.12%
+//First solution runtime beats:29.03% memory beats:45.12%
 bool isAnagram(std::string s, std::string t) {
     if (s.size() != t.size())
         return false;
@@ -6702,7 +6702,7 @@ bool isAnagram(std::string s, std::string t) {
 }
 
 //257. Binary Tree Paths
-//初解 runtime beats:100.00% memory beats:38.29%
+//First solution runtime beats:100.00% memory beats:38.29%
 void binaryTreePaths_DFS(TreeNode* node, std::string Path, std::vector<std::string>& ans) {
     if (!node)
         return;
@@ -6732,7 +6732,7 @@ std::vector<std::string> binaryTreePaths(TreeNode* root) {
 }
 
 //260. Single Number III
-//初解 runtime beats:15.06% memory beats:05.16%
+//First solution runtime beats:15.06% memory beats:05.16%
 std::vector<int> singleNumber3(std::vector<int>& nums) {
     if (nums.size() < 3)
         return nums;
@@ -6751,7 +6751,7 @@ std::vector<int> singleNumber3(std::vector<int>& nums) {
     return ans;
 }
 
-//網解 runtime beats:94.67% memory beats:98.06%
+//Network solution runtime beats:94.67% memory beats:98.06%
 std::vector<int> singleNumber3_network(std::vector<int>& nums) {
     sort(nums.begin(), nums.end());
     std::vector<int> vc;
@@ -6767,7 +6767,7 @@ std::vector<int> singleNumber3_network(std::vector<int>& nums) {
 }
 
 //264. Ugly Number II
-//網解 runtime beats:97.58% memory beats:62.44%
+//Network solution runtime beats:97.58% memory beats:62.44%
 int nthUglyNumber_network(int n) {
     std::vector<int> dp(n, 0);
     dp[0] = 1;
@@ -6787,7 +6787,7 @@ int nthUglyNumber_network(int n) {
 }
 
 //278. First Bad Version
-//網解 runtime beats:100.00% memory beats:54.89%
+//Network solution runtime beats:100.00% memory beats:54.89%
 bool isBadVersion(int version) {
     if (version >= 4)
         return true;
@@ -6813,7 +6813,7 @@ int firstBadVersion(int n) {
 
 //279. Perfect Squares
 //https://www.cnblogs.com/grandyang/p/4800552.html
-//網解 runtime beats:100.00% memory beats:99.53%
+//Network solution runtime beats:100.00% memory beats:99.53%
 int numSquares(int n) {
     while (n % 4 == 0) n /= 4;
     if (n % 8 == 7) return 4;
@@ -6827,7 +6827,7 @@ int numSquares(int n) {
 }
 
 //283. Move Zeroes
-//初解 runtime beats:58.98% memory beats:57.69%
+//First solution runtime beats:58.98% memory beats:57.69%
 void moveZeroes(std::vector<int>& nums) {
     for (auto it = nums.rbegin(); it != nums.rend(); ++it) {
         if (*it == 0) {
@@ -6837,7 +6837,7 @@ void moveZeroes(std::vector<int>& nums) {
     }
 }
 
-//網解 runtime beats:99.69% memory beats:73.38%
+//Network solution runtime beats:99.69% memory beats:73.38%
 void moveZeroes_network(std::vector<int>& nums) {
     int i = 0;
     for (int j = 0; j < nums.size(); j++) {
@@ -6853,7 +6853,7 @@ void moveZeroes_network(std::vector<int>& nums) {
 }
 
 //287. Find the Duplicate Number
-//初解 runtime beats:17.68% memory beats:12.39%
+//First solution runtime beats:17.68% memory beats:12.39%
 int findDuplicate(std::vector<int>& nums) {
     std::set<int> exist;
     for (auto num : nums) {
@@ -6866,7 +6866,7 @@ int findDuplicate(std::vector<int>& nums) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4843654.html
-//網解 runtime beats:97.43% memory beats:71.57%
+//Network solution runtime beats:97.43% memory beats:71.57%
 int findDuplicate_network(std::vector<int>& nums) {
     int slow = 0, fast = 0, t = 0;
     while (true) {              //設true因為slow跟fast初始數值一致
@@ -6883,7 +6883,7 @@ int findDuplicate_network(std::vector<int>& nums) {
 }
 
 //289. Game of Life
-//初解 runtime beats:100.00% memory beats:11.67%
+//First solution runtime beats:100.00% memory beats:11.67%
 void gameOfLife(std::vector<std::vector<int>>& board) {
     //https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
     //Remember that the board needs to be updated at the same time
@@ -6911,7 +6911,7 @@ void gameOfLife(std::vector<std::vector<int>>& board) {
 }
 
 //https://www.cnblogs.com/grandyang/p/4854466.html
-//網解 runtime beats:100.00% memory beats:27.99%
+//Network solution runtime beats:100.00% memory beats:27.99%
 void gameOfLife_network(std::vector<std::vector<int> >& board) {
     int m = board.size(), n = m ? board[0].size() : 0;
     std::vector<int> dx{ -1, -1, -1, 0, 1, 1, 1, 0 };
@@ -6941,7 +6941,7 @@ void gameOfLife_network(std::vector<std::vector<int> >& board) {
 }
 
 //290. Word Pattern
-//初解 runtime beats:100.00% memory beats:05.04%
+//First solution runtime beats:100.00% memory beats:05.04%
 bool wordPattern(std::string pattern, std::string str) {
     str += " ";
     std::unordered_map<char, std::string> map1;
@@ -6974,7 +6974,7 @@ bool wordPattern(std::string pattern, std::string str) {
         return false;
 }
 
-//網解 runtime beats:100.00% memory beats:05.04%
+//Network solution runtime beats:100.00% memory beats:05.04%
 bool wordPattern_network(std::string pattern, std::string str) {
     std::vector<std::string> words;
     std::string token;
@@ -6995,7 +6995,7 @@ bool wordPattern_network(std::string pattern, std::string str) {
 }
 
 //295. Find Median from Data Stream
-//初解 runtime beats:05.12% memory beats:95.33%
+//First solution runtime beats:05.12% memory beats:95.33%
 class MedianFinder {
 private:
     std::vector<int> nums;
@@ -7021,7 +7021,7 @@ public:
     }
 };
 
-//網解 runtime beats:92.74% memory beats:32.95%
+//Network solution runtime beats:92.74% memory beats:32.95%
 class MedianFinder_network {
 public:
     /** initialize your data structure here. */
@@ -7079,7 +7079,7 @@ public:
 
 //297. Serialize and Deserialize Binary Tree
 //https://www.cnblogs.com/grandyang/p/4913869.html
-//網解 runtime beats:92.88% memory beats:72.40%
+//Network solution runtime beats:92.88% memory beats:72.40%
 class Codec_network {
 public:
     // Encodes a tree to a single string.
@@ -7116,7 +7116,7 @@ private:
 };
 
 //300. Longest Increasing Subsequence
-//初解 runtime beats:44.00% memory beats:73.52%
+//First solution runtime beats:44.00% memory beats:73.52%
 int lengthOfLIS(std::vector<int>& nums) {
     //參考Solution
     int size = nums.size();
@@ -7136,7 +7136,7 @@ int lengthOfLIS(std::vector<int>& nums) {
 
 //301. Remove Invalid Parentheses
 //https://www.cnblogs.com/grandyang/p/4944875.html
-//網解 runtime beats:39.74% memory beats:46.59%
+//Network solution runtime beats:39.74% memory beats:46.59%
 bool InvalidParentheses(std::string t) {
     int cnt = 0;
     for (int i = 0; i < t.size(); ++i) {
@@ -7171,7 +7171,7 @@ std::vector<std::string> removeInvalidParentheses_network(std::string s) {
     return res;
 }
 
-//網解 runtime beats:100.00% memory beats:83.91%
+//Network solution runtime beats:100.00% memory beats:83.91%
 void removeInvalidParentheses_helper(std::string s, int last_i, int last_j, std::vector<char> p, std::vector<std::string>& res) {
     //last_i : 當前遍歷位置
     //last_j : 上次刪除位置
@@ -7203,7 +7203,7 @@ std::vector<std::string> removeInvalidParentheses(std::string s) {
 }
 
 //304. Range Sum Query 2D - Immutable
-//初解 runtime beats:83.63% memory beats:95.14%
+//First solution runtime beats:83.63% memory beats:95.14%
 class NumMatrix {
 private:
     std::vector<std::vector<int>>* DP = nullptr;
@@ -7228,7 +7228,7 @@ public:
 };
 
 //307. Range Sum Query - Mutable
-//初解 runtime beats:05.36% memory beats:97.68%
+//First solution runtime beats:05.36% memory beats:97.68%
 class NumArray {
 private:
     std::vector<int> DP;
@@ -7254,7 +7254,7 @@ public:
 };
 
 //https://www.cnblogs.com/grandyang/p/4985506.html
-//網解 runtime beats:34.01% memory beats:51.62%
+//Network solution runtime beats:34.01% memory beats:51.62%
 class NumArray_network {
 public:
     NumArray_network(std::vector<int> nums) {
@@ -7294,7 +7294,7 @@ private:
 
 //309. Best Time to Buy and Sell Stock with Cooldown
 //https://www.cnblogs.com/grandyang/p/4997417.html
-//網解 runtime beats:88.82% memory beats:82.96%
+//Network solution runtime beats:88.82% memory beats:82.96%
 int maxProfit_Cooldown_network(std::vector<int>& prices) {
     int buy = INT_MIN, pre_buy = 0, sell = 0, pre_sell = 0;
     for (int price : prices) {
@@ -7308,7 +7308,7 @@ int maxProfit_Cooldown_network(std::vector<int>& prices) {
 
 //310. Minimum Height Trees
 //https://www.cnblogs.com/grandyang/p/5000291.html
-//網解 runtime beats:67.00% memory beats:30.85%
+//Network solution runtime beats:67.00% memory beats:30.85%
 std::vector<int> findMinHeightTrees_network(int n, std::vector<std::vector<int>>& edges) {
     if (n == 1) return { 0 };
     std::vector<int> res;
@@ -7347,7 +7347,7 @@ std::vector<int> findMinHeightTrees_network(int n, std::vector<std::vector<int>>
 
 //312. Burst Balloons
 //https://www.cnblogs.com/grandyang/p/5006441.html
-//網解 runtime beats:42.15% memory beats:37.62%
+//Network solution runtime beats:42.15% memory beats:37.62%
 int maxCoins_network(std::vector<int>& nums) {
     int n = nums.size();
     nums.insert(nums.begin(), 1);
@@ -7364,7 +7364,7 @@ int maxCoins_network(std::vector<int>& nums) {
 }
 
 //313. Super Ugly Number
-//初解 runtime beats:74.24% memory beats:51.60%
+//First solution runtime beats:74.24% memory beats:51.60%
 int nthSuperUglyNumber(int n, std::vector<int>& primes) {
     //參考Ugly Number II
     std::vector<int> dp(n, 0);
@@ -7387,7 +7387,7 @@ int nthSuperUglyNumber(int n, std::vector<int>& primes) {
 
 //315. Count of Smaller Numbers After Self
 //https://www.cnblogs.com/grandyang/p/5078490.html
-//網解 runtime beats:19.68% memory beats:90.01%
+//Network solution runtime beats:19.68% memory beats:90.01%
 std::vector<int> countSmaller_network(std::vector<int>& nums) {
     std::vector<int> t, res(nums.size());
     for (int i = nums.size() - 1; i >= 0; --i) {
@@ -7405,7 +7405,7 @@ std::vector<int> countSmaller_network(std::vector<int>& nums) {
 
 //316. Remove Duplicate Letters
 //https://www.cnblogs.com/grandyang/p/5085379.html
-//網解 runtime beats:95.10% memory beats:70.99%
+//Network solution runtime beats:95.10% memory beats:70.99%
 std::string removeDuplicateLetters(std::string s) {
     //解題思路為先計算每個字母出現次數
     //然後再次遍歷s，若c比res.back小則將visited[res.back]設為0，意思為尚未走訪，且必須符合res.back在後面還會出現，也就是m[res.back] > 0
@@ -7429,7 +7429,7 @@ std::string removeDuplicateLetters(std::string s) {
 
 //318. Maximum Product of Word Lengths
 //https://www.cnblogs.com/grandyang/p/5090058.html
-//網解 runtime beats:96.25% memory beats:80.75%
+//Network solution runtime beats:96.25% memory beats:80.75%
 int maxProduct(std::vector<std::string>& words) {
     //解題思路為以int取代set來判斷words裡出現哪些字母
     //因為只有lowercase所以int(32bits)的後26bits可以代表字母
@@ -7447,7 +7447,7 @@ int maxProduct(std::vector<std::string>& words) {
 }
 
 //321. Create Maximum Number
-//網解 runtime beats:99.79% memory beats:95.00%
+//Network solution runtime beats:99.79% memory beats:95.00%
 void maxNumber_getMax(int* num, int& len, int* result, int& t, int& sortedLen) {
     int n, top = 0;
     result[0] = num[0];
@@ -7541,7 +7541,7 @@ std::vector<int> maxNumber_network(std::vector<int>& nums1, std::vector<int>& nu
 
 //322. Coin Change
 //https://www.cnblogs.com/grandyang/p/5138186.html
-//網解 runtime beats:68.79% memory beats:17.03%
+//Network solution runtime beats:68.79% memory beats:17.03%
 int coinChange_network(std::vector<int>& coins, int amount) {
     //解題思路為i為當前amount，j是在coins中的位置
     //如果i > coins[j]代表說現在的amount可以被1個coins[j] + ?個其他硬幣組合
@@ -7556,7 +7556,7 @@ int coinChange_network(std::vector<int>& coins, int amount) {
     return (dp[amount] > amount) ? -1 : dp[amount];
 }
 
-//網解 runtime beats:99.88% memory beats:91.38%
+//Network solution runtime beats:99.88% memory beats:91.38%
 void coinChange_helper(int& res, std::vector<int>& coins, int target, int idx, int count) {
     if (idx < 0)
         return;
