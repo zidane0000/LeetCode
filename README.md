@@ -1,9 +1,25 @@
 # LeetCode project
 Record the Problem-solving process
 
-[Code Link](https://github.com/zidane0000/LeetCode/blob/master/src/Solution.h)
+[Go Latest Code Link](https://github.com/zidane0000/LeetCode/blob/master/Go/main.go)
 
-## 2024
+[C++ Latest Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution.h)
+
+[C++ 2022 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2022.h)
+
+[C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
+
+## 2024 Go
+- [933]. Number of Recent Calls
+	- First solution runtime beats:86.22% memory beats:76.15%
+- [2390]. Removing Stars From a String
+	- First solution runtime beats:35.90% memory beats:30.66%
+- [2352]. Equal Row and Column Pairs
+	- First solution runtime beats:16.84% memory beats:5.03%
+- [1975]. Maximum Matrix Sum
+	- First solution runtime beats:100.00% memory beats:71.43%
+
+## 2024 C++
 - [1768]. Merge Strings Alternately
 	- First solution | runtime beats:06.54% memory beats:09.06%
 - [1071]. Greatest Common Divisor of Strings
@@ -57,7 +73,7 @@ Record the Problem-solving process
     - Network solution | runtime beats:86.69% memory beats:09.68% [Ref](https://leetcode.com/problems/determine-if-two-strings-are-close/discuss/935920/C%2B%2B-Short-and-Simple-oror-O(-N-)-solution)
 
 
-## 2022
+## 2022 C++
 - [6]. Zigzag Conversion
 	- First solution | runtime beats:44.06% memory beats:49.42%
 - [7]. Reverse Integer
@@ -404,7 +420,7 @@ Record the Problem-solving process
 
 
 
-## 2020
+## 2020 C++
 - [1]. Two Sum
 	- First solution | runtime beats:12.97% memory beats:89.01%
 	- Second solution | runtime beats:55.88% memory beats:42.01%

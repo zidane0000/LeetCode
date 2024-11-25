@@ -5,6 +5,44 @@ import (
 	"strconv"
 )
 
+// 933. Number of Recent Calls
+// First solution runtime beats:86.22% memory beats:76.15%
+type RecentCounter struct {
+	record []int
+}
+
+func Constructor() RecentCounter {
+	return RecentCounter{}
+}
+
+func (this *RecentCounter) Ping(t int) int {
+	this.record = append(this.record, t)
+
+	len := len(this.record)
+	for i, v := range this.record {
+		if t-v <= 3000 {
+			this.record = this.record[i:]
+			return len - i
+		}
+	}
+	return 1
+}
+
+// 2390. Removing Stars From a String
+// First solution runtime beats:35.90% memory beats:30.66%
+func removeStars(s string) string {
+	stack := []rune{}
+	for _, c := range s {
+		if c == '*' {
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, c)
+		}
+	}
+
+	return string(stack)
+}
+
 // 2352. Equal Row and Column Pairs
 // First solution runtime beats:16.84% memory beats:5.03%
 func equalPairs(grid [][]int) int {
@@ -72,16 +110,18 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	println("1975. Maximum Matrix Sum:", maxMatrixSum([][]int{
-		{1, 2, 3},
-		{-1, -2, -3},
-		{1, 2, 3},
-	}))
+	println("2390. Removing Stars From a String:", removeStars("leet**cod*e"))
 
-	println("2352. Equal Row and Column Pairs:", equalPairs([][]int{
-		{3, 1, 2, 2},
-		{1, 4, 4, 5},
-		{2, 4, 2, 2},
-		{2, 4, 2, 2},
-	}))
+	// println("1975. Maximum Matrix Sum:", maxMatrixSum([][]int{
+	// 	{1, 2, 3},
+	// 	{-1, -2, -3},
+	// 	{1, 2, 3},
+	// }))
+
+	// println("2352. Equal Row and Column Pairs:", equalPairs([][]int{
+	// 	{3, 1, 2, 2},
+	// 	{1, 4, 4, 5},
+	// 	{2, 4, 2, 2},
+	// 	{2, 4, 2, 2},
+	// }))
 }
