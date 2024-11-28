@@ -1,9 +1,41 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 )
+
+// 735. Asteroid Collision
+// First solution runtime beats:100.00% memory beats:10.78%
+func asteroidCollision(asteroids []int) []int {
+	var ans []int
+	for i := 0; i < len(asteroids); i++ {
+		if len(ans) == 0 || asteroids[i] > 0 {
+			ans = append(ans, asteroids[i])
+		} else {
+			posi := len(ans) - 1
+			for posi >= 0 && ans[posi] > 0 && (ans[posi]+asteroids[i] < 0) {
+				posi--
+			}
+
+			if posi < 0 {
+				ans = []int{asteroids[i]}
+			} else if ans[posi] < 0 {
+				ans = append(ans[:posi+1], asteroids[i])
+			} else {
+				// ans[posi] is not less than asteroids[i]
+				if ans[posi]+asteroids[i] == 0 {
+					ans = ans[:posi]
+				} else {
+					ans = ans[:posi+1]
+				}
+			}
+		}
+	}
+
+	return ans
+}
 
 // 933. Number of Recent Calls
 // First solution runtime beats:86.22% memory beats:76.15%
@@ -110,7 +142,13 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	println("2390. Removing Stars From a String:", removeStars("leet**cod*e"))
+	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{8, -8}))
+	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{8, 1, 2, 3, 4, -8}))
+	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{9, 1, 2, 3, 4, -8}))
+	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{-2, -1, 1, 2}))
+	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{-2, -2, 1, -2}))
+
+	// println("2390. Removing Stars From a String:", removeStars("leet**cod*e"))
 
 	// println("1975. Maximum Matrix Sum:", maxMatrixSum([][]int{
 	// 	{1, 2, 3},

@@ -10,6 +10,8 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+- [735]. Asteroid Collision
+	- First solution runtime beats:100.00% memory beats:10.78%
 - [933]. Number of Recent Calls
 	- First solution runtime beats:86.22% memory beats:76.15%
 - [2390]. Removing Stars From a String
