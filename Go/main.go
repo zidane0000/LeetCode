@@ -6,6 +6,68 @@ import (
 	"strconv"
 )
 
+// 2130. Maximum Twin Sum of a Linked List
+// First solution runtime beats:47.40% memory beats:55.05%
+func pairSum(head *ListNode) int {
+	// find the half of List
+	var half, end *ListNode = head, head.Next
+	for end.Next != nil {
+		half = half.Next
+		end = end.Next.Next
+	}
+
+	// reverse twins of List
+	twinsHead := reverseList(half.Next)
+
+	// find Maximum Twin Sum
+	MaximumTwinSum := math.MinInt
+	for head != nil && twinsHead != nil {
+		if head.Val+twinsHead.Val > MaximumTwinSum {
+			MaximumTwinSum = head.Val + twinsHead.Val
+		}
+		head = head.Next
+		twinsHead = twinsHead.Next
+	}
+
+	return MaximumTwinSum
+}
+
+// 206. Reverse Linked List
+// First solution runtime beats:100.00% memory beats:9.86%
+func reverseList(head *ListNode) *ListNode {
+	var pre, cur *ListNode = nil, head
+	for cur != nil {
+		next := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
+	}
+
+	return pre
+}
+
+// 328. Odd Even Linked List
+// First solution runtime beats:100.00% memory beats:11.33%
+func oddEvenList(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+
+	var current, tailHead, tailCurrent *ListNode = head, head.Next, head.Next
+	for current.Next != nil && tailCurrent != nil {
+		current.Next = tailCurrent.Next
+		if current.Next != nil {
+			current = current.Next
+			if current != nil {
+				tailCurrent.Next = current.Next
+				tailCurrent = tailCurrent.Next
+			}
+		}
+	}
+	current.Next = tailHead
+	return head
+}
+
 // 735. Asteroid Collision
 // First solution runtime beats:100.00% memory beats:10.78%
 func asteroidCollision(asteroids []int) []int {
@@ -142,11 +204,22 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{8, -8}))
-	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{8, 1, 2, 3, 4, -8}))
-	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{9, 1, 2, 3, 4, -8}))
-	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{-2, -1, 1, 2}))
-	fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{-2, -2, 1, -2}))
+	fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 2, 3, 40, 5, 6, 7, 8})))
+	// fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 20, 3, 4, 5, 6, 7, 8})))
+	// fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 2, 3, 4, 5, 6, 7, 8})))
+
+	// fmt.Printf("206. Reverse Linked List: %v\n", ListNodeToSlice(reverseList(CreateListNode([]int{1, 2, 3, 4, 5, 6, 7, 8}))))
+
+	// fmt.Printf("328. Odd Even Linked List: %v\n", ListNodeToSlice(oddEvenList(CreateListNode([]int{1, 2, 3, 4, 5, 6, 7, 8}))))
+	// fmt.Printf("328. Odd Even Linked List: %v\n", ListNodeToSlice(oddEvenList(CreateListNode([]int{1, 2, 3, 4, 5}))))
+	// fmt.Printf("328. Odd Even Linked List: %v\n", ListNodeToSlice(oddEvenList(CreateListNode([]int{2, 1, 3, 5, 6, 4, 7}))))
+	// fmt.Printf("328. Odd Even Linked List: %v\n", ListNodeToSlice(oddEvenList(CreateListNode([]int{1, 3, 4}))))
+
+	// fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{8, -8}))
+	// fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{8, 1, 2, 3, 4, -8}))
+	// fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{9, 1, 2, 3, 4, -8}))
+	// fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{-2, -1, 1, 2}))
+	// fmt.Printf("933. Number of Recent Calls: %v\n", asteroidCollision([]int{-2, -2, 1, -2}))
 
 	// println("2390. Removing Stars From a String:", removeStars("leet**cod*e"))
 

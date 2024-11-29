@@ -10,6 +10,12 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+- [2130]. Maximum Twin Sum of a Linked List
+	- First solution runtime beats:47.40% memory beats:55.05%
+- [206]. Reverse Linked List
+	- First solution runtime beats:100.00% memory beats:9.86%
+- [328]. Odd Even Linked List
+	- First solution runtime beats:100.00% memory beats:11.33%
 - [735]. Asteroid Collision
 	- First solution runtime beats:100.00% memory beats:10.78%
 - [933]. Number of Recent Calls
