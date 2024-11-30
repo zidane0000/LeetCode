@@ -7,6 +7,41 @@ func Abs(x int64) int64 {
 	return x
 }
 
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func CreateTreeNode(nums []int) *TreeNode {
+	if len(nums) == 0 {
+		return nil
+	}
+
+	root := &TreeNode{Val: nums[0]}
+	queue := []*TreeNode{root}
+	i := 1
+
+	for i < len(nums) {
+		current := queue[0]
+		queue = queue[1:]
+
+		if i < len(nums) && nums[i] != -1 {
+			current.Left = &TreeNode{Val: nums[i]}
+			queue = append(queue, current.Left)
+		}
+		i++
+
+		if i < len(nums) && nums[i] != -1 {
+			current.Right = &TreeNode{Val: nums[i]}
+			queue = append(queue, current.Right)
+		}
+		i++
+	}
+
+	return root
+}
+
 type ListNode struct {
 	Val  int
 	Next *ListNode

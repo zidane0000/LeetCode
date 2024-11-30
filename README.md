@@ -10,6 +10,13 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+- [1161]. Maximum Level Sum of a Binary Tree
+	- First solution runtime beats:89.14% memory beats:32.38%
+- [872]. Leaf-Similar Trees
+	- First solution runtime beats:100.00% memory beats:21.52%
+	- Network solution runtime beats:100.00% memory beats:5.76% [Ref](https://leetcode.com/problems/leaf-similar-trees/discuss/2888866/Go)
+	- Second solution runtime beats:100.00% memory beats:5.76%
+
 - [2130]. Maximum Twin Sum of a Linked List
 	- First solution runtime beats:47.40% memory beats:55.05%
 - [206]. Reverse Linked List

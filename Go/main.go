@@ -3,8 +3,120 @@ package main
 import (
 	"fmt"
 	"math"
+	"slices"
 	"strconv"
 )
+
+// 1161. Maximum Level Sum of a Binary Tree
+// First solution runtime beats:89.14% memory beats:32.38%
+func maxLevelSum(root *TreeNode) int {
+	var currentLevel, maxLevel, maxLevelSum, levelSum int = 1, 0, math.MinInt, 0
+	var levelQueue, nextQueue []*TreeNode = []*TreeNode{root}, []*TreeNode{}
+
+	// Breadth-first search
+	for len(levelQueue) != 0 {
+		for _, node := range levelQueue {
+			levelSum += node.Val
+			if node.Left != nil {
+				nextQueue = append(nextQueue, node.Left)
+			}
+			if node.Right != nil {
+				nextQueue = append(nextQueue, node.Right)
+			}
+		}
+
+		if maxLevelSum < levelSum {
+			maxLevelSum = levelSum
+			maxLevel = currentLevel
+		}
+
+		levelSum = 0
+		levelQueue = nextQueue
+		currentLevel++
+		nextQueue = []*TreeNode{}
+	}
+	return maxLevel
+}
+
+// 872. Leaf-Similar Trees
+// First solution runtime beats:100.00% memory beats:21.52%
+// func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
+// 	var findLeaf func(root *TreeNode, LeafList *[]*TreeNode)
+// 	findLeaf = func(root *TreeNode, LeafList *[]*TreeNode) {
+// 		if root.Left != nil {
+// 			findLeaf(root.Left, LeafList)
+// 		}
+
+// 		if root.Right != nil {
+// 			findLeaf(root.Right, LeafList)
+// 		}
+
+// 		if root.Left == nil && root.Right == nil {
+// 			*LeafList = append(*LeafList, root)
+// 		}
+// 	}
+
+// 	var LeafList1, LeafList2 []*TreeNode
+// 	findLeaf(root1, &LeafList1)
+// 	findLeaf(root2, &LeafList2)
+
+// 	if len(LeafList1) != len(LeafList2) {
+// 		return false
+// 	}
+
+// 	for index, Leaf := range LeafList1 {
+// 		if LeafList2[index].Val != Leaf.Val {
+// 			return false
+// 		}
+// 	}
+
+// 	return true
+// }
+
+// https://leetcode.com/problems/leaf-similar-trees/discuss/2888866/Go
+// Network solution runtime beats:100.00% memory beats:5.76%
+// func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
+// 	// define inner function to get leaf TreeNode Val
+// 	var getLeafVal func(root *TreeNode, vals *[]int)
+// 	getLeafVal = func(root *TreeNode, vals *[]int) {
+// 		if root != nil {
+// 			if (root.Left == nil) && (root.Right == nil) {
+// 				*vals = append(*vals, root.Val)
+// 				return
+// 			}
+
+// 			getLeafVal(root.Left, vals)
+// 			getLeafVal(root.Right, vals)
+// 		}
+// 	}
+
+// 	var leafVals1, leafVals2 []int
+// 	getLeafVal(root1, &leafVals1)
+// 	getLeafVal(root2, &leafVals2)
+
+// 	return reflect.DeepEqual(leafVals1, leafVals2)
+// }
+
+// Second solution runtime beats:100.00% memory beats:5.76%
+func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
+	var findLeaf func(root *TreeNode, LeafList *[]int)
+	findLeaf = func(root *TreeNode, LeafList *[]int) {
+		if root == nil {
+			return
+		} else if root.Left == nil && root.Right == nil {
+			*LeafList = append(*LeafList, root.Val)
+		} else {
+			findLeaf(root.Left, LeafList)
+			findLeaf(root.Right, LeafList)
+		}
+	}
+
+	var LeafValList1, LeafValList2 []int
+	findLeaf(root1, &LeafValList1)
+	findLeaf(root2, &LeafValList2)
+
+	return slices.Equal(LeafValList1, LeafValList2)
+}
 
 // 2130. Maximum Twin Sum of a Linked List
 // First solution runtime beats:47.40% memory beats:55.05%
@@ -204,7 +316,10 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 2, 3, 40, 5, 6, 7, 8})))
+	fmt.Printf("872. Leaf-Similar Trees: %v\n", leafSimilar(CreateTreeNode([]int{3, 5, 1, 6, 2, 9, 8, -1, -1, 7, 4}), CreateTreeNode([]int{3, 5, 1, 6, 7, 4, 2, -1, -1, -1, -1, -1, -1, 9, 8})))
+	fmt.Printf("872. Leaf-Similar Trees: %v\n", leafSimilar(CreateTreeNode([]int{1, 2, 3}), CreateTreeNode([]int{1, 3, 2})))
+
+	// fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 2, 3, 40, 5, 6, 7, 8})))
 	// fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 20, 3, 4, 5, 6, 7, 8})))
 	// fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 2, 3, 4, 5, 6, 7, 8})))
 
