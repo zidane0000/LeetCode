@@ -1,11 +1,117 @@
 package main
 
 import (
-	"fmt"
 	"math"
 	"slices"
 	"strconv"
 )
+
+// 700. Search in a Binary Search Tree
+// First solution runtime beats:100.00% memory beats:6.82%
+// func searchBST(root *TreeNode, val int) *TreeNode {
+// 	queue := []*TreeNode{root}
+// 	nextQueue := []*TreeNode{}
+
+// 	for len(queue) != 0 {
+// 		for _, candidate := range queue {
+// 			if candidate.Val == val {
+// 				return candidate
+// 			}
+
+// 			if candidate.Left != nil {
+// 				nextQueue = append(nextQueue, candidate.Left)
+// 			}
+// 			if candidate.Right != nil {
+// 				nextQueue = append(nextQueue, candidate.Right)
+// 			}
+// 		}
+// 		queue = nextQueue
+// 		nextQueue = []*TreeNode{}
+// 	}
+
+// 	return nil
+// }
+
+// Second solution runtime beats:100.00% memory beats:51.85%
+func searchBST(root *TreeNode, val int) *TreeNode {
+	if root == nil || root.Val == val {
+		return root
+	}
+
+	if root.Val > val {
+		return searchBST(root.Left, val)
+	}
+	return searchBST(root.Right, val)
+}
+
+// 1372. Longest ZigZag Path in a Binary Tree
+// First solution runtime beats:57.14% memory beats:16.08%
+// func longestZigZag(root *TreeNode) int {
+// 	max := func(a int, b int) int {
+// 		if a > b {
+// 			return a
+// 		} else {
+// 			return b
+// 		}
+// 	}
+
+// 	// direction: 0 means left, 1 means right
+// 	var zigZag func(node *TreeNode, len int, direction int) int
+// 	zigZag = func(node *TreeNode, len int, direction int) int {
+// 		if node == nil {
+// 			return len - 1
+// 		}
+
+// 		var leftLen, rightLin int
+// 		if direction == 0 {
+// 			leftLen = zigZag(node.Left, 1, 0)
+// 			rightLin = zigZag(node.Right, len+1, 1)
+// 		} else {
+// 			leftLen = zigZag(node.Left, len+1, 0)
+// 			rightLin = zigZag(node.Right, 1, 1)
+// 		}
+
+// 		return max(leftLen, rightLin)
+// 	}
+
+// 	return max(zigZag(root.Left, 1, 0), zigZag(root.Right, 1, 1))
+// }
+
+// https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/discuss/6032839/EASY-oror-94-BEATS-PROOF-oror-JAVA-oror-BEGINNER-FRIENDLY-oror-DETAILED-EXPLANATION
+// Network solution runtime beats:98.41% memory beats:73.37%
+func longestZigZag(root *TreeNode) int {
+	max := func(a int, b int) int {
+		if a > b {
+			return a
+		}
+		return b
+	}
+
+	longestLen := math.MinInt
+
+	// direction: 0 means left, 1 means right
+	var zigZag func(node *TreeNode, len int, isLeft bool)
+	zigZag = func(node *TreeNode, len int, isLeft bool) {
+		if node == nil {
+			return
+		}
+
+		longestLen = max(longestLen, len)
+
+		if isLeft {
+			zigZag(node.Left, 1, true)
+			zigZag(node.Right, len+1, false)
+		} else {
+			zigZag(node.Left, len+1, true)
+			zigZag(node.Right, 1, false)
+		}
+	}
+
+	zigZag(root.Left, 1, true)
+	zigZag(root.Right, 1, false)
+
+	return longestLen
+}
 
 // 1161. Maximum Level Sum of a Binary Tree
 // First solution runtime beats:89.14% memory beats:32.38%
@@ -316,8 +422,14 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("872. Leaf-Similar Trees: %v\n", leafSimilar(CreateTreeNode([]int{3, 5, 1, 6, 2, 9, 8, -1, -1, 7, 4}), CreateTreeNode([]int{3, 5, 1, 6, 7, 4, 2, -1, -1, -1, -1, -1, -1, 9, 8})))
-	fmt.Printf("872. Leaf-Similar Trees: %v\n", leafSimilar(CreateTreeNode([]int{1, 2, 3}), CreateTreeNode([]int{1, 3, 2})))
+	// fmt.Printf("700. Search in a Binary Search Tree: %v\n", searchBST(CreateTreeNode([]int{4, 2, 7, 1, 3}), 3))
+	// fmt.Printf("700. Search in a Binary Search Tree: %v\n", searchBST(CreateTreeNode([]int{4, 2, 7, 1, 3}), 5))
+
+	// fmt.Printf("1372. Longest ZigZag Path in a Binary Tree: %v\n", longestZigZag(CreateTreeNode([]int{1, 1, 1, -1, 1, -1, -1, 1, 1, -1, 1})))
+	// fmt.Printf("1372. Longest ZigZag Path in a Binary Tree: %v\n", longestZigZag(CreateTreeNode([]int{1})))
+
+	// fmt.Printf("872. Leaf-Similar Trees: %v\n", leafSimilar(CreateTreeNode([]int{3, 5, 1, 6, 2, 9, 8, -1, -1, 7, 4}), CreateTreeNode([]int{3, 5, 1, 6, 7, 4, 2, -1, -1, -1, -1, -1, -1, 9, 8})))
+	// fmt.Printf("872. Leaf-Similar Trees: %v\n", leafSimilar(CreateTreeNode([]int{1, 2, 3}), CreateTreeNode([]int{1, 3, 2})))
 
 	// fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 2, 3, 40, 5, 6, 7, 8})))
 	// fmt.Printf("2130. Maximum Twin Sum of a Linked List: %v\n", pairSum(CreateListNode([]int{1, 20, 3, 4, 5, 6, 7, 8})))

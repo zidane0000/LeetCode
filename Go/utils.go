@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func Abs(x int64) int64 {
 	if x < 0 {
 		return -x
@@ -40,6 +42,30 @@ func CreateTreeNode(nums []int) *TreeNode {
 	}
 
 	return root
+}
+
+// PrintTree prints the tree nodes in a level-order traversal.
+func PrintTree(root *TreeNode) {
+	if root == nil {
+		fmt.Println("The tree is empty.")
+		return
+	}
+
+	queue := []*TreeNode{root}
+
+	for len(queue) > 0 {
+		current := queue[0]
+		queue = queue[1:]
+
+		if current != nil {
+			fmt.Print(current.Val, " ")
+			queue = append(queue, current.Left)
+			queue = append(queue, current.Right)
+		} else {
+			fmt.Print("nil ")
+		}
+	}
+	fmt.Println()
 }
 
 type ListNode struct {

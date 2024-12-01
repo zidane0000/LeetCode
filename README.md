@@ -10,6 +10,13 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+
+- [700]. Search in a Binary Search Tree
+	- First solution runtime beats:100.00% memory beats:6.82%
+	- Second solution runtime beats:100.00% memory beats:51.85%
+- [1372]. Longest ZigZag Path in a Binary Tree
+	- First solution runtime beats:57.14% memory beats:16.08%
+	- Network solution runtime beats:98.41% memory beats:73.37% [Ref](https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/discuss/6032839/EASY-oror-94-BEATS-PROOF-oror-JAVA-oror-BEGINNER-FRIENDLY-oror-DETAILED-EXPLANATION)
 - [1161]. Maximum Level Sum of a Binary Tree
 	- First solution runtime beats:89.14% memory beats:32.38%
 - [872]. Leaf-Similar Trees
