@@ -10,7 +10,13 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
-
+- [841]. Keys and Rooms
+	- First solution runtime beats:100.00% memory beats:12.18%
+	- Network solution runtime beats:100.00% memory beats:33.97% [Find-tune the Ref](https://leetcode.com/problems/keys-and-rooms/discuss/3603371/O(n%2Be)-DFS-Runtime-100-or-Memory-92.6)
+- [1455]. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+	- First solution runtime beats:100.00% memory beats:33.33%
+- [450]. Delete Node in a BST
+	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
 - [700]. Search in a Binary Search Tree
 	- First solution runtime beats:100.00% memory beats:6.82%
 	- Second solution runtime beats:100.00% memory beats:51.85%

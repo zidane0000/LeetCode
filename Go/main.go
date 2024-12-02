@@ -1,10 +1,99 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"slices"
 	"strconv"
+	"strings"
 )
+
+// 841. Keys and Rooms
+// First solution runtime beats:100.00% memory beats:12.18%
+// func canVisitAllRooms(rooms [][]int) bool {
+// 	count := len(rooms)
+// 	IsOpen := make(map[int]bool, count)
+// 	IsOpen[0] = true
+// 	canOpen := rooms[0]
+// 	i := 0
+// 	for i < len(canOpen) {
+// 		println(canOpen[i])
+// 		fmt.Printf("IsOpen:%v\n", IsOpen)
+// 		if !IsOpen[canOpen[i]] {
+// 			IsOpen[canOpen[i]] = true
+// 			canOpen = append(canOpen, rooms[canOpen[i]]...)
+// 			count--
+// 		}
+// 		i++
+// 	}
+// 	return count == 1
+// }
+
+// https://leetcode.com/problems/keys-and-rooms/discuss/3603371/O(n%2Be)-DFS-Runtime-100-or-Memory-92.6
+// Network solution runtime beats:100.00% memory beats:33.97%
+func canVisitAllRooms(rooms [][]int) bool {
+	counter := 0
+	visitedRooms := make([]bool, len(rooms))
+
+	var walkRoom func(int)
+	walkRoom = func(room int) {
+		if visitedRooms[room] {
+			return
+		}
+		visitedRooms[room] = true
+		counter++
+		for _, rm := range rooms[room] {
+			walkRoom(rm)
+		}
+	}
+
+	walkRoom(0)
+
+	return counter == len(rooms)
+}
+
+// 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+// First solution runtime beats:100.00% memory beats:33.33%
+func isPrefixOfWord(sentence string, searchWord string) int {
+	words := strings.Split(sentence, " ")
+	for i, word := range words {
+		if strings.HasPrefix(word, searchWord) {
+			return i + 1
+		}
+	}
+	return -1
+}
+
+// 450. Delete Node in a BST
+// comment from skyblue_cat in https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution
+// Network solution runtime beats:100.00% memory beats:13.89%
+func deleteNode(root *TreeNode, key int) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	if root.Val > key {
+		root.Left = deleteNode(root.Left, key)
+	} else if root.Val < key {
+		root.Right = deleteNode(root.Right, key)
+	} else {
+		if root.Left == nil {
+			return root.Right
+		}
+		if root.Right == nil {
+			return root.Left
+		}
+
+		// key is set root left to right smallest node left
+		rightSmallest := root.Right
+		for rightSmallest.Left != nil {
+			rightSmallest = rightSmallest.Left
+		}
+		rightSmallest.Left = root.Left
+		return root.Right
+	}
+	return root
+}
 
 // 700. Search in a Binary Search Tree
 // First solution runtime beats:100.00% memory beats:6.82%
@@ -422,6 +511,16 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
+	fmt.Printf("841. Keys and Rooms: %v\n", canVisitAllRooms([][]int{{1}, {2}, {3}, {}}))
+	fmt.Printf("841. Keys and Rooms: %v\n", canVisitAllRooms([][]int{{1, 3}, {3, 0, 1}, {2}, {0}}))
+
+	// fmt.Println("450. Delete Node in a BST:")
+	// PrintTree(deleteNode(CreateTreeNode([]int{4, 2, 7, 1, 3}), 2))
+	// fmt.Println("450. Delete Node in a BST:")
+	// PrintTree(deleteNode(CreateTreeNode([]int{4, 2, 7, 1, 3}), 3))
+	// fmt.Println("450. Delete Node in a BST:")
+	// PrintTree(deleteNode(CreateTreeNode([]int{4, 2, 7, 1, 3}), 5))
+
 	// fmt.Printf("700. Search in a Binary Search Tree: %v\n", searchBST(CreateTreeNode([]int{4, 2, 7, 1, 3}), 3))
 	// fmt.Printf("700. Search in a Binary Search Tree: %v\n", searchBST(CreateTreeNode([]int{4, 2, 7, 1, 3}), 5))
 
