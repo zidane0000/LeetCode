@@ -8,6 +8,52 @@ import (
 	"strings"
 )
 
+// 2825. Make String a Subsequence Using Cyclic Increments
+// First solution runtime beats:100.00% memory beats:44.44%
+func canMakeSubsequence(str1 string, str2 string) bool {
+	index1, index2 := 0, 0
+	for index1 < len(str1) && index2 < len(str2) {
+		// also can rewrite to str1[index1] == str2[index2] || str1[index1] + 1 == str2[index2] || (str1[index1] == 'z' && (str2[index2] == 'a')
+		if (str1[index1] == 'z' && (str2[index2] == 'z' || str2[index2] == 'a')) || (str2[index2]-str1[index1] < 2) {
+			index2++
+		}
+		index1++
+	}
+
+	return index2 == len(str2)
+}
+
+// 2109. Adding Spaces to a String
+// First solution Time Limit Exceeded
+// func addSpaces(s string, spaces []int) string {
+// 	ans := ""
+// 	preSpace := 0
+// 	for _, space := range spaces {
+// 		ans = ans + s[preSpace:(space)] + " "
+// 		println(ans)
+// 		preSpace = space
+// 	}
+// 	ans = ans + s[preSpace:]
+
+// 	return ans
+// }
+
+// https://leetcode.com/problems/adding-spaces-to-a-string/discuss/5137248/Go-Easy
+// Network solution runtime beats:91.43% memory beats:85.37%
+func addSpaces(s string, spaces []int) string {
+	b := make([]uint8, 0, len(s)+len(spaces))
+
+	for sIndex, spaceIndex := 0, 0; sIndex < len(s); sIndex++ {
+		if spaceIndex < len(spaces) && sIndex == spaces[spaceIndex] {
+			b = append(b, ' ')
+			spaceIndex++
+		}
+		b = append(b, s[sIndex])
+	}
+
+	return string(b)
+}
+
 // 841. Keys and Rooms
 // First solution runtime beats:100.00% memory beats:12.18%
 // func canVisitAllRooms(rooms [][]int) bool {
@@ -511,8 +557,32 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("841. Keys and Rooms: %v\n", canVisitAllRooms([][]int{{1}, {2}, {3}, {}}))
-	fmt.Printf("841. Keys and Rooms: %v\n", canVisitAllRooms([][]int{{1, 3}, {3, 0, 1}, {2}, {0}}))
+	fmt.Printf("547. Number of Provinces: %v\n", findCircleNum([][]int{
+		{1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+		{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+		{0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+		{0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
+		{1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0},
+		{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+		{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+		{0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}}))
+
+	// fmt.Printf("2825. Make String a Subsequence Using Cyclic Increments: %v\n", canMakeSubsequence("a", "a"))
+	// fmt.Printf("2825. Make String a Subsequence Using Cyclic Increments: %v\n", canMakeSubsequence("a", "abc"))
+	// fmt.Printf("2825. Make String a Subsequence Using Cyclic Increments: %v\n", canMakeSubsequence("abc", "ad"))
+
+	// fmt.Printf("2109. Adding Spaces to a String: %v\n", addSpaces("abc", []int{1, 2, 3}))
+	// fmt.Printf("2109. Adding Spaces to a String: %v\n", addSpaces("abcdefg", []int{1, 2, 3}))
+
+	// fmt.Printf("841. Keys and Rooms: %v\n", canVisitAllRooms([][]int{{1}, {2}, {3}, {}}))
+	// fmt.Printf("841. Keys and Rooms: %v\n", canVisitAllRooms([][]int{{1, 3}, {3, 0, 1}, {2}, {0}}))
 
 	// fmt.Println("450. Delete Node in a BST:")
 	// PrintTree(deleteNode(CreateTreeNode([]int{4, 2, 7, 1, 3}), 2))

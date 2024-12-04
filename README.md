@@ -10,6 +10,11 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+- [2825.] Make String a Subsequence Using Cyclic Increments
+	- First solution runtime beats:100.00% memory beats:44.44%
+- [2109]. Adding Spaces to a String
+	- First solution Time Limit Exceeded
+	- Network solution runtime beats:91.43% memory beats:85.37% [Ref](https://leetcode.com/problems/adding-spaces-to-a-string/discuss/5137248/Go-Easy)
 - [841]. Keys and Rooms
 	- First solution runtime beats:100.00% memory beats:12.18%
 	- Network solution runtime beats:100.00% memory beats:33.97% [Find-tune the Ref](https://leetcode.com/problems/keys-and-rooms/discuss/3603371/O(n%2Be)-DFS-Runtime-100-or-Memory-92.6)
