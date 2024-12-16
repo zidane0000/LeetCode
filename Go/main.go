@@ -8,6 +8,62 @@ import (
 	"strings"
 )
 
+// 99. Recover Binary Search Tree
+// https://leetcode.com/problems/recover-binary-search-tree/discuss/1962281/C%2B%2B-oror-Easy-to-understand
+// Network solution runtime beats:100.00% memory beats:68.69%
+func recoverTree(root *TreeNode) {
+	var firstMistake, secondMistake *TreeNode
+	pre := &TreeNode{Val: math.MinInt}
+	var inorder func(*TreeNode)
+	inorder = func(root *TreeNode) {
+		if root == nil {
+			return
+		}
+
+		inorder(root.Left)
+
+		if firstMistake == nil && root.Val < pre.Val {
+			firstMistake = pre
+		}
+		if firstMistake != nil && root.Val < pre.Val {
+			secondMistake = root
+		}
+		pre = root
+
+		inorder(root.Right)
+	}
+
+	inorder(root)
+
+	temp := firstMistake.Val
+	firstMistake.Val = secondMistake.Val
+	secondMistake.Val = temp
+}
+
+// 94. Binary Tree Inorder Traversal
+// First solution runtime beats:100.00% memory beats:35.33%
+func inorderTraversal(root *TreeNode) []int {
+	var ans []int
+	var DFS func(*TreeNode)
+	DFS = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+
+		if node.Left != nil {
+			DFS(node.Left)
+		}
+		ans = append(ans, node.Val)
+
+		if node.Right != nil {
+			DFS(node.Right)
+		}
+	}
+	DFS(root)
+
+	return ans
+}
+
 // 1466. Reorder Routes to Make All Paths Lead to the City Zero
 // https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/discuss/1833582/Go-Golang-DFS-Adjacency-List
 // Network solution runtime beats:81.59% memory beats:34.52%
@@ -622,22 +678,24 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("547. Number of Provinces: %v\n", findCircleNum([][]int{
-		{1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-		{0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-		{0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0},
-		{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1},
-		{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-		{0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}}))
+	fmt.Printf("94. Binary Tree Inorder Traversal: %v\n", inorderTraversal(CreateTreeNode([]int{4, 2, 7, 1, 3})))
+
+	// fmt.Printf("547. Number of Provinces: %v\n", findCircleNum([][]int{
+	// 	{1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+	// 	{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	// 	{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	// 	{0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+	// 	{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	// 	{0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+	// 	{0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
+	// 	{1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+	// 	{0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0},
+	// 	{0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+	// 	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0},
+	// 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+	// 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+	// 	{0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
+	// 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}}))
 
 	// fmt.Printf("2825. Make String a Subsequence Using Cyclic Increments: %v\n", canMakeSubsequence("a", "a"))
 	// fmt.Printf("2825. Make String a Subsequence Using Cyclic Increments: %v\n", canMakeSubsequence("a", "abc"))

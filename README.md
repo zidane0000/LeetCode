@@ -10,6 +10,10 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+- [99]. Recover Binary Search Tree [Ref](https://leetcode.com/problems/recover-binary-search-tree/discuss/1962281/C%2B%2B-oror-Easy-to-understand)
+	- Network solution runtime beats:100.00% memory beats:68.69%
+- [94]. Binary Tree Inorder Traversal
+	- First solution runtime beats:100.00% memory beats:35.33%
 - [1466]. Reorder Routes to Make All Paths Lead to the City Zero
 	- Network solution runtime beats:81.59% memory beats:34.52% [Ref](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/discuss/1833582/Go-Golang-DFS-Adjacency-List)
 - [547]. Number of Provinces
