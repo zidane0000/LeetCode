@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func Abs(x int64) int64 {
+func Abs[T int | int64](x T) T {
 	if x < 0 {
 		return -x
 	}

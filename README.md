@@ -10,6 +10,10 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+- [1466]. Reorder Routes to Make All Paths Lead to the City Zero
+	- Network solution runtime beats:81.59% memory beats:34.52% [Ref](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/discuss/1833582/Go-Golang-DFS-Adjacency-List)
+- [547]. Number of Provinces
+	- Official solution runtime beats:100.00% memory beats:76.26%
 - [2825.] Make String a Subsequence Using Cyclic Increments
 	- First solution runtime beats:100.00% memory beats:44.44%
 - [2109]. Adding Spaces to a String

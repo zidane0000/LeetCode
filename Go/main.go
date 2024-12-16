@@ -8,6 +8,71 @@ import (
 	"strings"
 )
 
+// 1466. Reorder Routes to Make All Paths Lead to the City Zero
+// https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/discuss/1833582/Go-Golang-DFS-Adjacency-List
+// Network solution runtime beats:81.59% memory beats:34.52%
+func minReorder(n int, connections [][]int) int {
+	// Start at city 0
+	// recursively check its neighbors
+	// count outgoing edges
+
+	neighbors := make(map[int][]int, n)
+	for _, connection := range connections {
+		neighbors[connection[0]] = append(neighbors[connection[0]], -connection[1]) // means arrow
+		neighbors[connection[1]] = append(neighbors[connection[1]], connection[0])
+	}
+
+	visit := make([]bool, n)
+	change := 0
+
+	var DFS func(int)
+	DFS = func(city int) {
+		visit[city] = true
+		for _, neighbor := range neighbors[city] {
+			if neighbor < 0 {
+				neighbor = -neighbor
+				if !visit[neighbor] {
+					change++
+					DFS(neighbor)
+				}
+			} else {
+				if !visit[neighbor] {
+					DFS(neighbor)
+				}
+			}
+		}
+	}
+
+	DFS(0)
+
+	return change
+}
+
+// 547. Number of Provinces
+// Official solution runtime beats:100.00% memory beats:76.26%
+func findCircleNum(isConnected [][]int) int {
+	n := len(isConnected)
+	province := 0
+	visit := make([]bool, n)
+	var DFS func(int)
+	DFS = func(city int) {
+		visit[city] = true
+		for i := 0; i < n; i++ {
+			if isConnected[city][i] == 1 && !visit[i] {
+				DFS(i)
+			}
+		}
+	}
+
+	for i := 0; i < n; i++ {
+		if !visit[i] {
+			province++
+			DFS(i)
+		}
+	}
+	return province
+}
+
 // 2825. Make String a Subsequence Using Cyclic Increments
 // First solution runtime beats:100.00% memory beats:44.44%
 func canMakeSubsequence(str1 string, str2 string) bool {
