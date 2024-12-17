@@ -10,6 +10,14 @@ Record the Problem-solving process
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
 ## 2024 Go
+- [1046]. Last Stone Weight
+	- first solution runtime beats:100.00% memory beats:23.16%
+- [506]. Relative Ranks
+	- Official solution runtime beats:49.53% memory beats:26.61%
+	- AI solution runtime beats:100.00% memory beats:11.93%
+- [1926]. Nearest Exit from Entrance in Maze
+	- First solution runtime beats:63.16% memory beats:25.82%
+	- Network solution runtime beats:82.78% memory beats:97.18% [Ref](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/discuss/2835220/Go-Solution-BFS-oror-100-memory-oror-90%2B-runtime)
 - [99]. Recover Binary Search Tree [Ref](https://leetcode.com/problems/recover-binary-search-tree/discuss/1962281/C%2B%2B-oror-Easy-to-understand)
 	- Network solution runtime beats:100.00% memory beats:68.69%
 - [94]. Binary Tree Inorder Traversal
