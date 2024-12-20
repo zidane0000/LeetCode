@@ -9,23 +9,27 @@ Record the Problem-solving process
 
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)
 
-## 2024 Go
-- [1046]. Last Stone Weight
-	- first solution runtime beats:100.00% memory beats:23.16%
+## Need Practice
 - [506]. Relative Ranks
 	- Official solution runtime beats:49.53% memory beats:26.61%
 	- AI solution runtime beats:100.00% memory beats:11.93%
-- [1926]. Nearest Exit from Entrance in Maze
-	- First solution runtime beats:63.16% memory beats:25.82%
-	- Network solution runtime beats:82.78% memory beats:97.18% [Ref](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/discuss/2835220/Go-Solution-BFS-oror-100-memory-oror-90%2B-runtime)
 - [99]. Recover Binary Search Tree [Ref](https://leetcode.com/problems/recover-binary-search-tree/discuss/1962281/C%2B%2B-oror-Easy-to-understand)
 	- Network solution runtime beats:100.00% memory beats:68.69%
-- [94]. Binary Tree Inorder Traversal
-	- First solution runtime beats:100.00% memory beats:35.33%
 - [1466]. Reorder Routes to Make All Paths Lead to the City Zero
 	- Network solution runtime beats:81.59% memory beats:34.52% [Ref](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/discuss/1833582/Go-Golang-DFS-Adjacency-List)
 - [547]. Number of Provinces
 	- Official solution runtime beats:100.00% memory beats:76.26%
+- [450]. Delete Node in a BST
+	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
+
+## 2024 Go
+- [1046]. Last Stone Weight
+	- First solution runtime beats:100.00% memory beats:23.16%
+- [1926]. Nearest Exit from Entrance in Maze
+	- First solution runtime beats:63.16% memory beats:25.82%
+	- Network solution runtime beats:82.78% memory beats:97.18% [Ref](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/discuss/2835220/Go-Solution-BFS-oror-100-memory-oror-90%2B-runtime)
+- [94]. Binary Tree Inorder Traversal
+	- First solution runtime beats:100.00% memory beats:35.33%
 - [2825.] Make String a Subsequence Using Cyclic Increments
 	- First solution runtime beats:100.00% memory beats:44.44%
 - [2109]. Adding Spaces to a String
@@ -36,8 +40,6 @@ Record the Problem-solving process
 	- Network solution runtime beats:100.00% memory beats:33.97% [Find-tune the Ref](https://leetcode.com/problems/keys-and-rooms/discuss/3603371/O(n%2Be)-DFS-Runtime-100-or-Memory-92.6)
 - [1455]. Check If a Word Occurs As a Prefix of Any Word in a Sentence
 	- First solution runtime beats:100.00% memory beats:33.33%
-- [450]. Delete Node in a BST
-	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
 - [700]. Search in a Binary Search Tree
 	- First solution runtime beats:100.00% memory beats:6.82%
 	- Second solution runtime beats:100.00% memory beats:51.85%
@@ -50,7 +52,6 @@ Record the Problem-solving process
 	- First solution runtime beats:100.00% memory beats:21.52%
 	- Network solution runtime beats:100.00% memory beats:5.76% [Ref](https://leetcode.com/problems/leaf-similar-trees/discuss/2888866/Go)
 	- Second solution runtime beats:100.00% memory beats:5.76%
-
 - [2130]. Maximum Twin Sum of a Linked List
 	- First solution runtime beats:47.40% memory beats:55.05%
 - [206]. Reverse Linked List
