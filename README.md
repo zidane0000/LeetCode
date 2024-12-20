@@ -23,6 +23,10 @@ Record the Problem-solving process
 	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
 
 ## 2024 Go
+- [399]. Evaluate Division
+	- First solution runtime beats:100.00% memory beats:25.51%
+- [374]. Guess Number Higher or Lower
+	- First solution runtime beats:71.07% memory beats:30.37%
 - [1046]. Last Stone Weight
 	- First solution runtime beats:100.00% memory beats:23.16%
 - [1926]. Nearest Exit from Entrance in Maze

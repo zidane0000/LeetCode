@@ -9,8 +9,76 @@ import (
 	"strings"
 )
 
+// 399. Evaluate Division
+// First solution runtime beats:100.00% memory beats:25.51%
+func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
+	candidate := make(map[string][]string)
+	equationsMap := make(map[string]float64)
+	for i, equation := range equations {
+		equationsMap[equation[0]+" "+equation[1]] = values[i]
+		equationsMap[equation[1]+" "+equation[0]] = 1 / values[i]
+		equationsMap[equation[0]+" "+equation[0]] = 1
+		equationsMap[equation[1]+" "+equation[1]] = 1
+		candidate[equation[0]] = append(candidate[equation[0]], equation[1])
+		candidate[equation[1]] = append(candidate[equation[1]], equation[0])
+	}
+
+	var solve func(front, back string, visited map[string]bool) float64
+	solve = func(front, back string, visited map[string]bool) float64 {
+		if ans, exist := equationsMap[front+" "+back]; exist {
+			return ans
+		}
+
+		if visited[front] {
+			return -1.0
+		}
+		visited[front] = true
+
+		for _, cand := range candidate[front] {
+			if ans := solve(cand, back, visited); ans != -1.0 {
+				equationsMap[front+" "+back] = equationsMap[front+" "+cand] * ans
+				return equationsMap[front+" "+back]
+			}
+		}
+		return -1.0
+	}
+
+	ans := []float64{}
+	for _, query := range queries {
+		visited := make(map[string]bool)
+		ans = append(ans, solve(query[0], query[1], visited))
+	}
+	return ans
+}
+
+// 374. Guess Number Higher or Lower
+// First solution runtime beats:71.07% memory beats:30.37%
+/**
+ * Forward declaration of guess API.
+ * @param  num   your guess
+ * @return 	     -1 if num is higher than the picked number
+ *			      1 if num is lower than the picked number
+ *               otherwise return 0
+ * func guess(num int) int;
+ */
+// func guessNumber(n int) int {
+// 	left, right := 1, n
+// 	for left < right {
+// 		mid := left + (right-left)/2
+// 		switch guess(mid) {
+// 		case -1:
+// 			right = mid - 1
+// 		case 1:
+// 			left = mid + 1
+// 		case 0:
+// 			return mid
+// 		}
+// 	}
+// 	return left
+// }
+
 // 1046. Last Stone Weight
-// first solution runtime beats:100.00% memory beats:23.16%
+// First solution runtime beats:100.00% memory beats:23.16%
 func lastStoneWeight(stones []int) int {
 	for len(stones) > 1 {
 		sort.Slice(stones, func(i, j int) bool {
@@ -843,7 +911,9 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("1046. Last Stone Weight: %v\n", lastStoneWeight([]int{1, 2, 9, 10, 4}))
+	fmt.Printf("399. Evaluate Division: %v\n", calcEquation([][]string{{"1", "2"}, {"2", "3"}, {"3", "4"}}, []float64{3.0, 4.0, 5.0}, [][]string{{"2", "4"}}))
+
+	// fmt.Printf("1046. Last Stone Weight: %v\n", lastStoneWeight([]int{1, 2, 9, 10, 4}))
 
 	// fmt.Printf("506. Relative Ranks: %v\n", findRelativeRanks([]int{1, 2, 9, 10, 4}))
 
