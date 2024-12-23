@@ -9,6 +9,58 @@ import (
 	"strings"
 )
 
+// 2471. Minimum Number of Operations to Sort a Binary Tree by Level
+// First solution runtime beats:10.00% memory beats:60.00%
+func minimumOperations(root *TreeNode) int {
+	queue := []*TreeNode{root}
+	queueValue := []int{root.Val}
+	swap := 0
+
+	var pickSmall func(slice []int) int
+	pickSmall = func(slice []int) int {
+		if len(slice) == 1 {
+			return 0
+		}
+
+		smallIndex := 0
+		for i := 1; i < len(slice); i++ {
+			if slice[smallIndex] > slice[i] {
+				smallIndex = i
+			}
+		}
+
+		if smallIndex != 0 {
+			temp := slice[smallIndex]
+			slice[smallIndex] = slice[0]
+			slice[0] = temp
+			return 1 + pickSmall(slice[1:])
+		}
+		return 0 + pickSmall(slice[1:])
+	}
+
+	for len(queue) > 0 {
+		swap += pickSmall(queueValue)
+
+		nextQueue := []*TreeNode{}
+		nextQueueValue := []int{}
+		for _, q := range queue {
+			if q.Left != nil {
+				nextQueue = append(nextQueue, q.Left)
+				nextQueueValue = append(nextQueueValue, q.Left.Val)
+			}
+
+			if q.Right != nil {
+				nextQueue = append(nextQueue, q.Right)
+				nextQueueValue = append(nextQueueValue, q.Right.Val)
+			}
+		}
+		queue = nextQueue
+		queueValue = nextQueueValue
+	}
+
+	return swap
+}
+
 // 399. Evaluate Division
 // First solution runtime beats:100.00% memory beats:25.51%
 func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
@@ -911,7 +963,9 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("399. Evaluate Division: %v\n", calcEquation([][]string{{"1", "2"}, {"2", "3"}, {"3", "4"}}, []float64{3.0, 4.0, 5.0}, [][]string{{"2", "4"}}))
+	fmt.Printf("2471. Minimum Number of Operations to Sort a Binary Tree by Level: %v\n", minimumOperations(CreateTreeNode([]int{1, 4, 3, 7, 6, 8, 5, -1, -1, -1, -1, 9, -1, 10})))
+
+	// fmt.Printf("399. Evaluate Division: %v\n", calcEquation([][]string{{"1", "2"}, {"2", "3"}, {"3", "4"}}, []float64{3.0, 4.0, 5.0}, [][]string{{"2", "4"}}))
 
 	// fmt.Printf("1046. Last Stone Weight: %v\n", lastStoneWeight([]int{1, 2, 9, 10, 4}))
 

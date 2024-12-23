@@ -23,6 +23,8 @@ Record the Problem-solving process
 	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
 
 ## 2024 Go
+- [2471]. Minimum Number of Operations to Sort a Binary Tree by Level
+	- First solution runtime beats:10.00% memory beats:60.00%
 - [399]. Evaluate Division
 	- First solution runtime beats:100.00% memory beats:25.51%
 - [374]. Guess Number Higher or Lower
