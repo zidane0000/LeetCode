@@ -9,6 +9,85 @@ import (
 	"strings"
 )
 
+// 274. H-Index
+// First solution runtime beats:100.00% memory beats:22.62%
+func hIndex(citations []int) int {
+	n := len(citations)
+	possible := make([]int, n)
+
+	for i := 0; i < n; i++ {
+		for j := 0; j < min(n, citations[i]); j++ {
+			possible[j]++
+		}
+	}
+
+	for i := n - 1; i >= 0; i-- {
+		if possible[i] > i {
+			return i + 1
+		}
+	}
+	return 0
+}
+
+// 88. Merge Sorted Array
+// First solution runtime beats:100.00% memory beats:19.18%
+// func merge(nums1 []int, m int, nums2 []int, n int) {
+// 	i, j, k := 0, 0, 0
+// 	nums1Copy := make([]int, m)
+// 	copy(nums1Copy, nums1[:m])
+// 	for i < m && j < n {
+// 		if nums1Copy[i] < nums2[j] {
+// 			nums1[k] = nums1Copy[i]
+// 			i++
+// 		} else {
+// 			nums1[k] = nums2[j]
+// 			j++
+// 		}
+// 		k++
+// 	}
+
+// 	for i < m {
+// 		nums1[k] = nums1Copy[i]
+// 		i++
+// 		k++
+// 	}
+
+// 	for j < n {
+// 		nums1[k] = nums2[j]
+// 		j++
+// 		k++
+// 	}
+// }
+
+// Second solution runtime beats:100.00% memory beats:5.25%
+func merge(nums1 []int, m int, nums2 []int, n int) {
+	// sort from back
+	i, j, k := m-1, n-1, m+n-1
+
+	for i >= 0 && j >= 0 {
+		if nums1[i] > nums2[j] {
+			nums1[k] = nums1[i]
+			i--
+		} else {
+			nums1[k] = nums2[j]
+			j--
+		}
+		k--
+	}
+
+	for i >= 0 {
+		nums1[k] = nums1[i]
+		i--
+		k--
+	}
+
+	for j >= 0 {
+		nums1[k] = nums2[j]
+		j--
+		k--
+	}
+}
+
 // 2471. Minimum Number of Operations to Sort a Binary Tree by Level
 // First solution runtime beats:10.00% memory beats:60.00%
 func minimumOperations(root *TreeNode) int {
@@ -963,7 +1042,12 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("2471. Minimum Number of Operations to Sort a Binary Tree by Level: %v\n", minimumOperations(CreateTreeNode([]int{1, 4, 3, 7, 6, 8, 5, -1, -1, -1, -1, 9, -1, 10})))
+	nums1 := []int{1, 2, 3, 0, 0, 0}
+	nums2 := []int{2, 5, 6}
+	merge(nums1, 3, nums2, 3)
+	fmt.Printf("88. Merge Sorted Array: %v\n", nums1)
+
+	// fmt.Printf("2471. Minimum Number of Operations to Sort a Binary Tree by Level: %v\n", minimumOperations(CreateTreeNode([]int{1, 4, 3, 7, 6, 8, 5, -1, -1, -1, -1, 9, -1, 10})))
 
 	// fmt.Printf("399. Evaluate Division: %v\n", calcEquation([][]string{{"1", "2"}, {"2", "3"}, {"3", "4"}}, []float64{3.0, 4.0, 5.0}, [][]string{{"2", "4"}}))
 
