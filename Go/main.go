@@ -9,6 +9,36 @@ import (
 	"strings"
 )
 
+// 61. Rotate List
+// First solution runtime beats:100.00% memory beats:6.28%
+func rotateRight(head *ListNode, k int) *ListNode {
+	if head == nil || k == 0 {
+		return head
+	}
+
+	n := 0
+	NodeMap := make(map[int]*ListNode)
+
+	for head != nil {
+		NodeMap[n] = head
+		n++
+		head = head.Next
+	}
+
+	nMod := n - k%n
+	if k%n == 0 {
+		nMod = 0
+	}
+	head = NodeMap[nMod]
+	if nMod > 0 {
+		pre := NodeMap[nMod-1]
+		pre.Next = nil
+		NodeMap[n-1].Next = NodeMap[0]
+	}
+
+	return head
+}
+
 // 274. H-Index
 // First solution runtime beats:100.00% memory beats:22.62%
 func hIndex(citations []int) int {
@@ -1042,10 +1072,14 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	nums1 := []int{1, 2, 3, 0, 0, 0}
-	nums2 := []int{2, 5, 6}
-	merge(nums1, 3, nums2, 3)
-	fmt.Printf("88. Merge Sorted Array: %v\n", nums1)
+	fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{1}), 1)))
+	fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{0, 1, 2}), 4)))
+	fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{0, 1, 2}), 24)))
+
+	// nums1 := []int{1, 2, 3, 0, 0, 0}
+	// nums2 := []int{2, 5, 6}
+	// merge(nums1, 3, nums2, 3)
+	// fmt.Printf("88. Merge Sorted Array: %v\n", nums1)
 
 	// fmt.Printf("2471. Minimum Number of Operations to Sort a Binary Tree by Level: %v\n", minimumOperations(CreateTreeNode([]int{1, 4, 3, 7, 6, 8, 5, -1, -1, -1, -1, 9, -1, 10})))
 

@@ -23,6 +23,8 @@ Record the Problem-solving process
 	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
 
 ## 2024 Go
+- [61]. Rotate List
+	- First solution runtime beats:100.00% memory beats:6.28%
 - [274]. H-Index
 	- First solution runtime beats:100.00% memory beats:22.62%
 - [88]. Merge Sorted Array
