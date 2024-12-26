@@ -9,6 +9,31 @@ import (
 	"strings"
 )
 
+// 494. Target Sum
+// First solution runtime beats:31.93% memory beats:85.29%
+func findTargetSumWays(nums []int, target int) int {
+	ans, n := 0, len(nums)
+	var dp func(int, int)
+	dp = func(sum, posi int) {
+		if posi == n-1 {
+			if sum+nums[posi] == target {
+				ans++
+			}
+
+			if sum-nums[posi] == target {
+				ans++
+			}
+		} else {
+			dp(sum+nums[posi], posi+1)
+			dp(sum-nums[posi], posi+1)
+		}
+	}
+
+	dp(0, 0)
+
+	return ans
+}
+
 // 61. Rotate List
 // First solution runtime beats:100.00% memory beats:6.28%
 func rotateRight(head *ListNode, k int) *ListNode {
@@ -1072,9 +1097,12 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{1}), 1)))
-	fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{0, 1, 2}), 4)))
-	fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{0, 1, 2}), 24)))
+	fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 1, 1, 1, 1}, 3))
+	fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 0}, 1))
+
+	// fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{1}), 1)))
+	// fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{0, 1, 2}), 4)))
+	// fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{0, 1, 2}), 24)))
 
 	// nums1 := []int{1, 2, 3, 0, 0, 0}
 	// nums2 := []int{2, 5, 6}
