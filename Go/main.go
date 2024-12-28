@@ -9,6 +9,17 @@ import (
 	"strings"
 )
 
+// 1014. Best Sightseeing Pair
+// First solution runtime beats:100.00% memory beats:28.57%
+func maxScoreSightseeingPair(values []int) int {
+	maxSpot, maxScore := 0, values[0]-1
+	for i := 1; i < len(values); i++ {
+		maxSpot = max(maxSpot-1, values[i-1]-1)
+		maxScore = max(maxScore, maxSpot+values[i])
+	}
+	return maxScore
+}
+
 // 494. Target Sum
 // First solution runtime beats:31.93% memory beats:85.29%
 func findTargetSumWays(nums []int, target int) int {

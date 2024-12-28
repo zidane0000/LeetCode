@@ -23,6 +23,8 @@ Record the Problem-solving process
 	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
 
 ## 2024 Go
+- [1014]. Best Sightseeing Pair
+	- First solution runtime beats:100.00% memory beats:28.57%
 - [494]. Target Sum
 	- First solution runtime beats:31.93% memory beats:85.29%
 - [61]. Rotate List
