@@ -9,6 +9,32 @@ import (
 	"strings"
 )
 
+// 2446. Determine if Two Events Have Conflict
+// First solution runtime beats:100.00% memory beats: 83.33%
+func haveConflict(event1 []string, event2 []string) bool {
+	if event1[0] < event2[0] {
+		return !(event1[1] < event2[0])
+	} else {
+		return !(event2[1] < event1[0])
+	}
+}
+
+// 66. Plus One
+// First solution runtime beats:100.00% memory beats:16.83%
+func plusOne(digits []int) []int {
+	current := len(digits) - 1
+	for digits[current] == 9 {
+		digits[current] = 0
+		if current == 0 {
+			digits = append([]int{0}, digits...)
+		} else {
+			current--
+		}
+	}
+	digits[current]++
+	return digits
+}
+
 // 1014. Best Sightseeing Pair
 // First solution runtime beats:100.00% memory beats:28.57%
 func maxScoreSightseeingPair(values []int) int {
@@ -1108,8 +1134,13 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 1, 1, 1, 1}, 3))
-	fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 0}, 1))
+	fmt.Printf("66. Plus One: %v\n", plusOne([]int{0}))
+	fmt.Printf("66. Plus One: %v\n", plusOne([]int{9, 9, 9}))
+	fmt.Printf("66. Plus One: %v\n", plusOne([]int{1, 2, 3}))
+	fmt.Printf("66. Plus One: %v\n", plusOne([]int{1, 9, 3}))
+
+	// fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 1, 1, 1, 1}, 3))
+	// fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 0}, 1))
 
 	// fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{1}), 1)))
 	// fmt.Printf("61. Rotate List: %v\n", ListNodeToSlice(rotateRight(CreateListNode([]int{0, 1, 2}), 4)))

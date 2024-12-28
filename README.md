@@ -23,6 +23,10 @@ Record the Problem-solving process
 	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
 
 ## 2024 Go
+- [2446]. Determine if Two Events Have Conflict
+	- First solution runtime beats:100.00% memory beats: 83.33%
+- [66]. Plus One
+	- First solution runtime beats:100.00% memory beats:16.83%
 - [1014]. Best Sightseeing Pair
 	- First solution runtime beats:100.00% memory beats:28.57%
 - [494]. Target Sum
