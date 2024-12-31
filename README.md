@@ -21,6 +21,9 @@ Record the Problem-solving process
 	- Official solution runtime beats:100.00% memory beats:76.26%
 - [450]. Delete Node in a BST
 	- Network solution runtime beats:100.00% memory beats:13.89% [Ref comment from skyblue_cat](https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution)
+- [983]. Minimum Cost For Tickets
+	- Network solution runtime beats:26.67% memory beats: 10.67% [Ref](https://leetcode.com/problems/minimum-cost-for-tickets/solutions/810749/python-js-go-c-by-dp-w-visualization/)
+	- Network solution runtime beats:100.00% memory beats: 86.67% [Ref](https://leetcode.com/problems/minimum-cost-for-tickets/solutions/6207097/dynamic-programming-with-sliding-window-o-n-0ms-in-rust-go/)
 
 ## 2024 Go
 - [2446]. Determine if Two Events Have Conflict

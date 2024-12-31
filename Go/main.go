@@ -9,6 +9,66 @@ import (
 	"strings"
 )
 
+// 983. Minimum Cost For Tickets
+// https://leetcode.com/problems/minimum-cost-for-tickets/solutions/810749/python-js-go-c-by-dp-w-visualization/
+// Network solution runtime beats:26.67% memory beats: 10.67%
+// func mincostTickets(days []int, costs []int) int {
+// 	// help reader to understand code, to avoid magic number
+// 	const _1day, _7day, _30day = 0, 1, 2
+
+// 	// set of travel days
+// 	travelDays := make(map[int]interface{})
+// 	for _, curTravelDay := range days {
+// 		travelDays[curTravelDay] = nil
+// 	}
+
+// 	// last travel day from input array
+// 	lastTraverlDay := days[len(days)-1]
+
+// 	// dp table
+// 	dpCost := make([]int, lastTraverlDay+1)
+// 	for day_i := 1; day_i <= lastTraverlDay; day_i++ {
+// 		if _, isTravelDay := travelDays[day_i]; !isTravelDay {
+// 			// today is not traveling day
+// 			// no extra cost
+// 			dpCost[day_i] = dpCost[day_i-1]
+// 		} else {
+// 			// today is traveling day
+// 			// compute optimal cost by DP
+// 			dpCost[day_i] = min(dpCost[day_i-1]+costs[_1day],
+// 				dpCost[max(day_i-7, 0)]+costs[_7day],
+// 				dpCost[max(day_i-30, 0)]+costs[_30day])
+// 		}
+// 	}
+
+// 	return dpCost[lastTraverlDay]
+// }
+
+// https://leetcode.com/problems/minimum-cost-for-tickets/solutions/6207097/dynamic-programming-with-sliding-window-o-n-0ms-in-rust-go/
+// Network solution runtime beats:100.00% memory beats: 86.67%
+func mincostTickets(days []int, costs []int) int {
+	// Dynamic programming array to store minimum costs for each day in `days`
+	dp := make([]int, len(days)+1)        // dp[i] is the minimum cost to cover days[0..i-1]
+	last7DayIndex, last30DayIndex := 0, 0 // Pointers for the last valid day for 7-day and 30-day passes
+
+	for i, currentDay := range days {
+		// Update the pointer for the last valid day covered by a 7-day pass
+		for days[last7DayIndex] <= currentDay-7 {
+			last7DayIndex++
+		}
+		// Update the pointer for the last valid day covered by a 30-day pass
+		for days[last30DayIndex] <= currentDay-30 {
+			last30DayIndex++
+		}
+
+		// Calculate the minimum cost for the current day
+		dp[i+1] = min(dp[i]+costs[0], dp[last7DayIndex]+costs[1], dp[last30DayIndex]+costs[2])
+	}
+
+	// Return the total minimum cost to cover all travel days
+	return dp[len(days)]
+}
+
 // 2446. Determine if Two Events Have Conflict
 // First solution runtime beats:100.00% memory beats: 83.33%
 func haveConflict(event1 []string, event2 []string) bool {
