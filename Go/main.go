@@ -9,6 +9,90 @@ import (
 	"strings"
 )
 
+// 337. House Robber III
+// First solution runtime beats:100.00% memory beats: 62.65%
+func rob(root *TreeNode) int {
+	var dp func(current *TreeNode) (withCurrent, withoutCurrent int)
+	dp = func(current *TreeNode) (withCurrent, withoutCurrent int) {
+		if current == nil {
+			return 0, 0
+		}
+
+		withLeft, withoutLeft := dp(current.Left)
+		withRight, withoutRight := dp(current.Right)
+
+		withCurrent = current.Val + withoutLeft + withoutRight
+		withoutCurrent = max(
+			withLeft+withRight,
+			withLeft+withoutRight,
+			withoutLeft+withRight,
+			withoutLeft+withoutRight)
+		return
+	}
+
+	withRoot, withOutRoot := dp(root)
+	return max(withRoot, withOutRoot)
+}
+
+// 2559. Count Vowel Strings in Ranges
+// First solution runtime beats:15.38% memory beats: 7.69%
+// func vowelStrings(words []string, queries [][]int) (ans []int) {
+// 	isVowelString := func(s string) bool {
+// 		start := s[0]
+// 		end := s[len(s)-1]
+// 		if (start == 'a' || start == 'e' || start == 'i' || start == 'o' || start == 'u') &&
+// 			(end == 'a' || end == 'e' || end == 'i' || end == 'o' || end == 'u') {
+// 			return true
+// 		}
+// 		return false
+// 	}
+
+// 	prefixSumMap := map[int]int{-1: 0}
+// 	prefixSum := 0
+// 	for i, word := range words {
+// 		if isVowelString(word) {
+// 			prefixSum++
+// 		}
+// 		prefixSumMap[i] = prefixSum
+// 	}
+
+// 	for _, query := range queries {
+// 		ansQuery := prefixSumMap[query[1]] - prefixSumMap[query[0]-1]
+// 		ans = append(ans, ansQuery)
+// 	}
+
+// 	return
+// }
+
+// Second solution runtime beats:38.46% memory beats: 61.54%
+func vowelStrings(words []string, queries [][]int) (ans []int) {
+	isVowelString := func(s string) bool {
+		start := s[0]
+		end := s[len(s)-1]
+		if (start == 'a' || start == 'e' || start == 'i' || start == 'o' || start == 'u') &&
+			(end == 'a' || end == 'e' || end == 'i' || end == 'o' || end == 'u') {
+			return true
+		}
+		return false
+	}
+
+	prefixSumSlice := []int{0}
+	prefixSum := 0
+	for _, word := range words {
+		if isVowelString(word) {
+			prefixSum++
+		}
+		prefixSumSlice = append(prefixSumSlice, prefixSum)
+	}
+
+	for _, query := range queries {
+		ansQuery := prefixSumSlice[query[1]+1] - prefixSumSlice[query[0]]
+		ans = append(ans, ansQuery)
+	}
+
+	return
+}
+
 // 983. Minimum Cost For Tickets
 // https://leetcode.com/problems/minimum-cost-for-tickets/solutions/810749/python-js-go-c-by-dp-w-visualization/
 // Network solution runtime beats:26.67% memory beats: 10.67%
@@ -1194,10 +1278,12 @@ func maxMatrixSum(matrix [][]int) int64 {
 }
 
 func main() {
-	fmt.Printf("66. Plus One: %v\n", plusOne([]int{0}))
-	fmt.Printf("66. Plus One: %v\n", plusOne([]int{9, 9, 9}))
-	fmt.Printf("66. Plus One: %v\n", plusOne([]int{1, 2, 3}))
-	fmt.Printf("66. Plus One: %v\n", plusOne([]int{1, 9, 3}))
+	fmt.Printf("337. House Robber III: %v\n", rob(CreateTreeNode([]int{7, 6, 8, 5})))
+
+	// fmt.Printf("66. Plus One: %v\n", plusOne([]int{0}))
+	// fmt.Printf("66. Plus One: %v\n", plusOne([]int{9, 9, 9}))
+	// fmt.Printf("66. Plus One: %v\n", plusOne([]int{1, 2, 3}))
+	// fmt.Printf("66. Plus One: %v\n", plusOne([]int{1, 9, 3}))
 
 	// fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 1, 1, 1, 1}, 3))
 	// fmt.Printf("494. Target Sum: %v\n", findTargetSumWays([]int{1, 0}, 1))

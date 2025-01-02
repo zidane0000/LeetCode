@@ -26,6 +26,11 @@ Record the Problem-solving process
 	- Network solution runtime beats:100.00% memory beats: 86.67% [Ref](https://leetcode.com/problems/minimum-cost-for-tickets/solutions/6207097/dynamic-programming-with-sliding-window-o-n-0ms-in-rust-go/)
 
 ## 2024 Go
+- [337]. House Robber III
+	- First solution runtime beats:100.00% memory beats: 62.65%
+- [2559]. Count Vowel Strings in Ranges
+	- First solution runtime beats:15.38% memory beats: 7.69%
+	- Second solution runtime beats:38.46% memory beats: 61.54%
 - [2446]. Determine if Two Events Have Conflict
 	- First solution runtime beats:100.00% memory beats: 83.33%
 - [66]. Plus One
