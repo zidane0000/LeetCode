@@ -5,6 +5,8 @@ Record the Problem-solving process
 
 [C++ Latest Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution.h)
 
+[C++ 2024 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2024.h)
+
 [C++ 2022 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2022.h)
 
 [C++ 2020 Code Link](https://github.com/zidane0000/LeetCode/blob/master/Cplusplus/src/Solution_2020.h)

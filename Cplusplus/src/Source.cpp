@@ -1,5 +1,7 @@
+// #include "Solution_2020.h"
+// #include "Solution_2022.h"
+#include "Solution_2024.h"
 #include "Solution.h"
-//#include "Solution_2020.h"
 
 #define null -1
 
@@ -377,7 +379,7 @@ int main()
     //int r = maxSubArray(nums);
 
     //55. Jump Game
-    //ªì¸Ñ runtime beats:46.64% memory beats:70.04%
+    //ï¿½ï¿½ï¿½ runtime beats:46.64% memory beats:70.04%
     //std::vector<int> nums{2,0,0,1};
     //bool r = canJump(nums);
 

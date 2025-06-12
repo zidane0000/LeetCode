@@ -8,3 +8,18 @@
 /src/*.bmp
 /src/*.raw
 /x64/Debug
+
+# Executables and binaries
+*.exe
+*.out
+*.o
+*.obj
+*.dll
+*.so
+*.a
+*.lib
+
+# Build directories
+build/
+Debug/
+Release/
