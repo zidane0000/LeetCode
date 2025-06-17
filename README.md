@@ -27,6 +27,17 @@ Record the Problem-solving process
 	- Network solution runtime beats:26.67% memory beats: 10.67% [Ref](https://leetcode.com/problems/minimum-cost-for-tickets/solutions/810749/python-js-go-c-by-dp-w-visualization/)
 	- Network solution runtime beats:100.00% memory beats: 86.67% [Ref](https://leetcode.com/problems/minimum-cost-for-tickets/solutions/6207097/dynamic-programming-with-sliding-window-o-n-0ms-in-rust-go/)
 
+## 2025 C++
+- [80]. Remove Duplicates from Sorted Array II
+  - Network solution runtime beats:41.42% memory beats:21.10% [Ref](https://youtu.be/bGuWrXKmnSM)
+- [380]. Insert Delete GetRandom O(1)
+  - First solution runtime beats:07.22%  memory beats:55.69%
+  - Network solution runtime beats:92.78%  memory beats:26.10% [Ref](https://leetcode.com/problems/insert-delete-getrandom-o1/solutions/1377728/real-practical-applications-c-optimalarr-qw65/)
+- [528]. Random Pick with Weight
+  - First solution runtime beats:45.49%  memory beats:06.11%
+  - Second solution runtime beats:06.93%  memory beats:06.11%
+  - Network solution runtime beats:79.30%  memory beats:47.67% [Ref](https://leetcode.com/problems/random-pick-with-weight/solutions/671632/c-simple-and-easy-solution-with-explanation/)
+
 ## 2024 Go
 - [337]. House Robber III
 	- First solution runtime beats:100.00% memory beats: 62.65%
