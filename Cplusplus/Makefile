@@ -33,16 +33,17 @@ grepDiff:
 					printf("  - %s\n", info[i]); \
 			} \
 		} \
-		/^\+\/\/[0-9]+\./ { \
+		/^\+\/\/\s*[0-9]+\./ { \
 			print_block(); \
 			delete info; info_count = 0; \
-			match($$0, /^\+\/\/([0-9]+)\. (.*)$$/, arr); \
+			match($$0, /^\+\/\/\s*([0-9]+)\. (.*)$$/, arr); \
 			num = arr[1]; \
 			title = arr[2]; \
 			next; \
 		} \
 		/^\+\/\// { \
 			line = substr($$0, 4); \
+			sub(/^ +/, "", line); \
 			if (line ~ /^https?:\/\//) { \
 				last_url = line; \
 			} else if (line ~ /%$$/) { \

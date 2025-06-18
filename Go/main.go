@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Printf("337. House Robber III: %v\n", rob(CreateTreeNode([]int{7, 6, 8, 5})))
+	// fmt.Printf("337. House Robber III: %v\n", rob(CreateTreeNode([]int{7, 6, 8, 5})))
 
 	// fmt.Printf("66. Plus One: %v\n", plusOne([]int{0}))
 	// fmt.Printf("66. Plus One: %v\n", plusOne([]int{9, 9, 9}))
@@ -28,7 +28,7 @@ func main() {
 
 	// fmt.Printf("1046. Last Stone Weight: %v\n", lastStoneWeight([]int{1, 2, 9, 10, 4}))
 
-	fmt.Printf("506. Relative Ranks: %v\n", findRelativeRanks([]int{1, 2, 9, 10, 4}))
+	// fmt.Printf("506. Relative Ranks: %v\n", findRelativeRanks([]int{1, 2, 9, 10, 4}))
 
 	// fmt.Printf("1926. Nearest Exit from Entrance in Maze: %v\n", nearestExit([][]byte{{'+', '+', '.', '+'}, {'.', '.', '.', '+'}, {'+', '+', '+', '.'}}, []int{1, 2}))
 	// fmt.Printf("1926. Nearest Exit from Entrance in Maze: %v\n", nearestExit([][]byte{
@@ -210,4 +210,8 @@ func main() {
 	// 	{2, 4, 2, 2},
 	// 	{2, 4, 2, 2},
 	// }))
+
+	// println(isPalindrome("race a car"))
+
+	fmt.Printf("2062. Count Vowel Substrings of a String: %v\n", countVowelSubstrings("cuaieuouac"))
 }

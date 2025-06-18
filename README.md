@@ -26,6 +26,8 @@ Record the Problem-solving process
 - [983]. Minimum Cost For Tickets
 	- Network solution runtime beats:26.67% memory beats: 10.67% [Ref](https://leetcode.com/problems/minimum-cost-for-tickets/solutions/810749/python-js-go-c-by-dp-w-visualization/)
 	- Network solution runtime beats:100.00% memory beats: 86.67% [Ref](https://leetcode.com/problems/minimum-cost-for-tickets/solutions/6207097/dynamic-programming-with-sliding-window-o-n-0ms-in-rust-go/)
+- [2062]. Count Vowel Substrings of a String
+  - Network solution runtime beats:21.79%  memory beats:30.24% [Ref](https://leetcode.com/problems/count-vowel-substrings-of-a-string/solutions/1563737/sliding-window/)
 
 ## 2025 C++
 - [80]. Remove Duplicates from Sorted Array II
@@ -37,6 +39,11 @@ Record the Problem-solving process
   - First solution runtime beats:45.49%  memory beats:06.11%
   - Second solution runtime beats:06.93%  memory beats:06.11%
   - Network solution runtime beats:79.30%  memory beats:47.67% [Ref](https://leetcode.com/problems/random-pick-with-weight/solutions/671632/c-simple-and-easy-solution-with-explanation/)
+
+## 2025 Go
+- [125]. Valid Palindrome
+  - First solution runtime beats:21.79%  memory beats:30.24%
+  - Second solution runtime beats:37.77%  memory beats:54.80%
 
 ## 2024 Go
 - [337]. House Robber III
